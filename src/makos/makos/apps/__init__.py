@@ -18,7 +18,7 @@ MODULES = {'calculator': 'calculator', 'text-editor': 'texteditor', 'notes': 'no
            'disk-utility': 'diskutil', 'system-info': 'sysinfo', 'screenshot': 'screenshot', 'software-center': 'softwarecenter',
            'preview': 'preview', 'pictures': 'pictures', 'tunes': 'tunes', 'movies': 'movies'}
 SEPARATE = frozenset(MODULES)
-EXTERNAL = ('chatgpt', 'claude', 'paper', 'digits', 'slides', 'makbox', 'venture', 'terminal', 'render', 'engine', 'sprite', 'studio')
+EXTERNAL = ('social', 'chatgpt', 'claude', 'paper', 'digits', 'slides', 'makbox', 'venture', 'terminal', 'render', 'engine', 'sprite', 'studio')
 SINGLE_INSTANCE = frozenset({'tunes'})
 
 

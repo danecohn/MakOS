@@ -1,5 +1,5 @@
 extends RefCounted
-## The tools the assistant (and Amerika Agent over JSON-RPC) can call. Every tool takes a Dictionary and returns a
+## The tools the assistant (and local automation over JSON-RPC) can call. Every tool takes a Dictionary and returns a
 ## Dictionary: {ok: true, ...} or {ok: false, error: "...", code: -32xxx}. All file access is confined to res://.
 ## Works with or without the editor: `plugin` is null when running from the command line / tests.
 
@@ -289,7 +289,7 @@ func finish_session() -> Dictionary:
 	if plugin != null and plugin.has_method("get_undo_redo"):
 		var ur: Object = plugin.call("get_undo_redo")
 		if ur != null:
-			ur.call("create_action", "Amerika: " + str(manifest["label"]).left(60))
+			ur.call("create_action", "Engine: " + str(manifest["label"]).left(60))
 			ur.call("add_do_method", history, "redo_session", manifest["id"])
 			ur.call("add_undo_method", history, "undo_session", manifest["id"])
 			ur.call("commit_action", false)

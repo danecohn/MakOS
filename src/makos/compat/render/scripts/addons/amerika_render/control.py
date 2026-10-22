@@ -1,4 +1,4 @@
-"""Loopback JSON-RPC control endpoint so Amerika Agent (via amerika-studio-mcp) can drive Render.
+"""Loopback JSON-RPC control endpoint so local automation (via amerika-studio-mcp) can drive Render.
 
 Contract: src/os/studio/tools.json (render.* tools). Transport: POST /rpc, `Authorization: Bearer <token>`, JSON-RPC 2.0.
 Every method that touches Blender runs on the MAIN thread through Session.main (timer in the UI, pumped in background mode).

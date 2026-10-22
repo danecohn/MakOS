@@ -3,7 +3,7 @@ import shutil
 import os
 import subprocess
 
-VERSION='0.1.0~dev4'
+VERSION='0.1.0~dev6'
 NAMES=('makos-session','makos-shell','makos-theme','makos-icons','makos-apps','makos-desktop')
 
 
@@ -15,7 +15,7 @@ def register(b):
         p.copy(b.ROOT/'docs/makos/ASSETS.md',f'/usr/share/doc/{name}/ASSETS.md')
         return p
     def shell():
-        p=package('makos-shell','MakkOS desktop shell and native utilities',
+        p=package('makos-shell','Makk OS desktop shell and native utilities',
                   'python3, libpython3.14, python3-gi, python3-gi-cairo, python3-cairo, gir1.2-gtk-4.0 (>= 4.10), gir1.2-gtk4layershell-1.0, libgtk4-layer-shell0, makos-theme, makos-icons, network-manager, wireplumber, upower, fonts-dejavu-core',arch='arm64')
         shutil.copytree(source/'makos',p.path('/usr/lib/python3/dist-packages/makos'),ignore=shutil.ignore_patterns('__pycache__','*.pyc'))
         shutil.copytree(source/'bridge',p.path('/usr/share/makos/bridge'))
@@ -26,12 +26,12 @@ def register(b):
         output.parent.mkdir(parents=True,exist_ok=True)
         flags=subprocess.check_output(['python3-config','--embed','--ldflags'],text=True).split()
         b.sh('cc','-O2','-Wl,-z,relro,-z,now',source/'shell-host.c','-o',output,*flags)
-        p.file('/usr/share/applications/org.makos.Shell.desktop','[Desktop Entry]\nType=Application\nName=MakkOS Shell\nExec=/usr/libexec/makos/makos-shell-host\nNoDisplay=true\nX-KDE-DBUS-Restricted-Interfaces=org.kde.KWin.ScreenShot2\n')
+        p.file('/usr/share/applications/org.makos.Shell.desktop','[Desktop Entry]\nType=Application\nName=Makk OS Shell\nExec=/usr/libexec/makos/makos-shell-host\nNoDisplay=true\nX-KDE-DBUS-Restricted-Interfaces=org.kde.KWin.ScreenShot2\n')
         p.copy(source/'helpers/makos-settings-helper','/usr/libexec/makos/makos-settings-helper',0o755)
         p.copy(source/'helpers/org.makos.settings.policy','/usr/share/polkit-1/actions/org.makos.settings.policy')
         return p
     def session():
-        p=package('makos-session','MakkOS independent KWin Wayland login session',
+        p=package('makos-session','Makk OS independent KWin Wayland login session',
                   'kwin-wayland (>= 4:6.7), kwin-style-aurorae (>= 6.7), xwayland, dbus-user-session, makos-shell, polkit-kde-agent-1',arch='arm64')
         p.copy(source/'session/makos-session','/usr/bin/makos-session',0o755)
         for name in ('session-start','makos-xkb-override'):
@@ -40,8 +40,12 @@ def register(b):
         p.copy(source/'session/kwinrc','/usr/share/makos/session/kwinrc')
         return p
     def theme():
-        p=package('makos-theme','Original MakkOS Glass & Metal appearance', 'fonts-dejavu-core')
+        p=package('makos-theme','Original Makk OS Glass & Metal appearance', 'fonts-dejavu-core')
         shutil.copytree(source/'theme',p.path('/usr/share/makos/theme'),ignore=shutil.ignore_patterns('decoration'))
+        shutil.copytree(source/'theme/lockscreen',p.path('/usr/share/plasma/shells/org.makk.desktop'))
+        shutil.copytree(source/'theme/sddm',p.path('/usr/share/sddm/themes/makk'))
+        shutil.copytree(source/'theme/plymouth',p.path('/usr/share/plymouth/themes/makk'))
+        p.copy(source/'libexec/makk-branding','/usr/sbin/makk-branding',0o755)
         shutil.copytree(source/'theme/decoration',p.path('/usr/share/kwin/decorations/org.makos.glass'))
         shutil.copytree(source/'wallpapers',p.path('/usr/share/makos/wallpapers'))
         shutil.copytree(source/'sounds',p.path('/usr/share/makos/sounds'))
@@ -50,7 +54,7 @@ def register(b):
             shutil.copytree(p.path('/usr/share/icons/MakkOS-Cursors'), p.path('/usr/share/icons/MakOS-Cursors'), copy_function=os.link)
         return p
     def icons():
-        p=package('makos-icons','Original MakkOS icon theme')
+        p=package('makos-icons','Original Makk OS icon theme')
         shutil.copytree(source/'icons/MakkOS',p.path('/usr/share/makos/icons/MakkOS'))
         # Keep existing running apps and saved theme selections working.
         shutil.copytree(p.path('/usr/share/makos/icons/MakkOS'), p.path('/usr/share/makos/icons/MakOS'), copy_function=os.link)
@@ -60,8 +64,9 @@ def register(b):
     def apps():
         # core-apps: runtime needs of Preview/Pictures (Pillow, poppler), Tunes/Movies (GStreamer + gtk4paintablesink),
         # Disk Utility (udisks2, lsblk), Software Center (pkexec + the helper below) and Activity (procps).
-        p=package('makos-apps','Curated MakkOS application entries with one app per role','makos-shell, python3-pil, poppler-utils, udisks2, util-linux, pkexec, gir1.2-gstreamer-1.0, gstreamer1.0-plugins-base, gstreamer1.0-plugins-good, gstreamer1.0-gtk4, procps',arch='arm64')
+        p=package('makos-apps','Curated Makk OS application entries with one app per role','makos-shell, python3-pil, poppler-utils, udisks2, util-linux, pkexec, gir1.2-gstreamer-1.0, gstreamer1.0-plugins-base, gstreamer1.0-plugins-good, gstreamer1.0-gtk4, procps',arch='arm64')
         p.recommends='ptyxis, python3-mutagen, gstreamer1.0-libav, gstreamer1.0-pipewire, flatpak, smartmontools, amerika-venture, mak-office, amerika-studio, amerika-render, amerika-engine, amerika-sprite, amerika-box'
+        p.copy(source/'branding/cherry-blossom.svg','/usr/share/makos/branding/cherry-blossom.svg')
         shutil.copytree(source/'compat',p.path('/usr/share/makos/compat'),ignore=shutil.ignore_patterns('__pycache__','*.pyc'))
         for path in (source/'applications').glob('*.desktop'):
             p.copy(path,'/usr/share/applications/'+path.name)
@@ -70,7 +75,7 @@ def register(b):
         p.copy(source/'polkit/org.makos.software.policy','/usr/share/polkit-1/actions/org.makos.software.policy')
         return p
     def meta():
-        p=package('makos-desktop','MakkOS desktop development preview for Ubuntu ARM64',', '.join(n+f' (= {VERSION})' for n in NAMES if n!='makos-desktop'),arch='arm64')
+        p=package('makos-desktop','Makk OS desktop development preview for Ubuntu ARM64',', '.join(n+f' (= {VERSION})' for n in NAMES if n!='makos-desktop'),arch='arm64')
         p.copy(b.ROOT/'docs/makos/README.md','/usr/share/doc/makos-desktop/README.md')
         p.copy(b.ROOT/'docs/makos/INTEGRATION.md','/usr/share/doc/makos-desktop/INTEGRATION.md')
         return p

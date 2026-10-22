@@ -75,3 +75,4 @@ assets/makos/*.png
 !assets/makos/wallpaper-hills.png
 !assets/makos/wallpaper-graphite.png
 !assets/makos/wallpaper-linen-grey.png
+src/makos/theme/plymouth/*.png

@@ -21,7 +21,7 @@ var _undone: Array = []
 func setup(p_ai: Node, p_tools: RefCounted) -> void:
 	ai = p_ai
 	tools = p_tools
-	name = "Amerika"
+	name = "Studio"
 	custom_minimum_size = Vector2(300, 400)
 	var top := HBoxContainer.new()
 	add_child(top)
@@ -77,7 +77,7 @@ func setup(p_ai: Node, p_tools: RefCounted) -> void:
 	_redo = _btn(bar, "Redo", _on_redo)
 	_btn(bar, "Assemble", func() -> void: _quick("Assemble the recipe and run it for 300 frames; fix any errors."))
 	_btn(bar, "New chat", func() -> void: ai.clear_chat(); _log.clear(); _say("[color=gray]New conversation.[/color]"))
-	ai.assistant_text.connect(func(t: String) -> void: _say("[b]Amerika:[/b] " + _esc(t)))
+	ai.assistant_text.connect(func(t: String) -> void: _say("[b]Studio:[/b] " + _esc(t)))
 	ai.tool_started.connect(func(_id: String, n: String, i: Dictionary) -> void: _say("[color=#ffb02e]> %s[/color] %s" % [n, _esc(JSON.stringify(i).left(160))]))
 	ai.tool_finished.connect(func(_id: String, n: String, s: String, ok: bool) -> void: _say("[color=%s]  %s: %s[/color]" % ["#3dffb0" if ok else "#ff3d6e", "done" if ok else "failed", _esc(s)]))
 	ai.status.connect(func(t: String) -> void: _status.text = t)
@@ -123,7 +123,7 @@ func _replay() -> void:
 		if m["content"] is Array:
 			for b in m["content"]:
 				if b.get("type") == "text":
-					_say(("[b]You:[/b] " if m["role"] == "user" else "[b]Amerika:[/b] ") + _esc(str(b["text"])))
+					_say(("[b]You:[/b] " if m["role"] == "user" else "[b]Studio:[/b] ") + _esc(str(b["text"])))
 
 
 func _on_send() -> void:

@@ -7,6 +7,6 @@ TOOLS = [('timeshift', 'Timeshift'), ('snapper', 'Snapper'), ('restic', 'restic'
 def status():
     found = [name for tool, name in TOOLS if sysutil.have(tool)]
     return {'implemented': False, 'tools': found,
-            'message': 'MakkOS does not create or restore backups yet; no backup job exists. '
+            'message': 'Makk OS does not create or restore backups yet; no backup job exists. '
                        + ('Installed backup tools you can use yourself: ' + ', '.join(found) + '.' if found
                           else 'No backup tool was found on this computer.')}

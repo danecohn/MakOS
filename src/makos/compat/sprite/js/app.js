@@ -189,7 +189,7 @@
   };
   A.promptForRpc = async function (message, timeoutS) {
     var self = this, timer, timedOut = false;
-    var run = this.runPrompt(message, 'Amerika Agent');
+    var run = this.runPrompt(message, 'local automation');
     var to = new Promise(function (_, rej) { timer = setTimeout(function () { timedOut = true; self.ai.stop(); var e = new Error('timeout waiting for the assistant'); e.code = -32000; rej(e); }, Math.max(5, timeoutS || 600) * 1000); });
     try { var res = await Promise.race([run, to]); return { reply: res.text || '', tool_calls: res.toolCalls.map(function (c) { return c.name; }) }; }
     finally { clearTimeout(timer); }

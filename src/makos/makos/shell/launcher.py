@@ -14,9 +14,10 @@ TRASH = 'trash-empty'
 SHELL_CLASS = 'org.makos.shell'
 # Window classes (lower case) of the real applications behind catalog entries. Internal apps are matched by id.
 EXTRA_CLASSES = {
+    'social': {'makksocial','amerikasocial','amerika social','amerika-social','makk-social'},
     'terminal': {'konsole', 'ptyxis', 'org.gnome.ptyxis', 'xterm', 'org.kde.konsole'},
     'paper': {'euro-office'}, 'digits': set(), 'slides': set(),
-    'venture': {'amerikaventure', 'firefox', 'chromium', 'amerika-venture', 'org.mozilla.firefox'},
+    'venture': {'venture', 'amerikaventure', 'firefox', 'chromium', 'amerika-venture', 'org.mozilla.firefox'},
     'files': {'org.makos.files'},
 }
 FOLDERS = {  # id -> (name, icon, xdg key, default sub folder)
@@ -77,6 +78,11 @@ def app_id_for_window(w):
     if SHELL_CLASS in names:
         title = str(w.get('caption', '')).split(' — ')[0].split(' - ')[0].strip().lower()
         return _NAME_TO_ID.get(title)
+    if names & {'euro-office', 'euro-office-euro-office'}:
+        caption=str(w.get('caption','')).lower()
+        if any(ext in caption for ext in ('.xlsx','.ods','.csv')):return 'digits'
+        if any(ext in caption for ext in ('.pptx','.odp')):return 'slides'
+        return 'paper'
     for app_id, keys in _APP_KEYS.items():
         if keys & names:
             return app_id

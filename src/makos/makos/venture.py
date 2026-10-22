@@ -55,6 +55,10 @@ def prepare(profile=None, share=None):
 def command(args=(), which=shutil.which, profile=None):
     backend=next((which(exe) for exe in ('amerika-venture','firefox') if which(exe)),None)
     if not backend:raise RuntimeError('Venture requires the installed amerika-venture or Firefox browser engine.')
+    if Path('/opt/amerika/venture/browser/omni.ja').is_file() and Path(backend).name=='amerika-venture':
+        from .venture_runtime import runtime
+        executable=runtime('/opt/amerika/venture',common.SHARE/'venture')
+        return [str(executable),'--name','Venture','--class','Venture','--profile',str(prepare(profile)),*args]
     return [backend,'--profile',str(prepare(profile)),*args]
 
 

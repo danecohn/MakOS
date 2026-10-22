@@ -23,7 +23,7 @@ MOTIFS={
 'rewind':'<path d="M14 22 A23 23 0 1 1 12 42" fill="none" stroke="#6d98bc" stroke-width="8"/><path d="M7 11 L7 29 L26 29" fill="none" stroke="#6d98bc" stroke-width="7" stroke-linejoin="round"/><path d="M33 18 V33 L44 40" fill="none" stroke="#4d738f" stroke-width="3"/>',
 'chatgpt':'<path d="M10 13 Q10 7 16 7 H48 Q55 7 55 14 V44 Q55 50 48 50 H29 L16 59 V50 Q10 50 10 44Z" fill="url(#blue)" stroke="#517b9d"/><path d="M21 24 H45 M21 32 H41" stroke="#f2fbff" stroke-width="3"/>',
 'claude':'<path d="M10 14 Q10 8 16 8 H48 Q54 8 54 14 V43 Q54 49 48 49 H35 L47 59 H21 Q10 59 10 49Z" fill="url(#silver)" stroke="#8095a9"/><path d="M21 24 H44 M21 32 H38" stroke="#5486ad" stroke-width="3"/>',
-'makos-logo':'<path d="M7 49 V15 L20 8 L32 31 L44 8 L57 15 V49 L44 56 V29 L32 48 L20 29 V56Z" fill="url(#blue)" stroke="#326e9a" stroke-width="1.5"/>',
+'makos-logo': (ROOT/'src/makos/branding/cherry-blossom.svg').read_text().split('</title>',1)[1].rsplit('</svg>',1)[0],
 }
 
 # ---- Settings pane icons (settings-and-Seek engineer). One distinct original geometric drawing per pane.

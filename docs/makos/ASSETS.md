@@ -69,3 +69,16 @@ be passed to it. No API keys or cloud account are needed for local documents.
 local start page, MakkOS contributors, GPL-3.0-only. No third-party browser artwork
 was extracted or traced. Existing native engine toolbar glyphs are rendered by the
 installed browser under its retained upstream licence; no glyph assets are copied.
+
+## Cherry Blossom identity (2026-10-22)
+
+`src/makos/branding/cherry-blossom.svg` is original vector artwork created for
+Cherry Blossom LLC and Makk OS. Five notched pink petals with a gold stamen centre;
+no proprietary source artwork. GPL-3.0-only, as original project code/artwork.
+`tools/make_makk_brand.py` renders the logo, boot watermark, native two-step
+authentication icons and progress frames. DejaVu fonts retain their upstream licence.
+
+The lock-screen QML is derived from the installed KDE Plasma 6.7.5 shell lock
+screen, GPL-2.0-or-later, copyright Aleix Pol Gonzalez and the other KDE authors
+listed in each source file. Its authentication and unlock flow are retained.
+The background and brand header are downstream changes by Cherry Blossom LLC.

@@ -5,7 +5,7 @@ or corrupt file can never crash the shell.
 """
 import re
 
-ACCENTS = ('blue', 'graphite', 'teal', 'green', 'orange', 'red', 'purple')
+ACCENTS = ('blossom', 'blue', 'graphite', 'teal', 'green', 'orange', 'red', 'purple')
 SCROLLBARS = ('auto', 'always')
 CORNER_NAMES = ('top_left', 'top_right', 'bottom_left', 'bottom_right')
 # Hot-corner actions understood by bridge/bridge.js (script edges); Spread, Desks and Seek go to the shell.
@@ -68,6 +68,7 @@ def clean(data):
 # ---------------------------------------------------------------- appearance CSS (loaded after glass.css by ui.install_theme)
 # name -> (light, mid, dark, border): original gel colour stops; makos.appearance builds the widget theme from these.
 ACCENT_COLORS = {
+    'blossom': ('#ffe0eb', '#ff8cb4', '#ff0058', '#bd0041'),
     'blue': ('#d7efff', '#8cc7ff', '#418ee6', '#3873b1'),
     'graphite': ('#e7e9ec', '#bfc4ca', '#7b838d', '#5d646d'),
     'teal': ('#d4f6f1', '#86ddd0', '#2fa597', '#2a8379'),

@@ -230,7 +230,7 @@
 		const A = NS.about;
 		modal(function (card, close) {
 			card.appendChild(h("h2", { text: "MakBox" }));
-			card.appendChild(h("p", { text: "MakBox " + A.appVersion + " is a desktop copy of BeepBox " + A.beepboxVersion + " with the Amerika Composer, an AI music assistant that writes and edits songs through BeepBox's own song format." }));
+			card.appendChild(h("p", { text: "MakBox " + A.appVersion + " is a desktop copy of BeepBox " + A.beepboxVersion + " with the Composer, an AI music assistant that writes and edits songs through BeepBox's own song format." }));
 			card.appendChild(h("p", { text: "BeepBox is created by John Nesky and contributors, and is distributed under the MIT licence (reproduced below). MakBox is not affiliated with, or endorsed by, BeepBox or John Nesky. The hosted website beepbox.co is a separate service." }));
 			card.appendChild(h("p", { text: "Source: github.com/johnnesky/beepbox at commit " + A.beepboxCommit.slice(0, 10) + ". Amerika additions: Copyright Amerika LLC. The MP3 encoder (lamejs, based on LAME) is used under the LGPL." }));
 			card.appendChild(h("p", { text: "Your songs stay on this computer. The composer talks only to the local Studio bridge; no API key is stored in this app, and BeepBox's online features (URL shortener, embeds, service worker) are removed." }));

@@ -1,6 +1,7 @@
 #!/bin/sh
 set -eu
 export XDG_CURRENT_DESKTOP=MakkOS:MakOS XDG_SESSION_DESKTOP=MakkOS XDG_SESSION_TYPE=wayland
+export PLASMA_DEFAULT_SHELL=org.makk.desktop
 export MAKOS_SESSION=1 QT_QPA_PLATFORM=wayland GDK_BACKEND=wayland MOZ_ENABLE_WAYLAND=1
 export _JAVA_AWT_WM_NONREPARENTING=1
 # KWin alone sees the private configuration. Apps regain the user's original XDG_CONFIG_HOME below.

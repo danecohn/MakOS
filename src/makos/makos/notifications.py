@@ -234,7 +234,7 @@ class Notifications:
         if method == 'GetCapabilities':
             invocation.return_value(GLib.Variant('(as)', (CAPABILITIES,)))
         elif method == 'GetServerInformation':
-            invocation.return_value(GLib.Variant('(ssss)', ('MakkOS Notifications', 'MakkOS', '0.2.0', '1.2')))
+            invocation.return_value(GLib.Variant('(ssss)', ('Makk OS Notifications', 'MakkOS', '0.2.0', '1.2')))
         elif method == 'CloseNotification':
             ident = params.unpack()[0]
             item = self.model.items.get(ident)

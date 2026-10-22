@@ -1,0 +1,102 @@
+#!/usr/bin/python3
+"""Explicit, reversible login/boot theme activation. Package installation never calls this.
+
+No PAM, default session, kernel, boot arguments, or EFI changes. Root-owned fixed
+paths only. A failed activation restores the original configs, GRUB and initrds.
+"""
+import argparse
+import configparser
+import datetime
+import json
+import os
+from pathlib import Path
+import shutil
+import subprocess
+import tempfile
+
+FILES=('etc/sddm.conf.d/90-makk-brand.conf','etc/plymouth/plymouthd.conf',
+       'etc/default/grub.d/90-makk-brand.cfg','boot/grub/grub.cfg')
+THEME='/usr/share/plymouth/themes/makk/makk.plymouth'
+
+class Branding:
+    def __init__(self,root=Path('/'),run=None):
+        self.root=Path(root);self.run=run or self.command
+        self.state=self.root/'var/lib/makos/branding'
+    @staticmethod
+    def command(*args):
+        return subprocess.run(args,check=True,capture_output=True,text=True).stdout
+    def snapshot(self):
+        self.state.mkdir(parents=True,exist_ok=True,mode=0o700)
+        path=Path(tempfile.mkdtemp(prefix='before-',dir=self.state));path.chmod(0o700)
+        query=self.run('update-alternatives','--query','default.plymouth')
+        alternatives=dict(line.split(': ',1) for line in query.splitlines() if ': ' in line and not line.startswith(' '))
+        files=list(FILES)+[str(p.relative_to(self.root)) for p in (self.root/'boot').glob('initrd.img-*') if p.is_file() and not p.is_symlink()]
+        manifest={'alternatives':{'status':alternatives.get('Status'),'value':alternatives.get('Value')},'files':{}}
+        for rel in files:
+            source=self.root/rel;dest=path/rel
+            manifest['files'][rel]=source.exists()
+            if source.exists():
+                if source.is_symlink():raise RuntimeError('Unexpected symlink at '+rel)
+                dest.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(source,dest)
+        (path/'manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
+        return path
+    def restore(self,path):
+        path=Path(path).resolve()
+        if path.parent!=self.state.resolve():raise RuntimeError('Snapshot must belong to the branding recovery directory.')
+        manifest=json.loads((path/'manifest.json').read_text())
+        for rel,existed in manifest['files'].items():
+            # Do not accept arbitrary paths even in a modified snapshot manifest.
+            if rel not in FILES and not (rel.startswith('boot/initrd.img-') and '/' not in rel[len('boot/'):]):raise RuntimeError('Invalid recovery path')
+            dest=self.root/rel
+            if existed:
+                dest.parent.mkdir(parents=True,exist_ok=True)
+                temporary=dest.with_name(dest.name+'.makk-restore')
+                shutil.copy2(path/rel,temporary);temporary.replace(dest)
+            else:dest.unlink(missing_ok=True)
+        alt=manifest['alternatives']
+        if alt.get('status')=='auto':self.run('update-alternatives','--auto','default.plymouth')
+        elif alt.get('value'):self.run('update-alternatives','--set','default.plymouth',alt['value'])
+        (self.state/'active').unlink(missing_ok=True)
+        (self.state/'pending').unlink(missing_ok=True)
+    def apply(self):
+        for rel in ('usr/share/sddm/themes/makk/Main.qml',THEME.lstrip('/'),'usr/share/plymouth/themes/makk/watermark.png'):
+            if not (self.root/rel).is_file():raise RuntimeError('Install the Makk OS theme package first: '+rel)
+        if (self.state/'active').exists() or (self.state/'pending').exists():raise RuntimeError('Branding is already active. Revert before applying again.')
+        if shutil.disk_usage(self.root/'boot').free < 600*1024*1024:raise RuntimeError('At least 600 MiB free on /boot is required for safe initramfs regeneration.')
+        snapshot=self.snapshot()
+        (self.state/'pending').write_text(snapshot.name+'\n')
+        try:
+            login=self.root/FILES[0];login.parent.mkdir(parents=True,exist_ok=True)
+            login.write_text('[Theme]\nCurrent=makk\n')
+            cfg=configparser.ConfigParser();cfg.optionxform=str
+            cfg.read(self.root/FILES[1])
+            if not cfg.has_section('Daemon'):cfg.add_section('Daemon')
+            cfg['Daemon']['Theme']='makk'
+            with (self.root/FILES[1]).open('w') as stream:cfg.write(stream)
+            grub=self.root/FILES[2];grub.parent.mkdir(parents=True,exist_ok=True)
+            grub.write_text("# Makk OS presentation only; no default or kernel parameters change.\nGRUB_DISTRIBUTOR='Makk OS'\n")
+            self.run('update-alternatives','--install','/usr/share/plymouth/themes/default.plymouth','default.plymouth',THEME,'80')
+            self.run('update-alternatives','--set','default.plymouth',THEME)
+            self.run('update-initramfs','-u','-k','all')
+            self.run('update-grub')
+            (self.state/'active').write_text(snapshot.name+'\n')
+            (self.state/'pending').unlink(missing_ok=True)
+        except BaseException:
+            self.restore(snapshot);raise
+        return snapshot
+    def revert(self):
+        active=self.state/'active'
+        if not active.exists():active=self.state/'pending'
+        if not active.exists():raise RuntimeError('No active Makk branding snapshot.')
+        snapshot=self.state/active.read_text().strip();self.restore(snapshot)
+        return snapshot
+
+def main():
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('action',choices=['apply','revert','status']);args=p.parse_args()
+    if os.geteuid()!=0:raise SystemExit('Run through pkexec: pkexec /usr/sbin/makk-branding '+args.action)
+    service=Branding()
+    if args.action=='status':print('active' if (service.state/'active').exists() else 'inactive')
+    elif args.action=='apply':print('Applied Makk OS login/boot branding. Recovery snapshot: '+str(service.apply()))
+    else:print('Restored login/boot from '+str(service.revert()))
+
+if __name__=='__main__':main()

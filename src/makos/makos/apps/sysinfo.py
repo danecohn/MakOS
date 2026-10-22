@@ -10,7 +10,7 @@ from gi.repository import Gtk, Gdk, GLib
 from .. import ui, common
 from .base import AppWindow, human
 
-VERSION = '0.1.0~dev4'
+VERSION = '0.1.0~dev6'
 REDACTIONS = [
     (re.compile(r'\b(?:[0-9A-Fa-f]{2}[:-]){5}[0-9A-Fa-f]{2}\b'), '<mac>'),
     (re.compile(r'\b\d{1,3}(?:\.\d{1,3}){3}\b'), '<ip>'),
@@ -121,7 +121,7 @@ def gather():
     cpu, cores = cpu_info()
     seconds = uptime()
     sections = [
-        ('Software', [('Operating system', f'MakkOS {VERSION} (development preview)'), ('Base', release.get('PRETTY_NAME', 'unknown')), ('Kernel', platform.release()),
+        ('Software', [('Operating system', f'Makk OS {VERSION} (development preview)'), ('Base', release.get('PRETTY_NAME', 'unknown')), ('Kernel', platform.release()),
                       ('Architecture', platform.machine()), ('Compositor', tool_version(['kwin_wayland', '--version']) or 'KWin (version unavailable)'),
                       ('Toolkit', 'GTK %s.%s.%s' % (Gtk.get_major_version(), Gtk.get_minor_version(), Gtk.get_micro_version())), ('Python', platform.python_version()),
                       ('Session', os.environ.get('XDG_CURRENT_DESKTOP', 'unknown') + ' / ' + os.environ.get('XDG_SESSION_TYPE', 'unknown'))]),
@@ -135,7 +135,7 @@ def gather():
 
 def report(sections=None, redact_secrets=True):
     sections = sections or gather()
-    lines = ['MakkOS system report']
+    lines = ['Makk OS system report']
     for title, rows in sections:
         lines += ['', title]
         lines += [f'  {k}: {v}' for k, v in rows]
@@ -154,9 +154,10 @@ class SystemInfo:
             self.aw.action(name, fn)
         col = ui.box(True, 10, 'sheet')
         head = ui.box(spacing=16)
-        head.append(ui.icon('system-info', 72))
+        head.append(ui.icon('makos-logo', 72))
         titles = ui.box(True, 2)
-        titles.append(Gtk.Label(label='MakkOS', xalign=0, css_classes=['hero']))
+        titles.append(Gtk.Label(label='Makk OS', xalign=0, css_classes=['hero']))
+        titles.append(Gtk.Label(label='Developed by Cherry Blossom LLC', xalign=0))
         titles.append(Gtk.Label(label=f'Development preview {VERSION}', xalign=0, css_classes=['subtitle']))
         head.append(titles)
         col.append(head)

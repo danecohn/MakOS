@@ -1,0 +1,44 @@
+[Plymouth Theme]
+Name=Makk OS
+Description=Cherry Blossom LLC startup screen
+ModuleName=two-step
+
+[two-step]
+Font=DejaVu Sans 12
+TitleFont=DejaVu Sans 30
+ImageDir=/usr/share/plymouth/themes/makk
+DialogHorizontalAlignment=.5
+DialogVerticalAlignment=.62
+TitleHorizontalAlignment=.5
+TitleVerticalAlignment=.52
+HorizontalAlignment=.5
+VerticalAlignment=.75
+WatermarkHorizontalAlignment=.5
+WatermarkVerticalAlignment=.42
+Transition=none
+TransitionDuration=0.0
+BackgroundStartColor=0xd9e2e9
+BackgroundEndColor=0xb5c5d2
+ProgressBarBackgroundColor=0xa1b3c2
+ProgressBarForegroundColor=0xff0058
+DialogClearsFirmwareBackground=true
+MessageBelowAnimation=true
+
+[boot-up]
+UseEndAnimation=false
+UseFirmwareBackground=false
+
+[shutdown]
+UseEndAnimation=false
+UseFirmwareBackground=false
+
+[reboot]
+UseEndAnimation=false
+UseFirmwareBackground=false
+
+[updates]
+SuppressMessages=true
+ProgressBarShowPercentComplete=true
+UseProgressBar=true
+Title=Updating Makk OS
+SubTitle=Keep your computer powered on

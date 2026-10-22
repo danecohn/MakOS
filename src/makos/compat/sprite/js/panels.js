@@ -189,7 +189,7 @@
     var stop = h('button', { class: 'btn danger', hidden: true, onclick: function () { app.ai.stop(); } }, 'Stop');
     var fresh = h('button', { class: 'tool tiny', title: 'New chat', 'aria-label': 'New chat', onclick: function () { app.ai.reset(); log.textContent = ''; hello(); } }, U.icon('plus', 0.75));
     var keys = h('button', { class: 'btn small', hidden: true, onclick: function () { checkStatus(true); } }, 'Check key again');
-    el.append(h('div', { class: 'phead' }, h('span', { class: 'ptitle' }, U.icon('ai', 0.75), ' Amerika AI'), status, fresh), log, keys, input, h('div', { class: 'chat-btns' }, stop, send));
+    el.append(h('div', { class: 'phead' }, h('span', { class: 'ptitle' }, U.icon('ai', 0.75), ' Studio AI'), status, fresh), log, keys, input, h('div', { class: 'chat-btns' }, stop, send));
     var EXAMPLES = ['32x32 knight with a red plume, idle + walk animation, SNES style', 'Make the sword longer', 'Recolour it to a fire palette', 'Add a 4-frame walk cycle', 'Make a 16x16 forest tileset'];
     function hello() {
       var m = h('div', { class: 'msg sys' }, h('p', null, 'Tell me what to draw. I build it with tools you can undo in one step, and I look at the canvas as I go.'),

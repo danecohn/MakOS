@@ -216,7 +216,7 @@ class Screenshot:
     def captured(self, path):
         if not path:
             self.win.set_visible(True)
-            self.result.set_text('The compositor refused or could not take the picture. Screenshots need a running MakkOS shell.')
+            self.result.set_text('The compositor refused or could not take the picture. Screenshots need a running Makk OS shell.')
             return
         if self.mode == 'selection':
             Selector(self.app, path, lambda box: self.finish(path, box))

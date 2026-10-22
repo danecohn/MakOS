@@ -301,7 +301,7 @@ class SysInfoTests(unittest.TestCase):
 
     def test_gathered_report_has_no_secrets(self):
         r = sysinfo.report()
-        self.assertIn('MakkOS', r)
+        self.assertIn('Makk OS', r)
         self.assertNotIn(str(Path.home()), r)
         self.assertEqual(sysinfo.os_release('/nonexistent'), {})
 

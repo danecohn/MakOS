@@ -21,7 +21,7 @@ var tools: RefCounted ## tools.gd instance
 var bridge := Bridge.new()
 var model: String = "claude-sonnet-5-5"
 var review: bool = true ## ask before running scripts the model wrote
-var auto_approve: bool = false ## never ask (used for app.prompt from Amerika Agent, which has its own approval)
+var auto_approve: bool = false ## never ask (used for app.prompt from local automation, which has its own approval)
 var max_turns: int = 30
 var max_tokens: int = 8000
 var busy: bool = false

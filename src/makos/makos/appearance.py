@@ -13,10 +13,11 @@ import shutil
 import sys
 from pathlib import Path
 
-ACCENTS = ('blue', 'graphite', 'teal', 'green', 'orange', 'red', 'purple')
+ACCENTS = ('blossom', 'blue', 'graphite', 'teal', 'green', 'orange', 'red', 'purple')
 # name -> (light, mid, dark, border): original gel colour stops. Kept in step with
 # settings.model.ACCENT_COLORS (the settings pane validates names; both use the same set).
 _LOCAL = {
+    'blossom': ('#ffe0eb', '#ff8cb4', '#ff0058', '#bd0041'),
     'blue': ('#d7efff', '#8cc7ff', '#418ee6', '#3873b1'),
     'graphite': ('#e7e9ec', '#bfc4ca', '#7b838d', '#5d646d'),
     'teal': ('#d4f6f1', '#86ddd0', '#2fa597', '#2a8379'),

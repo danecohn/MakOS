@@ -16,5 +16,5 @@ copyright = [
 tags = ["3D View", "Game Engine", "Import-Export"]
 
 [permissions]
-network = "Talks only to the local Studio bridge on 127.0.0.1 and serves a loopback control endpoint for Amerika Agent"
+network = "Talks only to the local Studio bridge on 127.0.0.1 and serves a loopback control endpoint for local automation"
 files = "Reads and writes inside the Studio project folder (~/Studio/Render): exports, snapshots and screenshots"

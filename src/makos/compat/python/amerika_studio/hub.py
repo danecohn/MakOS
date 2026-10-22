@@ -1,5 +1,5 @@
 """Studio hub: four app tiles with status, Anthropic key setup, model, budget, New game, recent projects and the
-"Amerika Agent can use these tools" switch."""
+"Allow local automation to use these tools" switch."""
 import subprocess
 import sys
 from pathlib import Path
@@ -135,7 +135,7 @@ class Hub(Gtk.ApplicationWindow):
         icon.set_pixel_size(64)
         hero.append(icon)
         col = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=2, hexpand=True, valign=Gtk.Align.CENTER)
-        col.append(ui.label('AMERIKA STUDIO', 'st-brand'))
+        col.append(ui.label('STUDIO', 'st-brand'))
         col.append(ui.label('DESCRIBE IT. CLAUDE BUILDS IT.', 'st-tag'))
         hero.append(col)
         self.bridge_pill = ui.label('', 'am-pill off')
@@ -154,8 +154,9 @@ class Hub(Gtk.ApplicationWindow):
         self.reuse_sw = Gtk.Switch(valign=Gtk.Align.CENTER)
         self.reuse_sw.connect('state-set', self._reuse_set)
         reuse.append(self.reuse_sw)
-        self.reuse_label = ui.label("Use Amerika Agent's key when Studio has none", None, wrap=True)
+        self.reuse_label = ui.label("Legacy key reuse is disabled", None, wrap=True)
         reuse.append(self.reuse_label)
+        reuse.set_visible(False)  # The retired Agent is not part of Studio.
         return ui.card(ui.label('ANTHROPIC KEY', 'am-label'),
                        ui.label('One key for all four apps. It lives in your login keyring; the apps talk to a local bridge '
                                 'and never see it. Each tile can also use its own key.', 'am-sub', wrap=True),
@@ -194,10 +195,10 @@ class Hub(Gtk.ApplicationWindow):
         self.agent_sw = Gtk.Switch(valign=Gtk.Align.CENTER)
         self.agent_sw.connect('state-set', self._agent_set)
         row.append(self.agent_sw)
-        row.append(ui.label('Amerika Agent can use these tools', None))
+        row.append(ui.label('Allow local automation to use these tools', None))
         self.agent_msg = ui.label('', 'am-sub', wrap=True)
-        return ui.card(ui.label('AMERIKA AGENT', 'am-label'),
-                       ui.label('Lets Amerika Agent drive the four apps (render, engine, sprite and box tools). Anything that runs code '
+        return ui.card(ui.label('LOCAL AUTOMATION', 'am-label'),
+                       ui.label('Lets the local Studio bridge drive the four apps (render, engine, sprite and box tools). Anything that runs code '
                                 'still asks you first, every time.', 'am-sub', wrap=True), row, self.agent_msg)
 
     def _footer(self):
@@ -240,7 +241,7 @@ class Hub(Gtk.ApplicationWindow):
             self.key_state.add_css_class('saved')
         self.key_btn.set_label('Change key' if has else 'Set up Anthropic key')
         self.key_clear_btn.set_sensitive(has)
-        self.reuse_label.set_label("Use Amerika Agent's key when Studio has none" + (' (key found)' if st['agent_key_available'] else ' (no agent key found)'))
+        self.reuse_label.set_label("Legacy key reuse is disabled" + (' (key found)' if st['agent_key_available'] else ' (no agent key found)'))
         self.reuse_sw.set_sensitive(st['agent_key_available'] or self.settings['reuse_agent_key'])
         b = st['budget']
         limit = b['daily_tokens']

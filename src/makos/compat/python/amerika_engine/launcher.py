@@ -1,7 +1,6 @@
 """amerika-engine launcher: opens the Godot editor on a project with the Amerika plugin enabled."""
 import argparse
 import os
-import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -80,8 +79,6 @@ def main(argv=None):
     if a.dry_run:
         print(' '.join(cmd))
         return 0
-    if not os.environ.get('AMERIKA_NO_GAMEMODE') and shutil.which('gamemoderun'):
-        cmd = ['gamemoderun'] + cmd  # CPU governor boost while the editor runs (amerika-gamedev)
     os.execvpe(cmd[0], cmd, env)
 
 

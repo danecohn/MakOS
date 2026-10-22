@@ -12,7 +12,7 @@ DEFAULTS = {'launcher_size': 56, 'launcher_position': 'bottom', 'launcher_autohi
             'reduce_motion': False, 'graphite': False, 'pinstripes': False,
             'pins': ['files', 'venture', 'paper', 'digits', 'notes', 'terminal', 'settings', 'trash-empty'],
             # --- settings-and-Seek engineer: keys written by makos.settings panes (validated in settings.model.clean) ---
-            'accent': 'blue', 'font_size': 12, 'scrollbars': 'auto', 'reduce_transparency': False,
+            'accent': 'blossom', 'font_size': 12, 'scrollbars': 'auto', 'reduce_transparency': False,
             'wallpaper': '', 'launcher_magnify': True, 'launcher_magnify_percent': 55, 'launcher_recents': False,
             'hot_corners': {}, 'text_replacements': [], 'clock_24h': False, 'text_scale': 1.0, 'high_contrast': False,
             'privacy_indicators': True, 'seek_exclusions': [], 'seek_web_engine': 'duckduckgo',

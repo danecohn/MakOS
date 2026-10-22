@@ -1,4 +1,4 @@
-# MakkOS development rules
+# Makk OS development rules
 
 MakkOS is an original Linux desktop on KWin Wayland, ARM64 first. Work in `src/makos`.
 Keep the existing Plasma and Amerika sessions until MakkOS passes owner acceptance.
@@ -24,3 +24,7 @@ cursors and sounds are derivatives; the build regenerates them. To compile curso
 `MAKOS_XCURSORGEN` or provide the distro's xcursorgen (x11-apps) build tool.
 No login/boot/PAM/default-session mutations in package installation. Risky optional theme
 switches require their own tested snapshot/revert/recovery implementation before exposure.
+
+Current identity: Makk OS, developed by Cherry Blossom LLC; shared original cherry blossom logo.
+Makk Office must use Euro-Office as its direct upstream. Preserve licence notices.
+Login/boot changes are explicitly authorized by the owner on 2026-10-22, but require tested recovery.

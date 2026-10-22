@@ -1,5 +1,5 @@
 extends Node
-## Loopback JSON-RPC 2.0 server for Amerika Agent (via amerika-studio-mcp): POST /rpc with `Authorization: Bearer <token>`,
+## Loopback JSON-RPC 2.0 server for local automation (via amerika-studio-mcp): POST /rpc with `Authorization: Bearer <token>`,
 ## method engine.<tool> (see tools.gd RPC table), app.ping, app.prompt. Descriptor: $XDG_RUNTIME_DIR/amerika/studio-engine.json.
 
 const Bridge := preload("res://addons/amerika_engine/bridge.gd")

@@ -25,7 +25,7 @@ class VentureTests(unittest.TestCase):
             for bad in ('sandbox','security.ssl','security.cert','remote.active','marionette'):
                 self.assertNotIn(bad,prefs)
     def test_launcher_uses_only_dedicated_profile_and_keeps_urls_as_arguments(self):
-        with tempfile.TemporaryDirectory() as temp,patch.object(venture,'prepare',return_value=Path(temp)):
+        with tempfile.TemporaryDirectory() as temp,patch.object(venture,'prepare',return_value=Path(temp)),patch('makos.venture_runtime.runtime',return_value=Path('/fixture/Venture')):
             args=venture.command(['https://example.invalid/a?b=c'],which=lambda exe:'/usr/bin/amerika-venture' if exe=='amerika-venture' else None)
-            self.assertEqual(args,['/usr/bin/amerika-venture','--profile',temp,'https://example.invalid/a?b=c'])
+            self.assertEqual(args,['/fixture/Venture','--name','Venture','--class','Venture','--profile',temp,'https://example.invalid/a?b=c'])
             self.assertNotIn('--no-remote',args)

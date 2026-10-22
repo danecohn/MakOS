@@ -60,8 +60,25 @@ try:
     assert geometry['nav-bar']['y']<geometry['PersonalToolbar']['y']<geometry['TabsToolbar']['y']
     assert geometry['searchbar-new']['w']>=140
     assert geometry['urlbar']['w']>300
-    # The style must not hide the native identity control or disable security checks.
+    # Branded title and a real new-tab navigation, not only the startup preference.
+    assert script('return Services.strings.createBundle("chrome://branding/locale/brand.properties").GetStringFromName("brandShortName");')=='Venture'
+    script('BrowserCommands.openTab();return true;')
+    time.sleep(2)
+    call('Marionette:SetContext',{'value':'content'})
+    page=script('return document.body.innerText;')
+    assert 'Venture' in page and 'Cherry Blossom LLC' in page and 'Amerika' not in page,page
+    call('Marionette:SetContext',{'value':'chrome'})
+    script('gBrowser.removeCurrentTab();return true;')
+    # Identity control visibility is page-dependent on Firefox internal resources.
+    # Verify it on a local HTTP page instead; no security preference is changed.
+    import http.server,threading
+    server=http.server.ThreadingHTTPServer(('127.0.0.1',0),http.server.SimpleHTTPRequestHandler)
+    threading.Thread(target=server.serve_forever,daemon=True).start()
+    call('Marionette:SetContext',{'value':'content'})
+    call('WebDriver:Navigate',{'url':f'http://127.0.0.1:{server.server_port}/'})
+    call('Marionette:SetContext',{'value':'chrome'})
     assert script('return getComputedStyle(document.getElementById("identity-box")).display;')!='none'
+    server.shutdown()
     count=script('return gBrowser.tabs.length;')
     script('gBrowser.selectedTab=gBrowser.addTab("about:blank",{triggeringPrincipal:Services.scriptSecurityManager.getSystemPrincipal()});return true;')
     assert script('return gBrowser.tabs.length;')==count+1

@@ -8,7 +8,7 @@ from .. import ui
 from ..backends import look
 from . import model, widgets as W
 
-ACCENT_LABELS = {'blue': 'Blue', 'graphite': 'Graphite', 'teal': 'Teal', 'green': 'Green', 'orange': 'Orange', 'red': 'Red', 'purple': 'Purple'}
+ACCENT_LABELS = {'blossom': 'Cherry Blossom', 'blue': 'Blue', 'graphite': 'Graphite', 'teal': 'Teal', 'green': 'Green', 'orange': 'Orange', 'red': 'Red', 'purple': 'Purple'}
 
 
 def build(col, ctx):
@@ -16,11 +16,11 @@ def build(col, ctx):
     s = W.section(col, 'Colour')
     W.choice_row(s, 'Accent colour', [(a, ACCENT_LABELS[a]) for a in model.ACCENTS], d['accent'],
                  lambda v: ctx.do(look.set_accent, v, ok='Accent changed.'),
-                 hint='Graphite makes the controls neutral grey. Applies to MakkOS windows immediately.')
+                 hint='Graphite makes the controls neutral grey. Applies to Makk OS windows immediately.')
     W.switch_row(s, 'Use pinstripe window backgrounds', d['pinstripes'], lambda v: ctx.do(look.set_pinstripes, v, ok='Saved.'))
     s = W.section(col, 'Text and scrolling')
     W.scale_row(s, 'Font size', 10, 18, 1, d['font_size'], lambda v: ctx.do(look.set_font_size, round(v), ok='Font size changed.'),
-                fmt=lambda v: f'{int(v)} px', hint='Base size for MakkOS windows (default 12).')
+                fmt=lambda v: f'{int(v)} px', hint='Base size for Makk OS windows (default 12).')
     W.choice_row(s, 'Show scroll bars', [('auto', 'Automatically'), ('always', 'Always')], d['scrollbars'],
                  lambda v: ctx.do(look.set_scrollbars, v, ok='Scroll bar behaviour changed.'),
                  hint='Other GTK applications follow after they are restarted.')

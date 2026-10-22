@@ -72,7 +72,7 @@ def lookup(app=None):
 
 
 def lookup_agent():
-    return _lookup(AGENT_SERVICE, 'anthropic')
+    return None  # Agent key reuse is retired in Makk OS.
 
 
 def _present(fn):

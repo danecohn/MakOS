@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Makk Social
+Exec=makos-app social %U
+Icon=makos-makos-logo
+Terminal=false
+OnlyShowIn=MakkOS;MakOS;
+Categories=Network;InstantMessaging;
+StartupNotify=true
+StartupWMClass=MakkSocial
+Keywords=threads;social;friends;messages;

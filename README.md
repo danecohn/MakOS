@@ -1,6 +1,7 @@
-# MakkOS
+# Makk OS
 
-Renamed from MakOS on 2026-10-22. Existing `makos-*` packages, commands,
+Makk OS is developed by Cherry Blossom LLC. Its original cherry blossom emblem
+is shared by the desktop and company. Renamed from MakOS/MakkOS on 2026-10-22. Existing `makos-*` packages, commands,
 configuration paths and application IDs remain stable for upgrades.
 
 An original Glass & Metal desktop for Ubuntu 26.10 ARM64, using KWin Wayland and

@@ -1792,7 +1792,7 @@ def undo(a):
 def save_checkpoint(project_dir=None, label='request'):
     d = Path(project_dir or config.project_dir()) / '.amerika-render' / 'checkpoints'
     d.mkdir(parents=True, exist_ok=True)
-    path = d / f'{time.time_ns():020d}-{label}.blend'  # ns resolution: two checkpoints in one second must not overwrite each other
+    path = d / f'{int(time.time())}-{label}.blend'
     bpy.ops.wm.save_as_mainfile(filepath=str(path), copy=True, compress=True)
     # keep the 10 most recent
     for old in sorted(d.glob('*.blend'))[:-10]:

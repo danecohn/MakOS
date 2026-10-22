@@ -1,4 +1,4 @@
-/* MakBox: the "Amerika Composer" side panel and its tool-use loop.
+/* MakBox: the "Composer" side panel and its tool-use loop.
  * Talks only to the local Studio bridge through window.amerikaStudio (AIClient / request). No API key lives here. */
 (function (root) {
 	"use strict";
@@ -63,7 +63,7 @@
 		this.root = root;
 		root.textContent = "";
 		const head = el("div", "ac-head");
-		head.appendChild(el("div", "ac-title", "Amerika Composer"));
+		head.appendChild(el("div", "ac-title", "Composer"));
 		this.statusDot = el("span", "ac-dot");
 		this.statusDot.title = "Bridge status";
 		head.appendChild(this.statusDot);

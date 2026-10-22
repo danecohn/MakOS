@@ -13,7 +13,7 @@ def main():
     parser.add_argument('--no-repo',action='store_true')
     parser.add_argument('--only',help='comma-separated MakkOS package names; existing package files are retained')
     args=parser.parse_args()
-    for script in ('make_makos_vectors.py','make_makos_materials.py'):
+    for script in ('make_makos_vectors.py','make_makos_materials.py','make_makk_brand.py'):
         subprocess.run([sys.executable,str(ROOT/'tools'/script)],check=True)
     subprocess.run([sys.executable,str(ROOT/'tools/ingest_makos_assets.py'),'--normalize','--require-all'],check=True,stdout=subprocess.DEVNULL)
     subprocess.run([sys.executable,str(ROOT/'tools/prepare_makos_wallpapers.py')],check=True)

@@ -35,3 +35,17 @@ sh tests/rig/makos_settings_rig.sh
 sh tests/rig/makos_rig.sh
 sh tests/rig/makos_launcher_rig.sh tests/rig/makos_venture_rig.py
 ```
+
+## Makk OS identity update (dev5)
+
+The launcher now creates a versioned runtime overlay under the Makk cache. Engine
+executables are copied unmodified, libraries remain linked to the installed engine,
+and only application/distribution/branding resources and the bundled new-tab page
+are replaced. New tabs use the same Venture page with Cherry Blossom LLC branding.
+The original `/opt/amerika/venture` installation and existing profiles are preserved.
+A resource/input fingerprint refreshes the overlay after an engine or asset update.
+No production debugging capability is enabled. The runtime resource changes are
+published in the Makk OS source; Venture's own repository now builds this identity.
+
+The real-engine rig checked the brand string, a fresh native new tab, the page
+identity control on a local HTTP fixture, ordinary tabs and second-launch handoff.

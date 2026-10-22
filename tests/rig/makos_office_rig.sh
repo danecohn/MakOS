@@ -24,4 +24,4 @@ export MAKOS_OFFICE_CHILD=1
 # KWin passes its own DISPLAY and WAYLAND_DISPLAY to the session child (XWayland is lazy-started).
 dbus-run-session -- kwin_wayland --virtual --xwayland --width 1920 --height 1080 --no-lockscreen --exit-with-session="$ROOT/tests/rig/makos_office_checks.sh" >"$OUT/compositor.log" 2>&1
 cat "$OUT/report.log"
-rg -q 'MAK OFFICE RIG PASS' "$OUT/report.log"
+rg -q 'MAKK OFFICE ROUNDTRIP PASS' "$OUT/report.log"
