@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=Movies
+Exec=makos-app movies %U
+Icon=makos-video
+Terminal=false
+OnlyShowIn=MakOS;
+Categories=AudioVideo;Video;Player;
+StartupNotify=true
+StartupWMClass=makos-movies
+MimeType=video/mp4;video/x-matroska;video/webm;video/x-msvideo;video/quicktime;video/ogg;
+Keywords=video;films;player;

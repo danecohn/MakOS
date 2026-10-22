@@ -7,3 +7,5 @@ Terminal=false
 OnlyShowIn=MakOS;
 Categories=Utility;
 StartupNotify=true
+StartupWMClass=makos-notes
+Keywords=memo;folders;

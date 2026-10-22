@@ -1,18 +1,6 @@
 /* Original MakOS Glass & Metal widgets. GPL-3.0-only. */
 * { font-family: "DejaVu Sans"; font-size: 12px; }
-window { color: #242b34; background: #ededed; }
 window.background-surface, window.launcher-surface { background: transparent; }
-button { min-height: 22px; border-radius: 5px; padding: 3px 12px; color: #242b34;
- border: 1px solid #92979d; background: linear-gradient(to bottom, #fff 0%, #f7f7f7 45%, #dfdfe1 52%, #f4f4f5 100%);
- box-shadow: inset 0 1px #fff, 0 1px 1px alpha(#000,.15); }
-button:hover { background: linear-gradient(#fff, #e8f3ff); border-color: #6f879f; }
-button:active, button:checked { background: linear-gradient(#9bb5cf,#d8e8f7); box-shadow: inset 0 1px 3px alpha(#000,.25); }
-button.suggested-action { color: #10263d; border-color: #3873b1;
- background: linear-gradient(to bottom,#d7efff 0%,#8cc7ff 44%,#418ee6 50%,#83c4ff 100%); }
-button:disabled { opacity: .48; }
-button:focus-visible, entry:focus { outline: 2px solid alpha(#6bb9ff,.65); outline-offset: 1px; }
-entry, textview { color: #202731; background: #fff; border: 1px solid #979fa8; border-radius: 4px;
- box-shadow: inset 0 1px 2px alpha(#000,.15); padding: 5px 8px; }
 headerbar, .metal-toolbar { background: linear-gradient(#f5f5f5,#d6d7d9); border-bottom: 1px solid #969ba0;
  box-shadow: inset 0 1px #fff; padding: 7px 12px; min-height: 30px; }
 .title-label { font-weight: bold; text-shadow: 0 1px #fff; }
@@ -26,12 +14,9 @@ window:backdrop .traffic { background: linear-gradient(#ededed,#bcbec0); }
 .menu-bar { background: linear-gradient(alpha(#fff,.96), alpha(#dce3eb,.93)); border-bottom: 1px solid alpha(#202e41,.45); padding: 0 12px; }
 .menu-bar button { background: transparent; border: none; box-shadow: none; border-radius: 0; padding: 0 10px; min-height: 28px; }
 .menu-bar button:hover, .menu-bar button:checked { background: linear-gradient(#65a6e9,#266bc1); color: #fff; }
-popover contents { background: alpha(#fafcfe,.98); border: 1px solid #9da7b2; border-radius: 7px; box-shadow: 0 8px 20px alpha(#000,.3); padding: 6px; }
-popover button { background: transparent; box-shadow: none; border: none; }
-popover button:hover { background: linear-gradient(#63a7ef,#2d70c8); color: white; }
 .source-list { background: linear-gradient(to right,alpha(#dce7f3,.97),#d5dfe9); border-right: 1px solid #a8b4c1; padding: 12px 7px; }
 .source-list button { border: none; background: transparent; box-shadow: none; padding: 5px 9px; }
-.source-list button:hover, row:selected { color: #fff; background: linear-gradient(#7ca5cf,#507caa); }
+.source-list button:hover { color: #fff; background: linear-gradient(#7ca5cf,#507caa); }
 .source-heading { color: #6b7d91; font-size: 10px; font-weight: bold; padding: 10px 7px 5px; }
 .launcher-shelf { background: linear-gradient(to bottom,alpha(#fff,.68),alpha(#9eaec1,.73) 47%,alpha(#d3dbe6,.9) 51%,alpha(#71849d,.8));
  border: 1px solid alpha(#fff,.7); border-radius: 13px; padding: 8px 12px 3px; box-shadow: 0 5px 12px alpha(#000,.4), inset 0 1px #fff; }
@@ -49,10 +34,22 @@ popover button:hover { background: linear-gradient(#63a7ef,#2d70c8); color: whit
 .settings-tile:hover { background: alpha(#9cbce0,.25); }
 .sheet { padding: 24px; }
 .pinstripes { background: repeating-linear-gradient(to bottom,#f6f6f6 0px,#f6f6f6 2px,#efefef 2px,#efefef 4px); }
-scrollbar slider { border-radius: 99px; min-width: 9px; min-height: 9px; background: linear-gradient(to right,#b0bdcb,#e2eaf2,#a1b0c0); border: 1px solid #91a0af; }
-separator { background: #b7bec5; min-width: 1px; min-height: 1px; margin: 4px; }
 .overview { background: alpha(#152538,.90); padding: 40px; }
 .overview label { color: #fff; }
 .overview button { min-width: 240px; min-height: 100px; }
 
 .settings-section { padding: 12px 18px; }
+
+/* ---- notification banners and the Alerts history (makos.notifications) ---- */
+.banner-stack { padding: 6px 10px 14px 6px; }
+.banner { background: linear-gradient(to bottom, alpha(#fff,.95), alpha(#dde5ee,.93)); border: 1px solid alpha(#566a82,.6); border-radius: 12px;
+ padding: 10px 12px; box-shadow: 0 8px 22px alpha(#000,.38), inset 0 1px #fff; }
+.banner.critical { border-color: #c9392e; background: linear-gradient(to bottom, alpha(#fff,.96), alpha(#fbe2de,.94)); }
+.banner-app { font-size: 9px; font-weight: bold; color: #7a8798; }
+.banner-title { font-weight: bold; color: #202731; text-shadow: 0 1px alpha(#fff,.8); }
+.banner-body { color: #3b4655; }
+.banner-icon { margin-right: 2px; }
+.banner-close { min-width: 18px; min-height: 18px; padding: 0 5px; border-radius: 99px; color: #5d6a7a; }
+.banner-progress { min-height: 8px; margin: 2px 0 4px 50px; }
+.banner-more { color: #fff; background: alpha(#1c2a3c,.78); border-radius: 99px; padding: 2px 12px; font-size: 10px; font-weight: bold; }
+.history-row { padding: 6px 4px; border-bottom: 1px solid alpha(#7d8c9f,.25); }

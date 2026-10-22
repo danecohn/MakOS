@@ -1,28 +1,31 @@
 // SPDX-License-Identifier: GPL-3.0-only
+// One orb: pre-rendered original gel art (contents/images/orb-*.png and @2x), glyph drawn on hover of the group.
 import QtQuick
 import org.kde.kwin.decoration
 DecorationButton {
     id: control
-    property color shade
-    property string glyph
-    width: 15; height: 15
-    Rectangle {
+    property string kind: "close"      // close | minimize | zoom
+    property string glyph: ""
+    property bool active: true
+    property bool groupHover: false
+    property int diameter: 14
+    width: diameter; height: diameter
+    opacity: enabled ? 1 : 0.45
+    Image {
         anchors.fill: parent
-        radius: 8
-        border.width: 1
-        border.color: "#777d85"
-        gradient: Gradient {
-            GradientStop { position: 0; color: "#ffffff" }
-            GradientStop { position: .42; color: decoration.client.active ? Qt.lighter(control.shade,1.2) : "#d8dade" }
-            GradientStop { position: .55; color: decoration.client.active ? Qt.darker(control.shade,1.05) : "#b9bec4" }
-            GradientStop { position: 1; color: decoration.client.active ? Qt.lighter(control.shade,1.35) : "#e3e5e8" }
-        }
-        Text {
-            anchors.centerIn: parent
-            visible: control.hovered
-            text: control.glyph
-            color: "#30363b"
-            font.pixelSize: 11
-        }
+        smooth: true
+        mipmap: true
+        source: "../images/orb-" + control.kind + "-" + (control.active ? (control.pressed ? "pressed" : "active") : (control.groupHover || control.hovered ? "active" : "inactive")) + ".png"
+    }
+    Text {
+        anchors.centerIn: parent
+        anchors.verticalCenterOffset: control.kind === "close" ? 0 : -0.5
+        visible: control.groupHover || control.hovered
+        text: control.glyph
+        color: "#3a2a26"
+        opacity: 0.78
+        font.family: "DejaVu Sans"
+        font.bold: true
+        font.pixelSize: Math.round(control.diameter * 0.82)
     }
 }

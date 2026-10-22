@@ -7,3 +7,5 @@ Terminal=false
 OnlyShowIn=MakOS;
 Categories=Utility;
 StartupNotify=true
+StartupWMClass=makos-widgets
+Keywords=dashboard;clock;weather;

@@ -2,8 +2,10 @@
 Type=Application
 Name=Sprite
 Exec=makos-app sprite %U
-Icon=makos-preview
+Icon=makos-sprite
 Terminal=false
 OnlyShowIn=MakOS;
-Categories=Utility;
+Categories=Graphics;2DGraphics;RasterGraphics;
 StartupNotify=true
+StartupWMClass=makos-sprite
+Keywords=pixel;art;animation;

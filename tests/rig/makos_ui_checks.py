@@ -44,10 +44,13 @@ settings=Settings(app)
 settings.pane('Appearance');settle()
 assert settings.stack.get_visible_child_name()=='pane'
 settings.pane('Launcher Bar');settle()
+dock=app.services.dock
 app.preferences['reduce_motion']=True
-app.magnify(0)
-assert all(img.get_pixel_size()==app.preferences['launcher_size'] for _,img,_,_ in app.launcher_icons)
+dock.apply_preferences(app.preferences)
+assert dock.zoom==1.0,'reduce motion must disable magnification'
 app.preferences['reduce_motion']=False
+dock.apply_preferences(app.preferences)
+assert dock.zoom>1.0
 assert magnify(0,56)>magnify(80,56)>magnify(240,56)
 # Real com.canonical.dbusmenu service; all calls pass through the session bus.
 xml='''<node><interface name="com.canonical.dbusmenu">
@@ -98,7 +101,7 @@ assert reply[0] not in app.notifications.items
 times=[]
 def frame(widget,clock):
     times.append(clock.get_frame_time())
-    app.magnify((len(times)//3)%len(app.launcher_icons))
+    app.magnify((len(times)//3)%len(dock.items))
     return len(times)<121
 app.launcher.add_tick_callback(frame)
 spin(lambda:len(times)>=121,20)

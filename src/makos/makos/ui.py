@@ -7,6 +7,10 @@ from . import common
 
 
 def install_theme():
+    # theme-and-system-skin: the complete widget theme (tokens, accent, Graphite) loads below glass.css.
+    from . import appearance
+    prefs = common.load_settings()
+    appearance.install(Gdk.Display.get_default(), prefs.get('accent', 'blue'), bool(prefs.get('graphite')))
     provider = Gtk.CssProvider()
     provider.load_from_path(str(common.SHARE / 'theme/glass.css'))
     Gtk.StyleContext.add_provider_for_display(Gdk.Display.get_default(), provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
@@ -20,7 +24,28 @@ def install_theme():
     icons = Gtk.IconTheme.get_for_display(Gdk.Display.get_default())
     icons.add_search_path(str(common.SHARE / 'icons'))
     settings.set_property('gtk-icon-theme-name', 'MakOS')
+    refresh_appearance()  # settings-and-Seek: user-chosen font size / contrast / transparency (settings.model.css)
     return provider
+
+
+_PREFS_PROVIDER = {}
+
+
+def refresh_appearance():
+    """(Re)load the user-preference override stylesheet above glass.css. Called at start-up and after Settings changes."""
+    from .settings import model
+    data = common.load_settings()
+    display = Gdk.Display.get_default()
+    provider = _PREFS_PROVIDER.get('p')
+    if provider is None:
+        provider = _PREFS_PROVIDER['p'] = Gtk.CssProvider()
+        Gtk.StyleContext.add_provider_for_display(display, provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION + 1)
+    provider.load_from_string(model.css(data))
+    settings = Gtk.Settings.get_default()
+    if settings.find_property('gtk-overlay-scrolling'):
+        settings.set_property('gtk-overlay-scrolling', data['scrollbars'] == 'auto')
+    from . import appearance
+    appearance.set_variant(display, data['accent'], bool(data['graphite']))
 
 
 def box(vertical=False, spacing=0, css=None):

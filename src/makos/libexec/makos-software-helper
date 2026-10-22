@@ -1,0 +1,58 @@
+#!/usr/bin/python3
+"""Privileged half of MakOS Software Center. Run only through pkexec (see org.makos.software.policy).
+
+Fixed allowlist of actions; package names are validated and passed after "--" so they cannot be options.
+Never dist-upgrade, never removes MakOS or session-critical packages, never reads user files.
+"""
+import os
+import re
+import subprocess
+import sys
+
+NAME = re.compile(r'^[a-z0-9][a-z0-9+.-]{1,99}$')
+PROTECTED_PREFIXES = ('makos-', 'linux-image', 'linux-modules', 'linux-base', 'ubuntu-', 'kwin', 'libc6', 'systemd', 'polkit', 'pkexec', 'policykit', 'dbus', 'apt', 'dpkg', 'sudo', 'grub', 'shim', 'network-manager', 'sddm', 'xorg', 'xwayland')
+ACTIONS = ('update', 'upgrade', 'install', 'remove')
+MAX_PACKAGES = 20
+
+
+def validate(action, packages):
+    if action not in ACTIONS:
+        raise ValueError('unknown action')
+    if action in ('update', 'upgrade'):
+        if packages:
+            raise ValueError('this action takes no package names')
+        return
+    if not 1 <= len(packages) <= MAX_PACKAGES:
+        raise ValueError('give between 1 and %d package names' % MAX_PACKAGES)
+    for p in packages:
+        if not NAME.match(p):
+            raise ValueError('invalid package name')
+        if action == 'remove' and p.startswith(PROTECTED_PREFIXES):
+            raise ValueError('refusing to remove protected package ' + p)
+
+
+def command(action, packages):
+    validate(action, packages)
+    base = ['/usr/bin/apt-get', '-y', '-o', 'APT::Status-Fd=1', '-o', 'Dpkg::Options::=--force-confold', '-o', 'Dpkg::Use-Pty=0']
+    if action == 'update':
+        return ['/usr/bin/apt-get', '-y', 'update']
+    if action == 'upgrade':
+        return base + ['upgrade']
+    return base + [action, '--'] + list(packages)
+
+
+def main(argv):
+    if len(argv) < 2:
+        print('usage: makos-software-helper update|upgrade|install|remove [packages]', file=sys.stderr)
+        return 2
+    try:
+        argv_ = command(argv[1], argv[2:])
+    except ValueError as error:
+        print('makos-software-helper: ' + str(error), file=sys.stderr)
+        return 2
+    env = {'PATH': '/usr/sbin:/usr/bin:/sbin:/bin', 'LANG': 'C', 'LC_ALL': 'C', 'DEBIAN_FRONTEND': 'noninteractive', 'APT_LISTCHANGES_FRONTEND': 'none'}
+    return subprocess.call(argv_, env=env, stdin=subprocess.DEVNULL)
+
+
+if __name__ == '__main__':
+    sys.exit(main(sys.argv))

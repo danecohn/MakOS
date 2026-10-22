@@ -26,6 +26,46 @@ MOTIFS={
 'makos-logo':'<path d="M7 49 V15 L20 8 L32 31 L44 8 L57 15 V49 L44 56 V29 L32 48 L20 29 V56Z" fill="url(#blue)" stroke="#326e9a" stroke-width="1.5"/>',
 }
 
+# ---- Settings pane icons (settings-and-Seek engineer). One distinct original geometric drawing per pane.
+# These are development FALLBACKS: each is marked in the SVG and in docs/makos/settings.md for AI regeneration.
+PANE_MOTIFS={
+'appearance':'<circle cx="32" cy="32" r="23" fill="url(#silver)" stroke="#7c93a8"/><path d="M32 9 A23 23 0 0 1 32 55Z" fill="url(#blue)"/><circle cx="32" cy="32" r="8" fill="#fff" stroke="#7c93a8"/>',
+'desktop':'<rect x="6" y="10" width="52" height="34" rx="3" fill="url(#silver)" stroke="#758b9f"/><path d="M10 40 L24 24 L33 33 L40 26 L54 40Z" fill="#5f9bc4"/><circle cx="44" cy="19" r="4" fill="#fff0b0"/><path d="M22 54 H42 M32 44 V54" stroke="#8fa3b5" stroke-width="4" stroke-linecap="round"/>',
+'launcher':'<rect x="5" y="36" width="54" height="18" rx="6" fill="url(#silver)" stroke="#7d93a8"/>'+''.join(f'<rect x="{10+i*13}" y="{(40 if i not in (1,2) else 26)-(0 if i!=2 else 6)}" width="{9 if i not in (1,2) else 12 }" height="{9 if i not in (1,2) else 12}" rx="3" fill="url(#blue)" stroke="#3e7fb0"/>' for i in range(4)),
+'desks':'<rect x="5" y="14" width="25" height="20" rx="3" fill="url(#blue)" stroke="#3e7fb0"/><rect x="34" y="14" width="25" height="20" rx="3" fill="url(#silver)" stroke="#7d93a8"/><rect x="5" y="38" width="25" height="14" rx="3" fill="url(#silver)" stroke="#7d93a8"/><rect x="34" y="38" width="25" height="14" rx="3" fill="url(#silver)" stroke="#7d93a8"/><path d="M5 8 H15 M59 8 H49" stroke="#4d789e" stroke-width="3" stroke-linecap="round"/>',
+'language':'<rect x="6" y="9" width="35" height="30" rx="5" fill="url(#blue)" stroke="#3e7fb0"/><path d="M14 18 H33 M23.5 14 V18 M17 30 Q24 26 31 18 M19 22 Q24 29 31 31" fill="none" stroke="#fff" stroke-width="2.4"/><rect x="26" y="29" width="32" height="26" rx="5" fill="url(#paper)" stroke="#8aa0b3"/><path d="M34 49 L42 33 L50 49 M37 44 H47" fill="none" stroke="#4d738f" stroke-width="3"/>',
+'security':'<path d="M32 6 L54 14 V32 Q54 48 32 58 Q10 48 10 32 V14Z" fill="url(#silver)" stroke="#6f879c" stroke-width="1.5"/><rect x="22" y="29" width="20" height="16" rx="3" fill="url(#blue)" stroke="#3e7fb0"/><path d="M26 29 V24 Q26 17 32 17 Q38 17 38 24 V29" fill="none" stroke="#4d789e" stroke-width="3"/>',
+'displays':'<rect x="5" y="9" width="40" height="29" rx="3" fill="url(#silver)" stroke="#758b9f"/><rect x="9" y="13" width="32" height="21" fill="#7fc3e9"/><rect x="38" y="24" width="21" height="26" rx="3" fill="url(#silver)" stroke="#758b9f"/><rect x="41" y="27" width="15" height="20" fill="#9bd0ea"/><path d="M18 38 V46 M10 48 H28" stroke="#9aacbb" stroke-width="4" stroke-linecap="round"/>',
+'keyboard':'<rect x="4" y="18" width="56" height="30" rx="5" fill="url(#silver)" stroke="#758b9f"/>'+''.join(f'<rect x="{9+c*8.4}" y="{22+r*8}" width="6" height="5" rx="1.2" fill="#6294c0"/>' for r in range(2) for c in range(6))+'<rect x="16" y="39" width="32" height="5" rx="1.5" fill="#6294c0"/>',
+'mouse':'<path d="M32 6 C46 6 52 16 52 30 V38 C52 50 44 58 32 58 C20 58 12 50 12 38 V30 C12 16 18 6 32 6Z" fill="url(#silver)" stroke="#758b9f" stroke-width="1.5"/><path d="M32 7 V28 M13 28 H51" stroke="#8fa3b5" stroke-width="2"/><rect x="29" y="14" width="6" height="11" rx="3" fill="url(#blue)"/>',
+'sound':'<path d="M8 25 H18 L32 13 V51 L18 39 H8Z" fill="url(#silver)" stroke="#758b9f" stroke-linejoin="round"/><path d="M39 22 Q46 32 39 42 M45 15 Q58 32 45 49" fill="none" stroke="#4d8fc4" stroke-width="4" stroke-linecap="round"/>',
+'energy':'<rect x="7" y="19" width="43" height="27" rx="5" fill="url(#silver)" stroke="#758b9f"/><rect x="50" y="27" width="6" height="11" rx="2" fill="#8fa3b5"/><path d="M31 22 L21 34 H29 L25 44 L38 30 H30Z" fill="#6fb657" stroke="#3f7f31"/>',
+'printers':'<rect x="16" y="6" width="32" height="18" fill="url(#paper)" stroke="#8aa0b3"/><rect x="6" y="22" width="52" height="25" rx="5" fill="url(#silver)" stroke="#758b9f"/><rect x="16" y="38" width="32" height="19" fill="url(#paper)" stroke="#8aa0b3"/><path d="M21 44 H43 M21 50 H38" stroke="#8ca7bd" stroke-width="2"/><circle cx="49" cy="29" r="2.5" fill="#6fb657"/>',
+'bluetooth':'<circle cx="32" cy="32" r="25" fill="url(#blue)" stroke="#3e7fb0"/><path d="M22 23 L42 41 L32 50 V14 L42 23 L22 41" fill="none" stroke="#fff" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>',
+'network':'<circle cx="32" cy="32" r="24" fill="url(#blue)" stroke="#3e7fb0"/><path d="M12 25 H52 M10 38 H54" stroke="#cceaff" stroke-width="2"/><ellipse cx="32" cy="32" rx="10" ry="24" fill="none" stroke="#cceaff" stroke-width="2"/><path d="M32 8 V56" stroke="#cceaff" stroke-width="2"/><circle cx="50" cy="50" r="7" fill="#fff" stroke="#3e7fb0"/><path d="M46 50 H54 M50 46 V54" stroke="#3e7fb0" stroke-width="2"/>',
+'sharing':'<circle cx="18" cy="32" r="8" fill="url(#blue)" stroke="#3e7fb0"/><circle cx="46" cy="16" r="8" fill="url(#silver)" stroke="#758b9f"/><circle cx="46" cy="48" r="8" fill="url(#silver)" stroke="#758b9f"/><path d="M25 28 L39 19 M25 36 L39 45" stroke="#4d789e" stroke-width="3"/>',
+'users':'<circle cx="32" cy="22" r="11" fill="url(#blue)" stroke="#3e7fb0"/><path d="M10 56 Q10 36 32 36 Q54 36 54 56Z" fill="url(#silver)" stroke="#758b9f"/>',
+'datetime':'<rect x="7" y="9" width="40" height="40" rx="4" fill="url(#paper)" stroke="#8ea5b7"/><path d="M7 20 V13 Q7 9 11 9 H43 Q47 9 47 13 V20Z" fill="url(#blue)"/><circle cx="44" cy="44" r="15" fill="url(#silver)" stroke="#6f879c"/><circle cx="44" cy="44" r="11.5" fill="#f4f9fc"/><path d="M44 36 V44 L50 47" stroke="#39566f" stroke-width="2.5" fill="none" stroke-linecap="round"/>',
+'update':'<circle cx="32" cy="32" r="24" fill="url(#silver)" stroke="#7a91a6"/><path d="M32 14 V37 M22 28 L32 38 L42 28" fill="none" stroke="#3e7fb0" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M18 46 H46" stroke="#3e7fb0" stroke-width="5" stroke-linecap="round"/>',
+'accessibility':'<circle cx="32" cy="32" r="25" fill="url(#blue)" stroke="#3e7fb0"/><circle cx="32" cy="17" r="4.5" fill="#fff"/><path d="M15 25 Q32 30 49 25 M32 28 V40 M32 40 L24 53 M32 40 L40 53" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/>',
+'startup':'<circle cx="32" cy="34" r="22" fill="url(#silver)" stroke="#758b9f"/><path d="M32 8 V32" stroke="#3e7fb0" stroke-width="6" stroke-linecap="round"/><path d="M20 18 A20 20 0 1 0 44 18" fill="none" stroke="#3e7fb0" stroke-width="5" stroke-linecap="round"/>',
+'rewind':MOTIFS['rewind'],
+}
+PANE_NAMES=['pane-'+k for k in PANE_MOTIFS]
+FALLBACK_NOTE='<!-- FALLBACK: original vector placeholder for the Settings pane icon; regenerate with the AI image pipeline (see docs/makos/settings.md) -->'
+
+# ---- Application icons for the Studio suite (core-apps engineer): development fallbacks, one distinct drawing each.
+import math as _m
+_GEAR=''.join(f'<rect x="28" y="6" width="8" height="12" rx="2" fill="url(#silver)" stroke="#7a91a6" transform="rotate({a} 32 32)"/>' for a in range(0,360,45))
+APP_MOTIFS={
+'makbox':'<rect x="9" y="12" width="46" height="42" rx="8" fill="url(#silver)" stroke="#758b9f"/><circle cx="32" cy="38" r="12" fill="url(#blue)" stroke="#3e7fb0"/><circle cx="32" cy="38" r="4" fill="#e9f5fa"/><circle cx="32" cy="21" r="3.5" fill="#8fa3b5"/><path d="M16 20 H24 M40 20 H48" stroke="#8fa3b5" stroke-width="3" stroke-linecap="round"/>',
+'render':'<path d="M32 6 L55 18 V44 L32 58 L9 44 V18Z" fill="url(#blue)" stroke="#3a76a6" stroke-linejoin="round"/><path d="M32 32 L55 18 M32 32 L9 18 M32 32 V58" stroke="#e5f5ff" stroke-width="2" fill="none"/><path d="M32 6 L55 18 L32 32 L9 18Z" fill="#d6eefc" opacity=".55"/>',
+'engine':_GEAR+'<circle cx="32" cy="32" r="20" fill="url(#silver)" stroke="#7a91a6"/><circle cx="32" cy="32" r="11" fill="url(#blue)" stroke="#3e7fb0"/><path d="M29 26 L38 32 L29 38Z" fill="#fff"/>',
+'sprite':''.join(f'<rect x="{11+x*6}" y="{11+y*6}" width="6" height="6" fill="{c}"/>' for y,row in enumerate(['bbbbbbb','bcwwwwb','bcwwwwb','.bwwwb.','..bwwb.','...bb..','...b...']) for x,ch in enumerate(row) for c in [{'b':'#3e7fb0','w':'#bfe3fa','c':'#ffffff'}.get(ch)] if c),
+'studio':'<path d="M32 5 L56 19 V45 L32 59 L8 45 V19Z" fill="url(#silver)" stroke="#758b9f" stroke-linejoin="round"/><rect x="17" y="21" width="13" height="13" rx="2" fill="url(#blue)"/><rect x="34" y="21" width="13" height="13" rx="2" fill="#a9c9e2"/><rect x="17" y="38" width="13" height="8" rx="2" fill="#a9c9e2"/><circle cx="41" cy="42" r="6" fill="url(#blue)"/>',
+}
+APP_ICON_NAMES=list(APP_MOTIFS)
+
 def svg(body):
     return '<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">'+DEFS+body+'</svg>'
 
@@ -56,5 +96,9 @@ def main():
         else:
             body=MOTIFS['video']
         (OUT/f'makos-{name}.svg').write_text(svg(body))
+    for key,body in PANE_MOTIFS.items():
+        (OUT/f'makos-pane-{key}.svg').write_text(svg(body).replace('<defs>',FALLBACK_NOTE+'<defs>',1))
+    for key,body in APP_MOTIFS.items():
+        (OUT/f'makos-{key}.svg').write_text(svg(body).replace('<defs>',FALLBACK_NOTE.replace('Settings pane','application').replace('docs/makos/settings.md','docs/makos/ICON-REQUESTS.md')+'<defs>',1))
     print('Original development vector set:',len(list(OUT.glob('*.svg'))))
 if __name__=='__main__':main()

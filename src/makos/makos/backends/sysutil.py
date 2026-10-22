@@ -55,20 +55,40 @@ def popen(argv):
 
 
 # ---------------------------------------------------------------- KDE config (kreadconfig6 / kwriteconfig6)
-def kread(file, group, key, default=''):
-    argv = ['kreadconfig6', '--file', file]
+# KWin runs with XDG_CONFIG_HOME=<config>/makos/compositor (see session/makos-session) so the files it reads live there;
+# applications keep the user's own XDG_CONFIG_HOME. COMPOSITOR_FILES are therefore read/written in the private directory.
+COMPOSITOR_FILES = ('kwinrc', 'kxkbrc', 'kcminputrc', 'kglobalshortcutsrc', 'kscreenlockerrc', 'kaccessrc')
+BOTH_FILES = ('kdeglobals',)  # read by KWin (animation speed) and by applications: written to both homes
+
+
+def compositor_home():
+    return config_home() / 'makos' / 'compositor'
+
+
+def _kargv(tool, file, group):
+    argv = [tool, '--file', file]
     for g in group.split(']['):
         argv += ['--group', g]
-    res = run(argv + ['--key', key, '--default', default])
+    return argv
+
+
+def kread(file, group, key, default=''):
+    env = {'XDG_CONFIG_HOME': str(compositor_home())} if file in COMPOSITOR_FILES else None
+    res = run(_kargv('kreadconfig6', file, group) + ['--key', key, '--default', default], env=env)
     return res.out if res.code == 0 else default
 
 
 def kwrite(file, group, key, value):
-    argv = ['kwriteconfig6', '--file', file]
-    for g in group.split(']['):
-        argv += ['--group', g]
     value = str(value).lower() if isinstance(value, bool) else str(value)
-    return run(argv + ['--key', key, value], timeout=10).code == 0
+    argv = _kargv('kwriteconfig6', file, group) + ['--key', key, value]
+    if file in COMPOSITOR_FILES:
+        compositor_home().mkdir(parents=True, exist_ok=True)
+        return run(argv, timeout=10, env={'XDG_CONFIG_HOME': str(compositor_home())}).code == 0
+    ok = run(argv, timeout=10).code == 0
+    if file in BOTH_FILES:
+        compositor_home().mkdir(parents=True, exist_ok=True)
+        ok = run(argv, timeout=10, env={'XDG_CONFIG_HOME': str(compositor_home())}).code == 0 and ok
+    return ok
 
 
 def kwin_reconfigure():

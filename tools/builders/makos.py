@@ -47,11 +47,16 @@ def register(b):
         shutil.copytree(source/'icons/MakOS',p.path('/usr/share/icons/MakOS'))
         return p
     def apps():
-        p=package('makos-apps','Curated MakOS application entries with one app per role','makos-shell',arch='arm64')
-        p.recommends='ptyxis, amerika-venture, libreoffice-writer, libreoffice-calc, libreoffice-impress, amerika-studio, amerika-render, amerika-engine, amerika-sprite, amerika-box'
+        # core-apps: runtime needs of Preview/Pictures (Pillow, poppler), Tunes/Movies (GStreamer + gtk4paintablesink),
+        # Disk Utility (udisks2, lsblk), Software Center (pkexec + the helper below) and Activity (procps).
+        p=package('makos-apps','Curated MakOS application entries with one app per role','makos-shell, python3-pil, poppler-utils, udisks2, util-linux, pkexec, gir1.2-gstreamer-1.0, gstreamer1.0-plugins-base, gstreamer1.0-plugins-good, gstreamer1.0-gtk4, procps',arch='arm64')
+        p.recommends='ptyxis, python3-mutagen, gstreamer1.0-libav, gstreamer1.0-pipewire, flatpak, smartmontools, amerika-venture, libreoffice-writer, libreoffice-calc, libreoffice-impress, amerika-studio, amerika-render, amerika-engine, amerika-sprite, amerika-box'
         shutil.copytree(source/'compat',p.path('/usr/share/makos/compat'))
         for path in (source/'applications').glob('*.desktop'):
             p.copy(path,'/usr/share/applications/'+path.name)
+        # Software Center: privileged half runs only through pkexec under this polkit action (fixed allowlist, see the helper).
+        p.copy(source/'libexec/makos-software-helper','/usr/libexec/makos/makos-software-helper',0o755)
+        p.copy(source/'polkit/org.makos.software.policy','/usr/share/polkit-1/actions/org.makos.software.policy')
         return p
     def meta():
         p=package('makos-desktop','MakOS desktop development preview for Ubuntu ARM64',', '.join(n+f' (= {VERSION})' for n in NAMES if n!='makos-desktop'),arch='arm64')

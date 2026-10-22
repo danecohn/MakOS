@@ -1,0 +1,202 @@
+#!/usr/bin/python3 -I
+# Adapted for MakOS from Amerika OS (src/os/settings-helper/amerika-settings-helper), GPL-3.0-only, Amerika LLC; MakOS adaptations.
+"""Privileged helper for MakOS Settings. Run through pkexec (polkit action org.makos.settings.manage).
+
+Actions (nothing else is accepted; arguments are validated before anything else happens, nothing reaches a shell):
+  firewall-status            print whether the ufw firewall is enabled (JSON; needs no rights)
+  firewall-enable            enable ufw with its default policy
+  firewall-disable           disable ufw
+  battery-threshold N        set the battery charge limit to N percent (50..100) where the hardware supports it
+  lid-action ACTION          ignore | suspend | hibernate | poweroff | lock : logind drop-in for closing the lid
+  apt-update                 refresh the package lists of the configured sources
+  apt-upgrade                install upgrades for installed packages (never removes packages, never dist-upgrade)
+
+It never switches login managers, touches PAM, or runs boot-theme helpers. Ordinary package upgrades may run Ubuntu
+maintainer scripts, including kernel/initramfs updates; the default display manager selection is captured and restored.
+"""
+import json
+import os
+import re
+import subprocess
+import sys
+import tempfile
+from pathlib import Path
+
+# Tests patch ROOT after import. A privileged invocation must never redirect system paths through the environment.
+ROOT = Path('/')
+ENV = {'PATH': '/usr/sbin:/usr/bin:/sbin:/bin', 'LANG': 'C.UTF-8', 'DEBIAN_FRONTEND': 'noninteractive',
+       'APT_LISTCHANGES_FRONTEND': 'none', 'NEEDRESTART_MODE': 'l'}
+UFW = '/usr/sbin/ufw'
+APT_GET = '/usr/bin/apt-get'
+BATTERY_FILES = ('charge_control_end_threshold', 'charge_stop_threshold')
+DM_FILE = 'etc/X11/default-display-manager'
+DM_SERVICE = 'etc/systemd/system/display-manager.service'
+LOGIND_DROPIN = 'etc/systemd/logind.conf.d/50-makos-lid.conf'
+LID_VALUES = {'ignore': 'ignore', 'suspend': 'suspend', 'hibernate': 'hibernate', 'poweroff': 'poweroff', 'lock': 'lock'}
+NO_ARGS = ('firewall-status', 'firewall-enable', 'firewall-disable', 'apt-update', 'apt-upgrade')
+
+
+def fail(message, code=2):
+    print('error: ' + message, file=sys.stderr)
+    return code
+
+
+def path(rel):
+    return ROOT / rel
+
+
+def validate(action, args):
+    """Return an error string, or None when `action args` is acceptable. Pure; runs before the root check."""
+    if action in NO_ARGS:
+        return None if not args else f'{action} takes no arguments.'
+    if action == 'battery-threshold':
+        if len(args) != 1 or not re.fullmatch(r'[0-9]{2,3}', args[0]) or not 50 <= int(args[0]) <= 100:
+            return 'Give a percentage between 50 and 100.'
+        return None
+    if action == 'lid-action':
+        if len(args) != 1 or args[0] not in LID_VALUES:
+            return 'Give one of: ' + ', '.join(LID_VALUES) + '.'
+        return None
+    return 'Unknown action.'
+
+
+def run(argv):
+    return subprocess.run(argv, env=ENV, capture_output=True, text=True, check=False)
+
+
+def ufw_enabled():
+    try:
+        for line in path('etc/ufw/ufw.conf').read_text().splitlines():
+            if line.strip().startswith('ENABLED='):
+                return line.split('=', 1)[1].strip().lower() == 'yes'
+    except OSError:
+        pass
+    return False
+
+
+def battery_nodes():
+    base = path('sys/class/power_supply')
+    found = []
+    if base.is_dir():
+        for supply in sorted(base.glob('BAT*')):
+            for name in BATTERY_FILES:
+                node = supply / name
+                if node.exists():
+                    found.append(node)
+                    break
+    return found
+
+
+def dm_state():
+    file = path(DM_FILE)
+    service = path(DM_SERVICE)
+    current = file.read_bytes() if file.exists() else None
+    if service.is_symlink():
+        unit = ('link', os.readlink(service))
+    elif service.is_file():
+        unit = ('file', service.read_bytes())
+    else:
+        unit = None
+    return current, unit
+
+
+def guard_display_manager():
+    before = dm_state()
+    if before[0]:
+        selected = os.path.basename(before[0].decode().strip())
+        subprocess.run(['/usr/bin/debconf-set-selections'], env=ENV,
+                       input=f'shared/default-x-display-manager select {selected}\n', text=True, check=False)
+    return before
+
+
+def restore_display_manager(before):
+    if before is None or dm_state() == before:
+        return
+    current, unit = before
+    if current is None:
+        path(DM_FILE).unlink(missing_ok=True)
+    else:
+        path(DM_FILE).write_bytes(current)
+    if os.path.lexists(path(DM_SERVICE)):
+        path(DM_SERVICE).unlink()
+    if unit and unit[0] == 'link':
+        path(DM_SERVICE).symlink_to(unit[1])
+    elif unit:
+        path(DM_SERVICE).write_bytes(unit[1])
+    print('note: the default login manager was kept as it was.')
+
+
+def upgrade_preserving_manager():
+    protected = 'sddm lightdm gdm3 gdm lxdm xdm kdm nodm greetd slim'
+    original = path('etc/apt/preferences')
+    contents = original.read_text() if original.is_file() else ''
+    runtime = path('run')
+    runtime.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix='makos-upgrade-', dir=runtime) as temporary:
+        preferences = Path(temporary) / 'preferences'
+        preferences.write_text('Package: ' + protected + '\nPin: version *\nPin-Priority: -1\n\n' + contents)
+        preferences.chmod(0o600)
+        return apt(['--no-remove', '-o', 'Dir::Etc::Preferences=' + str(preferences), 'upgrade'])
+
+
+def apt(argv):
+    return subprocess.call([APT_GET, '-y', '-o', 'APT::Status-Fd=1', '-o', 'Dpkg::Options::=--force-confold',
+                            '-o', 'Dpkg::Options::=--force-confdef'] + argv, env=ENV)
+
+
+def set_lid_action(value):
+    """Write a logind drop-in; reverting means deleting this one file. systemd-logind reads it on reload/restart or next boot."""
+    target = path(LOGIND_DROPIN)
+    target.parent.mkdir(parents=True, exist_ok=True)
+    tmp = target.with_suffix('.tmp')
+    tmp.write_text('# Written by MakOS Settings (Energy Saver). Delete this file to restore the distribution default.\n'
+                   f'[Login]\nHandleLidSwitch={LID_VALUES[value]}\nHandleLidSwitchExternalPower={LID_VALUES[value]}\n')
+    tmp.chmod(0o644)
+    tmp.replace(target)
+    return 0
+
+
+def main(argv):
+    if len(argv) < 2:
+        return fail('Missing action.')
+    action, args = argv[1], argv[2:]
+    error = validate(action, args)
+    if error:
+        return fail(error)
+    if action != 'firewall-status' and os.geteuid() != 0:
+        return fail('This helper must be run as root through pkexec.')
+    if action == 'firewall-status':
+        print(json.dumps({'enabled': ufw_enabled()}))
+        return 0
+    if action in ('firewall-enable', 'firewall-disable'):
+        res = run([UFW, '--force', 'enable' if action.endswith('enable') else 'disable'])
+        print((res.stdout or res.stderr).strip())
+        return res.returncode
+    if action == 'battery-threshold':
+        nodes = battery_nodes()
+        if not nodes:
+            return fail('This computer does not support a battery charge limit.', 3)
+        for node in nodes:
+            node.write_text(args[0] + '\n')
+        persist = path('etc/makos/battery-threshold')
+        persist.parent.mkdir(parents=True, exist_ok=True)
+        persist.write_text(args[0] + '\n')
+        print(json.dumps({'threshold': int(args[0]), 'batteries': len(nodes)}))
+        return 0
+    if action == 'lid-action':
+        set_lid_action(args[0])
+        print(json.dumps({'lid_action': args[0], 'file': '/' + LOGIND_DROPIN, 'note': 'Takes effect after systemd-logind reloads or at the next boot.'}))
+        return 0
+    if action == 'apt-update':
+        return apt(['update'])
+    if action == 'apt-upgrade':
+        before = guard_display_manager()
+        try:
+            return upgrade_preserving_manager()
+        finally:
+            restore_display_manager(before)
+    return fail('Unknown action.')
+
+
+if __name__ == '__main__':
+    sys.exit(main(sys.argv))

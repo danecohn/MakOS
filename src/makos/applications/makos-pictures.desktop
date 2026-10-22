@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=Pictures
+Exec=makos-app pictures %U
+Icon=makos-photos
+Terminal=false
+OnlyShowIn=MakOS;
+Categories=Graphics;Photography;Viewer;
+StartupNotify=true
+StartupWMClass=makos-pictures
+MimeType=image/jpeg;image/png;image/webp;
+Keywords=photos;albums;slideshow;

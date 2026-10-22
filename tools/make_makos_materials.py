@@ -47,6 +47,103 @@ def rounded_material(name,size,top,bottom,radius=12):
     image.save(OUT/(name+'.png'))
 
 
+def _vgrad(size,stops):
+    """Vertical RGBA gradient through (t, (r,g,b,a)) stops."""
+    w,h=size
+    image=Image.new('RGBA',size)
+    draw=ImageDraw.Draw(image)
+    for y in range(h):
+        t=y/max(1,h-1)
+        for (t0,c0),(t1,c1) in zip(stops,stops[1:]):
+            if t0<=t<=t1:
+                k=(t-t0)/max(1e-9,t1-t0)
+                draw.line((0,y,w,y),fill=tuple(round(a+(b-a)*k) for a,b in zip(c0,c1)))
+                break
+    return image
+
+def _slice_shelf(name,image,cap):
+    """Save left cap, a 16-px stretchable middle and the right cap; also the stitched full-width image."""
+    w,h=image.size
+    parts={'left':image.crop((0,0,cap,h)),'mid':image.crop((w//2-8,0,w//2+8,h)),'right':image.crop((w-cap,0,w,h))}
+    for suffix,part in parts.items():
+        part.save(OUT/f'{name}-{suffix}.png')
+    full=Image.new('RGBA',(2048,h))
+    full.paste(parts['left'],(0,0))
+    for x in range(cap,2048-cap,16):
+        full.paste(parts['mid'],(x,0))
+    full.paste(parts['right'],(2048-cap,0))
+    full.save(OUT/f'{name}.png')
+
+def dock_shelves():
+    """Original shelf artwork for the Launcher Bar, drawn with 4x supersampling.
+    dock-shelf-flat-*: 2D glass slab. dock-shelf-3d-*: perspective glass floor (far edge narrow, near edge wide)."""
+    ss=4
+    # ---- 2D glass slab
+    W,H,cap,radius=480,128,64,30
+    w,h=W*ss,H*ss
+    body=_vgrad((w,h),[(0,(238,246,254,170)),(.48,(196,213,232,166)),(.5,(172,194,218,176)),(1,(138,163,192,196))])
+    gloss=_vgrad((w,h),[(0,(255,255,255,92)),(.46,(255,255,255,16)),(.47,(255,255,255,0)),(1,(255,255,255,0))])
+    body=Image.alpha_composite(body,gloss)
+    edge=Image.new('RGBA',(w,h),(0,0,0,0))
+    d=ImageDraw.Draw(edge)
+    d.rounded_rectangle((0,0,w-1,h-1),radius=radius*ss,outline=(255,255,255,215),width=2*ss)
+    d.rounded_rectangle((3*ss,3*ss,w-1-3*ss,h-1-3*ss),radius=(radius-3)*ss,outline=(58,90,128,62),width=ss)
+    body=Image.alpha_composite(body,edge)
+    mask=Image.new('L',(w,h),0)
+    ImageDraw.Draw(mask).rounded_rectangle((0,0,w-1,h-1),radius=radius*ss,fill=255)
+    alpha=body.getchannel('A')
+    from PIL import ImageChops
+    body.putalpha(ImageChops.multiply(alpha,mask))
+    _slice_shelf('dock-shelf-flat',body.resize((W,H),Image.Resampling.LANCZOS),cap)
+    # ---- 3D glass floor
+    W,H,cap,inset=640,256,176,84
+    w,h=W*ss,H*ss
+    floor=_vgrad((w,h),[(0,(196,222,250,128)),(.5,(150,186,224,168)),(.86,(222,236,251,222)),(.88,(250,253,255,244)),(1,(104,136,176,250))])
+    shape=[(inset*ss,0),((W-inset)*ss,0),(w-1,h-1),(0,h-1)]
+    mask=Image.new('L',(w,h),0)
+    ImageDraw.Draw(mask).polygon(shape,fill=255)
+    lines=Image.new('RGBA',(w,h),(0,0,0,0))
+    dl=ImageDraw.Draw(lines)
+    dl.line(shape+[shape[0]],fill=(255,255,255,170),width=3*ss)
+    dl.line((inset*ss,2*ss,(W-inset)*ss,2*ss),fill=(255,255,255,235),width=3*ss)
+    floor=Image.alpha_composite(floor,lines)
+    floor.putalpha(ImageChops.multiply(floor.getchannel('A'),mask))
+    _slice_shelf('dock-shelf-3d',floor.resize((W,H),Image.Resampling.LANCZOS),cap)
+
+def decoration_images():
+    """Orbs and a brushed-metal tile for the KWin decoration (1x and @2x), original procedural art."""
+    dest=ROOT/'src/makos/theme/decoration/contents/images'
+    dest.mkdir(parents=True,exist_ok=True)
+    palette={'close':(228,81,68),'minimize':(220,163,41),'zoom':(103,181,71)}
+    for name,color in palette.items():
+        for state in ('active','inactive','pressed'):
+            for scale,size in (('',28),('@2x',56)):
+                S=size*4  # supersample
+                im=Image.new('RGBA',(S,S));d=ImageDraw.Draw(im)
+                base=(176,182,190) if state=='inactive' else color
+                if state=='pressed':base=tuple(round(v*.78) for v in base)
+                c=S/2
+                for step in range(int(S*.47),0,-1):
+                    t=step/(S*.47)
+                    # darker rim, light core near the lower-middle: reads as a glass bead
+                    shade=tuple(min(255,round(v*(.72+.5*(1-t)**1.4))) for v in base)
+                    d.ellipse((c-step,c-step,c+step,c+step),fill=shade+(255,))
+                rim=max(2,S//28)
+                d.ellipse((c-S*.47,c-S*.47,c+S*.47,c+S*.47),outline=tuple(round(v*.55) for v in base)+(255,),width=rim)
+                hl=Image.new('RGBA',(S,S));hd=ImageDraw.Draw(hl)
+                hd.ellipse((S*.2,S*.08,S*.8,S*.5),fill=(255,255,255,200 if state!='inactive' else 150))
+                im=Image.alpha_composite(im,hl)
+                im.resize((size,size),Image.Resampling.LANCZOS).save(dest/f'orb-{name}-{state}{scale}.png')
+    for scale,size in (('',128),('@2x',256)):
+        image=Image.new('L',(size,size))
+        px=image.load()
+        for y in range(size):
+            for x in range(size):
+                sx=x/size*2*math.pi;sy=y/size*2*math.pi
+                px[x,y]=max(0,min(255,round(128+34*math.sin(sy*16)+20*math.sin(sy*26+sx)+9*math.sin(sx*2))))
+        image.convert('RGBA').save(dest/f'metal{scale}.png')
+
+
 def sounds():
     dest=ROOT/'src/makos/sounds'
     dest.mkdir(parents=True,exist_ok=True)
@@ -109,8 +206,7 @@ def main():
     rounded_material('scrollbar-thumb',(24,80),(226,238,248),(141,165,188),11)
     rounded_material('badge-red',(64,40),(255,171,160),(201,54,55),20)
     rounded_material('login-avatar-frame',(160,160),(252,254,255),(167,187,204),80)
-    rounded_material('dock-shelf-flat',(2048,128),(241,249,255),(136,159,181),24)
-    rounded_material('dock-shelf-3d',(2048,256),(235,245,253),(123,146,171),28)
+    dock_shelves()  # dock-shelf-{flat,3d}{,-left,-mid,-right}.png
     gradient('dock-reflection-mask',(16,128),(255,255,255),(0,0,0))
     # Render the code-native original geometric logo through the system SVG decoder.
     import gi
@@ -125,6 +221,7 @@ def main():
         if path.name.startswith(('texture-','menubar-','title-gradient','toolbar-','button-','traffic-','scrollbar-','badge-','login-','dock-','makos-logo')):
             import shutil
             shutil.copy2(path,THEME/path.name)
+    decoration_images()
     sounds()
     cursor('arrow',lambda d,f:d.polygon([(12,8),(12,100),(35,78),(52,112),(68,104),(52,70),(84,70)],fill='#e5f2fb',outline='#28475d',width=5))
     cursor('ibeam',lambda d,f:(d.line((64,12,64,112),fill='#28475d',width=6),d.line((44,12,84,12),fill='#28475d',width=6),d.line((44,112,84,112),fill='#28475d',width=6)),(16,16))

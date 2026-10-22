@@ -7,3 +7,5 @@ Terminal=false
 OnlyShowIn=MakOS;
 Categories=Utility;
 StartupNotify=true
+StartupWMClass=makos-trash-empty
+Keywords=bin;deleted;

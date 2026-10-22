@@ -144,7 +144,7 @@ def set_profile(card, profile):
 
 def tone_file(channel='both', hz=440, seconds=1.2, rate=44100):
     """Write a short stereo sine tone WAV (left, right or both) and return its path."""
-    path = Path(tempfile.mkdtemp(prefix='amerika-tone-')) / f'tone-{channel}.wav'
+    path = Path(tempfile.mkdtemp(prefix='makos-tone-')) / f'tone-{channel}.wav'
     n = int(rate * seconds)
     with wave.open(str(path), 'wb') as w:
         w.setnchannels(2)

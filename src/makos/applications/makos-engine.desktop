@@ -2,8 +2,10 @@
 Type=Application
 Name=Engine
 Exec=makos-app engine %U
-Icon=makos-desktops
+Icon=makos-engine
 Terminal=false
 OnlyShowIn=MakOS;
-Categories=Utility;
+Categories=Development;Game;
 StartupNotify=true
+StartupWMClass=makos-engine
+Keywords=game;engine;

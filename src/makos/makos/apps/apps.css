@@ -1,0 +1,31 @@
+/* Shared MakOS app widgets. Original, GPL-3.0-only. */
+.app-menubar { background: linear-gradient(#fbfbfc,#e2e5e9); border-bottom: 1px solid #a4abb3; padding: 0 4px; min-height: 24px; }
+.app-menubar > item { padding: 3px 10px; border-radius: 0; }
+.app-menubar > item:hover, .app-menubar > item:checked { background: linear-gradient(#65a6e9,#266bc1); color: #fff; }
+.app-sidebar { background: linear-gradient(to right,#dfe8f2,#d6e0ea); border-right: 1px solid #a8b4c1; }
+.app-sidebar row { padding: 6px 10px; }
+.app-sidebar row:selected { color: #fff; background: linear-gradient(#7ca5cf,#507caa); }
+.calc-display { font-size: 30px; font-weight: bold; padding: 6px 10px; background: linear-gradient(#e9f0e4,#cfdac8); border: 1px solid #8b9885; border-radius: 6px; color: #25331f; }
+.calc-expression { font-size: 13px; color: #55644f; }
+.calc-key { min-width: 54px; min-height: 36px; font-size: 15px; }
+.calc-key.op { background: linear-gradient(#e7eef7,#b8c8dc); }
+.calc-key.eq { color: #10263d; background: linear-gradient(to bottom,#d7efff 0%,#8cc7ff 44%,#418ee6 50%,#83c4ff 100%); }
+.tile { border-radius: 6px; padding: 4px; background: transparent; border: 1px solid transparent; box-shadow: none; }
+.tile:hover { background: alpha(#9cbce0,.25); }
+.tile.selected { background: alpha(#3d7fd0,.30); border-color: #3d7fd0; }
+.dark-stage { background: #1b1f24; }
+.dark-stage label { color: #e6edf4; }
+.player-bar { background: linear-gradient(#f5f5f5,#d6d7d9); border-top: 1px solid #969ba0; padding: 8px 12px; }
+.video-stage { background: #000; }
+.meter { min-height: 8px; }
+.meter trough { min-height: 8px; border-radius: 4px; background: #cdd5dd; }
+.meter block.filled { background: linear-gradient(#8ec9ff,#3a82d6); border-radius: 4px; }
+.hot meter block.filled { background: #d95f4e; }
+.widget-layer { background: alpha(#0d1620,.62); }
+.widget-card { background: linear-gradient(alpha(#ffffff,.88),alpha(#dfe7f0,.84)); border: 1px solid alpha(#ffffff,.85); border-radius: 14px; padding: 12px; box-shadow: 0 8px 24px alpha(#000,.45); }
+.widget-card label { color: #1d2733; }
+.widget-title { font-size: 11px; font-weight: bold; color: #5a6c80; }
+.widget-big { font-size: 38px; font-weight: bold; }
+.widget-bar { background: linear-gradient(alpha(#fff,.85),alpha(#aebccd,.8)); border-radius: 12px; padding: 8px 14px; }
+.hint { color: #6b7d91; font-size: 11px; }
+.error-text { color: #a8321f; }

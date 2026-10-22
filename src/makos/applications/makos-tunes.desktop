@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=Tunes
+Exec=makos-app tunes %U
+Icon=makos-music
+Terminal=false
+OnlyShowIn=MakOS;
+Categories=AudioVideo;Audio;Player;
+StartupNotify=true
+StartupWMClass=makos-tunes
+MimeType=audio/mpeg;audio/flac;audio/ogg;audio/x-wav;audio/mp4;audio/aac;
+Keywords=music;songs;player;

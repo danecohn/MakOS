@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Software Center
+Exec=makos-app software-center %U
+Icon=makos-software-center
+Terminal=false
+OnlyShowIn=MakOS;
+Categories=System;PackageManager;
+StartupNotify=true
+StartupWMClass=makos-software-center
+Keywords=install;apps;updates;packages;

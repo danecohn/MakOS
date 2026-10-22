@@ -69,15 +69,10 @@ class Shell(Gtk.Application):
         self.bridge.export()
         self.bridge.connect('changed',self.windows_changed)
         self.bridge.load()
-        self.desktop=self.surface('Desktop','background',('top','bottom','left','right'))
-        wallpaper=common.SHARE/'wallpapers/wallpaper-aurora-blue.png'
-        if wallpaper.exists():
-            picture=Gtk.Picture.new_for_filename(str(wallpaper))
-            picture.set_content_fit(Gtk.ContentFit.COVER)
-            self.desktop.set_child(picture)
-        else:
-            self.desktop.set_child(Gtk.Label(label='MakOS'))
-        self.desktop.present()
+        # launcher-and-windows: desktop layer (wallpaper), Launcher Bar, Spread, Desks, switcher live in shell/glue.py
+        from .glue import Services
+        self.services=Services(self)
+        self.services.build_desktop()
         self.build_bar()
         self.build_launcher()
         from ..notifications import Notifications
@@ -176,7 +171,13 @@ class Shell(Gtk.Application):
         self.battery_button=self.menu(row,'Battery',self.battery_menu)
         self.clock_button=self.menu(row,'',self.clock_menu)
         self.menu(row,'Alerts',self.alerts_menu)
-        self.menu(row,'Seek',lambda _col,pop:(pop.popdown(),self.action('seek')))
+        # settings-and-Seek: a menu-bar search field (opens the Seek panel with the typed text); plain menu button if it cannot load
+        try:
+            from ..seek.panel import install_bar_field
+            install_bar_field(self,row)
+        except Exception as error:
+            print('SEEK_BAR_FALLBACK '+type(error).__name__,flush=True)
+            self.menu(row,'Seek',lambda _col,pop:(pop.popdown(),self.action('seek')))
         self.bar.set_child(row)
         self.bar.present()
 
@@ -267,15 +268,8 @@ class Shell(Gtk.Application):
         self.item(col,pop,'Energy Saver…',lambda:launch(self,'settings').pane('Energy Saver'))
 
     def alerts_menu(self,col,pop):
-        silent=Gtk.CheckButton(label='Do Not Disturb',active=getattr(self.notifications,'silent',False))
-        silent.connect('toggled',lambda c:setattr(self.notifications,'silent',c.get_active()))
-        col.append(silent)
-        col.append(Gtk.Separator())
-        history=self.notifications.history[-12:]
-        for item in reversed(history):
-            col.append(Gtk.Label(label=item['summary'],wrap=True,max_width_chars=35,xalign=0,margin_top=5,margin_bottom=5))
-        if not history:
-            col.append(Gtk.Label(label='No recent notifications',margin_top=10,margin_bottom=10))
+        # theme-and-system-skin: history popover (Do Not Disturb, clear, per-entry remove) lives in makos.notifications
+        self.notifications.fill_menu(col,pop)
 
     def clock_menu(self,col,pop):
         col.append(Gtk.Calendar())
@@ -322,106 +316,22 @@ class Shell(Gtk.Application):
         return True
 
     def build_launcher(self):
-        old=getattr(self,'launcher',None)
-        if old:
-            old.destroy()
-        pos=self.preferences['launcher_position']
-        self.launcher=self.surface('Launcher','top',(pos,),exclusive=0,keyboard='on_demand')
-        shelf=ui.box(vertical=pos!='bottom',spacing=0,css='launcher-shelf')
-        self.launcher_icons=[]
-        for app_id in self.preferences['pins']:
-            record=catalog.BY_ID.get(app_id)
-            if not record:
-                continue
-            col=ui.box(True,0)
-            col.set_valign(Gtk.Align.END)
-            col.set_size_request(max(76,int(self.preferences['launcher_size']*1.5)),max(100,int(self.preferences['launcher_size']*1.55)+18))
-            img=ui.icon(record.icon,self.preferences['launcher_size'])
-            img.set_valign(Gtk.Align.END)
-            img.set_vexpand(True)
-            col.append(img)
-            dot=Gtk.Label(label=' ',css_classes=['running-dot'])
-            col.append(dot)
-            b=ui.button('',lambda a=app_id:self.launch(a))
-            b.set_child(col)
-            b.set_tooltip_text(record.name)
-            self.launcher_icons.append((b,img,dot,app_id))
-            shelf.append(b)
-            motion=Gtk.EventControllerMotion()
-            motion.connect('enter',lambda _c,_x,_y,i=len(self.launcher_icons)-1:self.magnify(i))
-            b.add_controller(motion)
-            right=Gtk.GestureClick(button=3)
-            right.connect('pressed',lambda _g,_n,_x,_y,b=b,a=app_id:self.popover(b,lambda c,p:self.launcher_menu(c,p,a)))
-            b.add_controller(right)
-            drag=Gtk.DragSource(actions=Gdk.DragAction.MOVE)
-            drag.connect('prepare',lambda _s,_x,_y,a=app_id:Gdk.ContentProvider.new_for_value(a))
-            b.add_controller(drag)
-            drop=Gtk.DropTarget.new(str,Gdk.DragAction.MOVE)
-            drop.connect('drop',lambda _t,value,_x,_y,a=app_id:self.reorder_pin(value,a))
-            b.add_controller(drop)
-        motion=Gtk.EventControllerMotion()
-        motion.connect('leave',lambda *_:self.magnify(None))
-        shelf.add_controller(motion)
-        self.launcher_revealer=Gtk.Revealer(reveal_child=True,transition_duration=160)
-        self.launcher_revealer.set_transition_type({'bottom':Gtk.RevealerTransitionType.SLIDE_UP,'left':Gtk.RevealerTransitionType.SLIDE_RIGHT,'right':Gtk.RevealerTransitionType.SLIDE_LEFT}[pos])
-        self.launcher_revealer.set_child(shelf)
-        wrapper=ui.box(vertical=pos=='bottom')
-        edge=Gtk.Box()
-        edge.set_size_request(-1 if pos=='bottom' else 3,3 if pos=='bottom' else -1)
-        wrapper.append(self.launcher_revealer)
-        wrapper.append(edge)
-        hover=Gtk.EventControllerMotion()
-        hover.connect('enter',lambda *_:self.launcher_revealer.set_reveal_child(True))
-        hover.connect('leave',lambda *_:GLib.timeout_add(550,self.maybe_hide_launcher))
-        wrapper.add_controller(hover)
-        self.launcher.set_child(wrapper)
-        self.launcher.present()
-        if self.preferences['launcher_autohide']:
-            GLib.timeout_add(1800,self.maybe_hide_launcher)
-        self.update_indicators()
-
-    def maybe_hide_launcher(self):
-        if self.preferences['launcher_autohide'] and not any(getattr(b,'_pop',None) and b._pop.get_visible() for b,_,_,_ in self.launcher_icons):
-            self.launcher_revealer.set_reveal_child(False)
-        return False
-
-    def reorder_pin(self,source,target):
-        pins=self.preferences['pins']
-        if source not in pins or target not in pins or source==target:
-            return False
-        pins.remove(source)
-        pins.insert(pins.index(target),source)
-        common.save_settings(self.preferences)
-        GLib.timeout_add(100,lambda:(self.build_launcher(),False)[1])
-        return True
-
-    def launcher_menu(self,col,pop,app_id):
-        record=catalog.BY_ID[app_id]
-        self.item(col,pop,'Open '+record.name,lambda:self.launch(app_id))
-        self.item(col,pop,'Remove from Launcher Bar',lambda:self.unpin(app_id))
-
-    def unpin(self,app_id):
-        self.preferences['pins']=[x for x in self.preferences['pins'] if x!=app_id]
-        common.save_settings(self.preferences)
-        # Do not rebuild while its layer-shell popover is mapped.
-        GLib.timeout_add(250,lambda:(self.build_launcher(),False)[1])
+        # launcher-and-windows: see shell/dock.py (Launcher Bar) and shell/glue.py
+        return self.services.build_launcher()
 
     def magnify(self,index):
-        base=self.preferences['launcher_size']
-        for i,(_b,img,_d,_a) in enumerate(self.launcher_icons):
-            img.set_pixel_size(base if index is None else magnify((i-index)*80,base,self.preferences['reduce_motion']))
+        # kept for the rig: pointer over item `index` (None: pointer left)
+        dock=self.services.dock
+        if index is None:
+            dock.sim_leave()
+        else:
+            dock.sim_pointer(dock.rest()[index].start+dock.rest()[index].length/2)
 
     def launch(self,app_id):
         launch(self,app_id)
 
     def update_indicators(self):
-        for _b,_img,dot,app_id in getattr(self,'launcher_icons',[]):
-            keys={app_id,'makos-'+app_id}
-            if app_id=='terminal':keys|={'konsole','ptyxis','org.gnome.ptyxis'}
-            running=any(str(w.get('desktopFile','')).removesuffix('.desktop').lower() in keys or str(w.get('cls','')).lower() in keys for w in self.bridge.app_windows())
-            if app_id=='files':running|=any(w.get_title()=='Files' for w in self.get_windows())
-            if app_id=='settings':running|=any(w.get_title()=='Settings' for w in self.get_windows())
-            dot.set_text('●' if running else ' ')
+        self.services.windows_changed()
 
     def windows_changed(self,*_):
         active=next((w for w in self.bridge.app_windows() if w.get('active')),None) or {}
@@ -434,13 +344,12 @@ class Shell(Gtk.Application):
         self.active_label.set_text(name.split(' — ')[-1][:35] if active else 'Files')
         if active:
             self.globalmenu.set_active(active)
-        self.update_indicators()
+        self.services.windows_changed()
 
     def reload_preferences(self):
         previous=self.preferences
         self.preferences=common.load_settings()
-        if any(previous[k]!=self.preferences[k] for k in ('launcher_size','launcher_position','launcher_autohide','pins')):
-            self.build_launcher()
+        self.services.apply_preferences()
         Gtk.Settings.get_default().set_property('gtk-enable-animations',not self.preferences['reduce_motion'])
         for w in self.get_windows():
             if w not in (self.desktop,self.bar,self.launcher,self.overlay):
@@ -463,6 +372,11 @@ class Shell(Gtk.Application):
         return self.overlay
 
     def action(self,name):
+        if self.services.action(name):
+            return
+        if name.startswith(('capture:','screenshot:')):  # core-apps: Screenshot app asks the shell (the authorised ScreenShot2 client)
+            from ..apps.screenshot import shell_action
+            return shell_action(self,name)
         if name in catalog.BY_ID and name not in ('seek','spread','desktops','widgets'):
             self.launch(name)
         elif name in ('seek','applications'):
@@ -479,6 +393,12 @@ class Shell(Gtk.Application):
             self.quit()
 
     def seek(self,applications_only=False):
+        # settings-and-Seek: the full panel (groups, preview, index) is makos/seek/panel.py; the basic panel below is only a fallback
+        try:
+            from ..seek.panel import open_seek
+            return open_seek(self,applications_only)
+        except Exception as error:
+            print('SEEK_PANEL_FALLBACK '+type(error).__name__+': '+str(error)[:120],flush=True)
         w=self.new_overlay('Seek')
         panel=ui.box(True,12,'seek-sheet')
         panel.set_size_request(640,-1)
@@ -588,14 +508,9 @@ class Shell(Gtk.Application):
         w.present()
 
     def widgets(self):
-        w=self.new_overlay('Widgets',True)
-        outer=ui.box(True,24,'overview')
-        outer.append(Gtk.Label(label=time.strftime('%I:%M'),css_classes=['hero']))
-        outer.append(Gtk.Label(label=time.strftime('%A, %B %d')))
-        for app_id in ('calculator','notes','calendar'):
-            outer.append(ui.button(catalog.BY_ID[app_id].name,lambda a=app_id:launch(self,a)))
-        w.set_child(outer)
-        w.present()
+        # core-apps: the Widgets layer lives in makos/widgets (toggle: the hotkey opens and closes it)
+        from ..widgets import toggle
+        toggle(self)
 
     def do_shutdown(self):
         ready=common.RUNTIME/'shell-ready'

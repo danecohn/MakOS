@@ -1,9 +1,11 @@
 [Desktop Entry]
 Type=Application
-Name=Disks
+Name=Disk Utility
 Exec=makos-app disk-utility %U
 Icon=makos-disk-utility
 Terminal=false
 OnlyShowIn=MakOS;
-Categories=Utility;
+Categories=System;Filesystem;
 StartupNotify=true
+StartupWMClass=makos-disk-utility
+Keywords=disks;drives;partitions;smart;

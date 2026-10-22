@@ -2,8 +2,10 @@
 Type=Application
 Name=MakBox
 Exec=makos-app makbox %U
-Icon=makos-music
+Icon=makos-makbox
 Terminal=false
 OnlyShowIn=MakOS;
-Categories=Utility;
+Categories=AudioVideo;Audio;Midi;
 StartupNotify=true
+StartupWMClass=makos-makbox
+Keywords=music;compose;synth;

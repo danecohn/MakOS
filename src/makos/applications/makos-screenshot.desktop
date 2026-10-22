@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Screenshot
+Exec=makos-app screenshot %U
+Icon=makos-screenshot
+Terminal=false
+OnlyShowIn=MakOS;
+Categories=Utility;Graphics;
+StartupNotify=true
+StartupWMClass=makos-screenshot
+Keywords=capture;screen;
