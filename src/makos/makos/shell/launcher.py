@@ -15,7 +15,7 @@ SHELL_CLASS = 'org.makos.shell'
 # Window classes (lower case) of the real applications behind catalog entries. Internal apps are matched by id.
 EXTRA_CLASSES = {
     'terminal': {'konsole', 'ptyxis', 'org.gnome.ptyxis', 'xterm', 'org.kde.konsole'},
-    'paper': {'libreoffice-writer', 'soffice'}, 'digits': {'libreoffice-calc'}, 'slides': {'libreoffice-impress'},
+    'paper': {'euro-office'}, 'digits': set(), 'slides': set(),
     'venture': {'firefox', 'chromium', 'amerika-venture', 'org.mozilla.firefox'},
     'files': {'org.makos.files'},
 }

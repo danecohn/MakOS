@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-24.04-arm
     steps:
       - uses: actions/checkout@v4
-      - run: sudo apt-get update && sudo apt-get install -y python3-pil
+      - run: sudo apt-get update && sudo apt-get install -y python3-pil python3-gi python3-cairo gir1.2-gtk-4.0
+      - run: python3 tools/make_makos_vectors.py
       - run: python3 -m unittest discover -s tests -q
       - run: python3 -m compileall -q src/makos/makos tools

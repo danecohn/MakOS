@@ -7,6 +7,6 @@ Terminal=false
 OnlyShowIn=MakOS;
 Categories=Utility;TextEditor;
 StartupNotify=true
-StartupWMClass=makos-text-editor
+StartupWMClass=org.makos.Apps.text_editor
 MimeType=text/plain;text/markdown;
 Keywords=notes;edit;code;

@@ -14,7 +14,7 @@ from . import model, network, search as fsearch, tags, trash as trashlib, views
 from .location import Loc
 from .widgets import Item
 
-CHUNK = 2500
+CHUNK = 250
 
 
 def idle(fn, *args):
@@ -362,9 +362,18 @@ class Tab:
                 total = len(items)
                 if cancel.is_set():
                     return
-                for i in range(0, max(total, 1), CHUNK):
-                    last = i + CHUNK >= total
-                    idle(deliver, items[i:i + CHUNK], total if last else None)
+                offset = 0
+                def deliver_next():
+                    nonlocal offset
+                    if gen != self.gen or cancel.is_set():
+                        return False
+                    end = min(offset + CHUNK, total)
+                    deliver(items[offset:end], total if end >= total else None)
+                    offset = end
+                    if end < total:
+                        GLib.timeout_add(1, deliver_next)
+                    return False
+                idle(deliver_next)
             except model.FolderError as exc:
                 idle(deliver, [], 0, str(exc))
             except Exception as exc:

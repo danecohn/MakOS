@@ -169,7 +169,6 @@ class Screenshot:
             b.connect('toggled', lambda btn, k=key: btn.get_active() and self.set_mode(k))
             self.buttons[key] = b
             row.append(b)
-        self.buttons['full'].set_active(True)
         col.append(row)
         delay = ui.box(spacing=8)
         delay.append(Gtk.Label(label='Delay (seconds)'))
@@ -183,6 +182,7 @@ class Screenshot:
         self.result = Gtk.Label(label='', xalign=0, wrap=True, selectable=True, css_classes=['hint'])
         col.append(self.result)
         self.aw.body.append(col)
+        self.buttons['full'].set_active(True)
         self.aw.say('Saves to ' + str(pictures_dir() / 'Screenshots'))
         if immediate in ('--full', '--selection', '--window'):
             self.set_mode(immediate[2:])

@@ -1,0 +1,186 @@
+[
+  {
+    "key": "text-editor",
+    "prompt": "Use case: stylized-concept. One original MakOS desktop icon: an ivory writing sheet with a cobalt enamel fountain-pen nib beside it. A consistent Glass & Metal icon family: photographic-quality glossy 3D object, viewed slightly from above, cool silver and blue, soft studio reflections, gentle gradients and soft contact shadow. Centered on a square 1024x1024 transparent canvas with generous 12 percent padding. No text, no logos, no fruit, no faces, no copied existing operating-system icon."
+  },
+  {
+    "key": "preview",
+    "prompt": "Use case: stylized-concept. One original MakOS desktop icon: a silver-framed glass photograph of a tiny mountain lake with a small cylindrical optical loupe overlapping one corner. A consistent Glass & Metal icon family: photographic-quality glossy 3D object, viewed slightly from above, cool silver and blue, soft studio reflections, gentle gradients and soft contact shadow. Centered on a square 1024x1024 transparent canvas with generous 12 percent padding. No text, no logos, no fruit, no faces, no copied existing operating-system icon."
+  },
+  {
+    "key": "calendar",
+    "prompt": "Use case: stylized-concept. One original MakOS desktop icon: a white desktop calendar block with a brushed-silver ring binding and cobalt-blue header, abstract blue date dots instead of letters. A consistent Glass & Metal icon family: photographic-quality glossy 3D object, viewed slightly from above, cool silver and blue, soft studio reflections, gentle gradients and soft contact shadow. Centered on a square 1024x1024 transparent canvas with generous 12 percent padding. No text, no logos, no fruit, no faces, no copied existing operating-system icon."
+  },
+  {
+    "key": "clock",
+    "prompt": "Use case: stylized-concept. One original MakOS desktop icon: a round ivory clock with brushed-silver frame, dark blue hands and tiny blue tick marks. A consistent Glass & Metal icon family: photographic-quality glossy 3D object, viewed slightly from above, cool silver and blue, soft studio reflections, gentle gradients and soft contact shadow. Centered on a square 1024x1024 transparent canvas with generous 12 percent padding. No text, no logos, no fruit, no faces, no copied existing operating-system icon."
+  },
+  {
+    "key": "activity",
+    "prompt": "Use case: stylized-concept. One original MakOS desktop icon: a smoked blue glass monitoring screen in a silver cradle showing a luminous cyan pulse trace. A consistent Glass & Metal icon family: photographic-quality glossy 3D object, viewed slightly from above, cool silver and blue, soft studio reflections, gentle gradients and soft contact shadow. Centered on a square 1024x1024 transparent canvas with generous 12 percent padding. No text, no logos, no fruit, no faces, no copied existing operating-system icon."
+  },
+  {
+    "key": "disk-utility",
+    "prompt": "Use case: stylized-concept. One original MakOS desktop icon: a brushed-silver open hard drive with a blue glass platter and a small wrench resting diagonally beside it. A consistent Glass & Metal icon family: photographic-quality glossy 3D object, viewed slightly from above, cool silver and blue, soft studio reflections, gentle gradients and soft contact shadow. Centered on a square 1024x1024 transparent canvas with generous 12 percent padding. No text, no logos, no fruit, no faces, no copied existing operating-system icon."
+  },
+  {
+    "key": "screenshot",
+    "prompt": "Use case: stylized-concept. One original MakOS desktop icon: a compact brushed-silver camera with a large cyan glass lens and a small floating rectangular crop bracket. A consistent Glass & Metal icon family: photographic-quality glossy 3D object, viewed slightly from above, cool silver and blue, soft studio reflections, gentle gradients and soft contact shadow. Centered on a square 1024x1024 transparent canvas with generous 12 percent padding. No text, no logos, no fruit, no faces, no copied existing operating-system icon."
+  },
+  {
+    "key": "system-info",
+    "prompt": "Use case: stylized-concept. One original MakOS desktop icon: a polished blue glass lowercase i mounted inside a small silver circular medallion. A consistent Glass & Metal icon family: photographic-quality glossy 3D object, viewed slightly from above, cool silver and blue, soft studio reflections, gentle gradients and soft contact shadow. Centered on a square 1024x1024 transparent canvas with generous 12 percent padding. No text, no logos, no fruit, no faces, no copied existing operating-system icon."
+  },
+  {
+    "key": "software-center",
+    "prompt": "Use case: stylized-concept. One original MakOS desktop icon: an open blue glass toolbox holding three small silver application cubes. A consistent Glass & Metal icon family: photographic-quality glossy 3D object, viewed slightly from above, cool silver and blue, soft studio reflections, gentle gradients and soft contact shadow. Centered on a square 1024x1024 transparent canvas with generous 12 percent padding. No text, no logos, no fruit, no faces, no copied existing operating-system icon."
+  },
+  {
+    "key": "photos",
+    "prompt": "Use case: stylized-concept. One original MakOS desktop icon: three overlapping glossy photo prints showing an original blue lake, a tiny flower and a sunlit hillside. A consistent Glass & Metal icon family: photographic-quality glossy 3D object, viewed slightly from above, cool silver and blue, soft studio reflections, gentle gradients and soft contact shadow. Centered on a square 1024x1024 transparent canvas with generous 12 percent padding. No text, no logos, no fruit, no faces, no copied existing operating-system icon."
+  },
+  {
+    "key": "music",
+    "prompt": "Use case: stylized-concept. One original MakOS desktop icon: two cobalt glass musical eighth notes with brushed-silver edges. A consistent Glass & Metal icon family: photographic-quality glossy 3D object, viewed slightly from above, cool silver and blue, soft studio reflections, gentle gradients and soft contact shadow. Centered on a square 1024x1024 transparent canvas with generous 12 percent padding. No text, no logos, no fruit, no faces, no copied existing operating-system icon."
+  },
+  {
+    "key": "video",
+    "prompt": "Use case: stylized-concept. One original MakOS desktop icon: a brushed-silver cinema reel with a short translucent cobalt film strip winding beneath. A consistent Glass & Metal icon family: photographic-quality glossy 3D object, viewed slightly from above, cool silver and blue, soft studio reflections, gentle gradients and soft contact shadow. Centered on a square 1024x1024 transparent canvas with generous 12 percent padding. No text, no logos, no fruit, no faces, no copied existing operating-system icon."
+  },
+  {
+    "key": "seek",
+    "prompt": "Use case: stylized-concept. One original MakOS desktop icon: a large circular crystal optical magnifier with polished silver rim and cobalt handle. A consistent Glass & Metal icon family: photographic-quality glossy 3D object, viewed slightly from above, cool silver and blue, soft studio reflections, gentle gradients and soft contact shadow. Centered on a square 1024x1024 transparent canvas with generous 12 percent padding. No text, no logos, no fruit, no faces, no copied existing operating-system icon."
+  },
+  {
+    "key": "widgets",
+    "prompt": "Use case: stylized-concept. One original MakOS desktop icon: four small silver and blue glass instrument tiles floating together in a square arrangement. A consistent Glass & Metal icon family: photographic-quality glossy 3D object, viewed slightly from above, cool silver and blue, soft studio reflections, gentle gradients and soft contact shadow. Centered on a square 1024x1024 transparent canvas with generous 12 percent padding. No text, no logos, no fruit, no faces, no copied existing operating-system icon."
+  },
+  {
+    "key": "trash-full",
+    "prompt": "Use case: stylized-concept. One original MakOS desktop icon: a frosted-glass cylindrical basket with silver ribs holding a few crumpled ivory papers, original design. A consistent Glass & Metal icon family: photographic-quality glossy 3D object, viewed slightly from above, cool silver and blue, soft studio reflections, gentle gradients and soft contact shadow. Centered on a square 1024x1024 transparent canvas with generous 12 percent padding. No text, no logos, no fruit, no faces, no copied existing operating-system icon."
+  },
+  {
+    "key": "desktops",
+    "prompt": "Use case: stylized-concept. One original MakOS desktop icon: four blue glass desktop panels arranged as a slightly staggered spatial stack. A consistent Glass & Metal icon family: photographic-quality glossy 3D object, viewed slightly from above, cool silver and blue, soft studio reflections, gentle gradients and soft contact shadow. Centered on a square 1024x1024 transparent canvas with generous 12 percent padding. No text, no logos, no fruit, no faces, no copied existing operating-system icon."
+  },
+  {
+    "key": "spread",
+    "prompt": "Use case: stylized-concept. One original MakOS desktop icon: three miniature silver-framed blue glass windows floating in a wide spreading fan. A consistent Glass & Metal icon family: photographic-quality glossy 3D object, viewed slightly from above, cool silver and blue, soft studio reflections, gentle gradients and soft contact shadow. Centered on a square 1024x1024 transparent canvas with generous 12 percent padding. No text, no logos, no fruit, no faces, no copied existing operating-system icon."
+  },
+  {
+    "key": "mail",
+    "prompt": "Use case: stylized-concept. One original MakOS desktop icon: an ivory envelope with a cobalt wax-like circular seal and a brushed-silver letter opener. A consistent Glass & Metal icon family: photographic-quality glossy 3D object, viewed slightly from above, cool silver and blue, soft studio reflections, gentle gradients and soft contact shadow. Centered on a square 1024x1024 transparent canvas with generous 12 percent padding. No text, no logos, no fruit, no faces, no copied existing operating-system icon."
+  },
+  {
+    "key": "contacts",
+    "prompt": "Use case: stylized-concept. One original MakOS desktop icon: a cobalt fabric address book with a silver person silhouette inset and ivory side tabs. A consistent Glass & Metal icon family: photographic-quality glossy 3D object, viewed slightly from above, cool silver and blue, soft studio reflections, gentle gradients and soft contact shadow. Centered on a square 1024x1024 transparent canvas with generous 12 percent padding. No text, no logos, no fruit, no faces, no copied existing operating-system icon."
+  },
+  {
+    "key": "maps",
+    "prompt": "Use case: stylized-concept. One original MakOS desktop icon: a folded ivory map with light-blue paths and a tiny silver map pin with a cobalt center. A consistent Glass & Metal icon family: photographic-quality glossy 3D object, viewed slightly from above, cool silver and blue, soft studio reflections, gentle gradients and soft contact shadow. Centered on a square 1024x1024 transparent canvas with generous 12 percent padding. No text, no logos, no fruit, no faces, no copied existing operating-system icon."
+  },
+  {
+    "key": "rewind",
+    "prompt": "Use case: stylized-concept. One original MakOS desktop icon: a silver circular time dial embraced by a flowing cobalt glass backward arrow. A consistent Glass & Metal icon family: photographic-quality glossy 3D object, viewed slightly from above, cool silver and blue, soft studio reflections, gentle gradients and soft contact shadow. Centered on a square 1024x1024 transparent canvas with generous 12 percent padding. No text, no logos, no fruit, no faces, no copied existing operating-system icon."
+  },
+  {
+    "key": "dictionary",
+    "prompt": "Use case: stylized-concept. One original MakOS desktop icon: two compact ivory and blue clothbound dictionaries with a silver ribbon bookmark. A consistent Glass & Metal icon family: photographic-quality glossy 3D object, viewed slightly from above, cool silver and blue, soft studio reflections, gentle gradients and soft contact shadow. Centered on a square 1024x1024 transparent canvas with generous 12 percent padding. No text, no logos, no fruit, no faces, no copied existing operating-system icon."
+  },
+  {
+    "key": "app-store",
+    "prompt": "Use case: stylized-concept. One original MakOS desktop icon: a translucent blue glass shopping bag with two polished silver handles and three tiny ivory cube parcels. A consistent Glass & Metal icon family: photographic-quality glossy 3D object, viewed slightly from above, cool silver and blue, soft studio reflections, gentle gradients and soft contact shadow. Centered on a square 1024x1024 transparent canvas with generous 12 percent padding. No text, no logos, no fruit, no faces, no copied existing operating-system icon."
+  },
+  {
+    "key": "folder",
+    "prompt": "Use case: stylized-concept. One original MakOS desktop icon: a closed translucent ice-blue document folio with a silver clasp, no face. A consistent Glass & Metal icon family: photographic-quality glossy 3D object, viewed slightly from above, cool silver and blue, soft studio reflections, gentle gradients and soft contact shadow. Centered on a square 1024x1024 transparent canvas with generous 12 percent padding. No text, no logos, no fruit, no faces, no copied existing operating-system icon."
+  },
+  {
+    "key": "folder-open",
+    "prompt": "Use case: stylized-concept. One original MakOS desktop icon: an open translucent ice-blue folio holding a few ivory dividers. A consistent Glass & Metal icon family: photographic-quality glossy 3D object, viewed slightly from above, cool silver and blue, soft studio reflections, gentle gradients and soft contact shadow. Centered on a square 1024x1024 transparent canvas with generous 12 percent padding. No text, no logos, no fruit, no faces, no copied existing operating-system icon."
+  },
+  {
+    "key": "folder-documents",
+    "prompt": "Use case: stylized-concept. One original MakOS desktop icon: a translucent ice-blue folio with a small ivory document protruding. A consistent Glass & Metal icon family: photographic-quality glossy 3D object, viewed slightly from above, cool silver and blue, soft studio reflections, gentle gradients and soft contact shadow. Centered on a square 1024x1024 transparent canvas with generous 12 percent padding. No text, no logos, no fruit, no faces, no copied existing operating-system icon."
+  },
+  {
+    "key": "folder-downloads",
+    "prompt": "Use case: stylized-concept. One original MakOS desktop icon: a translucent ice-blue folio with a tiny blue glass downward arrow in front. A consistent Glass & Metal icon family: photographic-quality glossy 3D object, viewed slightly from above, cool silver and blue, soft studio reflections, gentle gradients and soft contact shadow. Centered on a square 1024x1024 transparent canvas with generous 12 percent padding. No text, no logos, no fruit, no faces, no copied existing operating-system icon."
+  },
+  {
+    "key": "folder-pictures",
+    "prompt": "Use case: stylized-concept. One original MakOS desktop icon: a translucent ice-blue folio with a small silver-framed landscape photograph. A consistent Glass & Metal icon family: photographic-quality glossy 3D object, viewed slightly from above, cool silver and blue, soft studio reflections, gentle gradients and soft contact shadow. Centered on a square 1024x1024 transparent canvas with generous 12 percent padding. No text, no logos, no fruit, no faces, no copied existing operating-system icon."
+  },
+  {
+    "key": "folder-music",
+    "prompt": "Use case: stylized-concept. One original MakOS desktop icon: a translucent ice-blue folio with a small silver musical note inset. A consistent Glass & Metal icon family: photographic-quality glossy 3D object, viewed slightly from above, cool silver and blue, soft studio reflections, gentle gradients and soft contact shadow. Centered on a square 1024x1024 transparent canvas with generous 12 percent padding. No text, no logos, no fruit, no faces, no copied existing operating-system icon."
+  },
+  {
+    "key": "folder-movies",
+    "prompt": "Use case: stylized-concept. One original MakOS desktop icon: a translucent ice-blue folio with a small silver cinema reel. A consistent Glass & Metal icon family: photographic-quality glossy 3D object, viewed slightly from above, cool silver and blue, soft studio reflections, gentle gradients and soft contact shadow. Centered on a square 1024x1024 transparent canvas with generous 12 percent padding. No text, no logos, no fruit, no faces, no copied existing operating-system icon."
+  },
+  {
+    "key": "folder-applications",
+    "prompt": "Use case: stylized-concept. One original MakOS desktop icon: a translucent ice-blue folio holding two tiny polished application cubes. A consistent Glass & Metal icon family: photographic-quality glossy 3D object, viewed slightly from above, cool silver and blue, soft studio reflections, gentle gradients and soft contact shadow. Centered on a square 1024x1024 transparent canvas with generous 12 percent padding. No text, no logos, no fruit, no faces, no copied existing operating-system icon."
+  },
+  {
+    "key": "folder-desktop",
+    "prompt": "Use case: stylized-concept. One original MakOS desktop icon: a translucent ice-blue folio with a small silver desktop display. A consistent Glass & Metal icon family: photographic-quality glossy 3D object, viewed slightly from above, cool silver and blue, soft studio reflections, gentle gradients and soft contact shadow. Centered on a square 1024x1024 transparent canvas with generous 12 percent padding. No text, no logos, no fruit, no faces, no copied existing operating-system icon."
+  },
+  {
+    "key": "folder-network",
+    "prompt": "Use case: stylized-concept. One original MakOS desktop icon: a translucent ice-blue folio with a small polished silver globe lattice. A consistent Glass & Metal icon family: photographic-quality glossy 3D object, viewed slightly from above, cool silver and blue, soft studio reflections, gentle gradients and soft contact shadow. Centered on a square 1024x1024 transparent canvas with generous 12 percent padding. No text, no logos, no fruit, no faces, no copied existing operating-system icon."
+  },
+  {
+    "key": "drive-internal",
+    "prompt": "Use case: stylized-concept. One original MakOS desktop icon: a compact brushed-silver hard drive enclosure with a subtle blue glass activity light. A consistent Glass & Metal icon family: photographic-quality glossy 3D object, viewed slightly from above, cool silver and blue, soft studio reflections, gentle gradients and soft contact shadow. Centered on a square 1024x1024 transparent canvas with generous 12 percent padding. No text, no logos, no fruit, no faces, no copied existing operating-system icon."
+  },
+  {
+    "key": "drive-external",
+    "prompt": "Use case: stylized-concept. One original MakOS desktop icon: a small upright brushed-silver external drive with a short coiled blue cable. A consistent Glass & Metal icon family: photographic-quality glossy 3D object, viewed slightly from above, cool silver and blue, soft studio reflections, gentle gradients and soft contact shadow. Centered on a square 1024x1024 transparent canvas with generous 12 percent padding. No text, no logos, no fruit, no faces, no copied existing operating-system icon."
+  },
+  {
+    "key": "drive-optical",
+    "prompt": "Use case: stylized-concept. One original MakOS desktop icon: a brushed-silver drive tray holding an iridescent optical disc with a cobalt center. A consistent Glass & Metal icon family: photographic-quality glossy 3D object, viewed slightly from above, cool silver and blue, soft studio reflections, gentle gradients and soft contact shadow. Centered on a square 1024x1024 transparent canvas with generous 12 percent padding. No text, no logos, no fruit, no faces, no copied existing operating-system icon."
+  },
+  {
+    "key": "drive-network",
+    "prompt": "Use case: stylized-concept. One original MakOS desktop icon: a small brushed-silver drive enclosure beside three linked blue glass network nodes. A consistent Glass & Metal icon family: photographic-quality glossy 3D object, viewed slightly from above, cool silver and blue, soft studio reflections, gentle gradients and soft contact shadow. Centered on a square 1024x1024 transparent canvas with generous 12 percent padding. No text, no logos, no fruit, no faces, no copied existing operating-system icon."
+  },
+  {
+    "key": "file-generic",
+    "prompt": "Use case: stylized-concept. One original MakOS desktop icon: an ivory page with a folded silver-blue corner and a tiny embossed cobalt square. A consistent Glass & Metal icon family: photographic-quality glossy 3D object, viewed slightly from above, cool silver and blue, soft studio reflections, gentle gradients and soft contact shadow. Centered on a square 1024x1024 transparent canvas with generous 12 percent padding. No text, no logos, no fruit, no faces, no copied existing operating-system icon."
+  },
+  {
+    "key": "file-text",
+    "prompt": "Use case: stylized-concept. One original MakOS desktop icon: an ivory page with a folded silver-blue corner and four delicate embossed blue text lines. A consistent Glass & Metal icon family: photographic-quality glossy 3D object, viewed slightly from above, cool silver and blue, soft studio reflections, gentle gradients and soft contact shadow. Centered on a square 1024x1024 transparent canvas with generous 12 percent padding. No text, no logos, no fruit, no faces, no copied existing operating-system icon."
+  },
+  {
+    "key": "file-pdf",
+    "prompt": "Use case: stylized-concept. One original MakOS desktop icon: an ivory page with a folded silver-blue corner and a small original ruby-red geometric document seal, no letters. A consistent Glass & Metal icon family: photographic-quality glossy 3D object, viewed slightly from above, cool silver and blue, soft studio reflections, gentle gradients and soft contact shadow. Centered on a square 1024x1024 transparent canvas with generous 12 percent padding. No text, no logos, no fruit, no faces, no copied existing operating-system icon."
+  },
+  {
+    "key": "file-image",
+    "prompt": "Use case: stylized-concept. One original MakOS desktop icon: an ivory page with a folded silver-blue corner containing a small original photograph of a blue lake. A consistent Glass & Metal icon family: photographic-quality glossy 3D object, viewed slightly from above, cool silver and blue, soft studio reflections, gentle gradients and soft contact shadow. Centered on a square 1024x1024 transparent canvas with generous 12 percent padding. No text, no logos, no fruit, no faces, no copied existing operating-system icon."
+  },
+  {
+    "key": "file-audio",
+    "prompt": "Use case: stylized-concept. One original MakOS desktop icon: an ivory page with a folded silver-blue corner and a cobalt glass waveform. A consistent Glass & Metal icon family: photographic-quality glossy 3D object, viewed slightly from above, cool silver and blue, soft studio reflections, gentle gradients and soft contact shadow. Centered on a square 1024x1024 transparent canvas with generous 12 percent padding. No text, no logos, no fruit, no faces, no copied existing operating-system icon."
+  },
+  {
+    "key": "file-video",
+    "prompt": "Use case: stylized-concept. One original MakOS desktop icon: an ivory page with a folded silver-blue corner and a tiny silver-framed cyan play triangle. A consistent Glass & Metal icon family: photographic-quality glossy 3D object, viewed slightly from above, cool silver and blue, soft studio reflections, gentle gradients and soft contact shadow. Centered on a square 1024x1024 transparent canvas with generous 12 percent padding. No text, no logos, no fruit, no faces, no copied existing operating-system icon."
+  },
+  {
+    "key": "file-archive",
+    "prompt": "Use case: stylized-concept. One original MakOS desktop icon: an ivory document wrapped by a brushed-silver zip fastener and blue fabric binding. A consistent Glass & Metal icon family: photographic-quality glossy 3D object, viewed slightly from above, cool silver and blue, soft studio reflections, gentle gradients and soft contact shadow. Centered on a square 1024x1024 transparent canvas with generous 12 percent padding. No text, no logos, no fruit, no faces, no copied existing operating-system icon."
+  },
+  {
+    "key": "file-code",
+    "prompt": "Use case: stylized-concept. One original MakOS desktop icon: an ivory page with a folded silver-blue corner, small cobalt angle brackets and delicate abstract code lines. A consistent Glass & Metal icon family: photographic-quality glossy 3D object, viewed slightly from above, cool silver and blue, soft studio reflections, gentle gradients and soft contact shadow. Centered on a square 1024x1024 transparent canvas with generous 12 percent padding. No text, no logos, no fruit, no faces, no copied existing operating-system icon."
+  },
+  {
+    "key": "file-presentation",
+    "prompt": "Use case: stylized-concept. One original MakOS desktop icon: an ivory page with a folded silver-blue corner and a small silver projection screen with a cobalt pie chart. A consistent Glass & Metal icon family: photographic-quality glossy 3D object, viewed slightly from above, cool silver and blue, soft studio reflections, gentle gradients and soft contact shadow. Centered on a square 1024x1024 transparent canvas with generous 12 percent padding. No text, no logos, no fruit, no faces, no copied existing operating-system icon."
+  }
+]

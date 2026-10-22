@@ -263,7 +263,8 @@ class Editor:
             return
         if count:
             self.buffer.begin_user_action()
-            self.buffer.set_text(out)
+            self.buffer.delete(self.buffer.get_start_iter(), self.buffer.get_end_iter())
+            self.buffer.insert(self.buffer.get_start_iter(), out)
             self.buffer.end_user_action()
         self.find_info.set_text(f'{count} replaced')
 

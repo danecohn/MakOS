@@ -7,6 +7,6 @@ Terminal=false
 OnlyShowIn=MakOS;
 Categories=Graphics;Viewer;
 StartupNotify=true
-StartupWMClass=makos-preview
+StartupWMClass=org.makos.Apps.preview
 MimeType=application/pdf;image/png;image/jpeg;image/gif;image/webp;image/bmp;image/tiff;
 Keywords=pdf;image;viewer;

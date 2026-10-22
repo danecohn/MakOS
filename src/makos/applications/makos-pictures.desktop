@@ -7,6 +7,6 @@ Terminal=false
 OnlyShowIn=MakOS;
 Categories=Graphics;Photography;Viewer;
 StartupNotify=true
-StartupWMClass=makos-pictures
+StartupWMClass=org.makos.Apps.pictures
 MimeType=image/jpeg;image/png;image/webp;
 Keywords=photos;albums;slideshow;

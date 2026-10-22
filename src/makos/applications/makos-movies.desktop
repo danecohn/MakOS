@@ -7,6 +7,6 @@ Terminal=false
 OnlyShowIn=MakOS;
 Categories=AudioVideo;Video;Player;
 StartupNotify=true
-StartupWMClass=makos-movies
+StartupWMClass=org.makos.Apps.movies
 MimeType=video/mp4;video/x-matroska;video/webm;video/x-msvideo;video/quicktime;video/ogg;
 Keywords=video;films;player;

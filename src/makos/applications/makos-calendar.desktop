@@ -7,6 +7,6 @@ Terminal=false
 OnlyShowIn=MakOS;
 Categories=Office;Calendar;
 StartupNotify=true
-StartupWMClass=makos-calendar
+StartupWMClass=org.makos.Apps.calendar
 MimeType=text/calendar;
 Keywords=events;schedule;ics;

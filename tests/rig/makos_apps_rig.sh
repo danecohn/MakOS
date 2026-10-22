@@ -27,7 +27,8 @@ exec dbus-run-session -- sh -c '
   trap "kill $kw 2>/dev/null || true" EXIT
   sleep 4
   export WAYLAND_DISPLAY=makos-apps-rig GDK_BACKEND=wayland QT_QPA_PLATFORM=wayland
-  python3 "$ROOT/tests/rig/makos_apps_rig.py" >"$T/apps-rig.log" 2>&1
+  dbus-update-activation-environment WAYLAND_DISPLAY GDK_BACKEND QT_QPA_PLATFORM
+  python3 -u "$ROOT/tests/rig/makos_apps_rig.py" >"$T/apps-rig.log" 2>&1
   rc=$?
   cat "$T/apps-rig.log"
   exit $rc

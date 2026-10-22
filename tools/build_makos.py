@@ -11,13 +11,14 @@ ROOT=Path(__file__).resolve().parents[1]
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--no-repo',action='store_true')
+    parser.add_argument('--only',help='comma-separated MakOS package names; existing package files are retained')
     args=parser.parse_args()
     for script in ('make_makos_vectors.py','make_makos_materials.py'):
         subprocess.run([sys.executable,str(ROOT/'tools'/script)],check=True)
-    subprocess.run([sys.executable,str(ROOT/'tools/ingest_makos_assets.py'),'--normalize'],check=True,stdout=subprocess.DEVNULL)
+    subprocess.run([sys.executable,str(ROOT/'tools/ingest_makos_assets.py'),'--normalize','--require-all'],check=True,stdout=subprocess.DEVNULL)
+    subprocess.run([sys.executable,str(ROOT/'tools/prepare_makos_wallpapers.py')],check=True)
     (ROOT/'src/makos/wallpapers').mkdir(parents=True,exist_ok=True)
     import shutil
-    shutil.copy2(ROOT/'assets/makos/wallpaper-aurora-blue.png',ROOT/'src/makos/wallpapers/wallpaper-aurora-blue.png')
     cursor=os.environ.get('MAKOS_XCURSORGEN') or shutil.which('xcursorgen')
     if cursor:
         subprocess.run([sys.executable,str(ROOT/'tools/build_makos_cursors.py'),'--xcursorgen',cursor],check=True)
@@ -29,11 +30,13 @@ def main():
     module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
     builders=module.register(b)
     debs=[]
-    for name,fn in builders.items():
-        deb=fn().build();debs.append(deb)
+    names=args.only.split(',') if args.only else list(builders)
+    for name in names:
+        if name not in builders:parser.error('Unknown MakOS package: '+name)
+        deb=builders[name]().build();debs.append(deb)
         print('Built',deb.name,deb.stat().st_size,flush=True)
     if not args.no_repo:
         # Use the existing signing service through gpg; never read/copy private key material.
-        b.make_repo(debs)
+        b.make_repo(sorted(b.PKG_DIR.glob('*.deb')))
     return 0
 if __name__=='__main__':sys.exit(main())

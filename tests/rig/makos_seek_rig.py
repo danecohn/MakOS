@@ -145,7 +145,7 @@ try:
     settle(1.0)
     check(app.overlay is None, 'Quick Look closes the overlay')
     print('QUICK LOOK toplevels:', before, '->', len(Gtk.Window.get_toplevels()), flush=True)
-    check(len(Gtk.Window.get_toplevels()) > before, 'Quick Look window opened through the Files package')
+    check(any(w.get_title() == 'Quick Look' and w.get_visible() for w in Gtk.Window.get_toplevels()), 'Quick Look window opened through the Files package')
     field = [w for w in __import__('makos_rig_common').walk(app.bar) if isinstance(w, Gtk.SearchEntry)]
     check(bool(field), 'menu-bar Seek field exists')
     if field:

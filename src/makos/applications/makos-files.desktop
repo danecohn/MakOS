@@ -7,6 +7,6 @@ Terminal=false
 OnlyShowIn=MakOS;
 Categories=System;FileManager;
 StartupNotify=true
-StartupWMClass=makos-files
+StartupWMClass=org.makos.Apps.files
 MimeType=inode/directory;
 Keywords=folders;documents;

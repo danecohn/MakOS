@@ -1,10 +1,4 @@
-"""The desktop layer: a background layer-shell window showing the wallpaper.
-
-Why the rig showed a white desktop: the build step copies assets/makos/wallpaper-aurora-blue.png into
-src/makos/wallpapers/, which does not exist in a plain source checkout, so the shell fell back to a label on the default
-window colour. `wallpaper_path` now also looks in the repository's assets directory, and a missing image falls back to a
-painted gradient instead of white.
-"""
+"""Desktop layer: user wallpaper, shipped JPEG, or source-only original PNG."""
 from pathlib import Path
 
 import gi
@@ -14,7 +8,7 @@ from gi.repository import Gtk  # noqa: E402
 
 from .. import common
 
-DEFAULT_NAME = 'wallpaper-aurora-blue.png'
+DEFAULT_NAME = 'wallpaper-aurora-blue.jpg'
 IMAGE_EXT = ('.png', '.jpg', '.jpeg', '.webp')
 
 
@@ -27,9 +21,10 @@ def wallpaper_path(prefs=None):
         if p.is_file() and p.suffix.lower() in IMAGE_EXT:
             return p
     for base in (common.SHARE / 'wallpapers', common.SOURCE.parents[1] / 'assets' / 'makos'):
-        p = base / DEFAULT_NAME
-        if p.is_file():
-            return p
+        for name in (DEFAULT_NAME, 'wallpaper-aurora-blue.png'):
+            p = base / name
+            if p.is_file():
+                return p
     return None
 
 

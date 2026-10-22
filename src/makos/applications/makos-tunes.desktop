@@ -7,6 +7,6 @@ Terminal=false
 OnlyShowIn=MakOS;
 Categories=AudioVideo;Audio;Player;
 StartupNotify=true
-StartupWMClass=makos-tunes
+StartupWMClass=org.makos.Apps.tunes
 MimeType=audio/mpeg;audio/flac;audio/ogg;audio/x-wav;audio/mp4;audio/aac;
 Keywords=music;songs;player;

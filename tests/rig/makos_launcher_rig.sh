@@ -33,6 +33,7 @@ exec dbus-run-session -- sh -c '
   trap "kill $kw 2>/dev/null || true" EXIT
   sleep 4
   export WAYLAND_DISPLAY=makos-rig GDK_BACKEND=wayland QT_QPA_PLATFORM=wayland
+  dbus-update-activation-environment WAYLAND_DISPLAY GDK_BACKEND QT_QPA_PLATFORM
   case "$SCRIPT" in
     *.py) python3 "$SCRIPT" ;;
     *) sh "$SCRIPT" ;;

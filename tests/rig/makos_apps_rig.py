@@ -63,7 +63,8 @@ def windows():
 
 
 def find_window(cls):
-    return next((w for w in windows() if str(w.get('cls', '')).lower() == cls or str(w.get('desktopFile', '')).lower() == cls), None)
+    app_id = 'org.makos.apps.' + cls.removeprefix('makos-').replace('-', '_')
+    return next((w for w in windows() if str(w.get('cls', '')).lower() in (cls, app_id) or str(w.get('desktopFile', '')).lower() in (cls, app_id)), None)
 
 
 def desktop_shot(name):
@@ -78,7 +79,7 @@ def desktop_shot(name):
 
 
 def registrar_pids():
-    r = bus.call_sync('com.canonical.AppMenu.Registrar', '/com/canonical/AppMenu/Registrar', 'com.canonical.AppMenu.Registrar', 'GetMenus', None, None, Gio.DBusCallFlags.NONE, 3000, None).unpack()[0]
+    r = bus.call_sync('org.makos.AppMenu.Registrar', '/com/canonical/AppMenu/Registrar', 'com.canonical.AppMenu.Registrar', 'GetMenus', None, None, Gio.DBusCallFlags.NONE, 3000, None).unpack()[0]
     return {wid & 0xffff_ffff & ~0x40000000 for wid, _s, _p in r if wid & 0x40000000}
 
 
@@ -106,7 +107,7 @@ def main():
     # 1) in-process checks of every app (own Wayland client, own GTK application)
     checks = subprocess.run([sys.executable, str(ROOT / 'tests/rig/makos_apps_checks.py')], env=env, capture_output=True, text=True, timeout=420)
     print(checks.stdout[-4000:])
-    if checks.returncode != 0:
+    if checks.returncode != 0 or any(x in checks.stderr for x in ('Traceback', 'CRITICAL', 'CSS parser error')):
         print(checks.stderr[-4000:])
         fail('in-process app checks failed')
 

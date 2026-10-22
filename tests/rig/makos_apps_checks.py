@@ -62,6 +62,7 @@ def main():
     c.expression.set_text('2+3*4')
     assert c.compute() == '14'
     c.set_mode('scientific')
+    c.clear()
     c.press('sin(')
     c.press('30')
     c.press(')')
@@ -150,7 +151,9 @@ def main():
     ok('calendar: .ics store, recurrence, month grid, event editor')
 
     # ---- Activity
-    victim = subprocess.Popen(['sleep', '300'])
+    victim = subprocess.Popen(['sleep', '300'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    import atexit
+    atexit.register(lambda: victim.terminate() if victim.poll() is None else None)
     a = activity.Activity(app)
     a.aw.present()
     spin(lambda: len(a.procs) > 5, 8)
@@ -273,18 +276,28 @@ def main():
     spin(lambda: tu.position_us() > 300000, 10)
     assert tu.status == 'Playing'
     bus = Gio.bus_get_sync(Gio.BusType.SESSION)
-    props = lambda name: bus.call_sync('org.mpris.MediaPlayer2.makos_tunes', '/org/mpris/MediaPlayer2', 'org.freedesktop.DBus.Properties', 'Get', GLib.Variant('(ss)', ('org.mpris.MediaPlayer2.Player', name)), None, Gio.DBusCallFlags.NONE, 3000, None).unpack()[0]  # noqa: E731
+    def bus_call(*args):
+        reply=[]
+        def done(source,result):
+            try:reply.append((source.call_finish(result),None))
+            except Exception as exc:reply.append((None,exc))
+        bus.call(*args,None,done)
+        spin(lambda:bool(reply),5)
+        if reply[0][1]:raise reply[0][1]
+        return reply[0][0]
+    props = lambda name: bus_call('org.mpris.MediaPlayer2.makos_tunes', '/org/mpris/MediaPlayer2', 'org.freedesktop.DBus.Properties', 'Get', GLib.Variant('(ss)', ('org.mpris.MediaPlayer2.Player', name)), None, Gio.DBusCallFlags.NONE, 3000).unpack()[0]  # noqa: E731
     spin(lambda: tu.mpris.conn is not None, 3)
     assert props('PlaybackStatus') == 'Playing'
     assert props('Metadata')['xesam:title'] == 'Morning Light'
-    bus.call_sync('org.mpris.MediaPlayer2.makos_tunes', '/org/mpris/MediaPlayer2', 'org.mpris.MediaPlayer2.Player', 'PlayPause', None, None, Gio.DBusCallFlags.NONE, 3000, None)
+    bus_call('org.mpris.MediaPlayer2.makos_tunes', '/org/mpris/MediaPlayer2', 'org.mpris.MediaPlayer2.Player', 'PlayPause', None, None, Gio.DBusCallFlags.NONE, 3000)
     spin(lambda: tu.status == 'Paused', 5)
     assert props('PlaybackStatus') == 'Paused'
-    bus.call_sync('org.mpris.MediaPlayer2.makos_tunes', '/org/mpris/MediaPlayer2', 'org.mpris.MediaPlayer2.Player', 'Next', None, None, Gio.DBusCallFlags.NONE, 3000, None)
+    bus_call('org.mpris.MediaPlayer2.makos_tunes', '/org/mpris/MediaPlayer2', 'org.mpris.MediaPlayer2.Player', 'Next', None, None, Gio.DBusCallFlags.NONE, 3000)
     spin(lambda: tu.queue.current().title == 'Second Song', 5)
     tu.set_shuffle(True)
     tu.cycle_repeat()
     assert tu.queue.repeat == 'Playlist' and tu.queue.shuffle
+    tu.pause()
     tu.play_pause()
     spin(lambda: tu.status == 'Playing', 5)
     settle(.8)

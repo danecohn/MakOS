@@ -15,7 +15,7 @@ from .ctx import Ctx
 class Settings:
     def __init__(self, app, start=None):
         self.app = app
-        self.win = ui.window(app, 'Settings', 820, 680)
+        self.win = ui.window(app, 'Settings', 960, 820)
         self.stack = Gtk.Stack(transition_type=Gtk.StackTransitionType.NONE)
         self.status = Gtk.Label(label='', xalign=0, css_classes=['settings-status'], wrap=True)
         self.ctx = Ctx(app, self.win, self.status)

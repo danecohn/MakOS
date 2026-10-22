@@ -149,10 +149,8 @@ page = pane('startup')
 def switch_for(page, label):
     for sw in find_all(page, Gtk.Switch):
         row = sw.get_parent()
-        for _ in range(3):
-            if row is not None and label in texts(row):
-                return sw
-            row = row.get_parent() if row is not None else None
+        if row is not None and label in texts(row):
+            return sw
     raise AssertionError('no switch for %s in %s' % (label, texts(page)))
 
 

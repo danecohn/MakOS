@@ -108,7 +108,12 @@ class Shell(Gtk.Application):
             from ..capture import workspace
             def save(result):
                 print('COMPOSITOR_SHOT_FINISHED',flush=True)
-            self.background(lambda:workspace(self.bus).write_to_png(str(Path(os.environ['MAKOS_RIG_SHOTS'])/'desktop.png')),save)
+            def capture():
+                dest=Path(os.environ['MAKOS_RIG_SHOTS'])/'desktop.png'
+                temporary=dest.with_suffix('.tmp.png')
+                workspace(self.bus).write_to_png(str(temporary))
+                temporary.replace(dest)
+            self.background(capture,save)
             return
         if name not in ('bar','launcher','overlay','files','settings'):
             return
@@ -340,7 +345,7 @@ class Shell(Gtk.Application):
         if cls.startswith('org.makos'):
             name=active.get('caption','Files')
         for app in catalog.APPS:
-            if cls in (app.id,'makos-'+app.id):name=app.name
+            if cls in (app.id,'makos-'+app.id,'org.makos.apps.'+app.id.replace('-','_')):name=app.name
         self.active_label.set_text(name.split(' — ')[-1][:35] if active else 'Files')
         if active:
             self.globalmenu.set_active(active)

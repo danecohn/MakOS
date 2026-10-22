@@ -37,8 +37,8 @@ def start_shell(extra_env=None):
     if os.environ.get('MAKOS_GDB'):   # debugging aid: break on a GTK/pixman error and print the C backtrace
         env['MAKOS_GDB_LD_PRELOAD'] = env.get('LD_PRELOAD', '') or env['MAKOS_LAYERSHELL_LIB']
         argv = ['gdb', '-batch', '-ex', 'set environment LD_PRELOAD ' + env['MAKOS_LAYERSHELL_LIB'], '-ex', 'set breakpoint pending on',
-                '-ex', 'break pixman_region32_init_rect if (int)$x3 < 0 || (int)$x4 < 0', '-ex', 'run', '-ex', 'bt 25', '-ex', 'kill',
-                '--args', sys.executable, '-m', 'makos.shell.main']
+                '-ex', 'break pixman_region32_init_rect if (int)$x3 < 0 || (int)$x4 < 0 || (long)(int)$x1+(long)$x3 > 2147483647 || (long)(int)$x2+(long)$x4 > 2147483647', '-ex', 'run', '-ex', 'bt 25', '-ex', 'kill',
+                '--args', os.environ['MAKOS_SHELL_HOST']]
         env.pop('LD_PRELOAD', None)
     p = subprocess.Popen(argv, env=env, stdout=log, stderr=subprocess.STDOUT)
     procs.append(('shell', p))

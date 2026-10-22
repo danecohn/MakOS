@@ -671,6 +671,12 @@ class CatalogAndPackagingTests(unittest.TestCase):
         for app_id, module in apps.MODULES.items():
             self.assertTrue((ROOT / f'src/makos/makos/apps/{module}.py').exists(), app_id)
 
+    def test_office_uses_the_upstream_wrapper_and_matching_window_class(self):
+        for app_id,kind in [('paper','word'),('digits','cell'),('slides','slide')]:
+            self.assertEqual(catalog.resolve(catalog.BY_ID[app_id], lambda exe: exe=='euro-office-euro-office'), ['euro-office-euro-office','--new:'+kind])
+            self.assertIn('StartupWMClass=Euro-Office', (ROOT/f'src/makos/applications/makos-{app_id}.desktop').read_text())
+        self.assertIn('mak-office', (ROOT/'tools/builders/makos.py').read_text())
+
     def test_packaging_carries_helper_policy_and_dependencies(self):
         text = (ROOT / 'tools/builders/makos.py').read_text()
         for needle in ('makos-software-helper', 'org.makos.software.policy', 'pkexec', 'gstreamer1.0-gtk4', 'python3-pil', 'poppler-utils', 'udisks2'):

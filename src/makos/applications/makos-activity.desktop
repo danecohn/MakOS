@@ -7,5 +7,5 @@ Terminal=false
 OnlyShowIn=MakOS;
 Categories=System;Monitor;
 StartupNotify=true
-StartupWMClass=makos-activity
+StartupWMClass=org.makos.Apps.activity
 Keywords=processes;cpu;memory;task manager;

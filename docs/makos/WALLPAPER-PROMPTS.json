@@ -1,0 +1,22 @@
+[
+  {
+    "key": "wallpaper-water-drop",
+    "prompt": "Use case: photorealistic-natural. Create one wholly original MakOS wallpaper, landscape 3840x2160: a macro photograph of a single crystal water droplet perched on a gently curved blue-green leaf, luminous pale blue bokeh, delicate soft reflections, calm negative space. High photographic quality, subtle tonal gradients, calm areas suitable behind desktop windows. No text, no logos, no interface, no copied wallpapers."
+  },
+  {
+    "key": "wallpaper-nebula",
+    "prompt": "Use case: photorealistic-natural. Create one wholly original MakOS wallpaper, landscape 3840x2160: an original asymmetric cobalt and teal nebula in a deep star field, wispy silver light and dark navy negative space, scientific photographic aesthetic. High photographic quality, subtle tonal gradients, calm areas suitable behind desktop windows. No text, no logos, no interface, no copied wallpapers."
+  },
+  {
+    "key": "wallpaper-hills",
+    "prompt": "Use case: photorealistic-natural. Create one wholly original MakOS wallpaper, landscape 3840x2160: an original gently rolling meadow with layers of green hills and soft white morning mist, cool blue sky, natural fine grass, no resemblance to an existing OS wallpaper. High photographic quality, subtle tonal gradients, calm areas suitable behind desktop windows. No text, no logos, no interface, no copied wallpapers."
+  },
+  {
+    "key": "wallpaper-graphite",
+    "prompt": "Use case: photorealistic-natural. Create one wholly original MakOS wallpaper, landscape 3840x2160: an abstract original flowing graphite and silver ribbon of reflected light over a dark smooth mineral surface, monochrome charcoal gradient, restrained elegant minimal composition. High photographic quality, subtle tonal gradients, calm areas suitable behind desktop windows. No text, no logos, no interface, no copied wallpapers."
+  },
+  {
+    "key": "wallpaper-linen-grey",
+    "prompt": "Use case: photorealistic-natural. Create one wholly original MakOS wallpaper, landscape 3840x2160: a subtle original cool light-grey woven linen surface, fine natural irregular fabric threads, even diffuse light, unobtrusive minimal desktop background. High photographic quality, subtle tonal gradients, calm areas suitable behind desktop windows. No text, no logos, no interface, no copied wallpapers."
+  }
+]

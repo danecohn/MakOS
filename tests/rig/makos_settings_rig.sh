@@ -13,15 +13,17 @@ mkdir -p "$XDG_RUNTIME_DIR" "$XDG_CONFIG_HOME" "$XDG_DATA_HOME" "$XDG_STATE_HOME
 chmod 700 "$XDG_RUNTIME_DIR"
 cp "$ROOT/src/makos/session/kwinrc" "$XDG_CONFIG_HOME/kwinrc"
 export MAKOS_SHARE="$ROOT/src/makos" PYTHONPATH="$ROOT/src/makos:$ROOT/tests" GTK_A11Y=none MAKOS_LAYERSHELL_LIB="${AMERIKA_LAYERSHELL_LIB:-/usr/lib/aarch64-linux-gnu/libgtk4-layer-shell.so.0}"
-exec dbus-run-session -- sh -c '
+exec dbus-run-session -- sh -eu -c '
   kwin_wayland --virtual --socket makos-settings-rig --width 1920 --height 1080 --no-lockscreen >"$OUT/kwin.log" 2>&1 &
   kw=$!
   trap "kill $kw 2>/dev/null || true" EXIT
   sleep 4
   export WAYLAND_DISPLAY=makos-settings-rig GDK_BACKEND=wayland QT_QPA_PLATFORM=wayland
-  python3 "$ROOT/tests/rig/makos_settings_rig.py" 2>&1 | tee "$OUT/settings.log"
-  rc=$?
-  LD_PRELOAD="$MAKOS_LAYERSHELL_LIB" python3 "$ROOT/tests/rig/makos_seek_rig.py" 2>&1 | tee "$OUT/seek.log"
+  dbus-update-activation-environment WAYLAND_DISPLAY GDK_BACKEND QT_QPA_PLATFORM
+  python3 -u "$ROOT/tests/rig/makos_settings_rig.py" >"$OUT/settings.log" 2>&1 || { cat "$OUT/settings.log"; exit 1; }
+  cat "$OUT/settings.log"
+  LD_PRELOAD="$MAKOS_LAYERSHELL_LIB" python3 -u "$ROOT/tests/rig/makos_seek_rig.py" >"$OUT/seek.log" 2>&1 || { cat "$OUT/seek.log"; exit 1; }
+  cat "$OUT/seek.log"
   if grep -E "Traceback|CRITICAL|CSS parser error" "$OUT/settings.log" "$OUT/seek.log" ; then exit 1; fi
   grep -q "SETTINGS RIG PASS" "$OUT/settings.log" && grep -q "SEEK RIG PASS" "$OUT/seek.log"
 '

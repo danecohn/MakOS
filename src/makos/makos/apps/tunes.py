@@ -145,6 +145,7 @@ _instance = []
 
 class Tunes:
     def __init__(self, app, root=None):
+        gi.require_version('Gst', '1.0')
         from gi.repository import Gst
         Gst.init(None)
         self.Gst = Gst

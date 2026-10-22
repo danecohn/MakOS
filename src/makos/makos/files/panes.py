@@ -58,7 +58,8 @@ class PreviewPane(Gtk.Box):
             if k == 'Name':
                 continue
             a = Gtk.Label(label=k, xalign=1, yalign=0, css_classes=['subtitle'])
-            b = Gtk.Label(label=str(v), xalign=0, wrap=True, wrap_mode=Pango.WrapMode.WORD_CHAR, max_width_chars=26, selectable=True)
+            b = Gtk.Label(label=str(v), xalign=0, width_chars=20, max_width_chars=26, ellipsize=Pango.EllipsizeMode.END, selectable=True)
+            b.set_tooltip_text(str(v))
             self.grid.attach(a, 0, i, 1, 1)
             self.grid.attach(b, 1, i, 1, 1)
 

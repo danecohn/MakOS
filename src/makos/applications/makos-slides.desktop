@@ -7,6 +7,6 @@ Terminal=false
 OnlyShowIn=MakOS;
 Categories=Office;Presentation;
 StartupNotify=true
-StartupWMClass=makos-slides
+StartupWMClass=Euro-Office
 MimeType=application/vnd.oasis.opendocument.presentation;application/vnd.openxmlformats-officedocument.presentationml.presentation;
 Keywords=presentation;powerpoint;

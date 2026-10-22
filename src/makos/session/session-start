@@ -5,7 +5,7 @@ export XDG_CONFIG_HOME="${MAKOS_USER_CONFIG_HOME:-$HOME/.config}"
 export QT_STYLE_OVERRIDE=Fusion
 unset LD_PRELOAD
 # Environment for D-Bus-activated apps is restored to the user's normal configuration.
-dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE XDG_SESSION_DESKTOP XDG_CONFIG_HOME QT_QPA_PLATFORM GDK_BACKEND MOZ_ENABLE_WAYLAND MAKOS_SESSION 2>/dev/null || true
+[ "${MAKOS_TEST_MODE:-0}" = 1 ] || dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE XDG_SESSION_DESKTOP XDG_CONFIG_HOME QT_QPA_PLATFORM GDK_BACKEND MOZ_ENABLE_WAYLAND MAKOS_SESSION 2>/dev/null || true
 LOGDIR="${XDG_STATE_HOME:-$HOME/.local/state}/makos"
 mkdir -p "$LOGDIR"
 chmod 700 "$LOGDIR"
@@ -13,23 +13,52 @@ chmod 700 "$LOGDIR"
 # Launch authentication agent if the system provides one; it owns all credential entry.
 agent_pid=""
 for agent in /usr/lib/*/libexec/polkit-kde-authentication-agent-1; do
+  [ "${MAKOS_TEST_MODE:-0}" != 1 ] || break
   [ ! -x "$agent" ] || { "$agent" >/dev/null 2>&1 & agent_pid=$!; break; }
 done
 shell_pid=""
+watchdog_pid=""
 cleanup() {
   [ -z "$shell_pid" ] || kill "$shell_pid" 2>/dev/null || true
   [ -z "$agent_pid" ] || kill "$agent_pid" 2>/dev/null || true
+  [ -z "$watchdog_pid" ] || kill "$watchdog_pid" 2>/dev/null || true
 }
 trap cleanup EXIT
 trap 'exit 0' HUP TERM INT
+guard_ready() {
+  target=$1
+  steps=${MAKOS_READY_WAIT_STEPS:-60}
+  case "$steps" in ''|*[!0-9]*) steps=60 ;; esac
+  [ "$steps" -ge 1 ] && [ "$steps" -le 120 ] || steps=60
+  n=0
+  while [ "$n" -lt "$steps" ]; do
+    kill -0 "$target" 2>/dev/null || return 0
+    [ "$(cat "${XDG_RUNTIME_DIR:-/tmp}/makos/shell-ready" 2>/dev/null)" != "$target" ] || return 0
+    n=$((n+1))
+    sleep .5
+  done
+  printf 'MakOS startup watchdog: ready marker absent; restarting shell\n' >> "$LOGDIR/shell.log"
+  kill -TERM "$target" 2>/dev/null || true
+}
 crashes=0
 while [ "$crashes" -lt 5 ]; do
+  ready_file="${XDG_RUNTIME_DIR:-/tmp}/makos/shell-ready"
+  rm -f "$ready_file"
   started=$(date +%s)
   printf '\nMakOS session start\n' >> "$LOGDIR/shell.log"
-  /usr/bin/makos-shell >> "$LOGDIR/shell.log" 2>&1 &
+  "${MAKOS_BIN:-/usr/bin}/makos-shell" >> "$LOGDIR/shell.log" 2>&1 &
   shell_pid=$!
+  guard_ready "$shell_pid" &
+  watchdog_pid=$!
   wait "$shell_pid"
   code=$?
+  kill "$watchdog_pid" 2>/dev/null || true
+  wait "$watchdog_pid" 2>/dev/null || true
+  watchdog_pid=""
+  if [ "$code" = 0 ] && [ "$(cat "$ready_file" 2>/dev/null)" != "$shell_pid" ]; then
+    printf "MakOS shell exited before reporting ready\n" >> "$LOGDIR/shell.log"
+    code=1
+  fi
   shell_pid=""
   [ "$code" -ne 0 ] || exit 0
   [ $(($(date +%s)-started)) -le 60 ] || crashes=0

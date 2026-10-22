@@ -5,39 +5,30 @@ MakOS is an original Glass & Metal desktop for Ubuntu ARM64 on KWin Wayland.
 Do not remove fallback desktops or everyday file tools on the strength of this preview.
 The owner has not confirmed a real MakOS login or app compatibility.
 
-## Implemented and scoped
+## Integration status
 
-* Independent login entry, shell, config, theme, icon theme and six Debian packages.
-* Original silver GTK window chrome, left glass buttons, gel controls, source list,
-  a new KWin QML decoration, own generated wallpaper and nine AI app icons.
-* Top menu bar, asynchronous Wi-Fi/Bluetooth/battery readouts, volume control, calendar.
-  Saved Wi-Fi activation delegates to the existing backend; MakOS never captures passwords.
-* DBusMenu registrar and KWin Wayland menu endpoints, with Window fallback.
-* Gaussian icon magnification, launcher pins/removal, right-click menus, position/size preferences.
-* Window/desk selection overlays and compositor shortcuts for close, minimize, zoom,
-  snapping and showing the desktop. Spread currently shows window cards, not thumbnails.
-* Files browser: icon, list and two-column views, tabs, Places, mounted volumes,
-  parent/path navigation, spacebar image/text/audio/video preview, default-app opening.
-* Seek: curated apps, local filename fallback, safe calculator, common length/mass conversion.
-* Settings pane grid; appearance/launcher controls; read-only hardware status for some panes.
-* Small Text Editor, Notes, Calculator, Calendar, Activity, System Information and read-only Disks.
-* Original catalog: Venture, Paper, Digits, Slides, MakBox, Studio, Render, Engine, Sprite;
-  ChatGPT and Claude remain available. Terminal has one visible entry and a preferred backend.
-* Studio cosmetic copies do not replace upstream engines or edit user projects/configuration.
+See [INTEGRATION.md](INTEGRATION.md) for current evidence. The handoff added larger
+Files, Settings, Seek, Launcher Bar and native-app implementations. Their presence
+in the tree is not proof of completeness. The integration checks are being rerun
+against source and extracted ARM64 packages before deployment.
 
-## Release gates — not implemented or not yet proven
+The source includes 55 original AI app/folder/file/drive icons and six original
+wallpapers. Wallpaper output is explicitly resampled to 3840×2160; see provenance.
+Settings and Studio-suite icons currently use original vector development art.
+Paper/Digits/Slides use Mak Office's unmodified Euro-Office wrapper, with the
+upstream AGPL notices and identity retained. A source fork and full app reskin
+remain open work.
 
-Universal GTK/Qt/Electron menus; DBusMenu root live-update race coverage; complete Qt and
-browser skins; all requested settings mutations; file operations/trash/tags/network search,
-full column stack and cover previews; PDF/Office embedded previews; an indexer;
-contacts/dictionary providers; launcher drag reorder, stacks, badges, bounce/reflections,
-all autohide cases, minimization destinations; app-group switcher semantics; live window
-thumbnails, drag between desks, hot corners and gestures; complete touchscreen/pen testing;
-SDDM/Plymouth enable/revert themes; full notifications and sound set; cursor theme;
-software front-end; Photos/Music/Video apps; printer/account/security controls;
-accessibility audits, fractional/multi-monitor hardware tests, battery and physical 60 fps tests.
-Some Settings panes explicitly identify their unimplemented status. They do not pretend to
-apply changes. Graphite is not exposed because its full appearance is unfinished.
+## Release gates
+
+Owner-confirmed normal login; physical touch/pen, scaling, battery and accessibility
+acceptance; complete launcher/Spread/Desks input tests; universal menu export and
+third-party skins; safe login/boot snapshot/revert/recovery; all Settings apply paths
+on hardware; complete core-app/media/file workflows; Office edit/save/reopen and
+styling acceptance. The themes and their rig galleries alone do not establish
+that the normal session applies every third-party style correctly.
+
+Do not remove fallback sessions or broad sets of installed applications yet.
 
 ## Build and test
 

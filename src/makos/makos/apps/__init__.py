@@ -1,8 +1,7 @@
 """MakOS applications. One module per app; each exposes open_window(app, path=None).
 
 Apps in SEPARATE run in their own `makos-app` process when started by the shell (crash isolation,
-no heavy libraries inside the shell, and a per-process global menu). Files and Settings stay
-in the shell process because the shell controls them directly.
+no heavy libraries inside the shell, and a per-process global menu). Files and Settings also run separately; the private integration rig can explicitly embed them.
 """
 import importlib
 import os
@@ -78,6 +77,8 @@ def launch_external(app, record, path=None):
 
 
 def launch(app, app_id, path=None):
+    if app_id in ('files', 'settings') and not isinstance(app, Applications) and os.environ.get('MAKOS_RIG_EMBED_APPS') != '1':
+        return spawn(app_id, path)
     if app_id == 'files':
         from ..files import Files
         return Files(app, path)
@@ -111,7 +112,7 @@ class Applications(Gtk.Application):
     """Standalone process for one MakOS app (makos-app <id> [files...])."""
 
     def __init__(self, app_id, path=None):
-        flags = Gio.ApplicationFlags.HANDLES_OPEN | (Gio.ApplicationFlags.NONE if app_id in SINGLE_INSTANCE else Gio.ApplicationFlags.NON_UNIQUE)
+        flags = Gio.ApplicationFlags.HANDLES_OPEN | (Gio.ApplicationFlags.DEFAULT_FLAGS if app_id in SINGLE_INSTANCE else Gio.ApplicationFlags.NON_UNIQUE)
         super().__init__(application_id='org.makos.Apps.' + app_id.replace('-', '_'), flags=flags)
         self.app_id = app_id
         self.path = path

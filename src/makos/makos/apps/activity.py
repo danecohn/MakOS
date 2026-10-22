@@ -307,8 +307,8 @@ class Activity:
         q = self.search.get_text().casefold()
         key = {'cpu': lambda p: -p.cpu, 'mem': lambda p: -p.rss, 'name': lambda p: p.name.casefold()}[self.sort]
         rows = sorted((p for p in self.procs if q in p.name.casefold() or q == str(p.pid)), key=key)[:150]
-        ui.clear(self.list)
         keep = self.selected.pid if self.selected else None
+        ui.clear(self.list)
         select = None
         for p in rows:
             row = Gtk.ListBoxRow()

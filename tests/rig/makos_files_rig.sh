@@ -20,6 +20,7 @@ dbus-run-session -- sh -c '
   n=0
   until [ -S "$XDG_RUNTIME_DIR/$SOCK" ] || [ $n -ge 40 ]; do n=$((n+1)); sleep .25; done
   export WAYLAND_DISPLAY="$SOCK" GDK_BACKEND=wayland GTK_A11Y=none
+  dbus-update-activation-environment WAYLAND_DISPLAY GDK_BACKEND QT_QPA_PLATFORM
   export PYTHONPATH="$ROOT/src/makos" MAKOS_SHARE="$ROOT/src/makos" MAKOS_RIG_SHOTS="$OUT"
   python3 -X faulthandler "$ROOT/tests/rig/makos_files_ui.py" >"$T/files-ui.log" 2>&1
   echo $? >"$T/files-ui.status"

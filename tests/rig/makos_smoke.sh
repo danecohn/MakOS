@@ -5,7 +5,7 @@ export PYTHONPATH="$ROOT/src/makos:$ROOT/src/os"
 export MAKOS_SHARE="$ROOT/src/makos"
 export MAKOS_LAYERSHELL_LIB="${AMERIKA_LAYERSHELL_LIB:-/usr/lib/aarch64-linux-gnu/libgtk4-layer-shell.so.0}"
 export MAKOS_RIG_SHOTS="$ROOT/dist/makos/rig"
-export GTK_A11Y=none
+export GTK_A11Y=none MAKOS_RIG_EMBED_APPS=1
 mkdir -p "$MAKOS_RIG_SHOTS" "$HOME/Documents" "$MAKOS_SHARE/wallpapers"
 printf 'A private rig document.\n' > "$HOME/Documents/Welcome.txt"
 "$ROOT/src/makos/bin/makos-shell" > "$T/makos-shell.log" 2>&1 &

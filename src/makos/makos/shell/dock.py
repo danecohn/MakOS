@@ -597,6 +597,9 @@ class Dock:
         sw, sh = self.surface_size()
         bx = max(2, min(bx, sw - bw - 2))
         by = max(2, min(by, sh - bh - 2))
+        # Tooltips stay on whole pixels while the magnified icons move fractionally.
+        # Fractional rounded border/clip intersections produce invalid pixman regions.
+        bx, by = round(bx), round(by)
         skip = os.environ.get('MAKOS_DOCK_SKIP', '')
         if bg and 'bg' not in skip:
             rr = Gsk.RoundedRect().init_from_rect(_rect(bx, by, bw, bh), 8)
@@ -679,7 +682,10 @@ class Dock:
                 self.p_s = self.pointer[0]
             else:
                 self.p_s = dm.smooth(self.p_s, self.pointer[0], dt, 26.0)
-        self.strength = dm.smooth(self.strength, self._strength_target(), dt, 16.0)
+        target = self._strength_target()
+        self.strength = dm.smooth(self.strength, target, dt, 16.0)
+        if abs(self.strength - target) <= 0.002:
+            self.strength = target
         # auto-hide
         vis_before = self.autohide.visible
         popover = self.popover is not None

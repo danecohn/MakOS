@@ -65,3 +65,18 @@ class MakOSTests(unittest.TestCase):
         self.assertNotIn('systemctl enable',start)
 
 if __name__=='__main__':unittest.main()
+
+
+class PackagedWallpaperTests(unittest.TestCase):
+    def test_shipped_jpeg_is_the_default_and_missing_choice_falls_back(self):
+        import tempfile
+        from unittest.mock import patch
+        from makos.shell.desktop import wallpaper_path
+        with tempfile.TemporaryDirectory() as folder:
+            share=Path(folder)
+            (share/'wallpapers').mkdir()
+            jpeg=share/'wallpapers/wallpaper-aurora-blue.jpg'
+            jpeg.write_bytes(b'fixture')
+            with patch('makos.shell.desktop.common.SHARE', share):
+                self.assertEqual(wallpaper_path({}),jpeg)
+                self.assertEqual(wallpaper_path({'wallpaper':'/missing/old.png'}),jpeg)

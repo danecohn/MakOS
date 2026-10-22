@@ -7,5 +7,5 @@ Terminal=false
 OnlyShowIn=MakOS;
 Categories=System;
 StartupNotify=true
-StartupWMClass=makos-system-info
+StartupWMClass=org.makos.Apps.system_info
 Keywords=about;hardware;

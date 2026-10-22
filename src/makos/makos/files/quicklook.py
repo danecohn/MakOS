@@ -48,7 +48,7 @@ class QuickLook:
         w.add_css_class('quicklook')
         w.set_hide_on_close(True)
         outer = ui.box(True, 0)
-        self.stack = Gtk.Stack(hexpand=True, vexpand=True, transition_type=Gtk.StackTransitionType.CROSSFADE, transition_duration=120)
+        self.stack = Gtk.Stack(hexpand=True, vexpand=True, hhomogeneous=False, vhomogeneous=False, transition_type=Gtk.StackTransitionType.CROSSFADE, transition_duration=120)
         outer.append(self.stack)
         foot = ui.box(spacing=8, css='ql-foot')
         self.prev_btn = ui.button('‹', lambda: self._step(-1))
@@ -108,7 +108,9 @@ class QuickLook:
         self.prev_btn.set_visible(self.step is not None)
         self.next_btn.set_visible(self.step is not None)
         self.open_btn.set_label('Open Folder' if entry.is_dir else 'Open')
-        page = self._build(entry, gen)
+        content_page = self._build(entry, gen)
+        page = Gtk.ScrolledWindow(hexpand=True, vexpand=True, hscrollbar_policy=Gtk.PolicyType.NEVER)
+        page.set_child(content_page)
         self._counter += 1
         name = f'p{self._counter}'
         self.stack.add_named(page, name)

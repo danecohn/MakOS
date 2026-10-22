@@ -27,11 +27,14 @@ redistribution licence already shipped with Ubuntu; no font is copied from a pro
   per-session XKB include and diagnostic log in `~/.local/state/makos/shell.log`.
 * KWin alone reads `~/.config/makos/compositor/kwinrc`. `session-start` restores the
   original XDG config home before spawning the shell or any application. Existing
-  kwinrc, kdeglobals, Plasma and Amerika settings are never rewritten.
+  compositor defaults are not changed by installation. Explicit Settings actions can
+  write the relevant user/system setting through their backend; these are distinct
+  from package installation and require hardware verification.
 * gtk4-layer-shell preload is applied to the shell executable only and removed
   immediately from Python's launch environment. No application inherits it.
 * `org.makos.Shell` owns `/Control` and `/Windows`. Window commands reuse the
   proven validated one-shot KWin-script pattern. It does not share Amerika bus names.
+  Files and Settings launch in separate processes; private widget rigs can embed them.
 * DBusMenu registrar implements `com.canonical.AppMenu.Registrar`; Wayland menu
   service/path comes from KWin surface properties. Only genuinely exported menus
   appear. GTK4's GMenu export is a different protocol, not magically DBusMenu.
@@ -40,8 +43,9 @@ redistribution licence already shipped with Ubuntu; no font is copied from a pro
   isolated under `makos.backends`. They are not all exposed as writable settings yet.
 * All slow status and document search work runs off GTK's main thread. Calculator
   parses a bounded AST and implements a fixed operator allowlist (never eval).
-* Seek's document fallback visits at most 500 directories under four visible user
-  folders. Full Baloo/localsearch integration is a release gate.
+* Seek has a separate low-priority SQLite FTS index over visible user folders,
+  excludes secret/configuration locations and never follows symlinks. It can query
+  localsearch when reachable. Hardware-scale indexing is still an acceptance gate.
 * MakOS's curated app catalog offers one visible entry per task. It does not enumerate
   every installed launcher. This is presentation cleanup, not package removal.
 * Studio cosmetics are generated copies under `compat/`; serialized project formats,
@@ -66,3 +70,19 @@ as new rendering engines. Local signed staging is isolated under `dist/makos`.
 Install does not change the login manager, default session, boot theme or PAM.
 
 See README.md for the explicit unfinished-feature matrix and recovery path.
+
+## Verified integration details
+
+KWin 6.7's Aurorae theme identifier is `org.makos.glass`, without the historical
+`__qml__` prefix. The rig launches a real Qt terminal window to exercise the native
+decoration; the theme loaded and its screenshot was inspected. Shell-owned capture
+sets `hide-caller-windows=false` for ScreenShot2 v5. No software-rendering workaround
+is used in the final rig. Native utilities normally run in their own processes; the
+UI introspection rig embeds them explicitly and also tests the separate entry point.
+MakOS-owned widget CSS has priority above existing per-user CSS so an older desktop's
+custom styling cannot override the shell; those configuration files are never edited.
+
+The session supervisor also guards the ready marker: a process that stays alive but
+never maps its shell is terminated and restarted, with at most five attempts before
+returning to the login manager. Fixtures verify both a never-ready process and a
+ready process that exits normally. The normal timeout is 30 seconds.
