@@ -83,3 +83,10 @@ until the owner confirms it. No package release is published by this repair audi
 
 Frame callbacks are virtual-output evidence only; no physical-display 60 fps claim.
 The normal session and hardware gates above remain open.
+
+
+Source repair commit `b04549fe256142e9a3bb8f5ab7041f78b39f5a05` passed
+[GitHub Source checks](https://github.com/danecohn/MakOS/actions/runs/39780189648).
+The local dev2 archive is staged for review and has not been published as a GitHub
+package release. `Install-MakOS-local.sh` verifies its signed index before asking
+the system authentication agent to install it. It refuses package removals.
