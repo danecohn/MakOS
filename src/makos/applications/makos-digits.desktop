@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Digits
+Exec=makos-app digits %U
+Icon=makos-file-spreadsheet
+Terminal=false
+OnlyShowIn=MakOS;
+Categories=Utility;
+StartupNotify=true

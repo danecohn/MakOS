@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Claude
+Exec=makos-app claude %U
+Icon=makos-claude
+Terminal=false
+OnlyShowIn=MakOS;
+Categories=Utility;
+StartupNotify=true

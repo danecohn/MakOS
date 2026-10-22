@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=MakBox
+Exec=makos-app makbox %U
+Icon=makos-music
+Terminal=false
+OnlyShowIn=MakOS;
+Categories=Utility;
+StartupNotify=true

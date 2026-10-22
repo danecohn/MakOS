@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Studio
+Exec=makos-app studio %U
+Icon=makos-widgets
+Terminal=false
+OnlyShowIn=MakOS;
+Categories=Utility;
+StartupNotify=true

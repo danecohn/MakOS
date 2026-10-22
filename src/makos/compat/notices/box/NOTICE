@@ -1,0 +1,16 @@
+AmerikaBox
+==========
+AmerikaBox is a desktop build of BeepBox with an AI composer panel added by Amerika.
+
+BeepBox
+  Copyright (c) 2012-2024 John Nesky and contributing authors
+  Licence: MIT (full text in /usr/share/doc/amerika-box/LICENSE-BeepBox.md)
+  Source: https://github.com/johnnesky/beepbox, commit 355e510099d230d066d95074c16d748d59fe054c (version 4.2.2 plus later fixes)
+  AmerikaBox is not affiliated with, or endorsed by, BeepBox or John Nesky. beepbox.co is a separate hosted service.
+  Our changes to BeepBox's own code are the two patches in /usr/share/doc/amerika-box/patches/.
+
+lamejs 1.2.0 (MP3 encoder, a JavaScript port of LAME)
+  Licence: LGPL-3.0, shipped as a separate unmodified file app/amerika/vendor/lame.min.js
+  (licence note: app/amerika/vendor/LICENSE-lamejs.txt). LAME: https://lame.sourceforge.io / www.mp3dev.org
+
+Amerika additions (app/amerika/*, launchers, packaging): Copyright Amerika LLC, GPL-3.0-only.

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Settings
+Exec=makos-app settings %U
+Icon=makos-settings
+Terminal=false
+OnlyShowIn=MakOS;
+Categories=Settings;
+StartupNotify=true

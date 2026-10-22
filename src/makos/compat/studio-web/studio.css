@@ -1,0 +1,24 @@
+/* Studio shared look for the web apps: neon on chrome, same tokens as the GTK theme. */
+:root {
+  --am-bg: #0b0a14; --am-panel: #14131f; --am-panel-hi: #22212f; --am-line: #3a3950;
+  --am-text: #ecebf5; --am-dim: #9a98b0; --am-accent: #ff2e63; --am-second: #19e3ff;
+  --am-ok: #39ff88; --am-warn: #ffb02e; --am-err: #ff4d4d;
+  --am-font: "Inter", "Noto Sans", sans-serif; --am-mono: "JetBrains Mono", "DejaVu Sans Mono", monospace;
+  color-scheme: dark;
+}
+html, body { background: var(--am-bg); color: var(--am-text); font-family: var(--am-font); margin: 0; }
+.am-panel { background: linear-gradient(to bottom, var(--am-panel-hi), var(--am-panel)); border: 1px solid var(--am-line); border-radius: 12px; }
+.am-btn { background: linear-gradient(to bottom, rgba(255,255,255,.12), rgba(255,255,255,.03)); color: var(--am-text);
+  border: 1px solid rgba(255,255,255,.2); border-radius: 10px; padding: 6px 14px; font: 700 12px var(--am-font); cursor: pointer; }
+.am-btn:hover { border-color: var(--am-second); box-shadow: 0 0 10px rgba(25,227,255,.5); }
+.am-btn.primary { background: linear-gradient(to bottom, var(--am-accent), #a31a40); border-color: rgba(255,255,255,.35); box-shadow: 0 0 12px rgba(255,46,99,.5); }
+.am-btn:disabled { opacity: .45; cursor: default; box-shadow: none; }
+.am-input { background: rgba(0,0,0,.4); color: var(--am-text); border: 1px solid rgba(255,255,255,.16); border-radius: 8px; padding: 6px 10px; font: 13px var(--am-font); }
+.am-input:focus { outline: none; border-color: var(--am-second); }
+.am-label { font: 700 10px var(--am-font); letter-spacing: 2px; color: var(--am-dim); text-transform: uppercase; }
+.am-mono { font-family: var(--am-mono); }
+.am-chat-user { background: rgba(255,46,99,.15); border: 1px solid rgba(255,46,99,.4); border-radius: 12px; padding: 8px 12px; }
+.am-chat-ai { background: rgba(0,0,0,.4); border: 1px solid rgba(25,227,255,.35); border-radius: 12px; padding: 8px 12px; }
+.am-chat-tool { font: 11px var(--am-mono); color: var(--am-dim); }
+.am-err { color: var(--am-err); }
+::-webkit-scrollbar { width: 10px; height: 10px; } ::-webkit-scrollbar-thumb { background: rgba(255,255,255,.18); border-radius: 6px; }

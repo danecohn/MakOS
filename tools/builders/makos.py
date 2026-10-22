@@ -1,0 +1,60 @@
+"""Separate MakOS packages. No dependencies added to Amerika's metapackage."""
+import shutil
+import subprocess
+
+VERSION='0.1.0~dev1'
+NAMES=('makos-session','makos-shell','makos-theme','makos-icons','makos-apps','makos-desktop')
+
+
+def register(b):
+    source=b.SRC/'makos'
+    def package(name,description,depends='',arch='all'):
+        p=b.Pkg(name,VERSION,description,depends=depends,arch=arch)
+        p.copyright('MakOS original code and vectors: GPL-3.0-only.\nGenerated artwork: dedicated to CC0-1.0 by the owner.\nReused Amerika plumbing: GPL-3.0-only; attribution in ASSETS.md.\nFonts are provided by Ubuntu fonts-dejavu-core under its upstream licence.\n')
+        p.copy(b.ROOT/'docs/makos/ASSETS.md',f'/usr/share/doc/{name}/ASSETS.md')
+        return p
+    def shell():
+        p=package('makos-shell','MakOS desktop shell and native utilities',
+                  'python3, python3-gi, python3-gi-cairo, python3-cairo, gir1.2-gtk-4.0, gir1.2-gtk4layershell-1.0, libgtk4-layer-shell0, makos-theme, makos-icons, network-manager, wireplumber, upower, fonts-dejavu-core',arch='arm64')
+        shutil.copytree(source/'makos',p.path('/usr/lib/python3/dist-packages/makos'),ignore=shutil.ignore_patterns('__pycache__','*.pyc'))
+        shutil.copytree(source/'bridge',p.path('/usr/share/makos/bridge'))
+        for name in ('makos-shell','makos-app','makos-studio-app'):
+            p.copy(source/'bin'/name,'/usr/bin/'+name,0o755)
+        output=p.path('/usr/libexec/makos/makos-shell-host')
+        output.parent.mkdir(parents=True,exist_ok=True)
+        flags=subprocess.check_output(['python3-config','--embed','--ldflags'],text=True).split()
+        b.sh('cc','-O2','-Wl,-z,relro,-z,now',source/'shell-host.c','-o',output,*flags)
+        p.file('/usr/share/applications/org.makos.Shell.desktop','[Desktop Entry]\nType=Application\nName=MakOS Shell\nExec=/usr/libexec/makos/makos-shell-host\nNoDisplay=true\nX-KDE-DBUS-Restricted-Interfaces=org.kde.KWin.ScreenShot2\n')
+        return p
+    def session():
+        p=package('makos-session','MakOS independent KWin Wayland login session',
+                  'kwin-wayland, xwayland, dbus-user-session, makos-shell, polkit-kde-agent-1',arch='arm64')
+        p.copy(source/'session/makos-session','/usr/bin/makos-session',0o755)
+        for name in ('session-start','makos-xkb-override'):
+            p.copy(source/'session'/name,'/usr/libexec/makos/'+name,0o755)
+        p.copy(source/'session/makos.desktop','/usr/share/wayland-sessions/makos.desktop')
+        p.copy(source/'session/kwinrc','/usr/share/makos/session/kwinrc')
+        return p
+    def theme():
+        p=package('makos-theme','Original MakOS Glass & Metal appearance', 'fonts-dejavu-core')
+        shutil.copytree(source/'theme',p.path('/usr/share/makos/theme'),ignore=shutil.ignore_patterns('decoration'))
+        shutil.copytree(source/'theme/decoration',p.path('/usr/share/kwin/decorations/org.makos.glass'))
+        shutil.copytree(source/'wallpapers',p.path('/usr/share/makos/wallpapers'))
+        return p
+    def icons():
+        p=package('makos-icons','Original MakOS icon theme')
+        shutil.copytree(source/'icons',p.path('/usr/share/makos/icons'))
+        shutil.copytree(source/'icons/MakOS',p.path('/usr/share/icons/MakOS'))
+        return p
+    def apps():
+        p=package('makos-apps','Curated MakOS application entries with one app per role','makos-shell',arch='arm64')
+        p.recommends='ptyxis, amerika-venture, libreoffice-writer, libreoffice-calc, libreoffice-impress, amerika-studio, amerika-render, amerika-engine, amerika-sprite, amerika-box'
+        shutil.copytree(source/'compat',p.path('/usr/share/makos/compat'))
+        for path in (source/'applications').glob('*.desktop'):
+            p.copy(path,'/usr/share/applications/'+path.name)
+        return p
+    def meta():
+        p=package('makos-desktop','MakOS desktop development preview for Ubuntu ARM64',', '.join(n+f' (= {VERSION})' for n in NAMES if n!='makos-desktop'),arch='arm64')
+        p.copy(b.ROOT/'docs/makos/README.md','/usr/share/doc/makos-desktop/README.md')
+        return p
+    return dict(zip(NAMES,(session,shell,theme,icons,apps,meta)))

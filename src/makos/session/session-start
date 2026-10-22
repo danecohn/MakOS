@@ -1,0 +1,39 @@
+#!/bin/sh
+# Own session; never start another desktop shell or alter login defaults.
+set -u
+export XDG_CONFIG_HOME="${MAKOS_USER_CONFIG_HOME:-$HOME/.config}"
+export QT_STYLE_OVERRIDE=Fusion
+unset LD_PRELOAD
+# Environment for D-Bus-activated apps is restored to the user's normal configuration.
+dbus-update-activation-environment --systemd WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP XDG_SESSION_TYPE XDG_SESSION_DESKTOP XDG_CONFIG_HOME QT_QPA_PLATFORM GDK_BACKEND MOZ_ENABLE_WAYLAND MAKOS_SESSION 2>/dev/null || true
+LOGDIR="${XDG_STATE_HOME:-$HOME/.local/state}/makos"
+mkdir -p "$LOGDIR"
+chmod 700 "$LOGDIR"
+[ ! -f "$LOGDIR/shell.log" ] || [ "$(wc -c < "$LOGDIR/shell.log")" -lt 1048576 ] || mv -f "$LOGDIR/shell.log" "$LOGDIR/shell.log.1"
+# Launch authentication agent if the system provides one; it owns all credential entry.
+agent_pid=""
+for agent in /usr/lib/*/libexec/polkit-kde-authentication-agent-1; do
+  [ ! -x "$agent" ] || { "$agent" >/dev/null 2>&1 & agent_pid=$!; break; }
+done
+shell_pid=""
+cleanup() {
+  [ -z "$shell_pid" ] || kill "$shell_pid" 2>/dev/null || true
+  [ -z "$agent_pid" ] || kill "$agent_pid" 2>/dev/null || true
+}
+trap cleanup EXIT
+trap 'exit 0' HUP TERM INT
+crashes=0
+while [ "$crashes" -lt 5 ]; do
+  started=$(date +%s)
+  printf '\nMakOS session start\n' >> "$LOGDIR/shell.log"
+  /usr/bin/makos-shell >> "$LOGDIR/shell.log" 2>&1 &
+  shell_pid=$!
+  wait "$shell_pid"
+  code=$?
+  shell_pid=""
+  [ "$code" -ne 0 ] || exit 0
+  [ $(($(date +%s)-started)) -le 60 ] || crashes=0
+  crashes=$((crashes+1))
+  sleep 1
+done
+exit 1

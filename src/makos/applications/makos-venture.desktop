@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Venture
+Exec=makos-app venture %U
+Icon=makos-browser
+Terminal=false
+OnlyShowIn=MakOS;
+Categories=Utility;
+StartupNotify=true

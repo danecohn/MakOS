@@ -1,0 +1,141 @@
+{
+ "recipe_version": 1,
+ "name": "Coin Dash",
+ "genre": "platformer_2d",
+ "description": "A small side-scrolling platformer: coins, patrolling blobs, spikes and a goal flag.",
+ "theme": {
+  "sky": "#160c2b",
+  "wall": "#5b3a8c",
+  "player": "#ffb02e",
+  "enemy": "#ff3d6e",
+  "item": "#ffe14d"
+ },
+ "entities": {
+  "player": {
+   "role": "player",
+   "shape": "capsule",
+   "size": [
+    22,
+    30
+   ],
+   "components": [
+    {
+     "type": "platformer_controller",
+     "speed": 230,
+     "jump_speed": 470,
+     "max_jumps": 2
+    },
+    {
+     "type": "health",
+     "max_health": 3
+    },
+    {
+     "type": "camera_follow",
+     "zoom": 1.4
+    }
+   ]
+  },
+  "coin": {
+   "role": "item",
+   "shape": "circle",
+   "size": [
+    14,
+    14
+   ],
+   "components": [
+    {
+     "type": "pickup",
+     "kind": "score",
+     "value": 10
+    }
+   ]
+  },
+  "blob": {
+   "role": "enemy",
+   "color": "#ff3d6e",
+   "size": [
+    26,
+    22
+   ],
+   "components": [
+    {
+     "type": "patrol_ai",
+     "speed": 55,
+     "distance": 80
+    },
+    {
+     "type": "health",
+     "max_health": 1,
+     "score_value": 50
+    },
+    {
+     "type": "contact_damage",
+     "stomp": true
+    }
+   ]
+  },
+  "spikes": {
+   "role": "hazard",
+   "color": "#ff5a36",
+   "size": [
+    32,
+    14
+   ]
+  },
+  "flag": {
+   "role": "goal",
+   "color": "#3dffb0",
+   "size": [
+    20,
+    44
+   ]
+  }
+ },
+ "levels": [
+  {
+   "name": "level_1",
+   "tile_size": 32,
+   "rows": [
+    "................................................",
+    "................................................",
+    "................................................",
+    "................................................",
+    "................................................",
+    ".........................ccc....................",
+    "........................#####...................",
+    ".......cc..........cc.................c.........",
+    "......####.....c..####.........c....#####.......",
+    ".P.cc......cc.........e...e.......^^.....e....g.",
+    "##############...#############...###############",
+    "##############...#############...###############"
+   ],
+   "intro": "Reach the green flag. Jump on blobs!",
+   "legend": {
+    "P": "player",
+    "c": "coin",
+    "e": "blob",
+    "^": "spikes",
+    "g": "flag"
+   }
+  }
+ ],
+ "ui": {
+  "title": "COIN DASH",
+  "hud": [
+   "score",
+   "health",
+   "level",
+   "message"
+  ],
+  "win_text": "Level clear!",
+  "lose_text": "Game over"
+ },
+ "rules": {
+  "win": {
+   "type": "reach_goal"
+  },
+  "lose": {
+   "type": "health_zero"
+  }
+ }
+}

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Sprite
+Exec=makos-app sprite %U
+Icon=makos-preview
+Terminal=false
+OnlyShowIn=MakOS;
+Categories=Utility;
+StartupNotify=true

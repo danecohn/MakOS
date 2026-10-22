@@ -1,0 +1,11 @@
+#!/bin/sh
+# Prints the path of a private XKB include directory for the MakOS session (use as XKB_CONFIG_EXTRA_PATH).
+# On laptops with a Copilot key the stock layout turns Shift+Super+F23 into XF86Assistant, which KWin cannot bind.
+# This copy of the system "inet" symbols keeps that combination as F23, so Meta+Shift+F23 can be bound. It is generated
+# from the installed file each session, so it never drifts from the system's xkeyboard-config. Other sessions are untouched.
+src="${MAKOS_XKB_SRC:-/usr/share/X11/xkb}/symbols/inet"
+dest="${1:-${XDG_RUNTIME_DIR:-/tmp}/makos/xkb}"
+[ -r "$src" ] || exit 0
+mkdir -p "$dest/symbols" || exit 0
+sed 's|^\([[:space:]]*key <FK23>[[:space:]]*{\).*$|\1 [ F23 ] };|' "$src" > "$dest/symbols/inet.tmp" && mv "$dest/symbols/inet.tmp" "$dest/symbols/inet"
+echo "$dest"

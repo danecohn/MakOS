@@ -1,0 +1,58 @@
+/* Original MakOS Glass & Metal widgets. GPL-3.0-only. */
+* { font-family: "DejaVu Sans"; font-size: 12px; }
+window { color: #242b34; background: #ededed; }
+window.background-surface, window.launcher-surface { background: transparent; }
+button { min-height: 22px; border-radius: 5px; padding: 3px 12px; color: #242b34;
+ border: 1px solid #92979d; background: linear-gradient(to bottom, #fff 0%, #f7f7f7 45%, #dfdfe1 52%, #f4f4f5 100%);
+ box-shadow: inset 0 1px #fff, 0 1px 1px alpha(#000,.15); }
+button:hover { background: linear-gradient(#fff, #e8f3ff); border-color: #6f879f; }
+button:active, button:checked { background: linear-gradient(#9bb5cf,#d8e8f7); box-shadow: inset 0 1px 3px alpha(#000,.25); }
+button.suggested-action { color: #10263d; border-color: #3873b1;
+ background: linear-gradient(to bottom,#d7efff 0%,#8cc7ff 44%,#418ee6 50%,#83c4ff 100%); }
+button:disabled { opacity: .48; }
+button:focus-visible, entry:focus { outline: 2px solid alpha(#6bb9ff,.65); outline-offset: 1px; }
+entry, textview { color: #202731; background: #fff; border: 1px solid #979fa8; border-radius: 4px;
+ box-shadow: inset 0 1px 2px alpha(#000,.15); padding: 5px 8px; }
+headerbar, .metal-toolbar { background: linear-gradient(#f5f5f5,#d6d7d9); border-bottom: 1px solid #969ba0;
+ box-shadow: inset 0 1px #fff; padding: 7px 12px; min-height: 30px; }
+.title-label { font-weight: bold; text-shadow: 0 1px #fff; }
+.traffic { min-width: 14px; min-height: 14px; padding: 0; border-radius: 99px; border: 1px solid alpha(#000,.35); font-size: 9px; }
+.traffic label { opacity: 0; font-size: 9px; font-weight: bold; }
+.traffic:hover label { opacity: 1; }
+.close-orb { background: radial-gradient(circle at 40% 15%,#fff 0%,#ffb4a5 24%,#e45144 53%,#ff8a73 90%); }
+.minimize-orb { background: radial-gradient(circle at 40% 15%,#fff 0%,#ffe9a0 24%,#dca329 53%,#ffda62 90%); }
+.zoom-orb { background: radial-gradient(circle at 40% 15%,#fff 0%,#b7ef9b 24%,#67b547 53%,#a1df7f 90%); }
+window:backdrop .traffic { background: linear-gradient(#ededed,#bcbec0); }
+.menu-bar { background: linear-gradient(alpha(#fff,.96), alpha(#dce3eb,.93)); border-bottom: 1px solid alpha(#202e41,.45); padding: 0 12px; }
+.menu-bar button { background: transparent; border: none; box-shadow: none; border-radius: 0; padding: 0 10px; min-height: 28px; }
+.menu-bar button:hover, .menu-bar button:checked { background: linear-gradient(#65a6e9,#266bc1); color: #fff; }
+popover contents { background: alpha(#fafcfe,.98); border: 1px solid #9da7b2; border-radius: 7px; box-shadow: 0 8px 20px alpha(#000,.3); padding: 6px; }
+popover button { background: transparent; box-shadow: none; border: none; }
+popover button:hover { background: linear-gradient(#63a7ef,#2d70c8); color: white; }
+.source-list { background: linear-gradient(to right,alpha(#dce7f3,.97),#d5dfe9); border-right: 1px solid #a8b4c1; padding: 12px 7px; }
+.source-list button { border: none; background: transparent; box-shadow: none; padding: 5px 9px; }
+.source-list button:hover, row:selected { color: #fff; background: linear-gradient(#7ca5cf,#507caa); }
+.source-heading { color: #6b7d91; font-size: 10px; font-weight: bold; padding: 10px 7px 5px; }
+.launcher-shelf { background: linear-gradient(to bottom,alpha(#fff,.68),alpha(#9eaec1,.73) 47%,alpha(#d3dbe6,.9) 51%,alpha(#71849d,.8));
+ border: 1px solid alpha(#fff,.7); border-radius: 13px; padding: 8px 12px 3px; box-shadow: 0 5px 12px alpha(#000,.4), inset 0 1px #fff; }
+.launcher-shelf button { border: none; background: transparent; box-shadow: none; padding: 0 4px; }
+.launcher-shelf button:hover { background: alpha(#fff,.19); }
+.running-dot { color: #154d87; font-size: 12px; min-height: 8px; }
+.seek-sheet { background: linear-gradient(#f9fbff,#e5eaf0); border: 1px solid #9daabb; border-radius: 9px; box-shadow: 0 12px 40px alpha(#000,.4); padding: 20px; }
+.hero { font-size: 30px; font-weight: bold; }
+.subtitle { color: #667689; font-size: 12px; }
+.section-title { color: #66778b; font-size: 11px; font-weight: bold; }
+.statusbar { background: linear-gradient(#f7f7f7,#e3e3e3); border-top: 1px solid #bbb; padding: 5px 12px; color: #66717e; font-size: 11px; }
+.file-tile { background: transparent; border: none; box-shadow: none; padding: 12px; }
+.file-tile:hover { background: #d8e8fa; }
+.settings-tile { border: none; background: transparent; box-shadow: none; padding: 12px; }
+.settings-tile:hover { background: alpha(#9cbce0,.25); }
+.sheet { padding: 24px; }
+.pinstripes { background: repeating-linear-gradient(to bottom,#f6f6f6 0px,#f6f6f6 2px,#efefef 2px,#efefef 4px); }
+scrollbar slider { border-radius: 99px; min-width: 9px; min-height: 9px; background: linear-gradient(to right,#b0bdcb,#e2eaf2,#a1b0c0); border: 1px solid #91a0af; }
+separator { background: #b7bec5; min-width: 1px; min-height: 1px; margin: 4px; }
+.overview { background: alpha(#152538,.90); padding: 40px; }
+.overview label { color: #fff; }
+.overview button { min-width: 240px; min-height: 100px; }
+
+.settings-section { padding: 12px 18px; }

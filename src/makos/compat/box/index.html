@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>MakBox</title>
+	<meta name="description" content="MakBox: a desktop chiptune maker built on BeepBox, with an AI composer." />
+	<meta name="theme-color" content="#1d1a38" />
+	<link rel="stylesheet" href="amerika/amerika.css" />
+</head>
+<body>
+	<div id="amerikaApp">
+		<header id="amerikaBar">
+			<div class="am-brand">Amerika<b>Box</b><small>on BeepBox</small></div>
+			<button class="am-btn" id="amNew" title="New blank song">New</button>
+			<button class="am-btn" id="amOpen" title="Open a song (Ctrl+O)">Open…</button>
+			<div class="am-menu"><button class="am-btn" id="amRecent" title="Recent songs">Recent ▾</button><div class="am-drop" id="amRecentDrop"></div></div>
+			<button class="am-btn" id="amSave" title="Save (Ctrl+S)">Save</button>
+			<button class="am-btn" id="amSaveAs" title="Save as… (Ctrl+Shift+S)">Save as…</button>
+			<div class="am-menu"><button class="am-btn" id="amExport" title="Export audio, MIDI or a game bundle">Export ▾</button>
+				<div class="am-drop" id="amExportDrop">
+					<button data-export="wav">WAV audio…</button><button data-export="mp3">MP3 audio…</button><button data-export="midi">MIDI…</button><button data-export="json">BeepBox JSON…</button>
+					<div class="am-sep"></div><button data-export="game">Export for game (loopable WAV/OGG + metadata)…</button>
+				</div></div>
+			<div class="am-spacer"></div>
+			<span class="am-status" id="amStatus"></span>
+			<button class="am-btn" id="amTheme" title="Switch colour theme">Theme</button>
+			<button class="am-btn" id="amToggle" aria-pressed="true" title="Show or hide the Amerika Composer">Composer</button>
+			<button class="am-btn" id="amAbout" title="About MakBox and BeepBox">About</button>
+		</header>
+		<div id="amerikaMain">
+			<div id="beepboxEditorContainer"><noscript>MakBox needs JavaScript.</noscript></div>
+			<aside id="composer" aria-label="Amerika Composer"></aside>
+		</div>
+	</div>
+	<div class="am-banner" id="amBanner"></div>
+	<div class="am-modal" id="amModal"><div class="am-card" id="amCard"></div></div>
+
+	<script src="beepbox_editor.min.js"></script>
+	<script src="amerika/theory.js"></script>
+	<script src="amerika/audio.js"></script>
+	<script src="amerika/songtools.js"></script>
+	<script src="amerika/prompt.js"></script>
+	<script src="amerika/export.js"></script>
+	<script src="amerika/about.js"></script>
+	<script src="amerika/theme.js"></script>
+	<script src="amerika/shell.js"></script>
+	<script src="amerika/composer.js"></script>
+	<script src="amerika/rpc.js"></script>
+	<script src="amerika/app.js"></script>
+</body>
+</html>

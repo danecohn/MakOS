@@ -1,0 +1,15 @@
+Amerika Render
+==============
+
+Amerika Render is powered by Blender (GPL-3.0-or-later). Blender is a trademark of the Blender Foundation;
+Amerika Render is not affiliated with or endorsed by the Blender Foundation.
+
+Amerika Render is NOT a fork of Blender. It is the unmodified Ubuntu "blender" package plus:
+  * the "amerika_render" add-on (an AI modelling assistant; GPL-3.0-or-later),
+  * a launcher (amerika-render) that keeps its own configuration in ~/.config/amerika-render,
+  * an interface theme, splash image and startup file in the Amerika OS style.
+
+Blender source code: https://projects.blender.org/blender/blender  (and the Ubuntu source package "blender").
+Blender's licence text: /usr/share/doc/blender/copyright and /usr/share/common-licenses/GPL-3.
+
+The add-on talks only to the local Amerika Studio bridge on 127.0.0.1. It never contains or stores an API key.

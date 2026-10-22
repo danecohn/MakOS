@@ -1,0 +1,169 @@
+{
+ "recipe_version": 1,
+ "name": "Neon Vault",
+ "genre": "first_person_3d",
+ "description": "First person: WASD to move, mouse to look, Space to jump, F or click to shoot, E to interact.",
+ "theme": {
+  "sky": "#0b0716",
+  "ground": "#150d28",
+  "wall": "#4a2f80",
+  "accent": "#3dffb0"
+ },
+ "entities": {
+  "player": {
+   "role": "player",
+   "shape": "capsule",
+   "size": [
+    0.7,
+    1.7,
+    0.7
+   ],
+   "components": [
+    {
+     "type": "first_person_controller",
+     "speed": 5.5
+    },
+    {
+     "type": "health",
+     "max_health": 4
+    },
+    {
+     "type": "shooter",
+     "mode": "player",
+     "cooldown": 0.35
+    }
+   ]
+  },
+  "orb": {
+   "role": "item",
+   "shape": "sphere",
+   "size": [
+    0.5,
+    0.5,
+    0.5
+   ],
+   "components": [
+    {
+     "type": "pickup",
+     "kind": "score",
+     "value": 5,
+     "counts_for_win": false
+    }
+   ]
+  },
+  "key": {
+   "role": "item",
+   "shape": "box",
+   "size": [
+    0.4,
+    0.4,
+    0.4
+   ],
+   "color": "#ff3d6e",
+   "components": [
+    {
+     "type": "pickup",
+     "kind": "flag",
+     "flag": "red_key",
+     "value": 25,
+     "counts_for_win": false
+    }
+   ]
+  },
+  "guard": {
+   "role": "enemy",
+   "shape": "box",
+   "size": [
+    0.9,
+    1.6,
+    0.9
+   ],
+   "components": [
+    {
+     "type": "patrol_ai",
+     "axis": "x",
+     "speed": 2.0,
+     "distance": 6
+    },
+    {
+     "type": "health",
+     "max_health": 3,
+     "score_value": 100
+    },
+    {
+     "type": "contact_damage",
+     "damage": 1,
+     "interval": 1.0
+    }
+   ]
+  },
+  "vault": {
+   "role": "goal",
+   "shape": "box",
+   "size": [
+    1.4,
+    2.2,
+    0.4
+   ],
+   "color": "#3dffb0",
+   "components": [
+    {
+     "type": "door_trigger",
+     "kind": "goal",
+     "requires_flag": "red_key",
+     "locked_message": "Locked. Find the red key."
+    }
+   ]
+  }
+ },
+ "levels": [
+  {
+   "name": "vault",
+   "tile_size": 2,
+   "wall_height": 3,
+   "rows": [
+    "####################",
+    "#P.....#...........#",
+    "#......#...o.......#",
+    "#..o...#...........#",
+    "#......###.#########",
+    "#..................#",
+    "#..#####..#####....#",
+    "#..#...#..#...#..o.#",
+    "#..#.k.#..#...#....#",
+    "#..#####..#####....#",
+    "#.........e........#",
+    "##########.#####.###",
+    "#........#.#...#.#.#",
+    "#..o.....#.#.g.#.#.#",
+    "####################"
+   ],
+   "intro": "Find the red key.",
+   "legend": {
+    "P": "player",
+    "o": "orb",
+    "k": "key",
+    "e": "guard",
+    "g": "vault"
+   }
+  }
+ ],
+ "ui": {
+  "title": "NEON VAULT",
+  "hud": [
+   "score",
+   "health",
+   "message"
+  ],
+  "win_text": "Vault cracked!",
+  "lose_text": "Caught"
+ },
+ "rules": {
+  "win": {
+   "type": "reach_goal"
+  },
+  "lose": {
+   "type": "health_zero"
+  }
+ }
+}

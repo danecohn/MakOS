@@ -1,0 +1,18 @@
+[org.kde.kdecoration2]
+library=org.kde.kwin.aurorae
+theme=org.makos.glass
+ButtonsOnLeft=XIA
+ButtonsOnRight=
+BorderSize=0
+
+[Desktops]
+Number=4
+Rows=1
+Name_1=Desk 1
+Name_2=Desk 2
+Name_3=Desk 3
+Name_4=Desk 4
+
+[Plugins]
+magiclampEnabled=true
+blurEnabled=true

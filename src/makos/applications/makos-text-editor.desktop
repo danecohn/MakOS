@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Text Editor
+Exec=makos-app text-editor %U
+Icon=makos-text-editor
+Terminal=false
+OnlyShowIn=MakOS;
+Categories=Utility;
+StartupNotify=true
+MimeType=text/plain;

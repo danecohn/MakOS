@@ -1,0 +1,159 @@
+{
+ "recipe_version": 1,
+ "name": "Neon Swarm",
+ "genre": "topdown_2d",
+ "description": "Top-down arena shooter. Hold the shoot key to fire along your movement direction.",
+ "theme": {
+  "sky": "#0d0a1c",
+  "wall": "#3b2a63",
+  "player": "#3dffb0",
+  "enemy": "#ff3d6e"
+ },
+ "entities": {
+  "player": {
+   "role": "player",
+   "shape": "circle",
+   "size": [
+    22,
+    22
+   ],
+   "components": [
+    {
+     "type": "topdown_controller",
+     "speed": 210,
+     "aim_with_mouse": true
+    },
+    {
+     "type": "health",
+     "max_health": 5,
+     "invulnerable_time": 0.6
+    },
+    {
+     "type": "shooter",
+     "mode": "player",
+     "damage": 1,
+     "cooldown": 0.18,
+     "target_group": "enemy"
+    },
+    {
+     "type": "camera_follow",
+     "zoom": 1.0
+    }
+   ]
+  },
+  "swarm": {
+   "role": "enemy",
+   "shape": "circle",
+   "size": [
+    20,
+    20
+   ],
+   "color": "#ff3d6e",
+   "components": [
+    {
+     "type": "chase_ai",
+     "speed": 85,
+     "sight": 700
+    },
+    {
+     "type": "health",
+     "max_health": 2,
+     "score_value": 100
+    },
+    {
+     "type": "contact_damage",
+     "damage": 1
+    }
+   ]
+  },
+  "portal": {
+   "role": "spawner",
+   "shape": "circle",
+   "size": [
+    30,
+    30
+   ],
+   "color": "#b14dff",
+   "components": [
+    {
+     "type": "spawner",
+     "scene": "swarm",
+     "interval": 2.2,
+     "max_alive": 7,
+     "spread": 40
+    }
+   ]
+  },
+  "heart": {
+   "role": "item",
+   "shape": "circle",
+   "size": [
+    14,
+    14
+   ],
+   "color": "#ff3d6e",
+   "components": [
+    {
+     "type": "pickup",
+     "kind": "heal",
+     "value": 1,
+     "counts_for_win": false
+    }
+   ]
+  }
+ },
+ "levels": [
+  {
+   "name": "arena",
+   "tile_size": 32,
+   "rows": [
+    "##############################",
+    "#............................#",
+    "#............................#",
+    "#..h.....................o...#",
+    "#............................#",
+    "#.....##.....................#",
+    "#.....#......................#",
+    "#............................#",
+    "#............................#",
+    "#.............##.............#",
+    "#...P.........##.............#",
+    "#............................#",
+    "#......................#.....#",
+    "#.....................##.....#",
+    "#............................#",
+    "#............................#",
+    "#...o.....................h..#",
+    "#............................#",
+    "#............................#",
+    "##############################"
+   ],
+   "background": "#0d0a1c",
+   "legend": {
+    "P": "player",
+    "o": "portal",
+    "h": "heart"
+   },
+   "intro": "Hold J / X / Left mouse to shoot. Score 800 to win."
+  }
+ ],
+ "ui": {
+  "title": "NEON SWARM",
+  "hud": [
+   "score",
+   "health",
+   "message"
+  ],
+  "win_text": "Swarm cleared!",
+  "lose_text": "Overrun"
+ },
+ "rules": {
+  "win": {
+   "type": "score",
+   "target": 800
+  },
+  "lose": {
+   "type": "health_zero"
+  }
+ }
+}

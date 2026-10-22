@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=System Information
+Exec=makos-app system-info %U
+Icon=makos-system-info
+Terminal=false
+OnlyShowIn=MakOS;
+Categories=Utility;
+StartupNotify=true

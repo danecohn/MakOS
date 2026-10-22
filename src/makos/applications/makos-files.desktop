@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Files
+Exec=makos-app files %U
+Icon=makos-files
+Terminal=false
+OnlyShowIn=MakOS;
+Categories=Utility;
+StartupNotify=true
+MimeType=inode/directory;

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Desks
+Exec=makos-app desktops %U
+Icon=makos-desktops
+Terminal=false
+OnlyShowIn=MakOS;
+Categories=Utility;
+StartupNotify=true

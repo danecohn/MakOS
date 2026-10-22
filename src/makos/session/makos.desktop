@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=MakOS
+Comment=MakOS desktop on KWin Wayland
+Exec=/usr/bin/makos-session
+TryExec=/usr/bin/makos-session
+Type=Application
+DesktopNames=MakOS

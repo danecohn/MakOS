@@ -1,0 +1,727 @@
+{
+ "version": 1,
+ "components": {
+  "camera_follow": {
+   "script": "res://addons/amerika_engine/components/camera_follow.gd",
+   "dims": [
+    "2d",
+    "3d"
+   ],
+   "mover": false,
+   "internal": false,
+   "summary": "Camera that follows the host: a smoothed Camera2D, or a third-person orbit camera (mouse or look_left/look_right keys).",
+   "params": {
+    "zoom": {
+     "type": "number",
+     "default": 1.0,
+     "doc": "2D zoom factor"
+    },
+    "smoothing": {
+     "type": "number",
+     "default": 6.0,
+     "doc": "2D smoothing speed (0 = off)"
+    },
+    "distance": {
+     "type": "number",
+     "default": 7.0,
+     "doc": "3D orbit distance"
+    },
+    "height": {
+     "type": "number",
+     "default": 1.4,
+     "doc": "3D look-at height above the host"
+    },
+    "pitch_degrees": {
+     "type": "number",
+     "default": -22.0,
+     "doc": "3D camera pitch (negative looks down)"
+    },
+    "mouse_sensitivity": {
+     "type": "number",
+     "default": 0.004,
+     "doc": "3D orbit speed per mouse pixel"
+    },
+    "key_orbit_speed": {
+     "type": "number",
+     "default": 2.0,
+     "doc": "3D orbit speed in radians/s for look_left / look_right"
+    },
+    "limit_to_level": {
+     "type": "boolean",
+     "default": true,
+     "doc": "2D: keep the camera inside the level bounds when the level defines them"
+    }
+   }
+  },
+  "chase_ai": {
+   "script": "res://addons/amerika_engine/components/chase_ai.gd",
+   "dims": [
+    "2d",
+    "3d"
+   ],
+   "mover": true,
+   "internal": false,
+   "summary": "Chase the nearest body of a group when it is within sight, otherwise stand still.",
+   "params": {
+    "target_group": {
+     "type": "string",
+     "default": "player",
+     "doc": "Whom to chase"
+    },
+    "speed": {
+     "type": "number",
+     "default": 0.0,
+     "doc": "Speed (0 = automatic: 90 px/s in 2D, 3.5 m/s in 3D)"
+    },
+    "sight": {
+     "type": "number",
+     "default": 0.0,
+     "doc": "Sight range (0 = automatic: 280 px / 14 m)"
+    },
+    "stop_distance": {
+     "type": "number",
+     "default": 0.0,
+     "doc": "Stop this close to the target (0 = automatic: 6 px / 1 m)"
+    },
+    "gravity": {
+     "type": "number",
+     "default": 0.0,
+     "doc": "2D gravity in px/s^2 (top-down enemies keep 0; platformer chasers use ~1300). 3D always 20 m/s^2"
+    }
+   }
+  },
+  "contact_damage": {
+   "script": "res://addons/amerika_engine/components/contact_damage.gd",
+   "dims": [
+    "2d",
+    "3d"
+   ],
+   "mover": false,
+   "internal": false,
+   "summary": "Hurts bodies of the target group while they overlap the host (spikes, enemies). Optional stomp for platformers.",
+   "params": {
+    "damage": {
+     "type": "integer",
+     "default": 1,
+     "doc": "Hit points removed per hit"
+    },
+    "target_group": {
+     "type": "string",
+     "default": "player",
+     "doc": "Group of bodies that get hurt"
+    },
+    "radius": {
+     "type": "number",
+     "default": 0.0,
+     "doc": "Hit radius (0 = automatic: 16 px in 2D, 0.9 m in 3D)"
+    },
+    "interval": {
+     "type": "number",
+     "default": 0.6,
+     "doc": "Seconds between hits on the same overlap"
+    },
+    "stomp": {
+     "type": "boolean",
+     "default": false,
+     "doc": "2D only: landing on top hurts the host instead and bounces the player"
+    },
+    "knockback": {
+     "type": "number",
+     "default": 0.0,
+     "doc": "Push the victim away at this speed"
+    }
+   }
+  },
+  "dialogue": {
+   "script": "res://addons/amerika_engine/components/dialogue.gd",
+   "dims": [
+    "2d",
+    "3d"
+   ],
+   "mover": false,
+   "internal": false,
+   "summary": "Talk to an NPC: lines appear in the HUD when the player walks up (enter) or presses interact.",
+   "params": {
+    "speaker": {
+     "type": "string",
+     "default": "",
+     "doc": "Name shown with the line"
+    },
+    "lines": {
+     "type": "string_array",
+     "default": [],
+     "doc": "What is said, in order"
+    },
+    "trigger": {
+     "type": "string",
+     "default": "interact",
+     "doc": "Walk up, or press the interact key nearby",
+     "enum": [
+      "enter",
+      "interact"
+     ]
+    },
+    "radius": {
+     "type": "number",
+     "default": 0.0,
+     "doc": "Talk radius (0 = automatic: 48 px in 2D, 2.5 m in 3D)"
+    },
+    "line_time": {
+     "type": "number",
+     "default": 3.0,
+     "doc": "Seconds each line stays when trigger=enter"
+    },
+    "loop": {
+     "type": "boolean",
+     "default": true,
+     "doc": "Start over after the last line"
+    }
+   }
+  },
+  "door_trigger": {
+   "script": "res://addons/amerika_engine/components/door_trigger.gd",
+   "dims": [
+    "2d",
+    "3d"
+   ],
+   "mover": false,
+   "internal": false,
+   "summary": "Trigger zone: finish the level (goal), go to another level, or show a message. Can require a flag such as a key.",
+   "params": {
+    "kind": {
+     "type": "string",
+     "default": "goal",
+     "doc": "What entering does",
+     "enum": [
+      "goal",
+      "level",
+      "message"
+     ]
+    },
+    "next_level": {
+     "type": "string",
+     "default": "",
+     "doc": "Level name for kind=level"
+    },
+    "requires_flag": {
+     "type": "string",
+     "default": "",
+     "doc": "Flag the player must hold (a collected key)"
+    },
+    "message": {
+     "type": "string",
+     "default": "",
+     "doc": "Text shown for kind=message (or when the door is locked)"
+    },
+    "locked_message": {
+     "type": "string",
+     "default": "It is locked.",
+     "doc": "Shown when requires_flag is missing"
+    },
+    "target_group": {
+     "type": "string",
+     "default": "player",
+     "doc": "Who triggers it"
+    },
+    "radius": {
+     "type": "number",
+     "default": 0.0,
+     "doc": "Trigger radius (0 = automatic: 20 px in 2D, 1.2 m in 3D)"
+    },
+    "once": {
+     "type": "boolean",
+     "default": false,
+     "doc": "Only fire once"
+    }
+   }
+  },
+  "first_person_controller": {
+   "script": "res://addons/amerika_engine/components/first_person_controller.gd",
+   "dims": [
+    "3d"
+   ],
+   "mover": true,
+   "internal": false,
+   "summary": "First-person movement for a CharacterBody3D: WASD, jump, mouse look (or look_left/right keys), creates its own Camera3D at eye height.",
+   "params": {
+    "speed": {
+     "type": "number",
+     "default": 6.0,
+     "doc": "Move speed in m/s"
+    },
+    "acceleration": {
+     "type": "number",
+     "default": 50.0,
+     "doc": "Acceleration in m/s^2"
+    },
+    "jump_speed": {
+     "type": "number",
+     "default": 6.5,
+     "doc": "Jump velocity"
+    },
+    "gravity": {
+     "type": "number",
+     "default": 20.0,
+     "doc": "Gravity in m/s^2"
+    },
+    "eye_height": {
+     "type": "number",
+     "default": 1.6,
+     "doc": "Camera height above the host origin"
+    },
+    "mouse_sensitivity": {
+     "type": "number",
+     "default": 0.0025,
+     "doc": "Radians per mouse pixel"
+    },
+    "key_look_speed": {
+     "type": "number",
+     "default": 2.0,
+     "doc": "Radians per second for look_left / look_right"
+    },
+    "kill_y": {
+     "type": "number",
+     "default": -30.0,
+     "doc": "Falling below this y counts as death"
+    }
+   }
+  },
+  "health": {
+   "script": "res://addons/amerika_engine/components/health.gd",
+   "dims": [
+    "2d",
+    "3d"
+   ],
+   "mover": false,
+   "internal": false,
+   "summary": "Hit points with brief invulnerability. The player dying loses the game; other entities score and disappear.",
+   "params": {
+    "max_health": {
+     "type": "integer",
+     "default": 3,
+     "doc": "Hit points at start"
+    },
+    "invulnerable_time": {
+     "type": "number",
+     "default": 0.8,
+     "doc": "Seconds of immunity after being hurt"
+    },
+    "score_value": {
+     "type": "integer",
+     "default": 0,
+     "doc": "Score awarded when this entity dies"
+    },
+    "remove_on_death": {
+     "type": "boolean",
+     "default": true,
+     "doc": "Free the host when it dies (the player is never freed)"
+    },
+    "death_sfx": {
+     "type": "string",
+     "default": "hit",
+     "doc": "Sound effect name to play on death"
+    }
+   }
+  },
+  "patrol_ai": {
+   "script": "res://addons/amerika_engine/components/patrol_ai.gd",
+   "dims": [
+    "2d",
+    "3d"
+   ],
+   "mover": true,
+   "internal": false,
+   "summary": "Walk back and forth around the start position; turns at walls and (in platformers) at ledges.",
+   "params": {
+    "axis": {
+     "type": "string",
+     "default": "x",
+     "doc": "Patrol axis (use y for vertical top-down patrols, z for 3D depth)",
+     "enum": [
+      "x",
+      "y",
+      "z"
+     ]
+    },
+    "speed": {
+     "type": "number",
+     "default": 0.0,
+     "doc": "Speed (0 = automatic: 60 px/s in 2D, 2.5 m/s in 3D)"
+    },
+    "distance": {
+     "type": "number",
+     "default": 0.0,
+     "doc": "How far to each side of the start (0 = automatic: 96 px / 4 m)"
+    },
+    "gravity": {
+     "type": "number",
+     "default": 1300.0,
+     "doc": "2D gravity in px/s^2 (set 0 for top-down enemies); 3D uses 20 m/s^2"
+    },
+    "turn_at_ledges": {
+     "type": "boolean",
+     "default": true,
+     "doc": "2D platformers: turn instead of walking off a ledge"
+    },
+    "ledge_probe": {
+     "type": "number",
+     "default": 18.0,
+     "doc": "Distance ahead of the body checked for ground"
+    }
+   }
+  },
+  "pickup": {
+   "script": "res://addons/amerika_engine/components/pickup.gd",
+   "dims": [
+    "2d",
+    "3d"
+   ],
+   "mover": false,
+   "internal": false,
+   "summary": "Collectable: coins/score, healing, keys (flags). Removes the host when the target touches it.",
+   "params": {
+    "kind": {
+     "type": "string",
+     "default": "score",
+     "doc": "What collecting does",
+     "enum": [
+      "score",
+      "heal",
+      "flag",
+      "ammo"
+     ]
+    },
+    "value": {
+     "type": "integer",
+     "default": 1,
+     "doc": "Score or hit points to award"
+    },
+    "flag": {
+     "type": "string",
+     "default": "",
+     "doc": "Flag to set for kind=flag (e.g. \"red_key\")"
+    },
+    "sfx": {
+     "type": "string",
+     "default": "pickup",
+     "doc": "Sound effect name"
+    },
+    "target_group": {
+     "type": "string",
+     "default": "player",
+     "doc": "Who can collect it"
+    },
+    "radius": {
+     "type": "number",
+     "default": 0.0,
+     "doc": "Pickup radius (0 = automatic: 14 px in 2D, 0.8 m in 3D)"
+    },
+    "counts_for_win": {
+     "type": "boolean",
+     "default": true,
+     "doc": "Counts toward the collect_all win rule"
+    }
+   }
+  },
+  "platformer_controller": {
+   "script": "res://addons/amerika_engine/components/platformer_controller.gd",
+   "dims": [
+    "2d"
+   ],
+   "mover": true,
+   "internal": false,
+   "summary": "Side-scrolling movement for a CharacterBody2D: run, jump with coyote time, double jump, gravity, fall-death.",
+   "params": {
+    "speed": {
+     "type": "number",
+     "default": 220.0,
+     "doc": "Run speed in px/s"
+    },
+    "acceleration": {
+     "type": "number",
+     "default": 1800.0,
+     "doc": "Ground acceleration in px/s^2"
+    },
+    "jump_speed": {
+     "type": "number",
+     "default": 460.0,
+     "doc": "Initial upward speed of a jump"
+    },
+    "gravity": {
+     "type": "number",
+     "default": 1300.0,
+     "doc": "Gravity in px/s^2"
+    },
+    "coyote_time": {
+     "type": "number",
+     "default": 0.1,
+     "doc": "Seconds after leaving a ledge you can still jump"
+    },
+    "max_jumps": {
+     "type": "integer",
+     "default": 1,
+     "doc": "2 enables double jump"
+    },
+    "kill_y": {
+     "type": "number",
+     "default": 3000.0,
+     "doc": "Falling below this y counts as death (the level may override it)"
+    }
+   }
+  },
+  "projectile": {
+   "script": "res://addons/amerika_engine/components/projectile.gd",
+   "dims": [
+    "2d",
+    "3d"
+   ],
+   "mover": false,
+   "internal": true,
+   "summary": "Created by the shooter component; flies straight, damages the target group, disappears on walls.",
+   "params": {}
+  },
+  "shooter": {
+   "script": "res://addons/amerika_engine/components/shooter.gd",
+   "dims": [
+    "2d",
+    "3d"
+   ],
+   "mover": false,
+   "internal": false,
+   "summary": "Fires projectiles. mode=player shoots on the shoot action (aim from movement, mouse or camera); mode=turret shoots automatically at the nearest body of aim_group.",
+   "params": {
+    "mode": {
+     "type": "string",
+     "default": "player",
+     "doc": "Who pulls the trigger",
+     "enum": [
+      "player",
+      "turret"
+     ]
+    },
+    "damage": {
+     "type": "integer",
+     "default": 1,
+     "doc": "Damage per projectile"
+    },
+    "projectile_speed": {
+     "type": "number",
+     "default": 0.0,
+     "doc": "Speed (0 = automatic: 520 px/s, 30 m/s)"
+    },
+    "cooldown": {
+     "type": "number",
+     "default": 0.25,
+     "doc": "Seconds between shots"
+    },
+    "lifetime": {
+     "type": "number",
+     "default": 1.6,
+     "doc": "Seconds before a projectile disappears"
+    },
+    "target_group": {
+     "type": "string",
+     "default": "enemy",
+     "doc": "Group the projectile damages (player shots: enemy, enemy shots: player)"
+    },
+    "aim_group": {
+     "type": "string",
+     "default": "player",
+     "doc": "turret mode: whom to aim at"
+    },
+    "max_range": {
+     "type": "number",
+     "default": 0.0,
+     "doc": "turret mode: shoot only within this range (0 = automatic: 360 px / 18 m)"
+    },
+    "color": {
+     "type": "color",
+     "default": "#ffd933",
+     "doc": "Projectile colour"
+    },
+    "sfx": {
+     "type": "string",
+     "default": "shoot",
+     "doc": "Sound effect name"
+    },
+    "muzzle_offset": {
+     "type": "number",
+     "default": 0.0,
+     "doc": "Spawn this far in front of the host (0 = automatic: 18 px / 1 m)"
+    }
+   }
+  },
+  "spawner": {
+   "script": "res://addons/amerika_engine/components/spawner.gd",
+   "dims": [
+    "2d",
+    "3d"
+   ],
+   "mover": false,
+   "internal": false,
+   "summary": "Spawns copies of an entity scene around the host at an interval, up to a maximum alive.",
+   "params": {
+    "scene": {
+     "type": "string",
+     "default": "",
+     "doc": "res:// path of the entity scene (entities/<name>.tscn)"
+    },
+    "interval": {
+     "type": "number",
+     "default": 3.0,
+     "doc": "Seconds between spawns"
+    },
+    "max_alive": {
+     "type": "integer",
+     "default": 5,
+     "doc": "Never exceed this many living spawns"
+    },
+    "spread": {
+     "type": "number",
+     "default": 0.0,
+     "doc": "Random offset radius (0 = automatic: 120 px in 2D, 5 m in 3D)"
+    },
+    "initial": {
+     "type": "integer",
+     "default": 0,
+     "doc": "Spawn this many immediately"
+    },
+    "active_group": {
+     "type": "string",
+     "default": "",
+     "doc": "Only spawn while a body of this group exists (empty = always)"
+    }
+   }
+  },
+  "spin_bob": {
+   "script": "res://addons/amerika_engine/components/spin_bob.gd",
+   "dims": [
+    "2d",
+    "3d"
+   ],
+   "mover": false,
+   "internal": false,
+   "summary": "Decoration: spin around the up axis and/or float up and down (nice for coins and gems).",
+   "params": {
+    "spin_degrees": {
+     "type": "number",
+     "default": 0.0,
+     "doc": "Degrees per second around the vertical axis (3D) or in the plane (2D)"
+    },
+    "bob_height": {
+     "type": "number",
+     "default": 0.0,
+     "doc": "Bob amplitude (0 = none; ~4 px in 2D, ~0.15 m in 3D)"
+    },
+    "bob_speed": {
+     "type": "number",
+     "default": 3.0,
+     "doc": "Bobs per second times 2*pi"
+    }
+   }
+  },
+  "sprite_anim": {
+   "script": "res://addons/amerika_engine/components/sprite_anim.gd",
+   "dims": [
+    "2d"
+   ],
+   "mover": false,
+   "internal": false,
+   "summary": "Frame animation for a sprite sheet (Sprite export): picks idle / run / jump rows from the host's motion.",
+   "params": {
+    "animations": {
+     "type": "object",
+     "default": {},
+     "doc": "Name -> [first_frame, last_frame], e.g. {\"idle\": [0, 1], \"run\": [2, 5], \"jump\": [6, 6]}"
+    },
+    "fps": {
+     "type": "number",
+     "default": 8.0,
+     "doc": "Frames per second"
+    },
+    "sprite_path": {
+     "type": "string",
+     "default": "Visual",
+     "doc": "Child Sprite2D of the host to animate"
+    },
+    "face_motion": {
+     "type": "boolean",
+     "default": true,
+     "doc": "Flip the sprite to the direction of travel"
+    }
+   }
+  },
+  "third_person_controller": {
+   "script": "res://addons/amerika_engine/components/third_person_controller.gd",
+   "dims": [
+    "3d"
+   ],
+   "mover": true,
+   "internal": false,
+   "summary": "Camera-relative third-person movement for a CharacterBody3D with jump and gravity; pairs with camera_follow (orbit mode).",
+   "params": {
+    "speed": {
+     "type": "number",
+     "default": 6.0,
+     "doc": "Move speed in m/s"
+    },
+    "acceleration": {
+     "type": "number",
+     "default": 40.0,
+     "doc": "Acceleration in m/s^2"
+    },
+    "jump_speed": {
+     "type": "number",
+     "default": 7.0,
+     "doc": "Jump velocity"
+    },
+    "gravity": {
+     "type": "number",
+     "default": 20.0,
+     "doc": "Gravity in m/s^2"
+    },
+    "turn_speed": {
+     "type": "number",
+     "default": 12.0,
+     "doc": "How fast the body turns to face movement"
+    },
+    "kill_y": {
+     "type": "number",
+     "default": -30.0,
+     "doc": "Falling below this y counts as death"
+    }
+   }
+  },
+  "topdown_controller": {
+   "script": "res://addons/amerika_engine/components/topdown_controller.gd",
+   "dims": [
+    "2d"
+   ],
+   "mover": true,
+   "internal": false,
+   "summary": "Eight-way top-down movement for a CharacterBody2D; the facing vector follows movement (or the mouse when aim_with_mouse is set).",
+   "params": {
+    "speed": {
+     "type": "number",
+     "default": 200.0,
+     "doc": "Move speed in px/s"
+    },
+    "acceleration": {
+     "type": "number",
+     "default": 2200.0,
+     "doc": "Acceleration in px/s^2"
+    },
+    "aim_with_mouse": {
+     "type": "boolean",
+     "default": false,
+     "doc": "Face the mouse cursor instead of the move direction"
+    },
+    "rotate_host": {
+     "type": "boolean",
+     "default": false,
+     "doc": "Rotate the host to face the aim direction"
+    }
+   }
+  }
+ }
+}

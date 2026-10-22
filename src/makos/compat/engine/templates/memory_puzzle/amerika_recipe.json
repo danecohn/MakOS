@@ -1,0 +1,33 @@
+{
+ "recipe_version": 1,
+ "name": "Memory Grid",
+ "genre": "puzzle",
+ "theme": {
+  "panel": "#0e0810",
+  "accent": "#ff3d6e",
+  "text": "#fff0cf"
+ },
+ "puzzle": {
+  "columns": 4,
+  "pairs": 8,
+  "symbols": [
+   "A",
+   "B",
+   "C",
+   "D",
+   "E",
+   "F",
+   "G",
+   "H"
+  ],
+  "flip_back": 0.7,
+  "time_limit": 0
+ },
+ "ui": {
+  "title": "MEMORY GRID",
+  "hud": [
+   "score"
+  ],
+  "win_text": "All pairs found!"
+ }
+}

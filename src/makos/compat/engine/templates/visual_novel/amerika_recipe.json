@@ -1,0 +1,89 @@
+{
+ "recipe_version": 1,
+ "name": "Signal Lost",
+ "genre": "visual_novel",
+ "theme": {
+  "panel": "#0b0716",
+  "accent": "#ff3d6e",
+  "text": "#fff0cf"
+ },
+ "story": {
+  "start": "intro",
+  "characters": {
+   "Mara": {
+    "color": "#ff3d6e"
+   },
+   "Radio": {
+    "color": "#3dffb0"
+   }
+  },
+  "nodes": {
+   "intro": {
+    "speaker": "",
+    "text": "The station has been silent for three days. You are alone on the night shift.",
+    "bg": "#0b0716",
+    "next": "radio"
+   },
+   "radio": {
+    "speaker": "Radio",
+    "text": "...kzzt... anyone... receiving... the old frequency...",
+    "bg": "#10182b",
+    "next": "mara"
+   },
+   "mara": {
+    "speaker": "Mara",
+    "text": "You hear that too, right? The dead channel is talking.",
+    "next": "choice"
+   },
+   "choice": {
+    "speaker": "Mara",
+    "text": "What do we do?",
+    "choices": [
+     {
+      "text": "Answer the signal",
+      "goto": "answer",
+      "set_flag": "answered"
+     },
+     {
+      "text": "Pull the plug",
+      "goto": "plug"
+     },
+     {
+      "text": "Wake the captain",
+      "goto": "captain"
+     }
+    ]
+   },
+   "answer": {
+    "speaker": "Radio",
+    "text": "Thank you. We have been waiting a very long time.",
+    "bg": "#1f1030",
+    "next": "good"
+   },
+   "plug": {
+    "speaker": "Mara",
+    "text": "Silence again. Somehow that is worse.",
+    "bg": "#05030a",
+    "end": true,
+    "end_text": "Ending: Static"
+   },
+   "captain": {
+    "speaker": "",
+    "text": "The captain arrives, listens, and slowly takes off her headset.",
+    "next": "answer"
+   },
+   "good": {
+    "speaker": "Mara",
+    "text": "They are coming home. All of them.",
+    "bg": "#102a2a",
+    "end": true,
+    "end_text": "Ending: Homecoming"
+   }
+  }
+ },
+ "ui": {
+  "title": "SIGNAL LOST",
+  "hud": [],
+  "win_text": "The End"
+ }
+}

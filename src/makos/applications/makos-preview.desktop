@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Preview
+Exec=makos-app preview %U
+Icon=makos-preview
+Terminal=false
+OnlyShowIn=MakOS;
+Categories=Utility;
+StartupNotify=true

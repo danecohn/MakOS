@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Render
+Exec=makos-app render %U
+Icon=makos-photos
+Terminal=false
+OnlyShowIn=MakOS;
+Categories=Utility;
+StartupNotify=true

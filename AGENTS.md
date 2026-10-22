@@ -1,0 +1,26 @@
+# MakOS development rules
+
+MakOS is an original Linux desktop on KWin Wayland, ARM64 first. Work in `src/makos`.
+Keep the existing Plasma and Amerika sessions until MakOS passes owner acceptance.
+The owner authorized this project's lead agent to push and publish; mark previews honestly.
+Do not claim completion, physical 60 fps, a working login, or hardware acceptance from a rig run.
+
+Never copy proprietary operating-system artwork, fonts, sounds, cursors or logos. Keep
+asset provenance in `docs/makos/ASSETS.md`. Preserve upstream credits and licences.
+Visible app names: Venture, Paper, Digits, MakBox, Studio, Render, Engine, Sprite.
+Keep ChatGPT and Claude available. Amerika Agent/OpenClaw was explicitly removed.
+
+Never read, print or modify the real `.claude`, `.codex`, or `.openclaw` configuration.
+Never ask for or log credentials. Let system authentication agents own privileged prompts.
+Never commit signing keys or tokens. A local signing identity is used through GPG only.
+
+After each shell or theme edit, run `sh tests/rig/makos_rig.sh`: it uses a private D-Bus,
+KWin, runtime/config/home and screenshot authorization. Check logs and actual screenshots.
+`python3 -m unittest discover -s tests -q` covers pure logic and package boundaries.
+KWin ScreenShot2 v5 hides the caller by default: shell screenshots must explicitly include it.
+
+Build only MakOS packages with `python3 build.py --no-repo`. Generated materials, icons,
+cursors and sounds are derivatives; the build regenerates them. To compile cursors set
+`MAKOS_XCURSORGEN` or provide the distro's xcursorgen (x11-apps) build tool.
+No login/boot/PAM/default-session mutations in package installation. Risky optional theme
+switches require their own tested snapshot/revert/recovery implementation before exposure.

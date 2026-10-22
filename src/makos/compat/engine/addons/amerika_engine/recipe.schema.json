@@ -1,0 +1,723 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "https://amerika.social/schemas/amerika-engine-recipe-1.json",
+ "title": "Engine game recipe",
+ "description": "Describes a whole game. The recipe assembler turns it into scenes, scripts, input map, autoloads and project settings. Stored as res://amerika_recipe.json.",
+ "type": "object",
+ "required": [
+  "recipe_version",
+  "name",
+  "genre"
+ ],
+ "additionalProperties": false,
+ "properties": {
+  "$schema": {
+   "type": "string"
+  },
+  "recipe_version": {
+   "const": 1,
+   "description": "Schema version"
+  },
+  "name": {
+   "type": "string",
+   "minLength": 1,
+   "maxLength": 80,
+   "description": "Game title (also the project name)"
+  },
+  "description": {
+   "type": "string",
+   "maxLength": 2000
+  },
+  "genre": {
+   "enum": [
+    "platformer_2d",
+    "topdown_2d",
+    "third_person_3d",
+    "first_person_3d",
+    "puzzle",
+    "visual_novel"
+   ],
+   "description": "Template family. puzzle = memory-match card board. racing_lite is on the roadmap and not assembled yet."
+  },
+  "window": {
+   "type": "object",
+   "additionalProperties": false,
+   "properties": {
+    "width": {
+     "type": "integer",
+     "minimum": 160,
+     "maximum": 7680
+    },
+    "height": {
+     "type": "integer",
+     "minimum": 120,
+     "maximum": 4320
+    },
+    "fullscreen": {
+     "type": "boolean"
+    },
+    "stretch": {
+     "enum": [
+      "canvas_items",
+      "viewport",
+      "disabled"
+     ]
+    }
+   }
+  },
+  "theme": {
+   "type": "object",
+   "additionalProperties": false,
+   "description": "Palette used by generated placeholder art and UI",
+   "properties": {
+    "accent": {
+     "type": "string",
+     "pattern": "^#([0-9a-fA-F]{6}|[0-9a-fA-F]{8})$",
+     "description": "#rrggbb or #rrggbbaa"
+    },
+    "text": {
+     "type": "string",
+     "pattern": "^#([0-9a-fA-F]{6}|[0-9a-fA-F]{8})$",
+     "description": "#rrggbb or #rrggbbaa"
+    },
+    "panel": {
+     "type": "string",
+     "pattern": "^#([0-9a-fA-F]{6}|[0-9a-fA-F]{8})$",
+     "description": "#rrggbb or #rrggbbaa"
+    },
+    "sky": {
+     "type": "string",
+     "pattern": "^#([0-9a-fA-F]{6}|[0-9a-fA-F]{8})$",
+     "description": "#rrggbb or #rrggbbaa"
+    },
+    "ground": {
+     "type": "string",
+     "pattern": "^#([0-9a-fA-F]{6}|[0-9a-fA-F]{8})$",
+     "description": "#rrggbb or #rrggbbaa"
+    },
+    "wall": {
+     "type": "string",
+     "pattern": "^#([0-9a-fA-F]{6}|[0-9a-fA-F]{8})$",
+     "description": "#rrggbb or #rrggbbaa"
+    },
+    "player": {
+     "type": "string",
+     "pattern": "^#([0-9a-fA-F]{6}|[0-9a-fA-F]{8})$",
+     "description": "#rrggbb or #rrggbbaa"
+    },
+    "enemy": {
+     "type": "string",
+     "pattern": "^#([0-9a-fA-F]{6}|[0-9a-fA-F]{8})$",
+     "description": "#rrggbb or #rrggbbaa"
+    },
+    "item": {
+     "type": "string",
+     "pattern": "^#([0-9a-fA-F]{6}|[0-9a-fA-F]{8})$",
+     "description": "#rrggbb or #rrggbbaa"
+    }
+   }
+  },
+  "input": {
+   "type": "object",
+   "description": "Action name -> key names (e.g. \"A\", \"Left\", \"Space\", \"Mouse:Left\"). Merged over the genre defaults; an empty list removes an action.",
+   "additionalProperties": {
+    "type": "array",
+    "items": {
+     "type": "string",
+     "minLength": 1
+    },
+    "maxItems": 8
+   },
+   "propertyNames": {
+    "pattern": "^[a-z][a-z0-9_]{0,31}$"
+   }
+  },
+  "entities": {
+   "type": "object",
+   "description": "Entity key -> definition. Keys are identifiers used by levels (legend/objects).",
+   "propertyNames": {
+    "pattern": "^[a-z][a-z0-9_]{0,31}$"
+   },
+   "additionalProperties": {
+    "$ref": "#/$defs/entity"
+   }
+  },
+  "levels": {
+   "type": "array",
+   "minItems": 1,
+   "maxItems": 64,
+   "items": {
+    "$ref": "#/$defs/level"
+   }
+  },
+  "audio": {
+   "type": "object",
+   "additionalProperties": false,
+   "properties": {
+    "music": {
+     "type": "object",
+     "additionalProperties": {
+      "type": "string",
+      "pattern": "^res://[^\\\\]*$",
+      "description": "res:// path inside the project"
+     },
+     "description": "Track key -> res:// path (MakBox export, .ogg/.wav/.mp3)"
+    },
+    "sfx": {
+     "type": "object",
+     "additionalProperties": {
+      "type": "string",
+      "pattern": "^res://[^\\\\]*$",
+      "description": "res:// path inside the project"
+     },
+     "description": "Effect name (jump, pickup, hurt, hit, shoot, win, stomp, ...) -> res:// path"
+    }
+   }
+  },
+  "ui": {
+   "type": "object",
+   "additionalProperties": false,
+   "properties": {
+    "title": {
+     "type": "string",
+     "maxLength": 120
+    },
+    "hud": {
+     "type": "array",
+     "uniqueItems": true,
+     "items": {
+      "enum": [
+       "score",
+       "health",
+       "level",
+       "message"
+      ]
+     }
+    },
+    "win_text": {
+     "type": "string",
+     "maxLength": 200
+    },
+    "lose_text": {
+     "type": "string",
+     "maxLength": 200
+    }
+   }
+  },
+  "rules": {
+   "type": "object",
+   "additionalProperties": false,
+   "properties": {
+    "win": {
+     "$ref": "#/$defs/win_rule"
+    },
+    "lose": {
+     "$ref": "#/$defs/lose_rule"
+    }
+   }
+  },
+  "story": {
+   "$ref": "#/$defs/story"
+  },
+  "puzzle": {
+   "type": "object",
+   "additionalProperties": false,
+   "description": "Memory-match settings (genre puzzle)",
+   "properties": {
+    "columns": {
+     "type": "integer",
+     "minimum": 2,
+     "maximum": 10
+    },
+    "pairs": {
+     "type": "integer",
+     "minimum": 2,
+     "maximum": 32
+    },
+    "symbols": {
+     "type": "array",
+     "items": {
+      "type": "string",
+      "maxLength": 4
+     }
+    },
+    "flip_back": {
+     "type": "number"
+    },
+    "time_limit": {
+     "type": "number",
+     "minimum": 0
+    }
+   }
+  },
+  "autoloads": {
+   "type": "object",
+   "description": "Extra autoload singletons: Name -> res:// script or scene",
+   "propertyNames": {
+    "pattern": "^[A-Z][A-Za-z0-9_]{0,31}$"
+   },
+   "additionalProperties": {
+    "type": "string",
+    "pattern": "^res://[^\\\\]*$",
+    "description": "res:// path inside the project"
+   }
+  },
+  "export_presets": {
+   "type": "array",
+   "maxItems": 8,
+   "items": {
+    "type": "object",
+    "required": [
+     "platform"
+    ],
+    "additionalProperties": false,
+    "properties": {
+     "name": {
+      "type": "string"
+     },
+     "platform": {
+      "enum": [
+       "linux",
+       "windows",
+       "macos",
+       "web"
+      ]
+     },
+     "path": {
+      "type": "string",
+      "description": "Output path relative to the project, e.g. build/game.x86_64"
+     },
+     "arch": {
+      "enum": [
+       "x86_64",
+       "arm64"
+      ]
+     }
+    }
+   }
+  }
+ },
+ "$defs": {
+  "color": {
+   "type": "string",
+   "pattern": "^#([0-9a-fA-F]{6}|[0-9a-fA-F]{8})$",
+   "description": "#rrggbb or #rrggbbaa"
+  },
+  "vec": {
+   "type": "array",
+   "items": {
+    "type": "number"
+   },
+   "minItems": 2,
+   "maxItems": 3
+  },
+  "component": {
+   "type": "object",
+   "required": [
+    "type"
+   ],
+   "properties": {
+    "type": {
+     "enum": [
+      "camera_follow",
+      "chase_ai",
+      "contact_damage",
+      "dialogue",
+      "door_trigger",
+      "first_person_controller",
+      "health",
+      "patrol_ai",
+      "pickup",
+      "platformer_controller",
+      "shooter",
+      "spawner",
+      "spin_bob",
+      "sprite_anim",
+      "third_person_controller",
+      "topdown_controller"
+     ],
+     "description": "Behaviour component; its parameters are listed in docs/studio/engine.md and components.json"
+    }
+   },
+   "additionalProperties": true
+  },
+  "entity": {
+   "type": "object",
+   "required": [
+    "role"
+   ],
+   "additionalProperties": false,
+   "properties": {
+    "role": {
+     "enum": [
+      "player",
+      "enemy",
+      "npc",
+      "item",
+      "hazard",
+      "goal",
+      "block",
+      "prop",
+      "spawner"
+     ]
+    },
+    "shape": {
+     "enum": [
+      "box",
+      "circle",
+      "capsule",
+      "sphere"
+     ],
+     "description": "Placeholder / collision shape (circle = 2D, sphere = 3D)"
+    },
+    "size": {
+     "type": "array",
+     "items": {
+      "type": "number"
+     },
+     "minItems": 2,
+     "maxItems": 3,
+     "description": "Width,height[,depth] in px (2D) or metres (3D)"
+    },
+    "color": {
+     "type": "string",
+     "pattern": "^#([0-9a-fA-F]{6}|[0-9a-fA-F]{8})$",
+     "description": "#rrggbb or #rrggbbaa"
+    },
+    "sprite": {
+     "type": "object",
+     "additionalProperties": false,
+     "description": "2D sprite sheet (Sprite export)",
+     "properties": {
+      "texture": {
+       "type": "string",
+       "pattern": "^res://[^\\\\]*$",
+       "description": "res:// path inside the project"
+      },
+      "hframes": {
+       "type": "integer",
+       "minimum": 1
+      },
+      "vframes": {
+       "type": "integer",
+       "minimum": 1
+      },
+      "frame": {
+       "type": "integer",
+       "minimum": 0
+      },
+      "scale": {
+       "type": "number",
+       "exclusiveMinimum": 0
+      }
+     },
+     "required": [
+      "texture"
+     ]
+    },
+    "model": {
+     "type": "string",
+     "pattern": "^res://[^\\\\]*$",
+     "description": "3D model (.glb/.gltf from Render) instanced as the visual"
+    },
+    "model_scale": {
+     "type": "number",
+     "exclusiveMinimum": 0
+    },
+    "model_offset": {
+     "type": "array",
+     "items": {
+      "type": "number"
+     },
+     "minItems": 2,
+     "maxItems": 3
+    },
+    "model_rotation_y": {
+     "type": "number"
+    },
+    "components": {
+     "type": "array",
+     "maxItems": 16,
+     "items": {
+      "$ref": "#/$defs/component"
+     }
+    },
+    "groups": {
+     "type": "array",
+     "items": {
+      "type": "string",
+      "minLength": 1
+     }
+    },
+    "emissive": {
+     "type": "boolean",
+     "description": "3D placeholder glows in its colour"
+    }
+   }
+  },
+  "level": {
+   "type": "object",
+   "required": [
+    "name"
+   ],
+   "additionalProperties": false,
+   "properties": {
+    "name": {
+     "type": "string",
+     "pattern": "^[a-z][a-z0-9_]{0,31}$"
+    },
+    "tile_size": {
+     "type": "number",
+     "exclusiveMinimum": 0
+    },
+    "rows": {
+     "type": "array",
+     "minItems": 1,
+     "maxItems": 200,
+     "items": {
+      "type": "string",
+      "maxLength": 400
+     },
+     "description": "Grid layout, one string per row; characters map through legend ('#' is a solid block, '.' and space are empty)"
+    },
+    "legend": {
+     "type": "object",
+     "propertyNames": {
+      "minLength": 1,
+      "maxLength": 1
+     },
+     "additionalProperties": {
+      "type": "string"
+     },
+     "description": "Character -> entity key"
+    },
+    "objects": {
+     "type": "array",
+     "maxItems": 2000,
+     "items": {
+      "type": "object",
+      "required": [
+       "entity"
+      ],
+      "additionalProperties": false,
+      "properties": {
+       "entity": {
+        "type": "string"
+       },
+       "pos": {
+        "type": "array",
+        "items": {
+         "type": "number"
+        },
+        "minItems": 2,
+        "maxItems": 3
+       },
+       "size": {
+        "type": "array",
+        "items": {
+         "type": "number"
+        },
+        "minItems": 2,
+        "maxItems": 3
+       },
+       "rotation": {
+        "type": "number"
+       },
+       "count": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 200
+       },
+       "step": {
+        "type": "array",
+        "items": {
+         "type": "number"
+        },
+        "minItems": 2,
+        "maxItems": 3
+       }
+      }
+     }
+    },
+    "background": {
+     "type": "string",
+     "pattern": "^#([0-9a-fA-F]{6}|[0-9a-fA-F]{8})$",
+     "description": "#rrggbb or #rrggbbaa"
+    },
+    "sky": {
+     "type": "string",
+     "pattern": "^#([0-9a-fA-F]{6}|[0-9a-fA-F]{8})$",
+     "description": "#rrggbb or #rrggbbaa"
+    },
+    "music": {
+     "type": "string",
+     "description": "Key in audio.music"
+    },
+    "kill_y": {
+     "type": "number"
+    },
+    "intro": {
+     "type": "string",
+     "maxLength": 200
+    },
+    "floor": {
+     "type": "boolean",
+     "description": "3D: add a ground slab under the grid"
+    },
+    "wall_height": {
+     "type": "number",
+     "exclusiveMinimum": 0
+    },
+    "light": {
+     "type": "number",
+     "minimum": 0
+    }
+   }
+  },
+  "win_rule": {
+   "type": "object",
+   "required": [
+    "type"
+   ],
+   "additionalProperties": false,
+   "properties": {
+    "type": {
+     "enum": [
+      "reach_goal",
+      "collect_all",
+      "kill_all",
+      "score",
+      "survive",
+      "none"
+     ]
+    },
+    "target": {
+     "type": "integer",
+     "minimum": 1
+    },
+    "seconds": {
+     "type": "number",
+     "exclusiveMinimum": 0
+    }
+   }
+  },
+  "lose_rule": {
+   "type": "object",
+   "required": [
+    "type"
+   ],
+   "additionalProperties": false,
+   "properties": {
+    "type": {
+     "enum": [
+      "health_zero",
+      "timer",
+      "none"
+     ]
+    },
+    "seconds": {
+     "type": "number",
+     "exclusiveMinimum": 0
+    }
+   }
+  },
+  "story": {
+   "type": "object",
+   "required": [
+    "start",
+    "nodes"
+   ],
+   "additionalProperties": false,
+   "properties": {
+    "start": {
+     "type": "string"
+    },
+    "characters": {
+     "type": "object",
+     "additionalProperties": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+       "color": {
+        "type": "string",
+        "pattern": "^#([0-9a-fA-F]{6}|[0-9a-fA-F]{8})$",
+        "description": "#rrggbb or #rrggbbaa"
+       },
+       "texture": {
+        "type": "string",
+        "pattern": "^res://[^\\\\]*$",
+        "description": "res:// path inside the project"
+       }
+      }
+     }
+    },
+    "nodes": {
+     "type": "object",
+     "minProperties": 1,
+     "additionalProperties": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+       "speaker": {
+        "type": "string"
+       },
+       "text": {
+        "type": "string",
+        "maxLength": 1200
+       },
+       "bg": {
+        "type": "string"
+       },
+       "portrait": {
+        "type": "string",
+        "pattern": "^res://[^\\\\]*$",
+        "description": "res:// path inside the project"
+       },
+       "next": {
+        "type": "string"
+       },
+       "end": {
+        "type": "boolean"
+       },
+       "end_text": {
+        "type": "string"
+       },
+       "set_flag": {
+        "type": "string"
+       },
+       "sfx": {
+        "type": "string"
+       },
+       "choices": {
+        "type": "array",
+        "maxItems": 6,
+        "items": {
+         "type": "object",
+         "required": [
+          "text",
+          "goto"
+         ],
+         "additionalProperties": false,
+         "properties": {
+          "text": {
+           "type": "string"
+          },
+          "goto": {
+           "type": "string"
+          },
+          "set_flag": {
+           "type": "string"
+          },
+          "if_flag": {
+           "type": "string"
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

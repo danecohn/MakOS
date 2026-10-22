@@ -1,0 +1,10 @@
+#!/bin/sh
+# Preload only this process. The Python shell immediately clears it for children.
+lib=${MAKOS_LAYERSHELL_LIB:-}
+if [ -z "$lib" ]; then
+  for c in /usr/lib/*/libgtk4-layer-shell.so.0; do [ -e "$c" ] && lib=$c && break; done
+fi
+[ -n "$lib" ] && export LD_PRELOAD="$lib"
+host=${MAKOS_SHELL_HOST:-/usr/libexec/makos/makos-shell-host}
+if [ -x "$host" ]; then exec "$host" "$@"; fi
+exec python3 -m makos.shell.main "$@"

@@ -1,0 +1,140 @@
+{
+ "recipe_version": 1,
+ "name": "Orb Arena",
+ "genre": "third_person_3d",
+ "description": "A third-person arena. WASD to move, Q/E or mouse to orbit the camera, Space to jump, F or left mouse to shoot.",
+ "theme": {
+  "sky": "#120a24",
+  "ground": "#1a1030",
+  "wall": "#4a2f80",
+  "accent": "#ff3d6e",
+  "player": "#3dffb0",
+  "enemy": "#ff3d6e",
+  "item": "#ffe14d"
+ },
+ "entities": {
+  "player": {
+   "role": "player",
+   "shape": "capsule",
+   "size": [
+    0.8,
+    1.8,
+    0.8
+   ],
+   "components": [
+    {
+     "type": "third_person_controller",
+     "speed": 6.5
+    },
+    {
+     "type": "health",
+     "max_health": 5
+    },
+    {
+     "type": "shooter",
+     "mode": "player",
+     "cooldown": 0.3
+    },
+    {
+     "type": "camera_follow",
+     "distance": 8
+    }
+   ]
+  },
+  "orb": {
+   "role": "item",
+   "shape": "sphere",
+   "size": [
+    0.6,
+    0.6,
+    0.6
+   ],
+   "components": [
+    {
+     "type": "pickup",
+     "kind": "score",
+     "value": 10
+    }
+   ]
+  },
+  "chaser": {
+   "role": "enemy",
+   "shape": "box",
+   "size": [
+    0.9,
+    1.1,
+    0.9
+   ],
+   "components": [
+    {
+     "type": "chase_ai",
+     "speed": 3.0,
+     "sight": 14
+    },
+    {
+     "type": "health",
+     "max_health": 2,
+     "score_value": 50
+    },
+    {
+     "type": "contact_damage",
+     "damage": 1,
+     "interval": 1.0
+    }
+   ]
+  }
+ },
+ "levels": [
+  {
+   "name": "arena",
+   "tile_size": 2,
+   "wall_height": 3,
+   "rows": [
+    "####################",
+    "#..................#",
+    "#..................#",
+    "#..o......e.....o..#",
+    "#........o.........#",
+    "#..................#",
+    "#.....#......#.....#",
+    "#..................#",
+    "#..o............o..#",
+    "#........##........#",
+    "#........##.....e..#",
+    "#..o............o..#",
+    "#..................#",
+    "#.....#......#.....#",
+    "#..................#",
+    "#........o.........#",
+    "#..P......e.....o..#",
+    "#..................#",
+    "#..................#",
+    "####################"
+   ],
+   "intro": "Collect all the orbs.",
+   "legend": {
+    "P": "player",
+    "o": "orb",
+    "e": "chaser"
+   }
+  }
+ ],
+ "ui": {
+  "title": "ORB ARENA",
+  "hud": [
+   "score",
+   "health",
+   "message"
+  ],
+  "win_text": "All orbs collected!",
+  "lose_text": "Knocked out"
+ },
+ "rules": {
+  "win": {
+   "type": "collect_all"
+  },
+  "lose": {
+   "type": "health_zero"
+  }
+ }
+}

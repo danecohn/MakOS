@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Paper
+Exec=makos-app paper %U
+Icon=makos-file-document
+Terminal=false
+OnlyShowIn=MakOS;
+Categories=Utility;
+StartupNotify=true

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Slides
+Exec=makos-app slides %U
+Icon=makos-file-presentation
+Terminal=false
+OnlyShowIn=MakOS;
+Categories=Utility;
+StartupNotify=true

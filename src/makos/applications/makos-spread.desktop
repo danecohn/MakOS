@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Spread
+Exec=makos-app spread %U
+Icon=makos-spread
+Terminal=false
+OnlyShowIn=MakOS;
+Categories=Utility;
+StartupNotify=true

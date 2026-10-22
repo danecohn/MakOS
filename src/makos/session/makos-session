@@ -1,0 +1,15 @@
+#!/bin/sh
+set -eu
+export XDG_CURRENT_DESKTOP=MakOS XDG_SESSION_DESKTOP=MakOS XDG_SESSION_TYPE=wayland
+export MAKOS_SESSION=1 QT_QPA_PLATFORM=wayland GDK_BACKEND=wayland MOZ_ENABLE_WAYLAND=1
+export _JAVA_AWT_WM_NONREPARENTING=1
+# KWin alone sees the private configuration. Apps regain the user's original XDG_CONFIG_HOME below.
+export MAKOS_USER_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
+export XDG_CONFIG_HOME="$MAKOS_USER_CONFIG_HOME/makos/compositor"
+mkdir -p "$XDG_CONFIG_HOME"
+if [ ! -f "$XDG_CONFIG_HOME/kwinrc" ]; then
+  cp /usr/share/makos/session/kwinrc "$XDG_CONFIG_HOME/kwinrc"
+fi
+xkb=$(/usr/libexec/makos/makos-xkb-override)
+[ -z "$xkb" ] || export XKB_CONFIG_EXTRA_PATH="$xkb"
+exec /usr/bin/kwin_wayland --xwayland --exit-with-session=/usr/libexec/makos/session-start
