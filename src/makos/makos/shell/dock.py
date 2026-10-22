@@ -69,6 +69,9 @@ def _stops(*pairs):
     return out
 
 
+LEAVE_GRACE_MS = 220
+
+
 class IconCache:
     """Textures for theme icons, rendered once at 256 px (SVG icons through gdk-pixbuf)."""
 
@@ -770,6 +773,9 @@ class Dock:
         if self.pointer is None:
             self.p_s = u
         self.pointer = (u, v)
+        if getattr(self, '_leave_id', 0):  # a leave followed by an enter within the grace period is a compositor refocus, not a real exit
+            GLib.source_remove(self._leave_id)
+            self._leave_id = 0
         was = self.inside
         self.inside = True
         if not was:
@@ -779,10 +785,19 @@ class Dock:
     def _on_leave(self):
         if self.drag and self.drag.get('active'):
             return  # the drag grab keeps delivering; leave events are not a cancel
+        # Resizing the input region makes the compositor send leave+enter in quick succession. Acting on that leave collapsed the
+        # bar, which then re-expanded, and the bar flickered or vanished while hovered. Wait briefly before treating a leave as real.
+        if getattr(self, '_leave_id', 0):
+            return
+        self._leave_id = GLib.timeout_add(LEAVE_GRACE_MS, self._leave_commit)
+
+    def _leave_commit(self):
+        self._leave_id = 0
         self.pointer = None
         self.inside = False
         self._update_region(force=True)
         self._request_frames()
+        return False
 
     def _on_press(self, gesture, x, y):
         self.press = (self._index_at(x, y), x, y)
