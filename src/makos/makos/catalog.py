@@ -16,7 +16,7 @@ APPS = [
     App('files', 'Files', 'files', internal=True, categories='System;FileManager;', mime='inode/directory;', keywords='folders;documents;'),
     App('chatgpt', 'ChatGPT', 'chatgpt', ('chatgpt',), categories='Network;Utility;', keywords='assistant;ai;chat;'),
     App('claude', 'Claude', 'claude', ('claude-desktop',), categories='Network;Utility;', keywords='assistant;ai;chat;'),
-    App('venture', 'Venture', 'browser', ('amerika-venture', 'firefox', 'chromium'), categories='Network;WebBrowser;', mime='text/html;x-scheme-handler/http;x-scheme-handler/https;', keywords='web;browser;internet;'),
+    App('venture', 'Venture', 'browser', ('makos-venture',), categories='Network;WebBrowser;', mime='text/html;x-scheme-handler/http;x-scheme-handler/https;', keywords='web;browser;internet;'),
     App('paper', 'Paper', 'file-document', ('euro-office-euro-office --new:word',), categories='Office;WordProcessor;', mime='application/vnd.oasis.opendocument.text;application/msword;application/vnd.openxmlformats-officedocument.wordprocessingml.document;', keywords='word;documents;writing;'),
     App('digits', 'Digits', 'file-spreadsheet', ('euro-office-euro-office --new:cell',), categories='Office;Spreadsheet;', mime='application/vnd.oasis.opendocument.spreadsheet;text/csv;application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;', keywords='spreadsheet;excel;tables;'),
     App('slides', 'Slides', 'file-presentation', ('euro-office-euro-office --new:slide',), categories='Office;Presentation;', mime='application/vnd.oasis.opendocument.presentation;application/vnd.openxmlformats-officedocument.presentationml.presentation;', keywords='presentation;powerpoint;'),

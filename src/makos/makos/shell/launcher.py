@@ -16,7 +16,7 @@ SHELL_CLASS = 'org.makos.shell'
 EXTRA_CLASSES = {
     'terminal': {'konsole', 'ptyxis', 'org.gnome.ptyxis', 'xterm', 'org.kde.konsole'},
     'paper': {'euro-office'}, 'digits': set(), 'slides': set(),
-    'venture': {'firefox', 'chromium', 'amerika-venture', 'org.mozilla.firefox'},
+    'venture': {'amerikaventure', 'firefox', 'chromium', 'amerika-venture', 'org.mozilla.firefox'},
     'files': {'org.makos.files'},
 }
 FOLDERS = {  # id -> (name, icon, xdg key, default sub folder)

@@ -16,7 +16,7 @@ gpgv --keyring "$repo/makos-archive-keyring.gpg" "$repo/dists/makos-testing/InRe
 if [ "$(id -u)" -ne 0 ]; then
   exec pkexec /bin/sh "$script" "$repo"
 fi
-dest=/var/lib/makos/local-apt/0.1.0-dev.2
+dest=/var/lib/makos/local-apt/0.1.0-dev.3
 install -d -m 0755 "$dest" /usr/share/keyrings
 cp -a "$repo/." "$dest/"
 install -m 0644 "$dest/makos-archive-keyring.gpg" /usr/share/keyrings/makos-archive-keyring.gpg
@@ -29,5 +29,5 @@ Architectures: arm64
 Signed-By: /usr/share/keyrings/makos-archive-keyring.gpg
 EOF
 apt-get update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/makos-local.sources -o Dir::Etc::sourceparts=-
-apt-get install --no-remove --no-install-recommends makos-desktop=0.1.0~dev2
+apt-get install --no-remove --no-install-recommends makos-desktop=0.1.0~dev3
 printf '\nMakOS is available in the login session selector. Log out normally and select MakOS.\nTo return, choose Plasma or Amerika OS. Login and boot defaults were not changed.\n'

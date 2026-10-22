@@ -346,6 +346,9 @@ class Shell(Gtk.Application):
             name=active.get('caption','Files')
         for app in catalog.APPS:
             if cls in (app.id,'makos-'+app.id,'org.makos.apps.'+app.id.replace('-','_')):name=app.name
+        from .launcher import app_id_for_window
+        record = catalog.BY_ID.get(app_id_for_window(active)) if active else None
+        if record:name=record.name
         self.active_label.set_text(name.split(' — ')[-1][:35] if active else 'Files')
         if active:
             self.globalmenu.set_active(active)
@@ -372,6 +375,7 @@ class Shell(Gtk.Application):
         if not full:
             layer.LS.set_margin(self.overlay,layer.LS.Edge.TOP,100)
         keys=Gtk.EventControllerKey()
+        keys.set_propagation_phase(Gtk.PropagationPhase.CAPTURE)
         keys.connect('key-pressed',lambda _c,key,*_: (self.close_overlay(),True)[1] if key==Gdk.KEY_Escape else False)
         self.overlay.add_controller(keys)
         return self.overlay

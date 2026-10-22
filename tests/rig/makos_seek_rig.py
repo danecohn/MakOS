@@ -154,6 +154,20 @@ try:
         check(app.overlay is not None and panel is not None, 'typing in the menu-bar field opens the panel')
         shot(app.bar, 'seek-menubar-field')
 
+    # Real key dispatch: SearchEntry normally consumes Escape before a bubbling window controller.
+    from makos_input import Input
+    inp = Input()
+    for only, query in ((True, ''), (True, 'calc'), (False, 'quarterly')):
+        app.seek(applications_only=only)
+        settle(.3)
+        search_entry=next(w for w in __import__('makos_rig_common').walk(app.overlay) if isinstance(w,Gtk.SearchEntry))
+        search_entry.set_text(query)
+        search_entry.grab_focus()
+        settle(.3)
+        inp.chord('esc')
+        settle(.5)
+        check(app.overlay is None, 'Escape dismisses focused search, including a nonempty query: '+repr(query))
+
     # live updates: a new file appears in the index through inotify without a rescan
     write('Documents/zebra crossing.txt', 'stripes')
     panel = app.seek()

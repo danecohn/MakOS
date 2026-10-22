@@ -2,7 +2,7 @@
 import shutil
 import subprocess
 
-VERSION='0.1.0~dev2'
+VERSION='0.1.0~dev3'
 NAMES=('makos-session','makos-shell','makos-theme','makos-icons','makos-apps','makos-desktop')
 
 
@@ -18,7 +18,8 @@ def register(b):
                   'python3, libpython3.14, python3-gi, python3-gi-cairo, python3-cairo, gir1.2-gtk-4.0 (>= 4.10), gir1.2-gtk4layershell-1.0, libgtk4-layer-shell0, makos-theme, makos-icons, network-manager, wireplumber, upower, fonts-dejavu-core',arch='arm64')
         shutil.copytree(source/'makos',p.path('/usr/lib/python3/dist-packages/makos'),ignore=shutil.ignore_patterns('__pycache__','*.pyc'))
         shutil.copytree(source/'bridge',p.path('/usr/share/makos/bridge'))
-        for name in ('makos-shell','makos-app','makos-studio-app'):
+        shutil.copytree(source/'venture',p.path('/usr/share/makos/venture'))
+        for name in ('makos-shell','makos-app','makos-studio-app','makos-venture'):
             p.copy(source/'bin'/name,'/usr/bin/'+name,0o755)
         output=p.path('/usr/libexec/makos/makos-shell-host')
         output.parent.mkdir(parents=True,exist_ok=True)

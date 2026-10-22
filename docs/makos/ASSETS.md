@@ -64,3 +64,8 @@ Corresponding-source links and the pin are recorded in the Mak Office package's
 https://github.com/danecohn/amerikasocial/tree/main/amerika-os/src/os/makoffice
 The wrapper sets its own CEF preload; the shell's layer-shell preload must never
 be passed to it. No API keys or cloud account are needed for local documents.
+
+`src/makos/venture/{venture.css,start.html}`: original MakOS browser chrome and
+local start page, MakOS contributors, GPL-3.0-only. No third-party browser artwork
+was extracted or traced. Existing native engine toolbar glyphs are rendered by the
+installed browser under its retained upstream licence; no glyph assets are copied.
