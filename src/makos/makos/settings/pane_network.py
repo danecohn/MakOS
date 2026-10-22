@@ -1,4 +1,4 @@
-"""Network (NetworkManager): Wi-Fi join/forget, VPN import, proxy. Passwords are never typed into Settings or stored by MakOS:
+"""Network (NetworkManager): Wi-Fi join/forget, VPN import, proxy. Passwords are never typed into Settings or stored by MakkOS:
 new secured networks are joined by `nmcli --ask` in a terminal window, or in the system network editor."""
 import gi
 
@@ -97,7 +97,7 @@ def build(col, ctx):
                 if f and f.get_path():
                     ctx.do(netman.vpn_import, f.get_path(), ok='VPN profile imported.', done=reload)
             dialog.open(ctx.window, None, picked)
-        W.button_row(s, '', 'Import VPN Profile…', pick, hint='Credentials in the profile are stored by NetworkManager, not by MakOS.')
+        W.button_row(s, '', 'Import VPN Profile…', pick, hint='Credentials in the profile are stored by NetworkManager, not by MakkOS.')
 
         s = W.section(box, 'Proxy')
         px = info['proxy']

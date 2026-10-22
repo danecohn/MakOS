@@ -1,4 +1,4 @@
-# Adapted for MakOS from Amerika OS (src/os/amerika/inputdev.py), GPL-3.0-only, Amerika LLC; MakOS adaptations.
+# Adapted for MakkOS from Amerika OS (src/os/amerika/inputdev.py), GPL-3.0-only, Amerika LLC; MakkOS adaptations.
 """Input settings backend: keyboard layouts (kxkbrc, applied by KWin), key repeat (kcminputrc), pointing devices
 (KWin's org.kde.KWin.InputDevice D-Bus, live, plus kcminputrc so the choice survives a restart)."""
 import re

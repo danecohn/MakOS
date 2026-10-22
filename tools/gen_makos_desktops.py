@@ -11,7 +11,7 @@ OUT = ROOT / 'src/makos/applications'
 
 def entry(app):
     lines = ['[Desktop Entry]', 'Type=Application', f'Name={app.name}', f'Exec=makos-app {app.id} %U', f'Icon=makos-{app.icon}', 'Terminal=false',
-             'OnlyShowIn=MakOS;', f'Categories={app.categories}', 'StartupNotify=true', f'StartupWMClass=makos-{app.id}']
+             'OnlyShowIn=MakkOS;MakOS;', f'Categories={app.categories}', 'StartupNotify=true', f'StartupWMClass=makos-{app.id}']
     if app.mime:
         lines.append(f'MimeType={app.mime}')
     if app.keywords:

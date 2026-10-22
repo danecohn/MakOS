@@ -1,4 +1,4 @@
-"""Desktop wallpaper: built-in images shipped with MakOS, the user's own pictures, and the choice stored in settings.json."""
+"""Desktop wallpaper: built-in images shipped with MakkOS, the user's own pictures, and the choice stored in settings.json."""
 import os
 from pathlib import Path
 

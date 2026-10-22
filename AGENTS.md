@@ -1,7 +1,7 @@
-# MakOS development rules
+# MakkOS development rules
 
-MakOS is an original Linux desktop on KWin Wayland, ARM64 first. Work in `src/makos`.
-Keep the existing Plasma and Amerika sessions until MakOS passes owner acceptance.
+MakkOS is an original Linux desktop on KWin Wayland, ARM64 first. Work in `src/makos`.
+Keep the existing Plasma and Amerika sessions until MakkOS passes owner acceptance.
 The owner authorized this project's lead agent to push and publish; mark previews honestly.
 Do not claim completion, physical 60 fps, a working login, or hardware acceptance from a rig run.
 
@@ -19,7 +19,7 @@ KWin, runtime/config/home and screenshot authorization. Check logs and actual sc
 `python3 -m unittest discover -s tests -q` covers pure logic and package boundaries.
 KWin ScreenShot2 v5 hides the caller by default: shell screenshots must explicitly include it.
 
-Build only MakOS packages with `python3 build.py --no-repo`. Generated materials, icons,
+Build only MakkOS packages with `python3 build.py --no-repo`. Generated materials, icons,
 cursors and sounds are derivatives; the build regenerates them. To compile cursors set
 `MAKOS_XCURSORGEN` or provide the distro's xcursorgen (x11-apps) build tool.
 No login/boot/PAM/default-session mutations in package installation. Risky optional theme

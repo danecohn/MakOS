@@ -86,7 +86,7 @@ class RegistryTests(Base):
         for p in registry.PANES:
             mod = importlib.import_module('makos.settings.' + p.module)
             self.assertTrue(callable(mod.build), p.id)
-            svg = ROOT / f'src/makos/icons/MakOS/scalable/apps/makos-{p.icon}.svg'
+            svg = ROOT / f'src/makos/icons/MakkOS/scalable/apps/makos-{p.icon}.svg'
             self.assertTrue(svg.exists(), f'missing fallback vector for {p.icon}')
             self.assertIn('FALLBACK', svg.read_text())
 
@@ -543,10 +543,10 @@ class HardwareBackendTests(Base):
 
 class AutostartTests(Base):
     def test_only_entries_for_this_desktop_are_listed(self):
-        self.assertTrue(startup.applies({}, 'MakOS'))
-        self.assertTrue(startup.applies({'OnlyShowIn': 'KDE;MakOS;'}, 'MakOS'))
-        self.assertFalse(startup.applies({'OnlyShowIn': 'KDE;'}, 'MakOS'))
-        self.assertFalse(startup.applies({'NotShowIn': 'MakOS;'}, 'MakOS'))
+        self.assertTrue(startup.applies({}, 'MakkOS'))
+        self.assertTrue(startup.applies({'OnlyShowIn': 'KDE;MakkOS;'}, 'MakkOS'))
+        self.assertFalse(startup.applies({'OnlyShowIn': 'KDE;'}, 'MakkOS'))
+        self.assertFalse(startup.applies({'NotShowIn': 'MakkOS;'}, 'MakkOS'))
         self.assertTrue(startup.applies({'OnlyShowIn': 'KDE;'}, 'KDE'))
 
 

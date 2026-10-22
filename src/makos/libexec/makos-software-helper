@@ -1,8 +1,8 @@
 #!/usr/bin/python3
-"""Privileged half of MakOS Software Center. Run only through pkexec (see org.makos.software.policy).
+"""Privileged half of MakkOS Software Center. Run only through pkexec (see org.makos.software.policy).
 
 Fixed allowlist of actions; package names are validated and passed after "--" so they cannot be options.
-Never dist-upgrade, never removes MakOS or session-critical packages, never reads user files.
+Never dist-upgrade, never removes MakkOS or session-critical packages, never reads user files.
 """
 import os
 import re

@@ -1,4 +1,4 @@
-"""MakOS Settings package: one module per pane (pane_*.py), a registry (no GTK), and the GTK window in `app`."""
+"""MakkOS Settings package: one module per pane (pane_*.py), a registry (no GTK), and the GTK window in `app`."""
 
 
 def __getattr__(name):

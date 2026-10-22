@@ -1,7 +1,7 @@
 """The list of Settings panes. Pure data (no GTK) so Seek, tests and the shell can use it without a display.
 
 Every pane has a distinct icon name. `ICON` names are looked up by makos.ui.icon(): first an AI-generated PNG under
-icons/MakOS/128x128/apps/<name>.png, then the theme icon 'makos-<name>' (the original vector fallback made by
+icons/MakkOS/128x128/apps/<name>.png, then the theme icon 'makos-<name>' (the original vector fallback made by
 tools/make_makos_vectors.py). See docs/makos/settings.md for which are still vector fallbacks awaiting regenerated art.
 """
 from dataclasses import dataclass

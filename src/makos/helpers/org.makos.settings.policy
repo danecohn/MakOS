@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE policyconfig PUBLIC "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
  "http://www.freedesktop.org/standards/PolicyKit/1.0/policyconfig.dtd">
-<!-- Adapted for MakOS from Amerika OS org.amerika.settings.policy (GPL-3.0-only, Amerika LLC). -->
+<!-- Adapted for MakkOS from Amerika OS org.amerika.settings.policy (GPL-3.0-only, Amerika LLC). -->
 <policyconfig>
-  <vendor>MakOS</vendor>
+  <vendor>MakkOS</vendor>
   <action id="org.makos.settings.manage">
     <description>Change protected system settings</description>
     <message>Authentication is required to change the firewall, lid, battery or software update settings</message>

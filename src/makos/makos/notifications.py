@@ -176,7 +176,7 @@ def play_sound(name, which=shutil.which, popen=subprocess.Popen):
     if not exe:
         return False
     try:
-        proc = popen([exe, '-i', name, '-d', 'MakOS'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, start_new_session=True)
+        proc = popen([exe, '-i', name, '-d', 'MakkOS'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, start_new_session=True)
     except OSError:
         return False
     threading.Thread(target=proc.wait, daemon=True).start()  # reap exactly this child
@@ -234,7 +234,7 @@ class Notifications:
         if method == 'GetCapabilities':
             invocation.return_value(GLib.Variant('(as)', (CAPABILITIES,)))
         elif method == 'GetServerInformation':
-            invocation.return_value(GLib.Variant('(ssss)', ('MakOS Notifications', 'MakOS', '0.2.0', '1.2')))
+            invocation.return_value(GLib.Variant('(ssss)', ('MakkOS Notifications', 'MakkOS', '0.2.0', '1.2')))
         elif method == 'CloseNotification':
             ident = params.unpack()[0]
             item = self.model.items.get(ident)
@@ -428,7 +428,7 @@ class Notifications:
         if widget is None:
             from . import ui
             app_id = item['app_id']
-            widget = ui.icon(app_id, 40) if app_id and os.path.exists(str(ui.common.SHARE / 'icons/MakOS/128x128/apps' / (app_id + '.png'))) else Gtk.Image.new_from_icon_name('makos-makos-logo')
+            widget = ui.icon(app_id, 40) if app_id and os.path.exists(str(ui.common.SHARE / 'icons/MakkOS/128x128/apps' / (app_id + '.png'))) else Gtk.Image.new_from_icon_name('makos-makos-logo')
         widget.set_pixel_size(40)
         widget.add_css_class('banner-icon')
         return widget

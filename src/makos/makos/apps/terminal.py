@@ -1,7 +1,7 @@
 """Terminal: one visible entry that starts the preferred installed terminal backend.
 
-MakOS does not draw a terminal emulator. The backend keeps its own profile and colours;
-MakOS never edits its configuration, so the backend is themed by GTK/Qt, not by MakOS CSS.
+MakkOS does not draw a terminal emulator. The backend keeps its own profile and colours;
+MakkOS never edits its configuration, so the backend is themed by GTK/Qt, not by MakkOS CSS.
 """
 from pathlib import Path
 from .. import catalog

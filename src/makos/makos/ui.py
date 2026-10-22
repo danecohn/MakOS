@@ -1,4 +1,4 @@
-"""Original window chrome and common widgets for MakOS apps."""
+"""Original window chrome and common widgets for MakkOS apps."""
 import gi
 
 gi.require_version('Gtk', '4.0')
@@ -23,7 +23,7 @@ def install_theme():
     settings.set_property('gtk-enable-animations', not common.load_settings()['reduce_motion'])
     icons = Gtk.IconTheme.get_for_display(Gdk.Display.get_default())
     icons.add_search_path(str(common.SHARE / 'icons'))
-    settings.set_property('gtk-icon-theme-name', 'MakOS')
+    settings.set_property('gtk-icon-theme-name', 'MakkOS')
     refresh_appearance()  # settings-and-Seek: user-chosen font size / contrast / transparency (settings.model.css)
     return provider
 
@@ -64,7 +64,7 @@ def button(label, callback, css=None):
 
 
 def icon(name, size=48):
-    path = common.SHARE / 'icons/MakOS/128x128/apps' / (name + '.png')
+    path = common.SHARE / 'icons/MakkOS/128x128/apps' / (name + '.png')
     if path.exists():
         img = Gtk.Image.new_from_file(str(path))
     else:

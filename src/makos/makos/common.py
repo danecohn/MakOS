@@ -1,4 +1,4 @@
-"""MakOS owns its configuration; importing this module never writes any files."""
+"""MakkOS owns its configuration; importing this module never writes any files."""
 import json
 import os
 from pathlib import Path

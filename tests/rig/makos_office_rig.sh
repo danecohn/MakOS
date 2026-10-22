@@ -9,13 +9,13 @@ export ROOT T OUT
 export HOME="$T/home" XDG_RUNTIME_DIR="$T/runtime" XDG_CONFIG_HOME="$T/config" XDG_CACHE_HOME="$T/cache" XDG_DATA_HOME="$T/data" XDG_STATE_HOME="$T/state"
 mkdir -p "$HOME" "$XDG_RUNTIME_DIR" "$XDG_CONFIG_HOME" "$XDG_CACHE_HOME" "$XDG_DATA_HOME" "$XDG_STATE_HOME" "$XDG_DATA_HOME/applications"
 chmod 700 "$XDG_RUNTIME_DIR"
-export XDG_CURRENT_DESKTOP=MakOS XDG_SESSION_TYPE=wayland
+export XDG_CURRENT_DESKTOP=MakkOS XDG_SESSION_TYPE=wayland
 export PYTHONPATH="$ROOT/src/makos" MAKOS_SHARE="$ROOT/src/makos" GTK_A11Y=none
 export MAKOS_SHELL_HOST="$ROOT/dist/makos/makos-shell-host"
 cat > "$XDG_DATA_HOME/applications/org.makos.Shell.desktop" <<EOF
 [Desktop Entry]
 Type=Application
-Name=MakOS Shell
+Name=MakkOS Shell
 Exec=$MAKOS_SHELL_HOST
 NoDisplay=true
 X-KDE-DBUS-Restricted-Interfaces=org.kde.KWin.ScreenShot2

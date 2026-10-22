@@ -34,7 +34,7 @@ class OpenRefused(Exception):
 
 
 def check_openable(mime, path=''):
-    """MakOS never runs programs from Files: binaries and AppImages are refused, everything else uses the default app."""
+    """MakkOS never runs programs from Files: binaries and AppImages are refused, everything else uses the default app."""
     if mime in BLOCKED_TYPES:
         raise OpenRefused('Files does not run programs. To start an application use the launcher, or a terminal.')
 

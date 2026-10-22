@@ -30,6 +30,6 @@ def parse(payload):
 
 def fetch(lat, lon, timeout=8):
     """One bounded HTTPS request to open-meteo; caller is responsible for checking that the user enabled it."""
-    request = urllib.request.Request(url(lat, lon), headers={'User-Agent': 'MakOS-Widgets/0.1'})
+    request = urllib.request.Request(url(lat, lon), headers={'User-Agent': 'MakkOS-Widgets/0.1'})
     with urllib.request.urlopen(request, timeout=timeout) as reply:
         return parse(json.loads(reply.read(65536)))

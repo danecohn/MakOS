@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""MakOS Debian packaging, adapted from the tested GPL Amerika package builder."""
+"""MakkOS Debian packaging, adapted from the tested GPL Amerika package builder."""
 import datetime
 import gzip
 import hashlib
@@ -21,7 +21,7 @@ SIGN_HOME=Path(os.environ.get('MAKOS_SIGNING_HOME',Path.home()/'.local/share/ame
 KEY_NAME=os.environ.get('MAKOS_SIGNING_IDENTITY','Amerika OS Archive Signing Key')
 ARCH='arm64'
 SUITE='makos-testing'
-MAINTAINER='MakOS contributors <noreply@users.noreply.github.com>'
+MAINTAINER='MakkOS contributors <noreply@users.noreply.github.com>'
 HOMEPAGE='https://github.com/danecohn/MakOS'
 
 
@@ -143,8 +143,8 @@ def make_repo(debs):
         if f.is_file():
             rel_files[str(f.relative_to(APT_DIR / f'dists/{SUITE}'))] = f
     now = datetime.datetime.now(datetime.timezone.utc).strftime('%a, %d %b %Y %H:%M:%S UTC')
-    lines = ['Origin: MakOS', 'Label: MakOS', f'Suite: {SUITE}', f'Codename: {SUITE}', f'Date: {now}',
-             f'Architectures: {ARCH}', 'Components: main', 'Description: MakOS development packages', 'SHA256:']
+    lines = ['Origin: MakkOS', 'Label: MakkOS', f'Suite: {SUITE}', f'Codename: {SUITE}', f'Date: {now}',
+             f'Architectures: {ARCH}', 'Components: main', 'Description: MakkOS development packages', 'SHA256:']
     for rel, f in rel_files.items():
         lines.append(f' {sha256(f)} {f.stat().st_size:>16} {rel}')
     release = APT_DIR / f'dists/{SUITE}/Release'

@@ -212,7 +212,7 @@ def main():
     import gi
     gi.require_version('GdkPixbuf','2.0')
     from gi.repository import GdkPixbuf
-    logo=ROOT/'src/makos/icons/MakOS/scalable/apps/makos-makos-logo.svg'
+    logo=ROOT/'src/makos/icons/MakkOS/scalable/apps/makos-makos-logo.svg'
     pix=GdkPixbuf.Pixbuf.new_from_file_at_scale(str(logo),1024,1024,True)
     pix.savev(str(OUT/'makos-logo.png'),'png',[],[])
     mono=Image.open(OUT/'makos-logo.png').convert('RGBA');gray=Image.new('RGBA',mono.size,'#4c6276');gray.putalpha(mono.getchannel('A'));gray.save(OUT/'makos-logo-mono.png')

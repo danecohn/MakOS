@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build only MakOS, in a separate local testing channel; never publish."""
+"""Build only MakkOS, in a separate local testing channel; never publish."""
 import argparse
 import importlib.util
 import sys
@@ -11,7 +11,7 @@ ROOT=Path(__file__).resolve().parents[1]
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--no-repo',action='store_true')
-    parser.add_argument('--only',help='comma-separated MakOS package names; existing package files are retained')
+    parser.add_argument('--only',help='comma-separated MakkOS package names; existing package files are retained')
     args=parser.parse_args()
     for script in ('make_makos_vectors.py','make_makos_materials.py'):
         subprocess.run([sys.executable,str(ROOT/'tools'/script)],check=True)
@@ -32,7 +32,7 @@ def main():
     debs=[]
     names=args.only.split(',') if args.only else list(builders)
     for name in names:
-        if name not in builders:parser.error('Unknown MakOS package: '+name)
+        if name not in builders:parser.error('Unknown MakkOS package: '+name)
         deb=builders[name]().build();debs.append(deb)
         print('Built',deb.name,deb.stat().st_size,flush=True)
     if not args.no_repo:

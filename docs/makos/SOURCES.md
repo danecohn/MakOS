@@ -9,7 +9,7 @@ Consulted 2026-10-22; these describe APIs, not redistributed artwork.
 * KWin compositor backend notes: https://community.kde.org/KWin/Hacking/Scene
 
 GTK menu models and DBusMenu are distinct protocols. A client must export a
-compatible menu before MakOS can display it. Universal support is a release gate.
+compatible menu before MakkOS can display it. Universal support is a release gate.
 
 KWin ScreenShot2 version 5 defaults to hiding the caller's windows. A shell owns
 its desktop and apps, so capture explicitly sets `hide-caller-windows=false`:

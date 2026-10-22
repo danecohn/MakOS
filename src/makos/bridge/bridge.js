@@ -1,4 +1,4 @@
-// MakOS compositor bridge; no session-wide configuration writes.
+// MakkOS compositor bridge; no session-wide configuration writes.
 // Window state goes to the shell over D-Bus (org.makos.Windows.Report); shell-owned actions come back through
 // org.makos.Control.Action. Keyboard shortcuts, screen edges (hot corners) and per-application window memory live here
 // because only the compositor sees them in time. Optional settings are read with readConfig() from kwinrc
@@ -60,7 +60,7 @@ function remember(w) {
     memoryDirty = true;
 }
 function restoreMemory(w) {
-    // First map of a window of an application MakOS has seen before: open it where and how big it was. The offset
+    // First map of a window of an application MakkOS has seen before: open it where and how big it was. The offset
     // keeps a second window of the same application from landing exactly on top of the first.
     if (!memoryOn || !w.normalWindow || remembered[id(w)] || w.fullScreen || !w.resizeable) return;
     remembered[id(w)] = true;

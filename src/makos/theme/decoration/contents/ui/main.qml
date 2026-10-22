@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-// MakOS Glass & Metal window frame: brushed-metal title bar, left glass orbs, soft shadow.
+// MakkOS Glass & Metal window frame: brushed-metal title bar, left glass orbs, soft shadow.
 // States: active/inactive, tool (no min/zoom -> compact bar), modal sheet/dialog, maximized,
 // edge-tiled (flat corners on the screen-edge sides), HiDPI (vector + @2x bitmaps).
 import QtQuick

@@ -16,7 +16,7 @@ cc -O2 "$ROOT/src/makos/shell-host.c" -o "$MAKOS_SHELL_HOST" $(python3-config --
 cat > "$XDG_DATA_HOME/applications/org.makos.Shell.desktop" <<EOT
 [Desktop Entry]
 Type=Application
-Name=MakOS Shell
+Name=MakkOS Shell
 Exec=$MAKOS_SHELL_HOST
 NoDisplay=true
 X-KDE-DBUS-Restricted-Interfaces=org.kde.KWin.ScreenShot2

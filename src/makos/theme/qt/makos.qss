@@ -1,4 +1,4 @@
-/* MakOS Glass & Metal for Qt widgets (applied through qt6ct on top of Fusion). Original, GPL-3.0-only.
+/* MakkOS Glass & Metal for Qt widgets (applied through qt6ct on top of Fusion). Original, GPL-3.0-only.
  * @DIR@ is replaced by the installer with this directory's absolute path. */
 QWidget { color: #242b34; }
 QMainWindow, QDialog, QMessageBox { background: #ececec; }

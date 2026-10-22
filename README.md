@@ -1,8 +1,11 @@
-# MakOS
+# MakkOS
+
+Renamed from MakOS on 2026-10-22. Existing `makos-*` packages, commands,
+configuration paths and application IDs remain stable for upgrades.
 
 An original Glass & Metal desktop for Ubuntu 26.10 ARM64, using KWin Wayland and
-GTK4. This is development software. The owner has not accepted a normal MakOS
-login or the finished desktop.
+GTK4. This is development software. The owner has approved the current desktop appearance;
+hardware and full application workflow acceptance remain open.
 
 The integration branch repairs the interrupted work delivered at `525fd82`.
 See [integration verification](docs/makos/INTEGRATION.md) for the exact checks,

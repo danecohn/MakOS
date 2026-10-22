@@ -1,4 +1,4 @@
-/* Original MakOS Glass & Metal widgets. GPL-3.0-only. */
+/* Original MakkOS Glass & Metal widgets. GPL-3.0-only. */
 * { font-family: "DejaVu Sans"; font-size: 12px; }
 window.background-surface, window.launcher-surface { background: transparent; }
 headerbar, .metal-toolbar { background: linear-gradient(#f5f5f5,#d6d7d9); border-bottom: 1px solid #969ba0;

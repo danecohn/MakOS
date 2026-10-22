@@ -1,4 +1,4 @@
-"""Shared plumbing for MakOS apps: window skeleton, menu bar, actions, dialogs, data paths."""
+"""Shared plumbing for MakkOS apps: window skeleton, menu bar, actions, dialogs, data paths."""
 import os
 import re
 from pathlib import Path
@@ -165,7 +165,7 @@ def safe_filename(name, fallback='untitled'):
     return name or fallback
 
 
-def notify(summary, body, icon='makos-calendar', app_name='MakOS'):
+def notify(summary, body, icon='makos-calendar', app_name='MakkOS'):
     """Post a desktop notification (the shell's banner service). Failure is silent."""
     try:
         bus = Gio.bus_get_sync(Gio.BusType.SESSION)

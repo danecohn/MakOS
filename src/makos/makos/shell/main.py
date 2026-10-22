@@ -1,4 +1,4 @@
-"""MakOS shell: own surfaces on KWin. No global theme/default-session mutations."""
+"""MakkOS shell: own surfaces on KWin. No global theme/default-session mutations."""
 import json
 import math
 import os
@@ -57,7 +57,7 @@ class Shell(Gtk.Application):
             return
         self.hold()
         if not layer.available():
-            print('MakOS needs a KWin Wayland session with gtk4-layer-shell.',flush=True)
+            print('MakkOS needs a KWin Wayland session with gtk4-layer-shell.',flush=True)
             self.quit()
             return
         self.theme=ui.install_theme()
@@ -187,7 +187,7 @@ class Shell(Gtk.Application):
         self.bar.present()
 
     def system_menu(self,col,pop):
-        self.item(col,pop,'About MakOS',lambda:launch(self,'system-info'))
+        self.item(col,pop,'About MakkOS',lambda:launch(self,'system-info'))
         self.item(col,pop,'Settings…',lambda:launch(self,'settings'))
         self.item(col,pop,'Applications…',lambda:self.action('applications'))
         col.append(Gtk.Separator())
@@ -202,7 +202,7 @@ class Shell(Gtk.Application):
     def confirm_power(self,action):
         w=ui.window(self,'Session',410,180)
         col=ui.box(True,16,'sheet')
-        col.append(Gtk.Label(label={'suspend':'Put this computer to sleep?','restart':'Restart this computer?','poweroff':'Shut down this computer?','logout':'Log out of MakOS?'}[action]))
+        col.append(Gtk.Label(label={'suspend':'Put this computer to sleep?','restart':'Restart this computer?','poweroff':'Shut down this computer?','logout':'Log out of MakkOS?'}[action]))
         row=ui.box(spacing=12)
         row.append(ui.button('Cancel',w.close))
         def perform():
@@ -236,7 +236,7 @@ class Shell(Gtk.Application):
         self.item(col,pop,'Refresh',self.poll_status)
 
     def connect_wifi(self,network):
-        # Delegate all secret input to NetworkManager's own agent/terminal; MakOS never captures a password.
+        # Delegate all secret input to NetworkManager's own agent/terminal; MakkOS never captures a password.
         if not network.get('saved'):
             ui.message(self,'Network','This preview can activate saved wireless profiles. Add new credentials using the system network connection editor.')
             return

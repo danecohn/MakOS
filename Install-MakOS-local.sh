@@ -1,5 +1,5 @@
 #!/bin/sh
-# Install a verified local MakOS testing channel. No desktop/default/boot switch.
+# Install a verified local MakkOS testing channel. No desktop/default/boot switch.
 set -eu
 base=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 repo=${1:-$base/apt}
@@ -29,5 +29,5 @@ Architectures: arm64
 Signed-By: /usr/share/keyrings/makos-archive-keyring.gpg
 EOF
 apt-get update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/makos-local.sources -o Dir::Etc::sourceparts=-
-apt-get install --no-remove --no-install-recommends makos-desktop=0.1.0~dev3
-printf '\nMakOS is available in the login session selector. Log out normally and select MakOS.\nTo return, choose Plasma or Amerika OS. Login and boot defaults were not changed.\n'
+apt-get install --no-remove --no-install-recommends makos-desktop=0.1.0~dev4
+printf '\nMakkOS is available in the login session selector. Log out normally and select MakkOS.\nTo return, choose Plasma or Amerika OS. Login and boot defaults were not changed.\n'

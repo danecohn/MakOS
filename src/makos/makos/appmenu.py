@@ -1,6 +1,6 @@
-"""Export a MakOS app's menu as com.canonical.dbusmenu so the shell's global menu bar can show it.
+"""Export a MakkOS app's menu as com.canonical.dbusmenu so the shell's global menu bar can show it.
 
-GTK4 cannot hand KWin a Wayland appmenu object, so a MakOS app instead registers
+GTK4 cannot hand KWin a Wayland appmenu object, so a MakkOS app instead registers
 itself with the shell's registrar under window id (WID_BASE | pid). The shell maps the
 active window's pid to that entry (see GlobalMenu.endpoint_for_pid). Without a shell
 (no registrar on the session bus) nothing is exported and the app keeps its in-window bar.
@@ -140,7 +140,7 @@ def export(app, spec):
         return bool(getattr(app, '_menu_export', None))
     try:
         conn = Gio.bus_get_sync(Gio.BusType.SESSION)
-        # theme-and-system-skin: the shell now owns a MakOS-private registrar name by default (the canonical one makes
+        # theme-and-system-skin: the shell now owns a MakkOS-private registrar name by default (the canonical one makes
         # Wayland-native Qt/GTK3 apps hide their in-window menus, see docs/makos/theme.md); fall back to the canonical name.
         registrar = None
         for name in ('org.makos.AppMenu.Registrar', 'com.canonical.AppMenu.Registrar'):

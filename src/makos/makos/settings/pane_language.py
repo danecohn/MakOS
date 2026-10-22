@@ -66,7 +66,7 @@ def build(col, ctx):
                  lambda v: ctx.do(inputdev.set_switch_shortcut, v, ok='Saved.'))
 
     s = W.section(col, 'Text replacement')
-    W.note(s, 'Typing a trigger followed by a space or return in a MakOS text field (Text Editor, Notes) replaces it. Other applications are not affected.')
+    W.note(s, 'Typing a trigger followed by a space or return in a MakkOS text field (Text Editor, Notes) replaces it. Other applications are not affected.')
     box = ui.box(True, 4)
     s.append(box)
     state = {'items': common.load_settings()['text_replacements']}

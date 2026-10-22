@@ -1,10 +1,10 @@
-"""MakOS appearance: Glass & Metal tokens, accent colours and the Graphite variant.
+"""MakkOS appearance: Glass & Metal tokens, accent colours and the Graphite variant.
 
 The widget themes in ``theme/gtk-{3,4}.0/gtk.css`` are written against ``@define-color mk_*``
 tokens and are a complete default (blue) theme on their own. A variant is the same file with
 ``@define-color`` overrides appended (the later definition wins), so switching appearance at
-runtime is one CssProvider reload and the installed static themes (``MakOS``,
-``MakOS-Graphite``, ``MakOS-<Accent>``) for third-party GTK apps are generated from the same
+runtime is one CssProvider reload and the installed static themes (``MakkOS``,
+``MakkOS-Graphite``, ``MakkOS-<Accent>``) for third-party GTK apps are generated from the same
 text. Pure logic: importing this module does not need GTK or a display. GPL-3.0-only.
 """
 import os
@@ -84,14 +84,14 @@ def theme_css(gtk=4, accent='blue', graphite=False):
 
 def theme_name(accent='blue', graphite=False):
     if graphite:
-        return 'MakOS-Graphite'
+        return 'MakkOS-Graphite'
     accent = clean_accent(accent)
-    return 'MakOS' if accent == 'blue' else 'MakOS-' + accent.title()
+    return 'MakkOS' if accent == 'blue' else 'MakkOS-' + accent.title()
 
 
 def theme_variants():
     """(name, accent, graphite) for every installed static theme."""
-    out = [('MakOS', 'blue', False), ('MakOS-Graphite', 'graphite', True)]
+    out = [('MakkOS', 'blue', False), ('MakkOS-Graphite', 'graphite', True)]
     out += [(theme_name(a), a, False) for a in ACCENTS if a not in ('blue', 'graphite')]
     return out
 
@@ -110,8 +110,8 @@ def write_themes(dest):
             if assets.is_dir():  # GTK 3 cannot read data: URIs in CSS, so its marks are real files
                 shutil.copytree(assets, target / 'assets', dirs_exist_ok=True)
         (root / 'index.theme').write_text(
-            '[Desktop Entry]\nType=X-GNOME-Metatheme\nName=%s\nComment=MakOS Glass & Metal%s\n'
-            'Encoding=UTF-8\n\n[X-GNOME-Metatheme]\nGtkTheme=%s\nMetacityTheme=%s\nIconTheme=MakOS\nCursorTheme=MakOS-Cursors\n'
+            '[Desktop Entry]\nType=X-GNOME-Metatheme\nName=%s\nComment=MakkOS Glass & Metal%s\n'
+            'Encoding=UTF-8\n\n[X-GNOME-Metatheme]\nGtkTheme=%s\nMetacityTheme=%s\nIconTheme=MakkOS\nCursorTheme=MakkOS-Cursors\n'
             % (name, ' (Graphite)' if graphite else '', name, name))
         written.append(root)
     return written

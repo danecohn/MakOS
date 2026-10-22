@@ -1,4 +1,4 @@
-"""Venture's original MakOS chrome, confined to a dedicated profile. No Firefox profile is modified."""
+"""Venture's original MakkOS chrome, confined to a dedicated profile. No Firefox profile is modified."""
 import json
 import os
 from pathlib import Path

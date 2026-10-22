@@ -1,4 +1,4 @@
-"""Real installed browser engine with private MakOS profile and test-only Marionette."""
+"""Real installed browser engine with private MakkOS profile and test-only Marionette."""
 import json
 import os
 from pathlib import Path

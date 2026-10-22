@@ -90,10 +90,10 @@ reply=[]
 def notified(source,result):
     reply.append(source.call_finish(result).unpack()[0])
 conn.call(conn.get_unique_name(),'/org/freedesktop/Notifications','org.freedesktop.Notifications','Notify',
-    GLib.Variant('(susssasa{sv}i)',('Rig',0,'','MakOS notification','A real isolated notification',[],{},0)),
+    GLib.Variant('(susssasa{sv}i)',('Rig',0,'','MakkOS notification','A real isolated notification',[],{},0)),
     None,Gio.DBusCallFlags.NONE,3000,None,notified)
 spin(lambda:bool(reply))
-assert app.notifications.items[reply[0]]['summary']=='MakOS notification'
+assert app.notifications.items[reply[0]]['summary']=='MakkOS notification'
 assert app.notifications.window.get_visible()
 app.notifications.close(reply[0],2)
 assert reply[0] not in app.notifications.items

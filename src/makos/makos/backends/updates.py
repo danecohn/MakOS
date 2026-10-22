@@ -1,5 +1,5 @@
-# Adapted for MakOS from Amerika OS (src/os/amerika/updates.py), GPL-3.0-only, Amerika LLC; MakOS adaptations.
-"""Updates backend: read-only apt state plus privileged actions that always go through pkexec and the fixed MakOS helper
+# Adapted for MakkOS from Amerika OS (src/os/amerika/updates.py), GPL-3.0-only, Amerika LLC; MakkOS adaptations.
+"""Updates backend: read-only apt state plus privileged actions that always go through pkexec and the fixed MakkOS helper
 (`makos-settings-helper apt-update | apt-upgrade`: no arguments, never dist-upgrade, login manager preserved).
 Nothing here ever runs apt directly with elevated rights.
 """

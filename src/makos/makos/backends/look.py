@@ -1,4 +1,4 @@
-"""Appearance backend: MakOS's own preferences (settings.json; the shell re-reads them live) plus the toolkit keys that make
+"""Appearance backend: MakkOS's own preferences (settings.json; the shell re-reads them live) plus the toolkit keys that make
 other applications follow (animation speed, GTK overlay scrolling)."""
 from .. import common
 from ..settings import model
@@ -50,7 +50,7 @@ def set_pinstripes(on):
 
 
 def set_reduce_motion(on):
-    """MakOS animations (GTK) and KWin's animation speed (written to the compositor's own config and the user's)."""
+    """MakkOS animations (GTK) and KWin's animation speed (written to the compositor's own config and the user's)."""
     on = bool(on)
     sysutil.kwrite('kdeglobals', 'KDE', 'AnimationDurationFactor', 0 if on else 1)
     sysutil.gsettings_set(GNOME, 'enable-animations', 'false' if on else 'true')

@@ -1,4 +1,4 @@
-# Adapted for MakOS from Amerika OS (src/os/amerika/language.py), GPL-3.0-only, Amerika LLC; MakOS adaptations.
+# Adapted for MakkOS from Amerika OS (src/os/amerika/language.py), GPL-3.0-only, Amerika LLC; MakkOS adaptations.
 """Language & region backend: user-level locale in ~/.config/environment.d (systemd user manager; next login) and system locale via localectl."""
 import json
 import re
@@ -69,7 +69,7 @@ def _env_path():
 
 
 def user_settings():
-    """Locale variables MakOS records for this user (empty when never set)."""
+    """Locale variables MakkOS records for this user (empty when never set)."""
     out = {'language': '', 'lang': '', **{k: '' for k, _t in FORMAT_KEYS}}
     try:
         for line in _env_path().read_text(encoding='utf-8').splitlines():
@@ -91,7 +91,7 @@ def _write_env(values):
     allowed = ['LANG', 'LANGUAGE'] + [k for k, _t in FORMAT_KEYS]
     path = _env_path()
     path.parent.mkdir(parents=True, exist_ok=True)
-    lines = ['# Written by MakOS Settings (Language & Text). Takes effect at the next login.']
+    lines = ['# Written by MakkOS Settings (Language & Text). Takes effect at the next login.']
     lines += [f'{k}={values[k]}' for k in allowed if values.get(k)]
     tmp = path.with_suffix('.tmp')
     tmp.write_text('\n'.join(lines) + '\n', encoding='utf-8')

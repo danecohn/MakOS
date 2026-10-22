@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Widget gallery: every standard widget in GTK 4 or GTK 3, as a *third-party* app would use them.
 
-The theme is selected by the caller with GTK_THEME (MakOS, MakOS-Graphite, MakOS-Red ...),
+The theme is selected by the caller with GTK_THEME (MakkOS, MakkOS-Graphite, MakkOS-Red ...),
 exactly like a normal GTK application. Usage:
-  GTK_THEME=MakOS python3 makos_gallery.py --gtk 4 [--snapshot out.png] [--hold SECONDS]
+  GTK_THEME=MakkOS python3 makos_gallery.py --gtk 4 [--snapshot out.png] [--hold SECONDS]
   --menu     open the popover/menu in the screenshot      --sheet  also show a message dialog
 """
 import argparse

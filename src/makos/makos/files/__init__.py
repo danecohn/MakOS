@@ -1,4 +1,4 @@
-"""Files: the MakOS file manager (browser, views, ops, preview, tags, search, network).
+"""Files: the MakkOS file manager (browser, views, ops, preview, tags, search, network).
 
 Importing this package is cheap and GTK-free; the window classes load on first use.
 

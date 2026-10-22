@@ -35,7 +35,7 @@ class Item:
     kind: str                      # app | folder | window | trash | separator
     key: str                       # catalog id / folder id / window id / group key
     name: str = ''
-    icon: str = ''                 # icon name in the MakOS theme
+    icon: str = ''                 # icon name in the MakkOS theme
     pinned: bool = False
     running: bool = False
     windows: list = field(default_factory=list)   # window dicts belonging to this app (most recent first)
@@ -286,7 +286,7 @@ _EXT_ICON = {ext: icon for icon, exts in _ICONS.items() for ext in exts}
 
 
 def file_icon(name, is_dir=False):
-    """Icon name (MakOS theme) for a file shown inside a stack."""
+    """Icon name (MakkOS theme) for a file shown inside a stack."""
     if is_dir:
         return 'folder'
     ext = name.rsplit('.', 1)[-1].lower() if '.' in name else ''

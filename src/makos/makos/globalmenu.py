@@ -8,7 +8,7 @@ Where a window's menu comes from, in priority order (``endpoint_for``):
   2. The registrar (``com.canonical.AppMenu.Registrar``): the exporting process is identified by the
      bus name's Unix PID and matched to the active window's PID. This covers GTK 3 apps with the
      appmenu-gtk-module, Qt apps using the generic DBusMenu platform menubar (qt6ct), Electron/Chromium
-     under XWayland, and MakOS's own apps (window id ``WID_BASE | pid``, see ``makos.appmenu``).
+     under XWayland, and MakkOS's own apps (window id ``WID_BASE | pid``, see ``makos.appmenu``).
   3. Nothing: the app keeps its in-window menu and the bar shows only the Window menu.
 """
 import os
@@ -25,7 +25,7 @@ REGISTRAR = '''<node><interface name="com.canonical.AppMenu.Registrar">
 <signal name="WindowUnregistered"><arg type="u"/></signal>
 </interface></node>'''
 
-WID_BASE = 0x40000000  # makos.appmenu registers MakOS apps as WID_BASE | pid
+WID_BASE = 0x40000000  # makos.appmenu registers MakkOS apps as WID_BASE | pid
 PRIVATE_NAME = 'org.makos.AppMenu.Registrar'
 CANONICAL_NAME = 'com.canonical.AppMenu.Registrar'
 
@@ -126,7 +126,7 @@ class GlobalMenu:
             done(None, error)
 
     def endpoint_for_pid(self, pid):
-        """Menu endpoint exported by a process (MakOS apps via WID_BASE | pid, or any registrar client)."""
+        """Menu endpoint exported by a process (MakkOS apps via WID_BASE | pid, or any registrar client)."""
         return pick_endpoint({'pid': pid}, self.windows, self.pids)
 
     def set_active(self, window):

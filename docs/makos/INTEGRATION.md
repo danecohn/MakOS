@@ -40,7 +40,7 @@ rendered real windows and compositor pixels under the private KWin/XWayland rig.
 The program remains the unmodified upstream editor; no source-fork claim is made.
 No sandbox relaxation or AppArmor profile was required for this check.
 
-MakOS itself has not been installed or selected in the normal session by this audit.
+MakkOS itself has not been installed or selected in the normal session by this audit.
 Login/boot themes, PAM and desktop defaults remain unchanged. Keep fallback sessions.
 Railway and Social production services were not deployed.
 
@@ -79,7 +79,7 @@ until the owner confirms it. No package release is published by this repair audi
   errors; treat the galleries as visual evidence, not a comprehensive passing test.
 * Signed local APT index verifies against archive fingerprint
   `9F52BD98A8EE9096B1BE7AAC1063BBC989A11133`. Sandbox dependency simulation resolves
-  all six dev2 packages with zero removals. No MakOS packages installed by the audit.
+  all six dev2 packages with zero removals. No MakkOS packages installed by the audit.
 
 Frame callbacks are virtual-output evidence only; no physical-display 60 fps claim.
 The normal session and hardware gates above remain open.

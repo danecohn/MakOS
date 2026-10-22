@@ -40,7 +40,7 @@ def _entries(directory):
 
 def applies(kv, desktop=None):
     """Whether an autostart entry runs in this desktop (OnlyShowIn / NotShowIn, as the XDG autostart spec defines)."""
-    current = {d for d in (desktop or os.environ.get('XDG_CURRENT_DESKTOP') or 'MakOS').split(':') if d}
+    current = {d for d in (desktop or os.environ.get('XDG_CURRENT_DESKTOP') or 'MakkOS').split(':') if d}
     only = {d for d in kv.get('OnlyShowIn', '').split(';') if d}
     nots = {d for d in kv.get('NotShowIn', '').split(';') if d}
     return (not only or bool(only & current)) and not (nots & current)

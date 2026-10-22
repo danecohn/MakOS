@@ -1,9 +1,10 @@
-# MakOS development preview
+# MakkOS development preview
 
-MakOS is an original Glass & Metal desktop for Ubuntu ARM64 on KWin Wayland.
+MakkOS is an original Glass & Metal desktop for Ubuntu ARM64 on KWin Wayland.
 **This is an early installable development preview, not a completed desktop.**
 Do not remove fallback desktops or everyday file tools on the strength of this preview.
-The owner has not confirmed a real MakOS login or app compatibility.
+The owner has approved the current desktop appearance. Full app compatibility
+and hardware acceptance remain open.
 
 ## Integration status
 
@@ -47,13 +48,13 @@ that the owner's normal session, all real apps, physical touch/pen or login/boot
 
 ## Try and return
 
-After inspecting the verification report, install only the local MakOS packages with
+After inspecting the verification report, install only the local MakkOS packages with
 the provided installer. It does not remove apps, stop the current desktop, select a
 default session, modify PAM or enable any login/boot theme. Finish current work,
-log out normally, choose **MakOS** in the login screen's session selector and log in.
+log out normally, choose **MakkOS** in the login screen's session selector and log in.
 
 To return: log out, choose **Plasma (Wayland)** or **Amerika OS**, and log in.
-If MakOS is blank, press Ctrl+Alt+F3, log in yourself and inspect:
+If MakkOS is blank, press Ctrl+Alt+F3, log in yourself and inspect:
 
 ```sh
 tail -100 ~/.local/state/makos/shell.log
@@ -76,5 +77,5 @@ were stopped/disabled and its package removed, along with the dependent metapack
 About 359 MB of installed files were removed. Existing user data was left untouched;
 no secret store or `.openclaw` directory was inspected. ChatGPT, Claude, Studio suite,
 KWin, Plasma and Amerika session packages are preserved. Broad package cleanup is
-pending MakOS completion and verification. Curated MakOS launcher presentation is
+pending MakkOS completion and verification. Curated MakkOS launcher presentation is
 separate from claiming that all other packages have been uninstalled.

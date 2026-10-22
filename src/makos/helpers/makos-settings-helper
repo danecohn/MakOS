@@ -1,6 +1,6 @@
 #!/usr/bin/python3 -I
-# Adapted for MakOS from Amerika OS (src/os/settings-helper/amerika-settings-helper), GPL-3.0-only, Amerika LLC; MakOS adaptations.
-"""Privileged helper for MakOS Settings. Run through pkexec (polkit action org.makos.settings.manage).
+# Adapted for MakkOS from Amerika OS (src/os/settings-helper/amerika-settings-helper), GPL-3.0-only, Amerika LLC; MakkOS adaptations.
+"""Privileged helper for MakkOS Settings. Run through pkexec (polkit action org.makos.settings.manage).
 
 Actions (nothing else is accepted; arguments are validated before anything else happens, nothing reaches a shell):
   firewall-status            print whether the ufw firewall is enabled (JSON; needs no rights)
@@ -149,7 +149,7 @@ def set_lid_action(value):
     target = path(LOGIND_DROPIN)
     target.parent.mkdir(parents=True, exist_ok=True)
     tmp = target.with_suffix('.tmp')
-    tmp.write_text('# Written by MakOS Settings (Energy Saver). Delete this file to restore the distribution default.\n'
+    tmp.write_text('# Written by MakkOS Settings (Energy Saver). Delete this file to restore the distribution default.\n'
                    f'[Login]\nHandleLidSwitch={LID_VALUES[value]}\nHandleLidSwitchExternalPower={LID_VALUES[value]}\n')
     tmp.chmod(0o644)
     tmp.replace(target)

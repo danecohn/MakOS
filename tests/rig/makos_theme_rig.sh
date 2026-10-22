@@ -1,5 +1,5 @@
 #!/bin/sh
-# Theme/system-skin rig: private D-Bus + KWin + the MakOS shell, then real third-party style windows
+# Theme/system-skin rig: private D-Bus + KWin + the MakkOS shell, then real third-party style windows
 # (GTK 4/3 widget gallery in every variant, Qt widgets, KWin decorations, notification banners,
 # global-menu coverage) photographed through KWin. Evidence for this rig only.
 #   STAGES="gtk qt deco notify menu hidpi"  sh tests/rig/makos_theme_rig.sh      (default: all)
@@ -15,14 +15,14 @@ mkdir -p "$XDG_RUNTIME_DIR" "$XDG_CONFIG_HOME" "$XDG_DATA_HOME/applications" "$X
 chmod 700 "$XDG_RUNTIME_DIR"
 cp "$ROOT/src/makos/session/kwinrc" "$XDG_CONFIG_HOME/kwinrc"
 cp -R "$ROOT/src/makos/theme/decoration" "$XDG_DATA_HOME/kwin/decorations/org.makos.glass"
-# Installed-style themes for third-party apps (GTK_THEME=MakOS ...), generated exactly like the package does.
+# Installed-style themes for third-party apps (GTK_THEME=MakkOS ...), generated exactly like the package does.
 PYTHONPATH="$ROOT/src/makos" python3 -m makos.appearance install-themes "$XDG_DATA_HOME/themes" >/dev/null
 export MAKOS_SHELL_HOST="$ROOT/dist/makos/makos-shell-host"
 [ -x "$MAKOS_SHELL_HOST" ] || cc -O2 "$ROOT/src/makos/shell-host.c" -o "$MAKOS_SHELL_HOST" $(python3-config --embed --ldflags)
 cat > "$XDG_DATA_HOME/applications/org.makos.Shell.desktop" <<EOD
 [Desktop Entry]
 Type=Application
-Name=MakOS Shell
+Name=MakkOS Shell
 Exec=$MAKOS_SHELL_HOST
 NoDisplay=true
 X-KDE-DBUS-Restricted-Interfaces=org.kde.KWin.ScreenShot2

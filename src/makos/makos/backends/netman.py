@@ -13,7 +13,7 @@ from . import sysutil
 
 SSID_MAX = 32
 NAME_OK = re.compile(r'^[^\x00-\x1f]{1,64}$')
-HOTSPOT_NAME = 'MakOS Hotspot'
+HOTSPOT_NAME = 'MakkOS Hotspot'
 
 _bus = None
 

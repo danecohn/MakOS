@@ -1,4 +1,4 @@
-/* MakOS Venture — original Glass & Metal browser chrome, GPL-3.0-only.
+/* MakkOS Venture — original Glass & Metal browser chrome, GPL-3.0-only.
    Browser UI only: web content and the browser's identity/security indicators stay native. */
 :root {
   color-scheme: light !important;
@@ -63,7 +63,7 @@
 #nav-bar .toolbarbutton-icon, #TabsToolbar .toolbarbutton-icon { fill: #3b4652 !important; fill-opacity: 1 !important; }
 #PersonalToolbar { width: 100% !important; min-height: 27px !important; }
 #searchbar-new { min-width: 160px !important; max-width: 230px !important; background: white !important; border-radius: 13px !important; color: #20252b !important; }
-/* Venture's inherited distribution policy collapses bookmarks. MakOS supplies
+/* Venture's inherited distribution policy collapses bookmarks. MakkOS supplies
    its fixed classic bookmarks row within this profile's chrome only. */
 #PersonalToolbar { display: flex !important; visibility: visible !important; flex: 0 0 27px !important; height: 27px !important; max-height: none !important; align-self: stretch !important; }
 #PersonalToolbar > #PlacesToolbar { flex: 1 !important; }

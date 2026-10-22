@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate originals and emit the redistributable MakOS icon theme.
+"""Validate originals and emit the redistributable MakkOS icon theme.
 
 No alpha invention, no background removal. --normalize is explicit resizing of
 AI outputs to the requested canonical resolution. Report includes source size.
@@ -60,7 +60,7 @@ def ingest(source,target,normalize=False,require_all=False):
         except (ValueError,OSError) as error:
             report['errors'].append(str(error))
     dirs=[f'{s}x{s}/apps' for s in SIZES]+['scalable/apps']
-    index=['[Icon Theme]','Name=MakOS','Comment=Original Glass & Metal icons','Inherits=hicolor','Directories='+','.join(dirs),'']
+    index=['[Icon Theme]','Name=MakkOS','Comment=Original Glass & Metal icons','Inherits=hicolor','Directories='+','.join(dirs),'']
     for s in SIZES:
         index += [f'[{s}x{s}/apps]',f'Size={s}','Type=Fixed','Context=Applications','']
     index += ['[scalable/apps]','Size=64','Type=Scalable','MinSize=16','MaxSize=512','Context=Applications','']
@@ -75,7 +75,7 @@ def ingest(source,target,normalize=False,require_all=False):
 def main():
     ap=argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--source',type=Path,default=ROOT/'assets/makos')
-    ap.add_argument('--target',type=Path,default=ROOT/'src/makos/icons/MakOS')
+    ap.add_argument('--target',type=Path,default=ROOT/'src/makos/icons/MakkOS')
     ap.add_argument('--normalize',action='store_true')
     ap.add_argument('--require-all',action='store_true')
     args=ap.parse_args()

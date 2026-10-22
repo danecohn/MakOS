@@ -10,7 +10,7 @@ def main():
     ap.add_argument('--xcursorgen',default='xcursorgen')
     a=ap.parse_args()
     source=ROOT/'src/makos/cursors'
-    target=ROOT/'src/makos/icons/MakOS-Cursors'
+    target=ROOT/'src/makos/icons/MakkOS-Cursors'
     (target/'cursors').mkdir(parents=True,exist_ok=True)
     for config in source.glob('*.cursor'):
         subprocess.run([a.xcursorgen,str(config),str(target/'cursors'/config.stem)],cwd=source,check=True)
@@ -18,6 +18,6 @@ def main():
     for alias,name in aliases.items():
         link=target/'cursors'/alias
         link.unlink(missing_ok=True);link.symlink_to(name)
-    (target/'index.theme').write_text('[Icon Theme]\nName=MakOS Cursors\nComment=Original silver and blue pointers\n')
+    (target/'index.theme').write_text('[Icon Theme]\nName=MakkOS Cursors\nComment=Original silver and blue pointers\n')
     print('Compiled cursor theme:',target)
 if __name__=='__main__':main()

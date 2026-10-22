@@ -79,7 +79,7 @@ class IconCache:
         if name in self.cache:
             return self.cache[name]
         tex = None
-        base = common.SHARE / 'icons/MakOS'
+        base = common.SHARE / 'icons/MakkOS'
         for candidate in (base / '256x256/apps' / (name + '.png'), base / '128x128/apps' / (name + '.png'),
                           base / 'scalable/apps' / ('makos-' + name + '.svg'), base / 'scalable/apps' / (name + '.svg')):
             if candidate.exists():

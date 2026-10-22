@@ -6,7 +6,7 @@ T=$(mktemp -d)
 mkdir -p "$ROOT/dist/makos"
 printf '%s\n' "$T" > "$ROOT/dist/makos/rig-dir"
 export ROOT T
-export XDG_CURRENT_DESKTOP=MakOS XDG_SESSION_DESKTOP=MakOS XDG_SESSION_TYPE=wayland
+export XDG_CURRENT_DESKTOP=MakkOS XDG_SESSION_DESKTOP=MakkOS XDG_SESSION_TYPE=wayland
 export XDG_RUNTIME_DIR="$T/runtime" XDG_CONFIG_HOME="$T/config" XDG_CACHE_HOME="$T/cache" XDG_DATA_HOME="$T/data" XDG_STATE_HOME="$T/state" HOME="$T/home"
 mkdir -p "$XDG_RUNTIME_DIR" "$XDG_CONFIG_HOME" "$XDG_DATA_HOME/applications" "$XDG_DATA_HOME/kwin/decorations" "$HOME"
 chmod 700 "$XDG_RUNTIME_DIR"
@@ -26,7 +26,7 @@ fi
 cat > "$XDG_DATA_HOME/applications/org.makos.Shell.desktop" <<EOF
 [Desktop Entry]
 Type=Application
-Name=MakOS Shell
+Name=MakkOS Shell
 Exec=$MAKOS_SHELL_HOST
 NoDisplay=true
 X-KDE-DBUS-Restricted-Interfaces=org.kde.KWin.ScreenShot2

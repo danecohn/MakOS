@@ -44,12 +44,12 @@ def _theme():
 
 
 def icon_paintable(name, size=48):
-    """Paintable for a MakOS icon name (app PNG art when present, otherwise the vector icon)."""
+    """Paintable for a MakkOS icon name (app PNG art when present, otherwise the vector icon)."""
     key = name
     hit = _TEXTURES.get(key)
     if hit is not None:
         return hit
-    png = common.SHARE / 'icons/MakOS/128x128/apps' / (name + '.png')
+    png = common.SHARE / 'icons/MakkOS/128x128/apps' / (name + '.png')
     paint = None
     if png.exists():
         try:

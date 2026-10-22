@@ -11,7 +11,7 @@ int main(int argc, char **argv)
 {
     char **python_argv = calloc((size_t)argc + 3, sizeof(char *));
     if (!python_argv) {
-        fputs("MakOS Shell: insufficient memory\n", stderr);
+        fputs("MakkOS Shell: insufficient memory\n", stderr);
         return 1;
     }
     python_argv[0] = "/usr/bin/python3.14";

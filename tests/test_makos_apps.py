@@ -301,7 +301,7 @@ class SysInfoTests(unittest.TestCase):
 
     def test_gathered_report_has_no_secrets(self):
         r = sysinfo.report()
-        self.assertIn('MakOS', r)
+        self.assertIn('MakkOS', r)
         self.assertNotIn(str(Path.home()), r)
         self.assertEqual(sysinfo.os_release('/nonexistent'), {})
 
@@ -652,10 +652,10 @@ class CatalogAndPackagingTests(unittest.TestCase):
             self.assertIn(f'Name={app.name}\n', text)
             self.assertIn(f'Exec=makos-app {app.id} %U\n', text)
             self.assertIn(f'Icon=makos-{app.icon}\n', text)
-            self.assertIn('OnlyShowIn=MakOS;', text)
+            self.assertIn('OnlyShowIn=MakkOS;', text)
 
     def test_every_icon_exists_so_nothing_shows_a_placeholder(self):
-        theme = ROOT / 'src/makos/icons/MakOS'
+        theme = ROOT / 'src/makos/icons/MakkOS'
         for app in catalog.APPS:
             self.assertTrue((theme / f'scalable/apps/makos-{app.icon}.svg').exists() or (theme / f'128x128/apps/{app.icon}.png').exists(), app.icon)
 

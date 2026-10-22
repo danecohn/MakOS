@@ -1,4 +1,4 @@
-"""MakOS applications. One module per app; each exposes open_window(app, path=None).
+"""MakkOS applications. One module per app; each exposes open_window(app, path=None).
 
 Apps in SEPARATE run in their own `makos-app` process when started by the shell (crash isolation,
 no heavy libraries inside the shell, and a per-process global menu). Files and Settings also run separately; the private integration rig can explicitly embed them.
@@ -41,7 +41,7 @@ def spawn(app_id, path=None):
 
 
 def which_local(exe):
-    """PATH lookup that also finds MakOS helper scripts in a source checkout (bin/)."""
+    """PATH lookup that also finds MakkOS helper scripts in a source checkout (bin/)."""
     found = shutil.which(exe)
     if found:
         return found
@@ -105,11 +105,11 @@ def launch(app, app_id, path=None):
         module = importlib.import_module('.' + MODULES[app_id], __name__)
         return module.open_window(app, path)
     record = catalog.BY_ID.get(app_id)
-    ui.message(app, record.name if record else 'MakOS', 'This application is not implemented in this development build.')
+    ui.message(app, record.name if record else 'MakkOS', 'This application is not implemented in this development build.')
 
 
 class Applications(Gtk.Application):
-    """Standalone process for one MakOS app (makos-app <id> [files...])."""
+    """Standalone process for one MakkOS app (makos-app <id> [files...])."""
 
     def __init__(self, app_id, path=None):
         flags = Gio.ApplicationFlags.HANDLES_OPEN | (Gio.ApplicationFlags.DEFAULT_FLAGS if app_id in SINGLE_INSTANCE else Gio.ApplicationFlags.NON_UNIQUE)

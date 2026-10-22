@@ -19,7 +19,7 @@ handle=log.open('w')
 shell=subprocess.Popen([str(payload/'usr/bin/makos-shell')],env=env,stdout=handle,stderr=subprocess.STDOUT)
 children=[]
 for folder in ('Documents','Downloads','Pictures','Desktop','Music'):(Path.home()/folder).mkdir(exist_ok=True)
-(Path.home()/'Documents/Welcome.txt').write_text('MakOS private-rig sample document.\n')
+(Path.home()/'Documents/Welcome.txt').write_text('MakkOS private-rig sample document.\n')
 
 def wait(fn,seconds=25):
     end=time.monotonic()+seconds

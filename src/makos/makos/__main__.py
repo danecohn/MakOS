@@ -5,7 +5,7 @@ from gi.repository import GLib
 from .catalog import BY_ID
 name=sys.argv[1] if len(sys.argv)>1 else 'files'
 if name not in BY_ID:
-    sys.exit('Unknown MakOS application')
+    sys.exit('Unknown MakkOS application')
 # Wayland app_id: matches the desktop entry (makos-<id>) so the launcher can show the running dot.
 GLib.set_prgname('makos-'+name)
 from .apps import Applications

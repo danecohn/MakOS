@@ -1,4 +1,4 @@
-"""MakOS cosmetic overlays for the retained Studio suite; upstream identities stay stable."""
+"""MakkOS cosmetic overlays for the retained Studio suite; upstream identities stay stable."""
 import os
 import sys
 from pathlib import Path

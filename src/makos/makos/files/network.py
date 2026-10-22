@@ -1,6 +1,6 @@
 """Devices (mount/unmount/eject) and Shared/Network locations through GIO + gvfs.
 
-Passwords are never read or stored by MakOS: Gtk.MountOperation shows the standard credential prompt owned by
+Passwords are never read or stored by MakkOS: Gtk.MountOperation shows the standard credential prompt owned by
 the system's authentication agent and gvfs/keyring.
 """
 import re

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE policyconfig PUBLIC "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN" "http://www.freedesktop.org/standards/PolicyKit/1.0/policyconfig.dtd">
 <policyconfig>
-  <vendor>MakOS</vendor>
+  <vendor>MakkOS</vendor>
   <action id="org.makos.software.manage">
     <description>Install, remove or update system software</description>
     <message>Authentication is required to change installed software</message>

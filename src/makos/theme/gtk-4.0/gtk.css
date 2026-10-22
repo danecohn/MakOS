@@ -1,4 +1,4 @@
-/* MakOS Glass & Metal for GTK 4. Original CSS/geometry, GPL-3.0-only.
+/* MakkOS Glass & Metal for GTK 4. Original CSS/geometry, GPL-3.0-only.
  * Variants (Graphite, accents) are produced by appending @define-color overrides
  * (see makos/appearance.py): the later definition wins, so this file is a complete
  * default (aqua blue) theme on its own. Checkmarks/arrows are inline original SVG. */

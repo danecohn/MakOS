@@ -1,4 +1,4 @@
-"""Accessibility backend: text size, contrast and motion (MakOS + toolkit keys), keyboard aids (kaccessrc), Orca, KWin zoom."""
+"""Accessibility backend: text size, contrast and motion (MakkOS + toolkit keys), keyboard aids (kaccessrc), Orca, KWin zoom."""
 from .. import common
 from . import look, sysutil
 
@@ -25,7 +25,7 @@ def set_text_scale(scale):
     if not 1.0 <= scale <= 2.0:
         raise ValueError('Text scale must be between 1.0 and 2.0.')
     sysutil.gsettings_set(GNOME_IFACE, 'text-scaling-factor', scale)  # other GTK applications
-    look.put(text_scale=scale)  # MakOS applications (CSS)
+    look.put(text_scale=scale)  # MakkOS applications (CSS)
     return scale
 
 

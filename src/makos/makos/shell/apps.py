@@ -1,4 +1,4 @@
-"""Window identity adapters; MakOS launch policy lives in its curated catalog."""
+"""Window identity adapters; MakkOS launch policy lives in its curated catalog."""
 from gi.repository import Gio
 
 def lookup(desktop_id):

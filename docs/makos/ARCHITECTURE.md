@@ -1,6 +1,6 @@
-# MakOS architecture
+# MakkOS architecture
 
-MakOS is an independent, opt-in ARM64 Wayland session on Ubuntu. It reuses the
+MakkOS is an independent, opt-in ARM64 Wayland session on Ubuntu. It reuses the
 working compositor/session patterns from Amerika OS without running either
 Plasma shell or GNOME Shell. Internal inspiration: classic 2009-era Mac desktop conventions.
 All product-facing names and shipped graphics are original.
@@ -11,7 +11,7 @@ Measured on the execution host on 2026-10-22: aarch64; KWin 6.7.5;
 GTK 4.24.1; gtk4-layer-shell 1.3.0; Mesa Vulkan drivers 26.2.4;
 DejaVu Sans 2.37. This proves the available environment, not an owner's acceptance test.
 The existing 408-test suite passed (one skip); the existing private KWin tray rig passed.
-Early MakOS smoke starts reached mapped-shell ready in 2.27–2.32 seconds,
+Early MakkOS smoke starts reached mapped-shell ready in 2.27–2.32 seconds,
 including Python import and library startup. Screenshot and timing logs accompany builds.
 
 Keep GTK4/layer-shell: it is already installed and proven with KWin on this machine;
@@ -46,7 +46,7 @@ redistribution licence already shipped with Ubuntu; no font is copied from a pro
 * Seek has a separate low-priority SQLite FTS index over visible user folders,
   excludes secret/configuration locations and never follows symlinks. It can query
   localsearch when reachable. Hardware-scale indexing is still an acceptance gate.
-* MakOS's curated app catalog offers one visible entry per task. It does not enumerate
+* MakkOS's curated app catalog offers one visible entry per task. It does not enumerate
   every installed launcher. This is presentation cleanup, not package removal.
 * Studio cosmetics are generated copies under `compat/`; serialized project formats,
   backend IDs, licences and configuration remain compatible. No credential files are read
@@ -63,7 +63,7 @@ replacement for mature file managers' full safe editing/trash/network functional
 ## Packaging
 
 `tools/builders/makos.py` registers six separate packages with an independent
-`0.1.0~dev1` version. It adds no MakOS dependency to Amerika OS. Only the new
+`0.1.0~dev1` version. It adds no MakkOS dependency to Amerika OS. Only the new
 packages are built; existing large packages are never regenerated. `makos-apps`
 recommends the real terminal/browser/office engines, it does not misrepresent wrappers
 as new rendering engines. Local signed staging is isolated under `dist/makos`.
@@ -79,7 +79,7 @@ decoration; the theme loaded and its screenshot was inspected. Shell-owned captu
 sets `hide-caller-windows=false` for ScreenShot2 v5. No software-rendering workaround
 is used in the final rig. Native utilities normally run in their own processes; the
 UI introspection rig embeds them explicitly and also tests the separate entry point.
-MakOS-owned widget CSS has priority above existing per-user CSS so an older desktop's
+MakkOS-owned widget CSS has priority above existing per-user CSS so an older desktop's
 custom styling cannot override the shell; those configuration files are never edited.
 
 The session supervisor also guards the ready marker: a process that stays alive but

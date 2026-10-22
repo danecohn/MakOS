@@ -1,4 +1,4 @@
-"""Validation of the MakOS settings.json keys owned by the Settings panes. Pure Python (no GTK, no I/O).
+"""Validation of the MakkOS settings.json keys owned by the Settings panes. Pure Python (no GTK, no I/O).
 
 `clean(data)` repairs a loaded settings dict in place: unknown or invalid values fall back to defaults, so a hand-edited
 or corrupt file can never crash the shell.

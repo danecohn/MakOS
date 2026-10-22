@@ -1,4 +1,4 @@
-"""Desks & Spread: number of desks, hot corners and the MakOS window-management shortcuts."""
+"""Desks & Spread: number of desks, hot corners and the MakkOS window-management shortcuts."""
 from ..backends import desks
 from . import shortcuts_ui, widgets as W
 

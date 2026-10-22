@@ -261,7 +261,7 @@ class FakeSystem:
             props = {'IsPresent': _unit(True, 'b'), 'Percentage': _unit(64.0, 'd'), 'State': _unit(2, 'u'), 'TimeToEmpty': _unit(10800, 'x'), 'TimeToFull': _unit(0, 'x')}
             return json.dumps({'type': 'a{sv}', 'data': [props]})
         if 'org.kde.Solid.PowerManagement' in text:
-            return FAIL  # powerdevil is not running in the MakOS session
+            return FAIL  # powerdevil is not running in the MakkOS session
         if 'InputDeviceManager' in text and 'devicesSysNames' in text:
             return 'as 2 "event3" "event4"'
         if '/org/kde/KWin/InputDevice/' in text and 'get-property' in text:

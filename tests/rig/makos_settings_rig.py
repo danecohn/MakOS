@@ -51,7 +51,7 @@ for i, colour in enumerate(((40, 90, 160), (30, 120, 90), (140, 70, 60))):
 (CFG / 'autostart/syncthing.desktop').write_text('[Desktop Entry]\nType=Application\nName=File Sync\nExec=syncthing serve --no-browser\n')
 comp = CFG / 'makos/compositor'
 comp.mkdir(parents=True, exist_ok=True)
-(comp / 'kglobalshortcutsrc').write_text('[kwin]\nMakOS: Seek=Meta+Space,Meta+Space,Seek\n[other]\nlaunch calculator=Meta+F10,none,Calc\n')
+(comp / 'kglobalshortcutsrc').write_text('[kwin]\nMakkOS: Seek=Meta+Space,Meta+Space,Seek\n[other]\nlaunch calculator=Meta+F10,none,Calc\n')
 
 fake = FakeSystem()
 sysutil.set_runner(fake, fake.which)

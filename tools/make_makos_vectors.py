@@ -2,7 +2,7 @@
 """Original compact vector assets for the development preview (not AI icon substitutes)."""
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
-OUT=ROOT/'src/makos/icons/MakOS/scalable/apps'
+OUT=ROOT/'src/makos/icons/MakkOS/scalable/apps'
 DEFS='''<defs><linearGradient id="blue" x2=".2" y2="1"><stop stop-color="#c6edff"/><stop offset=".48" stop-color="#62b4ed"/><stop offset=".5" stop-color="#3182c3"/><stop offset="1" stop-color="#80c2ef"/></linearGradient><linearGradient id="silver" x2="0" y2="1"><stop stop-color="#fff"/><stop offset=".5" stop-color="#e2e8ed"/><stop offset="1" stop-color="#9dabb9"/></linearGradient><linearGradient id="paper" x2="0" y2="1"><stop stop-color="#fffef5"/><stop offset="1" stop-color="#e0e5e5"/></linearGradient></defs>'''
 FOLDER='<path d="M8 22 Q8 17 13 17 H26 L32 23 H55 Q59 23 59 28 L55 53 H9Z" fill="url(#blue)" stroke="#3675a4"/><path d="M10 31 H57 L53 53 H10Z" fill="#72b7e4" opacity=".7"/><path d="M10 30 H57" stroke="white" opacity=".8"/>'
 PAGE='<path d="M16 7 H41 L51 18 V56 H16Z" fill="url(#paper)" stroke="#8a9cad"/><path d="M41 7 V18 H51" fill="#b5d1ea" stroke="#8a9cad"/>'

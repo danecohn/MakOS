@@ -87,7 +87,7 @@ def set_threshold(value):
 
 
 def lid_action(path=LOGIND_DROPIN):
-    """The lid action MakOS has configured (from its logind drop-in, readable by everyone); '' = distribution default."""
+    """The lid action MakkOS has configured (from its logind drop-in, readable by everyone); '' = distribution default."""
     try:
         for line in path.read_text().splitlines():
             if line.startswith('HandleLidSwitch='):

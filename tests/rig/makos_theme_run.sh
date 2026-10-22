@@ -40,15 +40,15 @@ gallery() {  # gallery NAME GTKVER THEME [args]
   stop
 }
 if has gtk; then
-  gallery gallery-gtk4 4 MakOS
-  gallery gallery-gtk3 3 MakOS
-  gallery gallery-gtk4-graphite 4 MakOS-Graphite
-  gallery gallery-gtk3-graphite 3 MakOS-Graphite
-  gallery gallery-gtk4-green 4 MakOS-Green
-  gallery gallery-gtk4-menu 4 MakOS --menu
-  gallery gallery-gtk3-menu 3 MakOS --menu
-  gallery gallery-gtk4-sheet 4 MakOS --sheet
-  gallery gallery-gtk3-sheet 3 MakOS --sheet
+  gallery gallery-gtk4 4 MakkOS
+  gallery gallery-gtk3 3 MakkOS
+  gallery gallery-gtk4-graphite 4 MakkOS-Graphite
+  gallery gallery-gtk3-graphite 3 MakkOS-Graphite
+  gallery gallery-gtk4-green 4 MakkOS-Green
+  gallery gallery-gtk4-menu 4 MakkOS --menu
+  gallery gallery-gtk3-menu 3 MakkOS --menu
+  gallery gallery-gtk4-sheet 4 MakkOS --sheet
+  gallery gallery-gtk3-sheet 3 MakkOS --sheet
 fi
 qtenv() { eval "$(python3 -m makos.qtskin env)"; python3 -m makos.qtskin setup >/dev/null; }
 if has qt; then
@@ -86,13 +86,13 @@ menu_case() {  # menu_case NAME COMMAND...: start an app, dump the registrar, ph
 }
 if has menu; then   # default registrar (private name): Wayland-native clients must keep their in-window menus
   menu_case qt-wayland sh -c 'eval "$(python3 -m makos.qtskin env)"; exec python3 "$ROOT/tests/rig/makos_qt_window.py" --hold 30'
-  menu_case gtk3-wayland sh -c 'GTK_THEME=MakOS exec python3 "$ROOT/tests/rig/makos_gtk3_menu_app.py" 30'
+  menu_case gtk3-wayland sh -c 'GTK_THEME=MakkOS exec python3 "$ROOT/tests/rig/makos_gtk3_menu_app.py" 30'
 fi
 if has xmenu; then  # canonical registrar name + XWayland clients (registered by X11 window id, matched by PID)
   say "DISPLAY for X11 clients: $DISPLAY"
   menu_case qt-xwayland sh -c 'eval "$(python3 -m makos.qtskin env)"; QT_QPA_PLATFORM=xcb exec python3 "$ROOT/tests/rig/makos_qt_window.py" --hold 30'
-  menu_case gtk3-xwayland sh -c 'GDK_BACKEND=x11 GTK_MODULES=appmenu-gtk-module GTK_THEME=MakOS exec python3 "$ROOT/tests/rig/makos_gtk3_menu_app.py" 30'
-  menu_case gtk3-wayland-hidden sh -c 'GTK_MODULES=appmenu-gtk-module GTK_THEME=MakOS exec python3 "$ROOT/tests/rig/makos_gtk3_menu_app.py" 30'
+  menu_case gtk3-xwayland sh -c 'GDK_BACKEND=x11 GTK_MODULES=appmenu-gtk-module GTK_THEME=MakkOS exec python3 "$ROOT/tests/rig/makos_gtk3_menu_app.py" 30'
+  menu_case gtk3-wayland-hidden sh -c 'GTK_MODULES=appmenu-gtk-module GTK_THEME=MakkOS exec python3 "$ROOT/tests/rig/makos_gtk3_menu_app.py" 30'
 fi
 call quit
 wait "$SHELL_PID" 2>/dev/null

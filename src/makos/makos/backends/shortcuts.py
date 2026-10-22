@@ -1,10 +1,10 @@
-# Adapted for MakOS from Amerika OS (src/os/amerika/shortcuts.py), GPL-3.0-only, Amerika LLC; MakOS adaptations.
+# Adapted for MakkOS from Amerika OS (src/os/amerika/shortcuts.py), GPL-3.0-only, Amerika LLC; MakkOS adaptations.
 """Global shortcut editor backend.
 
 The shortcut *definitions* come from bridge/bridge.js (`registerShortcut(title, description, default, ...)`); the
 *current* keys live in KDE's global-accelerator store (kglobalshortcutsrc, component "kwin"). Changes go through
 org.kde.KGlobalAccel over D-Bus, so they apply immediately and persist. Conflicts are checked against every other
-MakOS shortcut and every shortcut KDE has registered.
+MakkOS shortcut and every shortcut KDE has registered.
 """
 import re
 from pathlib import Path
@@ -55,7 +55,7 @@ def definitions(text=None):
     if _SIDES.search(text):
         for side in ('Left', 'Right'):
             add('Tile ' + side, 'Meta+' + side)
-    # anything else the running session registered under the MakOS prefix (default = second field of the store entry)
+    # anything else the running session registered under the MakkOS prefix (default = second field of the store entry)
     for action, (_keys, default) in read_store_full().get(COMPONENT, {}).items():
         if action.startswith(PREFIX):
             add(action[len(PREFIX):], default)
@@ -181,7 +181,7 @@ def current(title):
 
 
 def listing():
-    """Every MakOS shortcut with its current and default keys and its conflicts."""
+    """Every MakkOS shortcut with its current and default keys and its conflicts."""
     store = read_store()
     defs = definitions()
     cur_map = {d['id']: (store.get(COMPONENT, {}).get(d['id'], None)) for d in defs}
@@ -207,18 +207,18 @@ def conflicts(title, seq, store=None, current_override=None):
             continue
         for action, keys in actions.items():
             if comp == COMPONENT and action in mine:
-                continue  # MakOS actions are checked against their live values below
+                continue  # MakkOS actions are checked against their live values below
             if seq in keys and not (comp == COMPONENT and action == title):
                 found.append({'component': comp, 'action': action})
     live = current_override or {d['id']: current(d['id']) for d in definitions()}
     for action, key in live.items():
         if action != title and key == seq:
-            found.append({'component': 'MakOS', 'action': action})
+            found.append({'component': 'MakkOS', 'action': action})
     return found
 
 
 def set_shortcut(title, seq, allow_conflict=False):
-    """Change one MakOS shortcut. Raises ValueError for unknown actions, bad keys or (unless allowed) conflicts."""
+    """Change one MakkOS shortcut. Raises ValueError for unknown actions, bad keys or (unless allowed) conflicts."""
     if title not in {d['id'] for d in definitions()}:
         raise ValueError('Unknown shortcut.')
     seq = normalise(seq)

@@ -1,4 +1,4 @@
-"""Rewind: honest backup status. No backup job is created by MakOS yet."""
+"""Rewind: honest backup status. No backup job is created by MakkOS yet."""
 from ..backends import rewind
 from . import widgets as W
 

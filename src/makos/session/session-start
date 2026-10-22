@@ -37,7 +37,7 @@ guard_ready() {
     n=$((n+1))
     sleep .5
   done
-  printf 'MakOS startup watchdog: ready marker absent; restarting shell\n' >> "$LOGDIR/shell.log"
+  printf 'MakkOS startup watchdog: ready marker absent; restarting shell\n' >> "$LOGDIR/shell.log"
   kill -TERM "$target" 2>/dev/null || true
 }
 crashes=0
@@ -45,7 +45,7 @@ while [ "$crashes" -lt 5 ]; do
   ready_file="${XDG_RUNTIME_DIR:-/tmp}/makos/shell-ready"
   rm -f "$ready_file"
   started=$(date +%s)
-  printf '\nMakOS session start\n' >> "$LOGDIR/shell.log"
+  printf '\nMakkOS session start\n' >> "$LOGDIR/shell.log"
   "${MAKOS_BIN:-/usr/bin}/makos-shell" >> "$LOGDIR/shell.log" 2>&1 &
   shell_pid=$!
   guard_ready "$shell_pid" &
@@ -56,7 +56,7 @@ while [ "$crashes" -lt 5 ]; do
   wait "$watchdog_pid" 2>/dev/null || true
   watchdog_pid=""
   if [ "$code" = 0 ] && [ "$(cat "$ready_file" 2>/dev/null)" != "$shell_pid" ]; then
-    printf "MakOS shell exited before reporting ready\n" >> "$LOGDIR/shell.log"
+    printf "MakkOS shell exited before reporting ready\n" >> "$LOGDIR/shell.log"
     code=1
   fi
   shell_pid=""

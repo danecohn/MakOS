@@ -1,4 +1,4 @@
-/* Shared MakOS app widgets. Original, GPL-3.0-only. */
+/* Shared MakkOS app widgets. Original, GPL-3.0-only. */
 .app-menubar { background: linear-gradient(#fbfbfc,#e2e5e9); border-bottom: 1px solid #a4abb3; padding: 0 4px; min-height: 24px; }
 .app-menubar > item { padding: 3px 10px; border-radius: 0; }
 .app-menubar > item:hover, .app-menubar > item:checked { background: linear-gradient(#65a6e9,#266bc1); color: #fff; }

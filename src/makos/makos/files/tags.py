@@ -1,7 +1,7 @@
 """Tags (user.xdg.tags) and comments (user.xdg.comment) in extended attributes.
 
 When a filesystem has no user xattrs the values fall back to a small private JSON
-sidecar under the MakOS state directory; user files are never modified in that case.
+sidecar under the MakkOS state directory; user files are never modified in that case.
 A path index lets the sidebar list tagged files without crawling the disk.
 """
 import errno

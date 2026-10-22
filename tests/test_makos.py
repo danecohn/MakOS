@@ -1,4 +1,4 @@
-"""MakOS logic/security/packaging boundary regressions."""
+"""MakkOS logic/security/packaging boundary regressions."""
 import importlib.util
 import tempfile
 import unittest
@@ -9,7 +9,7 @@ ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'src/makos'))
 from makos import search,catalog
 
-class MakOSTests(unittest.TestCase):
+class MakkOSTests(unittest.TestCase):
     def test_calculator_and_resource_limits(self):
         self.assertEqual(search.calculate('(15 + 5) * 3 / 2'),'30')
         self.assertEqual(search.calculate('-12.5 * 2'),'-25')

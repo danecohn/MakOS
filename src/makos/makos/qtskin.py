@@ -1,12 +1,12 @@
-"""Qt skin plumbing for MakOS sessions: which platform theme/style to use, and the qt6ct config.
+"""Qt skin plumbing for MakkOS sessions: which platform theme/style to use, and the qt6ct config.
 
-Policy (only ever applied inside a MakOS session, through ``python3 -m makos.qtskin env``):
-  * qt6ct installed        -> QT_QPA_PLATFORMTHEME=qt6ct, Fusion + MakOS palette + MakOS QSS (default, verified in the rig)
-  * Kvantum installed      -> style kvantum with the MakOS theme (experimental; MAKOS_QT_STYLE=kvantum opts in)
+Policy (only ever applied inside a MakkOS session, through ``python3 -m makos.qtskin env``):
+  * qt6ct installed        -> QT_QPA_PLATFORMTHEME=qt6ct, Fusion + MakkOS palette + MakkOS QSS (default, verified in the rig)
+  * Kvantum installed      -> style kvantum with the MakkOS theme (experimental; MAKOS_QT_STYLE=kvantum opts in)
   * MAKOS_QT_PLATFORMTHEME=kde (needs plasma-integration) is the only way a Qt app exports its menu to the
     shell's global menu on Wayland; the colours then come from the user's KDE scheme unless Kvantum is active.
 Nothing here touches the user's config except creating ``qt6ct/qt6ct.conf`` and ``Kvantum/kvantum.kvconfig``
-when they do not exist; both are read only when the matching style/platform theme is selected, which only a MakOS
+when they do not exist; both are read only when the matching style/platform theme is selected, which only a MakkOS
 session does. GPL-3.0-only.
 """
 import glob
@@ -42,7 +42,7 @@ def qss_text(directory=QT_DIR):
 
 
 def qt6ct_conf(qss_path, palette_path):
-    return ('[Appearance]\ncolor_scheme_path=%s\ncustom_palette=true\nicon_theme=MakOS\nstandard_dialogs=default\nstyle=Fusion\n\n'
+    return ('[Appearance]\ncolor_scheme_path=%s\ncustom_palette=true\nicon_theme=MakkOS\nstandard_dialogs=default\nstyle=Fusion\n\n'
             '[Fonts]\nfixed="DejaVu Sans Mono,10,-1,5,50,0,0,0,0,0"\ngeneral="DejaVu Sans,10,-1,5,50,0,0,0,0,0"\n\n'
             '[Interface]\ndouble_click_interval=400\ncursor_flash_time=1000\nbuttonbox_layout=0\nmenus_have_icons=false\n'
             'activate_item_on_single_click=1\ndialog_buttons_have_icons=0\nstylesheets=%s\nunderline_shortcut=1\n'
@@ -51,7 +51,7 @@ def qt6ct_conf(qss_path, palette_path):
 
 
 def kvantum_conf():
-    return '[General]\ntheme=MakOS\n'
+    return '[General]\ntheme=MakkOS\n'
 
 
 def write_config(config_home=None, data_home=None):
@@ -81,8 +81,8 @@ def plugin_exists(kind, name, dirs=None):
     return any(glob.glob(p) for p in patterns)
 
 
-def environment(env=None, exists=plugin_exists, cursor_dir='/usr/share/icons/MakOS-Cursors'):
-    """Variables to export for a MakOS session. Pure given ``exists``; honours explicit MAKOS_QT_* overrides."""
+def environment(env=None, exists=plugin_exists, cursor_dir='/usr/share/icons/MakkOS-Cursors'):
+    """Variables to export for a MakkOS session. Pure given ``exists``; honours explicit MAKOS_QT_* overrides."""
     env = os.environ if env is None else env
     out = {}
     want = env.get('MAKOS_QT_PLATFORMTHEME', '')
@@ -98,8 +98,8 @@ def environment(env=None, exists=plugin_exists, cursor_dir='/usr/share/icons/Mak
         out['QT_STYLE_OVERRIDE'] = 'Fusion'
     share = str(SHARE)
     out['XDG_CONFIG_DIRS'] = ':'.join([share + '/theme/xdg'] + [p for p in env.get('XDG_CONFIG_DIRS', '/etc/xdg').split(':') if p and p != share + '/theme/xdg'])
-    if Path(cursor_dir).exists() or Path(share, 'icons', 'MakOS-Cursors').exists():
-        out['XCURSOR_THEME'] = 'MakOS-Cursors'
+    if Path(cursor_dir).exists() or Path(share, 'icons', 'MakkOS-Cursors').exists():
+        out['XCURSOR_THEME'] = 'MakkOS-Cursors'
         out.setdefault('XCURSOR_SIZE', env.get('XCURSOR_SIZE') or '24')
     out['GTK_USE_PORTAL'] = env.get('GTK_USE_PORTAL', '') or ''
     if not out['GTK_USE_PORTAL']:

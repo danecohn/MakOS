@@ -45,7 +45,7 @@ def seed(home):
     if gst:
         subprocess.run([gst, '-q', 'videotestsrc', 'num-buffers=300', 'pattern=ball', '!', 'video/x-raw,width=480,height=270,framerate=15/1', '!', 'videoconvert', '!', 'theoraenc', '!', 'oggmux', 'name=m',
                         '!', 'filesink', f'location={video}', 'audiotestsrc', 'num-buffers=430', 'freq=300', '!', 'audioconvert', '!', 'vorbisenc', '!', 'm.'], check=False, timeout=90, capture_output=True)
-        (videos / 'test-pattern.srt').write_text('1\n00:00:00,500 --> 00:00:09,000\nMakOS subtitle test line\n\n2\n00:00:10,000 --> 00:00:19,000\nSecond subtitle\n')
+        (videos / 'test-pattern.srt').write_text('1\n00:00:00,500 --> 00:00:09,000\nMakkOS subtitle test line\n\n2\n00:00:10,000 --> 00:00:19,000\nSecond subtitle\n')
     import cairo
     pdf = docs / 'Sample.pdf'
     surface = cairo.PDFSurface(str(pdf), 420, 560)
@@ -61,7 +61,7 @@ def seed(home):
         c.set_font_size(14)
         for line in range(12):
             c.move_to(40, 140 + line * 24)
-            c.show_text('MakOS Preview renders this paragraph line %d of the test document.' % line)
+            c.show_text('MakkOS Preview renders this paragraph line %d of the test document.' % line)
         surface.show_page()
     surface.finish()
     (docs / 'Welcome.txt').write_text('A private rig document.\nSecond line to edit.\nThird line.\n')

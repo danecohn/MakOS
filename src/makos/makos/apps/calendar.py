@@ -66,7 +66,7 @@ def fold(line):
 
 def to_ics(event):
     stamp = dt.datetime.now(dt.timezone.utc).strftime('%Y%m%dT%H%M%SZ')
-    lines = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//MakOS//Calendar//EN', 'BEGIN:VEVENT', 'UID:' + event.uid, 'DTSTAMP:' + stamp]
+    lines = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//MakkOS//Calendar//EN', 'BEGIN:VEVENT', 'UID:' + event.uid, 'DTSTAMP:' + stamp]
     if event.all_day:
         lines += ['DTSTART;VALUE=DATE:' + event.start.strftime('%Y%m%d'), 'DTEND;VALUE=DATE:' + (event.end if event.end > event.start else event.start + dt.timedelta(days=1)).strftime('%Y%m%d')]
     else:
