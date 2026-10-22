@@ -44,6 +44,8 @@ class Branding:
         path=Path(path).resolve()
         if path.parent!=self.state.resolve():raise RuntimeError('Snapshot must belong to the branding recovery directory.')
         manifest=json.loads((path/'manifest.json').read_text())
+        images=[str(path/rel) for rel,existed in manifest['files'].items() if existed and rel.startswith('boot/initrd.img-') and '/' not in rel[len('boot/'):]]
+        if images:self.run('/usr/sbin/makk-boot-check','--images',*images)
         for rel,existed in manifest['files'].items():
             # Do not accept arbitrary paths even in a modified snapshot manifest.
             if rel not in FILES and not (rel.startswith('boot/initrd.img-') and '/' not in rel[len('boot/'):]):raise RuntimeError('Invalid recovery path')
@@ -63,6 +65,7 @@ class Branding:
             if not (self.root/rel).is_file():raise RuntimeError('Install the Makk OS theme package first: '+rel)
         if (self.state/'active').exists() or (self.state/'pending').exists():raise RuntimeError('Branding is already active. Revert before applying again.')
         if shutil.disk_usage(self.root/'boot').free < 600*1024*1024:raise RuntimeError('At least 600 MiB free on /boot is required for safe initramfs regeneration.')
+        self.run('/usr/sbin/makk-boot-check')
         snapshot=self.snapshot()
         (self.state/'pending').write_text(snapshot.name+'\n')
         try:
@@ -78,6 +81,7 @@ class Branding:
             self.run('update-alternatives','--install','/usr/share/plymouth/themes/default.plymouth','default.plymouth',THEME,'80')
             self.run('update-alternatives','--set','default.plymouth',THEME)
             self.run('update-initramfs','-u','-k','all')
+            self.run('/usr/sbin/makk-boot-check')
             self.run('update-grub')
             (self.state/'active').write_text(snapshot.name+'\n')
             (self.state/'pending').unlink(missing_ok=True)

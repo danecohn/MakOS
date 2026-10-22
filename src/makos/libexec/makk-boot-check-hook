@@ -1,0 +1,8 @@
+#!/bin/sh
+# Validate before mkinitramfs publishes its .new image. No encryption changes.
+set -eu
+if [ "${1:-}" = prereqs ]; then
+    echo 'cryptroot lvm2'
+    exit 0
+fi
+/usr/sbin/makk-boot-check --staging "$DESTDIR"

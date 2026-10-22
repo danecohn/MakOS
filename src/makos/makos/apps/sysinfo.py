@@ -10,7 +10,7 @@ from gi.repository import Gtk, Gdk, GLib
 from .. import ui, common
 from .base import AppWindow, human
 
-VERSION = '0.1.0~dev6'
+VERSION = '0.1.0~dev7'
 REDACTIONS = [
     (re.compile(r'\b(?:[0-9A-Fa-f]{2}[:-]){5}[0-9A-Fa-f]{2}\b'), '<mac>'),
     (re.compile(r'\b\d{1,3}(?:\.\d{1,3}){3}\b'), '<ip>'),

@@ -31,3 +31,36 @@ class RecoveryTests(unittest.TestCase):
    with self.assertRaises(RuntimeError):service.apply()
    self.assertEqual((root/'boot/initrd.img-fixture').read_bytes(),b'# original fixture\n')
    self.assertFalse((service.state/'active').exists());self.assertFalse((service.state/'pending').exists())
+
+ def test_missing_unlock_support_blocks_activation_before_mutation(self):
+  with tempfile.TemporaryDirectory() as tmp:
+   root=Path(tmp);service=self.fixture(root);original=service.run
+   def run(*args):
+    if args[0]=='/usr/sbin/makk-boot-check':raise RuntimeError('missing cryptroot')
+    return original(*args)
+   service.run=run
+   with self.assertRaisesRegex(RuntimeError,'missing cryptroot'):service.apply()
+   self.assertFalse((root/branding.FILES[0]).exists())
+   self.assertFalse((service.state/'pending').exists())
+ def test_bad_new_image_restores_validated_previous_image(self):
+  with tempfile.TemporaryDirectory() as tmp:
+   root=Path(tmp);service=self.fixture(root);original=service.run;checks=[]
+   def run(*args):
+    if args[0]=='/usr/sbin/makk-boot-check':
+     checks.append(args)
+     if len(checks)==2:raise RuntimeError('new image lacks unlock support')
+    return original(*args)
+   service.run=run
+   with self.assertRaisesRegex(RuntimeError,'new image'):service.apply()
+   self.assertEqual((root/'boot/initrd.img-fixture').read_bytes(),b'# original fixture\n')
+   self.assertEqual(checks[2][1],'--images')
+ def test_stale_recovery_image_is_rejected_before_restore(self):
+  with tempfile.TemporaryDirectory() as tmp:
+   root=Path(tmp);service=self.fixture(root);service.apply();original=service.run
+   def run(*args):
+    if args[0]=='/usr/sbin/makk-boot-check':raise RuntimeError('stale snapshot lacks cryptroot')
+    return original(*args)
+   service.run=run
+   with self.assertRaisesRegex(RuntimeError,'stale snapshot'):service.revert()
+   self.assertEqual((root/'boot/initrd.img-fixture').read_bytes(),b'rebuilt fixture')
+   self.assertTrue((service.state/'active').exists())

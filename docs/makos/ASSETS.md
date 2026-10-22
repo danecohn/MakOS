@@ -82,3 +82,14 @@ The lock-screen QML is derived from the installed KDE Plasma 6.7.5 shell lock
 screen, GPL-2.0-or-later, copyright Aleix Pol Gonzalez and the other KDE authors
 listed in each source file. Its authentication and unlock flow are retained.
 The background and brand header are downstream changes by Cherry Blossom LLC.
+
+## Encrypted-root boot guard
+
+`makk-boot-check` validates active root dependencies against `/etc/crypttab` and
+each initramfs. It checks mapping name/UUID, explicit initramfs inclusion,
+cryptsetup, native passphrase prompt, cryptroot scripts, and LVM where required.
+It never opens key files or changes encryption. The initramfs build hook validates
+the staged tree after cryptroot/lvm2 hooks, before update-initramfs publishes it.
+Brand activation validates images before/after rebuilding; revert refuses stale
+snapshots without current encrypted-root support. Packages never activate themes.
+A passing guard is a structural check, not a real boot/unlock acceptance test.

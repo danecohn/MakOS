@@ -3,7 +3,7 @@ import shutil
 import os
 import subprocess
 
-VERSION='0.1.0~dev6'
+VERSION='0.1.0~dev7'
 NAMES=('makos-session','makos-shell','makos-theme','makos-icons','makos-apps','makos-desktop')
 
 
@@ -46,6 +46,8 @@ def register(b):
         shutil.copytree(source/'theme/sddm',p.path('/usr/share/sddm/themes/makk'))
         shutil.copytree(source/'theme/plymouth',p.path('/usr/share/plymouth/themes/makk'))
         p.copy(source/'libexec/makk-branding','/usr/sbin/makk-branding',0o755)
+        p.copy(source/'libexec/makk-boot-check','/usr/sbin/makk-boot-check',0o755)
+        p.copy(source/'libexec/makk-boot-check-hook','/usr/share/initramfs-tools/hooks/makk-boot-check',0o755)
         shutil.copytree(source/'theme/decoration',p.path('/usr/share/kwin/decorations/org.makos.glass'))
         shutil.copytree(source/'wallpapers',p.path('/usr/share/makos/wallpapers'))
         shutil.copytree(source/'sounds',p.path('/usr/share/makos/sounds'))

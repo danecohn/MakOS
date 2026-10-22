@@ -28,3 +28,10 @@ switches require their own tested snapshot/revert/recovery implementation before
 Current identity: Makk OS, developed by Cherry Blossom LLC; shared original cherry blossom logo.
 Makk Office must use Euro-Office as its direct upstream. Preserve licence notices.
 Login/boot changes are explicitly authorized by the owner on 2026-10-22, but require tested recovery.
+
+Encrypted-root regression (2026-10-22): do not regenerate boot images without
+cryptsetup-initramfs/LVM support and matching active crypttab mapping. Run
+`pkexec /usr/sbin/makk-boot-check` before/after boot changes. Never restore the
+original before-k2xmgz66 initrds without validation: they predate disk-unlock repair.
+Retain the working Surface kernel and its touchscreen DTB. Do not equate the
+generic kernel successfully unlocking disk with Surface input-driver support.

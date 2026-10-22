@@ -1,0 +1,98 @@
+#!/usr/bin/python3
+"""Verify encrypted-root configuration and initramfs contents without reading keys."""
+import argparse
+import json
+from pathlib import Path
+import subprocess
+import tempfile
+
+
+def output(*args):
+    return subprocess.run(args, check=True, text=True, capture_output=True).stdout
+
+
+def encrypted_roots(devices):
+    result = []
+    for device in devices:
+        if device['type'] == 'crypt':
+            parents = device.get('children', [])
+            if len(parents) != 1 or not parents[0].get('uuid'):
+                raise RuntimeError('Cannot identify encrypted root backing device; leaving boot images unchanged.')
+            result.append((device['name'], parents[0]['uuid']))
+        result.extend(encrypted_roots(device.get('children', [])))
+    return result
+
+
+def entries(text):
+    return [line.split() for line in text.splitlines() if line.strip() and not line.lstrip().startswith('#')]
+
+
+def check_crypttab(text, mappings):
+    table = entries(text)
+    for name, uuid in mappings:
+        matching = [row for row in table if row[0] == name]
+        if len(matching) != 1 or len(matching[0]) < 4:
+            raise RuntimeError('Encrypted root mapping missing or ambiguous in crypttab: ' + name)
+        row = matching[0]
+        if row[1] not in ('UUID=' + uuid, '/dev/disk/by-uuid/' + uuid):
+            raise RuntimeError('Encrypted root UUID does not match crypttab: ' + name)
+        if 'initramfs' not in row[3].split(','):
+            raise RuntimeError('Encrypted root needs explicit initramfs option: ' + name)
+        if 'noauto' in row[3].split(','):
+            raise RuntimeError('Encrypted root must not have noauto: ' + name)
+
+
+def check_tree(root, mappings, needs_lvm):
+    check_crypttab((root / 'cryptroot/crypttab').read_text(), mappings)
+    required = [('usr/sbin/cryptsetup', 'sbin/cryptsetup'),
+                ('usr/lib/cryptsetup/askpass', 'lib/cryptsetup/askpass'),
+                ('scripts/local-top/cryptroot',), ('scripts/local-block/cryptroot',)]
+    if needs_lvm:
+        required.append(('usr/sbin/lvm', 'sbin/lvm'))
+    for choices in required:
+        if not any((root / name).is_file() for name in choices):
+            raise RuntimeError('Boot image lacks required unlock component: ' + choices[0])
+
+
+def check_image(image, mappings, needs_lvm):
+    # Extraction remains private and is removed automatically; key files are never opened.
+    with tempfile.TemporaryDirectory(prefix='makk-boot-check-') as folder:
+        root = Path(folder)
+        output('unmkinitramfs', str(image), str(root))
+        candidates = [root, root / 'main']
+        tree = next((p for p in candidates if (p / 'cryptroot/crypttab').is_file()), None)
+        if tree is None:
+            raise RuntimeError('Boot image lacks encrypted-root crypttab: ' + str(image))
+        check_tree(tree, mappings, needs_lvm)
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--staging', type=Path)
+    parser.add_argument('--images', type=Path, nargs='+')
+    args = parser.parse_args()
+    source = output('findmnt', '-nro', 'SOURCE', '/').strip()
+    devices = json.loads(output('lsblk', '--json', '--inverse', '-o', 'NAME,TYPE,UUID', source))['blockdevices']
+    mappings = encrypted_roots(devices)
+    if not mappings:
+        print('Makk boot check: root has no active encrypted-device dependency.')
+        return
+    check_crypttab(Path('/etc/crypttab').read_text(), mappings)
+    needs_lvm = any(device['type'] == 'lvm' for device in devices)
+    if args.staging:
+        check_tree(args.staging, mappings, needs_lvm)
+        print('Makk boot check: staged encrypted-root unlock support verified.')
+    else:
+        images = args.images or sorted(p for p in Path('/boot').glob('initrd.img-*') if p.is_file() and not p.is_symlink() and not p.name.endswith(('.bak', '.new')))
+        if not images:
+            raise RuntimeError('No boot images found for encrypted root.')
+        for image in images:
+            check_image(image, mappings, needs_lvm)
+            print('Makk boot check: unlock support verified in ' + image.name)
+
+
+if __name__ == '__main__':
+    try:
+        main()
+    except (OSError, RuntimeError, subprocess.CalledProcessError, ValueError, KeyError) as error:
+        raise SystemExit('Makk boot check FAILED: ' + str(error))
