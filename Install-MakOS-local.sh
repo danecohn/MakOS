@@ -16,7 +16,7 @@ gpgv --keyring "$repo/makos-archive-keyring.gpg" "$repo/dists/makos-testing/InRe
 if [ "$(id -u)" -ne 0 ]; then
   exec pkexec /bin/sh "$script" "$repo"
 fi
-dest=/var/lib/makos/local-apt/0.1.0-dev.3
+dest=/var/lib/makos/local-apt/0.1.0-dev.4
 install -d -m 0755 "$dest" /usr/share/keyrings
 cp -a "$repo/." "$dest/"
 install -m 0644 "$dest/makos-archive-keyring.gpg" /usr/share/keyrings/makos-archive-keyring.gpg
