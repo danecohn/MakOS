@@ -41,7 +41,7 @@ sh tests/rig/makos_launcher_rig.sh tests/rig/makos_venture_rig.py
 The launcher now creates a versioned runtime overlay under the Makk cache. Engine
 executables are copied unmodified, libraries remain linked to the installed engine,
 and only application/distribution/branding resources and the bundled new-tab page
-are replaced. New tabs use the same Venture page with Cherry Blossom LLC branding.
+are replaced. New tabs use the same Venture page with Artemis Softworks LLC branding.
 The original `/opt/amerika/venture` installation and existing profiles are preserved.
 A resource/input fingerprint refreshes the overlay after an engine or asset update.
 No production debugging capability is enabled. The runtime resource changes are

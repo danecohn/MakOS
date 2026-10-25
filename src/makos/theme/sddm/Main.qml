@@ -32,7 +32,7 @@ Item {
         }
         Label {
             anchors.horizontalCenter: parent.horizontalCenter
-            text: "Cherry Blossom LLC"; color: "#4c6375"; font.pixelSize: 15
+            text: "Artemis Softworks LLC"; color: "#4c6375"; font.pixelSize: 15
         }
         TextField {
             id: username; width: parent.width

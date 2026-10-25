@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "publisher": "Artemis Softworks LLC",
+  "developer": "Artemis Softworks LLC",
+  "founder": "Demetria Althea Cohn",
+  "tagline": "Software in good company.",
+  "credit": "A product of Artemis Softworks LLC.",
+  "designSystem": "Moonrise",
+  "designIntent": "Companion software for macOS, thoughtfully available for Windows and Linux",
+  "mark": "Crescent moon, archer bow, arrow, guiding star",
+  "album": "Lunar Companion",
+  "artist": "Artemis Softworks LLC",
+  "colors": {"pearl":"#f5f0e6","moonlight":"#dce8e5","ink":"#273941","harbor":"#526e7b","brass":"#b89463","night":"#14252f"},
+  "compatibility": "Retain product names, package identifiers, APIs, saved data formats and upstream attribution"
+}

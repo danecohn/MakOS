@@ -3,7 +3,7 @@ id = "amerika_render"
 version = "3.1.1"
 name = "Render"
 tagline = "Talk to Blender: an AI modelling assistant from Studio"
-maintainer = "Amerika LLC <noreply@amerika.social>"
+maintainer = "Artemis Softworks LLC <noreply@amerika.social>"
 type = "add-on"
 website = "https://www.amerika.social"
 blender_version_min = "4.2.0"
@@ -11,7 +11,7 @@ license = [
   "SPDX:GPL-3.0-or-later",
 ]
 copyright = [
-  "2026 Amerika LLC",
+  "2026 Artemis Softworks LLC",
 ]
 tags = ["3D View", "Game Engine", "Import-Export"]
 

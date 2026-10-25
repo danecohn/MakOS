@@ -1,6 +1,15 @@
 # Makk OS
 
-Makk OS is developed by Cherry Blossom LLC. Its original cherry blossom emblem
+<!-- artemis-publisher:start -->
+<img src="brand/artemis/artemis-wordmark.svg" alt="Artemis Softworks LLC" width="340">
+
+**A product of Artemis Softworks LLC.** Founded by **Demetria Althea Cohn**.
+
+Companion software for macOS, thoughtfully available for Windows and Linux. See the [Artemis identity and design system](brand/artemis/BRAND.md). Platform availability varies by product and release.
+<!-- artemis-publisher:end -->
+
+
+Makk OS is developed by Artemis Softworks LLC. Its original cherry blossom emblem
 is shared by the desktop and company. Renamed from MakOS/MakkOS on 2026-10-22. Existing `makos-*` packages, commands,
 configuration paths and application IDs remain stable for upgrades.
 

@@ -333,7 +333,7 @@
     'help.about': function () {
       return U.dialog({ title: 'About Sprite', cancel: false, ok: 'Close', fields: [
         { type: 'note', text: 'Sprite ' + VERSION + ' - a pixel-art editor with an AI sprite builder, part of Studio (Developer Edition).' },
-        { type: 'note', text: 'Original code by Amerika LLC. Sprite is not Aseprite and is not affiliated with Aseprite or Igara Studio. It can read (import only) the documented .aseprite file format so you can bring your files in; it never writes it.' },
+        { type: 'note', text: 'Original code by Artemis Softworks LLC. Sprite is not Aseprite and is not affiliated with Aseprite or Igara Studio. It can read (import only) the documented .aseprite file format so you can bring your files in; it never writes it.' },
         { type: 'note', text: 'Your project files are .asprite.json. Exports: PNG, GIF, APNG, sprite sheets with Aseprite-compatible JSON and Godot SpriteFrames (.tres).' }] });
     }
   };

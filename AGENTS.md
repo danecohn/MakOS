@@ -25,7 +25,7 @@ cursors and sounds are derivatives; the build regenerates them. To compile curso
 No login/boot/PAM/default-session mutations in package installation. Risky optional theme
 switches require their own tested snapshot/revert/recovery implementation before exposure.
 
-Current identity: Makk OS, developed by Cherry Blossom LLC; shared original cherry blossom logo.
+Current identity: Makk OS, developed by Artemis Softworks LLC, founded by Demetria Althea Cohn; original crescent-moon and archer-bow emblem.
 Makk Office must use Euro-Office as its direct upstream. Preserve licence notices.
 Login/boot changes are explicitly authorized by the owner on 2026-10-22, but require tested recovery.
 

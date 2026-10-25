@@ -35,7 +35,7 @@ def runtime(engine, share, cache=None):
                 if child.name in ('firefox','firefox-bin'):
                     shutil.copy2(child,temp/child.name)
                 elif child.name=='application.ini':
-                    text=child.read_text().replace('Vendor=Amerika LLC','Vendor=Cherry Blossom LLC').replace('Name=AmerikaVenture','Name=Venture').replace('RemotingName=amerika-venture','RemotingName=makos-venture')
+                    text=child.read_text().replace('Vendor=Artemis Softworks LLC','Vendor=Artemis Softworks LLC').replace('Name=AmerikaVenture','Name=Venture').replace('RemotingName=amerika-venture','RemotingName=makos-venture')
                     (temp/child.name).write_text(text)
                 elif child.name=='distribution':
                     dest=temp/'distribution';dest.mkdir()
@@ -48,7 +48,7 @@ def runtime(engine, share, cache=None):
                     prefs['extensions.activeThemeID']={'Value':'default-theme@mozilla.org','Status':'default'}
                     prefs['app.releaseNotesURL']={'Value':'https://github.com/danecohn/MakOS','Status':'default'}
                     (dest/'policies.json').write_text(json.dumps(policy))
-                    (dest/'distribution.ini').write_text('[Global]\nid=org.makos.venture\nversion=1\nabout=Venture for Makk OS by Cherry Blossom LLC\n[Preferences]\napp.distributor="Cherry Blossom LLC"\napp.distributor.channel="venture"\n')
+                    (dest/'distribution.ini').write_text('[Global]\nid=org.makos.venture\nversion=1\nabout=Venture for Makk OS by Artemis Softworks LLC\n[Preferences]\napp.distributor="Artemis Softworks LLC"\napp.distributor.channel="venture"\n')
                 else:(temp/child.name).symlink_to(child)
             browser=temp/'browser';browser.mkdir()
             for child in (engine/'browser').iterdir():
@@ -62,7 +62,7 @@ def runtime(engine, share, cache=None):
                     data=src.read(info.filename)
                     if info.filename in replacements:data=replacements.pop(info.filename)
                     elif '/branding/' in info.filename and info.filename.endswith(('.ftl','.properties','.svg','.css')):
-                        data=data.decode().replace('Amerika Venture','Venture').replace('Amerika LLC','Cherry Blossom LLC').encode()
+                        data=data.decode().replace('Amerika Venture','Venture').replace('Artemis Softworks LLC','Artemis Softworks LLC').encode()
                     if info.filename.endswith('aboutDialog.css'):
                         data+=b'\n#aboutDialogContainer,#bottomBox{background:#edf0f3!important;color:#253c50!important}\n'
                     dst.writestr(info,data)

@@ -157,7 +157,7 @@ class SystemInfo:
         head.append(ui.icon('makos-logo', 72))
         titles = ui.box(True, 2)
         titles.append(Gtk.Label(label='Makk OS', xalign=0, css_classes=['hero']))
-        titles.append(Gtk.Label(label='Developed by Cherry Blossom LLC', xalign=0))
+        titles.append(Gtk.Label(label='Developed by Artemis Softworks LLC', xalign=0))
         titles.append(Gtk.Label(label=f'Development preview {VERSION}', xalign=0, css_classes=['subtitle']))
         head.append(titles)
         col.append(head)

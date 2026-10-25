@@ -203,7 +203,7 @@ Item {
             Column {
                 anchors.verticalCenter: parent.verticalCenter; spacing: 3
                 Text { text: "Makk OS"; font.pixelSize: 28; color: "#253c50" }
-                Text { text: "Cherry Blossom LLC"; font.pixelSize: 14; color: "#4c6375" }
+                Text { text: "Artemis Softworks LLC"; font.pixelSize: 14; color: "#4c6375" }
             }
         }
 

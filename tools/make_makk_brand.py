@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Render original Cherry Blossom LLC/Makk OS brand assets from the source SVG."""
+"""Render original Artemis Softworks LLC/Makk OS brand assets from the source SVG."""
 from pathlib import Path
 import math
 import gi
@@ -15,7 +15,7 @@ flower=Image.open(OUT/'blossom.png').convert('RGBA')
 mark=Image.new('RGBA',(420,240));mark.alpha_composite(flower,(146,0));d=ImageDraw.Draw(mark)
 font='/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf'
 d.text((210,150),'Makk OS',font=ImageFont.truetype(font,34),fill='#253c50',anchor='mm')
-d.text((210,194),'Cherry Blossom LLC',font=ImageFont.truetype(font,15),fill='#4c6375',anchor='mm')
+d.text((210,194),'Artemis Softworks LLC',font=ImageFont.truetype(font,15),fill='#4c6375',anchor='mm')
 mark.save(OUT/'watermark.png')
 # Two-step's native progress, authentication and message handling stays in charge.
 for i in range(36):
@@ -33,4 +33,4 @@ for name in ('lock','capslock','keyboard','keymap','bullet','entry'):
  else:draw.rounded_rectangle((2,5,22,20),3,outline='#536d81',width=2)
  im.save(OUT/(name+'.png'))
 preview=Image.new('RGBA',(1280,800),'#c4d1dc');preview.alpha_composite(mark,(430,216));preview.convert('RGB').save(OUT/'preview.png')
-print('Rendered Cherry Blossom/Makk OS boot assets')
+print('Rendered Artemis Softworks/Makk OS brand assets')

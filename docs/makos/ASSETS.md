@@ -20,9 +20,9 @@ to CC0-1.0 for redistribution.
 | `src/makos/theme/glass.css` | Original CSS gradients, shadows and glass controls | GPL-3.0-only | MakkOS contributors |
 | `src/makos/theme/decoration/contents/ui/*.qml` | Original QML using public decoration API conventions | GPL-3.0-only | MakkOS contributors |
 | DejaVu Sans | Ubuntu `fonts-dejavu-core`; not bundled | Bitstream Vera / DejaVu font licences; `/usr/share/doc/fonts-dejavu-core/copyright` | DejaVu contributors / Bitstream |
-| `src/makos/makos/{windows.py,shell/layer.py,shell/tray.py,backends/*.py}` | Existing Amerika OS plumbing, copied/adapted | GPL-3.0-only | Amerika LLC; MakkOS adaptations |
-| `src/makos/shell-host.c`, packaging utilities | Existing dedicated shell host and package builder, adapted | GPL-3.0-only | Amerika LLC; MakkOS adaptations |
-| `src/makos/compat/` Studio adapters | Existing Studio, Render, Engine, Sprite, Box sources, cosmetic copies | Existing GPL-3.0 / MIT notices under `compat/notices` | Amerika LLC and upstream contributors |
+| `src/makos/makos/{windows.py,shell/layer.py,shell/tray.py,backends/*.py}` | Existing Amerika OS plumbing, copied/adapted | GPL-3.0-only | Artemis Softworks LLC; MakkOS adaptations |
+| `src/makos/shell-host.c`, packaging utilities | Existing dedicated shell host and package builder, adapted | GPL-3.0-only | Artemis Softworks LLC; MakkOS adaptations |
+| `src/makos/compat/` Studio adapters | Existing Studio, Render, Engine, Sprite, Box sources, cosmetic copies | Existing GPL-3.0 / MIT notices under `compat/notices` | Artemis Softworks LLC and upstream contributors |
 | `compat/box/beepbox*` | Existing bundled BeepBox engine, not newly downloaded | MIT; retained notices | John Nesky / BeepBox contributors |
 | `compat/render/splash.png` | Original text composition with DejaVu Sans | GPL-3.0-only; font licence above | MakkOS contributors |
 
@@ -73,7 +73,7 @@ installed browser under its retained upstream licence; no glyph assets are copie
 ## Cherry Blossom identity (2026-10-22)
 
 `src/makos/branding/cherry-blossom.svg` is original vector artwork created for
-Cherry Blossom LLC and Makk OS. Five notched pink petals with a gold stamen centre;
+Artemis Softworks LLC and Makk OS. Five notched pink petals with a gold stamen centre;
 no proprietary source artwork. GPL-3.0-only, as original project code/artwork.
 `tools/make_makk_brand.py` renders the logo, boot watermark, native two-step
 authentication icons and progress frames. DejaVu fonts retain their upstream licence.
@@ -81,7 +81,7 @@ authentication icons and progress frames. DejaVu fonts retain their upstream lic
 The lock-screen QML is derived from the installed KDE Plasma 6.7.5 shell lock
 screen, GPL-2.0-or-later, copyright Aleix Pol Gonzalez and the other KDE authors
 listed in each source file. Its authentication and unlock flow are retained.
-The background and brand header are downstream changes by Cherry Blossom LLC.
+The background and brand header are downstream changes by Artemis Softworks LLC.
 
 ## Encrypted-root boot guard
 

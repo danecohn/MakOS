@@ -1,4 +1,4 @@
-# Adapted for MakkOS from Amerika OS (src/os/amerika/privacy.py), GPL-3.0-only, Amerika LLC; MakkOS adaptations.
+# Adapted for MakkOS from Amerika OS (src/os/amerika/privacy.py), GPL-3.0-only, Artemis Softworks LLC; MakkOS adaptations.
 """Security backend: portal permission store, device-in-use indicators, screen lock (kscreenlockerrc in the compositor config),
 recent files, ufw firewall (read-only status; enabling goes through pkexec and makos-settings-helper)."""
 import json
