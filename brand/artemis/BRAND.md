@@ -17,18 +17,16 @@ Founder biography: **Artemis Softworks LLC was founded by Demetria Althea Cohn.*
 Music artist, composer, producer and artwork credit: **Artemis Softworks LLC**.
 Preserve original third-party and historical copyright notices; a new publisher credit does not erase upstream authorship.
 
-## Moonrise visual system
+## Artemis Cloud visual system
 
-Companion software that feels at home on a Mac, thoughtfully available for Windows and Linux. Original artwork and system typography; no proprietary Apple artwork, fonts, sounds, logos, or public Apple operating-system theme names.
+Companion software that feels at home on a Mac, thoughtfully available for Windows and Linux. Bright blue atmosphere, white tile workspaces, translucent toolbars, system typography, and quieter native editor chrome. The original brass moon-and-bow artwork remains the publisher signature.
 
-- Pearl `#f5f0e6`: warm canvas, gentle highlights.
-- Moonlight `#dce8e5`: translucent silver glass and borders.
-- Coastal ink `#273941`: typography and dark surfaces.
-- Harbor blue `#526e7b`: accessible interactive emphasis.
-- Warm brass `#b89463`: illustration and restrained decorative details; use darker brass `#86623b` for text on pearl.
-- Night sea `#14252f`: dark appearance.
+- Canvas `#f5f5f7`; white workspace `#ffffff`.
+- Moonlight `#eaf2ff`; ink `#1d1d1f`; secondary text `#62646b`.
+- Interactive blue `#0066cc`; primary button `#0071e3` with white text.
+- Artwork brass `#b89463`; dark canvas `#17191f`.
 
-Use soft layered depth, subtle gradients, fine borders, generous breathing room, readable controls, and tactile but restrained surfaces. Keep controls keyboard accessible, respect reduced motion, and use layouts designed for touch. Light and dark appearances share the same structure. Avoid neon, black-and-lime automotive dashboards, and exaggerated motion.
+See [INTERFACE.md](INTERFACE.md) for layout, responsive behavior, touch targets, and native adaptation. `moonrise.css` is retained as a compatibility filename for the updated shared tokens. Preserve appearance preferences, saved data, upstream credits and each product's functional layout. Original implementations use platform fonts without redistributing Apple fonts, artwork or application code. The private reference archive is excluded from repositories.
 
 ## Sound: Lunar Companion
 
