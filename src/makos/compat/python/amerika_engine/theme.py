@@ -8,8 +8,8 @@ SETTINGS = f"""{MARK}
 
 [resource]
 interface/theme/preset = "Custom"
-interface/theme/base_color = Color(0.0784, 0.1451, 0.1843, 1)
-interface/theme/accent_color = Color(0.50, 0.67, 0.71, 1)
+interface/theme/base_color = Color(0.09, 0.10, 0.12, 1)
+interface/theme/accent_color = Color(0.0, 0.44, 0.89, 1)
 interface/theme/contrast = 0.4
 interface/theme/draw_extra_borders = true
 interface/theme/corner_radius = 6
@@ -21,7 +21,7 @@ text_editor/theme/highlighting/keyword_color = Color(0.72, 0.58, 0.39, 1)
 text_editor/theme/highlighting/control_flow_keyword_color = Color(0.72, 0.58, 0.39, 1)
 text_editor/theme/highlighting/base_type_color = Color(0.65, 0.79, 0.73, 1)
 text_editor/theme/highlighting/string_color = Color(1, 0.88, 0.3, 1)
-text_editor/theme/highlighting/background_color = Color(0.0784, 0.1451, 0.1843, 1)
+text_editor/theme/highlighting/background_color = Color(0.09, 0.10, 0.12, 1)
 """
 
 

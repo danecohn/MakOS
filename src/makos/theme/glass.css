@@ -53,3 +53,6 @@ window:backdrop .traffic { background: linear-gradient(#ededed,#bcbec0); }
 .banner-progress { min-height: 8px; margin: 2px 0 4px 50px; }
 .banner-more { color: #fff; background: alpha(#1c2a3c,.78); border-radius: 99px; padding: 2px 12px; font-size: 10px; font-weight: bold; }
 .history-row { padding: 6px 4px; border-bottom: 1px solid alpha(#7d8c9f,.25); }
+
+/* Artemis Cloud: original companion surfaces. */
+headerbar,.metal-toolbar{background:alpha(#f8faff,.96);border-bottom:1px solid #d5dce8;box-shadow:none;padding:10px 16px;min-height:36px;color:#1d1d1f}.title-label{text-shadow:none}.menu-bar{background:alpha(#f8faff,.90);border-bottom:1px solid #d5dce8;color:#1d1d1f}.menu-bar button:hover,.menu-bar button:checked{background:#0071e3;color:white}.source-list{background:#f4f7fc;border-right:1px solid #d5dce8;padding:16px 8px}.source-list button{min-height:30px;border-radius:10px;padding:6px 12px}.source-list button:hover{background:#eaf2ff;color:#0055aa}.source-heading{color:#62646b}.launcher-shelf{background:alpha(#f8faff,.82);border:1px solid alpha(#fff,.65);border-radius:22px;box-shadow:0 8px 24px alpha(#102953,.18);padding:10px 16px}.running-dot{color:#0066cc}
