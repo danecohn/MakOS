@@ -66,7 +66,7 @@ try:
     time.sleep(2)
     call('Marionette:SetContext',{'value':'content'})
     page=script('return document.body.innerText;')
-    assert 'Venture' in page and 'Artemis Softworks LLC' in page and 'Amerika' not in page,page
+    assert 'Venture' in page and 'VigilTech' in page and 'Amerika' not in page,page
     call('Marionette:SetContext',{'value':'chrome'})
     script('gBrowser.removeCurrentTab();return true;')
     # Identity control visibility is page-dependent on Firefox internal resources.

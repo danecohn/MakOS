@@ -1,4 +1,4 @@
-# Adapted for MakkOS from Amerika OS (src/os/amerika/language.py), GPL-3.0-only, Artemis Softworks LLC; MakkOS adaptations.
+# Adapted for MakkOS from Amerika OS (src/os/amerika/language.py), GPL-3.0-only, VigilTech; MakkOS adaptations.
 """Language & region backend: user-level locale in ~/.config/environment.d (systemd user manager; next login) and system locale via localectl."""
 import json
 import re

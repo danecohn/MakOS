@@ -53,7 +53,7 @@ class ModelTests(Base):
         d = model.clean({'accent': 'chartreuse', 'font_size': 99, 'scrollbars': 'x', 'hot_corners': {'top_left': 'explode', 'nowhere': 'seek'},
                          'text_replacements': [['ok', 'fine'], ['has space', 'x'], 'bad', ['a'] * 3], 'seek_exclusions': ['rel/path', '/abs'],
                          'text_scale': 'big', 'launcher_magnify_percent': -5})
-        self.assertEqual((d['accent'], d['font_size'], d['scrollbars']), ('blue', 18, 'auto'))
+        self.assertEqual((d['accent'], d['font_size'], d['scrollbars']), ('blossom', 18, 'auto'))
         self.assertEqual(d['hot_corners'], {})
         self.assertEqual(d['text_replacements'], [['ok', 'fine']])
         self.assertEqual(d['seek_exclusions'], ['/abs'])
@@ -72,7 +72,7 @@ class ModelTests(Base):
         css = model.css(data)
         self.assertIn('font-size: 15.0px', css)
         self.assertIn('.hero { font-size: 37.5px; }', css)
-        self.assertIn('.menu-bar { background: #eef1f5; }', css)
+        self.assertIn('.menu-bar { background: @mk_bar; }', css)
         self.assertNotIn('font-size: 12.0px', model.css(model.clean({})))
         mode = (common.CONFIG / 'settings.json').stat().st_mode & 0o777
         self.assertEqual(mode, 0o600)

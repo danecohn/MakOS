@@ -1,4 +1,4 @@
-"""Makk OS shell: own surfaces on KWin. No global theme/default-session mutations."""
+"""VigilOS shell: own surfaces on KWin. No global theme/default-session mutations."""
 import json
 import math
 import os
@@ -164,8 +164,8 @@ class Shell(Gtk.Application):
         row=ui.box(css='menu-bar')
         brand=self.menu(row,'',self.system_menu)
         brand.set_child(ui.icon('makos-logo',20))
-        brand.set_tooltip_text('Makk OS')
-        brand.update_property([Gtk.AccessibleProperty.LABEL],['Makk OS menu'])
+        brand.set_tooltip_text('VigilOS')
+        brand.update_property([Gtk.AccessibleProperty.LABEL],['VigilOS menu'])
         self.active_label=Gtk.Label(label='Files',css_classes=['title-label'],margin_start=6,margin_end=10)
         row.append(self.active_label)
         self.app_menus=ui.box()
@@ -190,7 +190,7 @@ class Shell(Gtk.Application):
         self.bar.present()
 
     def system_menu(self,col,pop):
-        self.item(col,pop,'About Makk OS',lambda:launch(self,'system-info'))
+        self.item(col,pop,'About VigilOS',lambda:launch(self,'system-info'))
         self.item(col,pop,'Settings…',lambda:launch(self,'settings'))
         self.item(col,pop,'Applications…',lambda:self.action('applications'))
         col.append(Gtk.Separator())
@@ -205,7 +205,7 @@ class Shell(Gtk.Application):
     def confirm_power(self,action):
         w=ui.window(self,'Session',410,180)
         col=ui.box(True,16,'sheet')
-        col.append(Gtk.Label(label={'suspend':'Put this computer to sleep?','restart':'Restart this computer?','poweroff':'Shut down this computer?','logout':'Log out of Makk OS?'}[action]))
+        col.append(Gtk.Label(label={'suspend':'Put this computer to sleep?','restart':'Restart this computer?','poweroff':'Shut down this computer?','logout':'Log out of VigilOS?'}[action]))
         row=ui.box(spacing=12)
         row.append(ui.button('Cancel',w.close))
         def perform():

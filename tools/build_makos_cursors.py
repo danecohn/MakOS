@@ -18,6 +18,6 @@ def main():
     for alias,name in aliases.items():
         link=target/'cursors'/alias
         link.unlink(missing_ok=True);link.symlink_to(name)
-    (target/'index.theme').write_text('[Icon Theme]\nName=MakkOS Cursors\nComment=Original silver and blue pointers\n')
+    (target/'index.theme').write_text('[Icon Theme]\nName=MakkOS Cursors\nComment=VigilOS pointers: white with plum outline\n')
     print('Compiled cursor theme:',target)
 if __name__=='__main__':main()

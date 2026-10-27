@@ -5,7 +5,7 @@ The owner renamed MakOS to MakkOS and approved the current appearance on
 System Information, toolkit themes, Venture start page and package descriptions.
 Existing commands, package IDs, profile paths, repository URL and shortcut action
 IDs stay stable. Theme aliases preserve existing selections. Studio, Render,
-Engine, Sprite, Venture, Paper, Digits and MakBox keep their app names.
+Engine, Sprite, Venture, Paper, Digits and Vigil Box keep their app names.
 Historical artwork prompts retain the original project name as provenance.
 
 Next priorities:

@@ -1,6 +1,6 @@
 # MakkOS development preview
 
-MakkOS is an original Glass & Metal desktop for Ubuntu ARM64 on KWin Wayland.
+VigilOS is a VigilTech desktop for Ubuntu ARM64 on KWin Wayland.
 **This is an early installable development preview, not a completed desktop.**
 Do not remove fallback desktops or everyday file tools on the strength of this preview.
 The owner has approved the current desktop appearance. Full app compatibility
@@ -16,7 +16,7 @@ against source and extracted ARM64 packages before deployment.
 The source includes 55 original AI app/folder/file/drive icons and six original
 wallpapers. Wallpaper output is explicitly resampled to 3840×2160; see provenance.
 Settings and Studio-suite icons currently use original vector development art.
-Paper/Digits/Slides use Mak Office's unmodified Euro-Office wrapper, with the
+Paper/Digits/Slides use Vigil Office's unmodified Euro-Office wrapper, with the
 upstream AGPL notices and identity retained. A source fork and full app reskin
 remain open work.
 

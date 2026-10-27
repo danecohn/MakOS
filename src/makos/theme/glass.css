@@ -1,58 +1,55 @@
-/* Original MakkOS Glass & Metal widgets. GPL-3.0-only. */
-* { font-family: "DejaVu Sans"; font-size: 12px; }
+/* VigilOS shell widgets: VigilTech design system, GPL-3.0-only. Colours come from the @mk_* tokens defined by the
+ * widget theme (makos.appearance), so the Night variant restyles everything here too. */
+* { font-family: "Vigil Sans", "DejaVu Sans", sans-serif; font-size: 12px; }
 window.background-surface, window.launcher-surface { background: transparent; }
-headerbar, .metal-toolbar { background: linear-gradient(#f5f5f5,#d6d7d9); border-bottom: 1px solid #969ba0;
- box-shadow: inset 0 1px #fff; padding: 7px 12px; min-height: 30px; }
-.title-label { font-weight: bold; text-shadow: 0 1px #fff; }
-.traffic { min-width: 14px; min-height: 14px; padding: 0; border-radius: 99px; border: 1px solid alpha(#000,.35); font-size: 9px; }
-.traffic label { opacity: 0; font-size: 9px; font-weight: bold; }
+headerbar, .metal-toolbar { background: alpha(@mk_bar,.94); border-bottom: 1px solid @mk_border_soft; box-shadow: inset 0 1px alpha(#fff,.5);
+ padding: 8px 14px; min-height: 36px; color: @mk_text; }
+.title-label { font-weight: bold; color: @mk_text; }
+.traffic { min-width: 14px; min-height: 14px; padding: 0; border-radius: 99px; border: 1px solid alpha(#1e0616,.35); font-size: 9px; }
+.traffic label { opacity: 0; font-size: 9px; font-weight: bold; color: #1e0616; }
 .traffic:hover label { opacity: 1; }
-.close-orb { background: radial-gradient(circle at 40% 15%,#fff 0%,#ffb4a5 24%,#e45144 53%,#ff8a73 90%); }
-.minimize-orb { background: radial-gradient(circle at 40% 15%,#fff 0%,#ffe9a0 24%,#dca329 53%,#ffda62 90%); }
-.zoom-orb { background: radial-gradient(circle at 40% 15%,#fff 0%,#b7ef9b 24%,#67b547 53%,#a1df7f 90%); }
-window:backdrop .traffic { background: linear-gradient(#ededed,#bcbec0); }
-.menu-bar { background: linear-gradient(alpha(#fff,.96), alpha(#dce3eb,.93)); border-bottom: 1px solid alpha(#202e41,.45); padding: 0 12px; }
-.menu-bar button { background: transparent; border: none; box-shadow: none; border-radius: 0; padding: 0 10px; min-height: 28px; }
-.menu-bar button:hover, .menu-bar button:checked { background: linear-gradient(#65a6e9,#266bc1); color: #fff; }
-.source-list { background: linear-gradient(to right,alpha(#dce7f3,.97),#d5dfe9); border-right: 1px solid #a8b4c1; padding: 12px 7px; }
-.source-list button { border: none; background: transparent; box-shadow: none; padding: 5px 9px; }
-.source-list button:hover { color: #fff; background: linear-gradient(#7ca5cf,#507caa); }
-.source-heading { color: #6b7d91; font-size: 10px; font-weight: bold; padding: 10px 7px 5px; }
-.launcher-shelf { background: linear-gradient(to bottom,alpha(#fff,.68),alpha(#9eaec1,.73) 47%,alpha(#d3dbe6,.9) 51%,alpha(#71849d,.8));
- border: 1px solid alpha(#fff,.7); border-radius: 13px; padding: 8px 12px 3px; box-shadow: 0 5px 12px alpha(#000,.4), inset 0 1px #fff; }
+.close-orb { background: #ff5f57; }
+.minimize-orb { background: #febc2e; }
+.zoom-orb { background: #28c840; }
+window:backdrop .traffic { background: @mk_pressed; }
+.menu-bar { background: alpha(@mk_bar,.94); border-bottom: 1px solid @mk_border_soft; padding: 0 12px; color: @mk_text; }
+.menu-bar button { background: transparent; border: none; box-shadow: none; border-radius: 6px; padding: 0 10px; min-height: 28px; color: @mk_text; }
+.menu-bar button:hover, .menu-bar button:checked { background: @mk_acc_dark; color: @mk_acc_text; }
+.source-list { background: linear-gradient(to right,alpha(@mk_sidebar_a,.97),@mk_sidebar_b); border-right: 1px solid @mk_border_soft; padding: 12px 8px; }
+.source-list button { border: none; background: transparent; box-shadow: none; padding: 6px 10px; color: @mk_text; border-radius: 8px; }
+.source-list button:hover { color: @mk_text; background: @mk_hover; }
+.source-list button:checked, .source-list button:active { color: @mk_acc_text; background: @mk_acc_dark; }
+.source-heading { color: @mk_text_dim; font-size: 10px; font-weight: bold; padding: 10px 8px 5px; }
+.launcher-shelf { background: alpha(@mk_bar,.80); border: 1px solid alpha(#fff,.45); border-radius: 22px; padding: 8px 14px 4px; box-shadow: 0 8px 24px alpha(#1e0616,.35), inset 0 1px alpha(#fff,.5); }
 .launcher-shelf button { border: none; background: transparent; box-shadow: none; padding: 0 4px; }
-.launcher-shelf button:hover { background: alpha(#fff,.19); }
-.running-dot { color: #154d87; font-size: 12px; min-height: 8px; }
-.seek-sheet { background: linear-gradient(#f9fbff,#e5eaf0); border: 1px solid #9daabb; border-radius: 9px; box-shadow: 0 12px 40px alpha(#000,.4); padding: 20px; }
-.hero { font-size: 30px; font-weight: bold; }
-.subtitle { color: #667689; font-size: 12px; }
-.section-title { color: #66778b; font-size: 11px; font-weight: bold; }
-.statusbar { background: linear-gradient(#f7f7f7,#e3e3e3); border-top: 1px solid #bbb; padding: 5px 12px; color: #66717e; font-size: 11px; }
-.file-tile { background: transparent; border: none; box-shadow: none; padding: 12px; }
-.file-tile:hover { background: #d8e8fa; }
-.settings-tile { border: none; background: transparent; box-shadow: none; padding: 12px; }
-.settings-tile:hover { background: alpha(#9cbce0,.25); }
+.launcher-shelf button:hover { background: alpha(@mk_acc_dark,.18); }
+.running-dot { color: @mk_acc_dark; font-size: 12px; min-height: 8px; }
+.seek-sheet { background: @mk_base; border: 1px solid @mk_border_soft; border-radius: 22px; box-shadow: 0 14px 44px alpha(#1e0616,.45); padding: 20px; color: @mk_text; }
+.hero { font-size: 30px; font-weight: bold; color: @mk_text; }
+.subtitle { color: @mk_text_dim; font-size: 12px; }
+.section-title { color: @mk_text_dim; font-size: 11px; font-weight: bold; }
+.statusbar { background: @mk_bar; border-top: 1px solid @mk_border_soft; padding: 5px 12px; color: @mk_text_dim; font-size: 11px; }
+.file-tile { background: transparent; border: none; box-shadow: none; padding: 12px; border-radius: 12px; color: @mk_text; }
+.file-tile:hover { background: @mk_hover; }
+.settings-tile { border: none; background: transparent; box-shadow: none; padding: 12px; border-radius: 12px; color: @mk_text; }
+.settings-tile:hover { background: @mk_hover; }
 .sheet { padding: 24px; }
-.pinstripes { background: repeating-linear-gradient(to bottom,#f6f6f6 0px,#f6f6f6 2px,#efefef 2px,#efefef 4px); }
-.overview { background: alpha(#152538,.90); padding: 40px; }
-.overview label { color: #fff; }
+.pinstripes { background: @mk_alt_row; }
+.overview { background: alpha(#120a14,.94); padding: 40px; }
+.overview label { color: #f7eef2; }
 .overview button { min-width: 240px; min-height: 100px; }
 
 .settings-section { padding: 12px 18px; }
 
 /* ---- notification banners and the Alerts history (makos.notifications) ---- */
 .banner-stack { padding: 6px 10px 14px 6px; }
-.banner { background: linear-gradient(to bottom, alpha(#fff,.95), alpha(#dde5ee,.93)); border: 1px solid alpha(#566a82,.6); border-radius: 12px;
- padding: 10px 12px; box-shadow: 0 8px 22px alpha(#000,.38), inset 0 1px #fff; }
-.banner.critical { border-color: #c9392e; background: linear-gradient(to bottom, alpha(#fff,.96), alpha(#fbe2de,.94)); }
-.banner-app { font-size: 9px; font-weight: bold; color: #7a8798; }
-.banner-title { font-weight: bold; color: #202731; text-shadow: 0 1px alpha(#fff,.8); }
-.banner-body { color: #3b4655; }
+.banner { background: alpha(@mk_base,.97); border: 1px solid @mk_border_soft; border-radius: 14px; padding: 10px 12px; box-shadow: 0 10px 28px alpha(#1e0616,.4), inset 0 1px alpha(#fff,.4); }
+.banner.critical { border-color: @mk_error; border-width: 2px; }
+.banner-app { font-size: 10px; font-weight: bold; color: @mk_text_dim; }
+.banner-title { font-weight: bold; color: @mk_text; }
+.banner-body { color: @mk_text; }
 .banner-icon { margin-right: 2px; }
-.banner-close { min-width: 18px; min-height: 18px; padding: 0 5px; border-radius: 99px; color: #5d6a7a; }
+.banner-close { min-width: 18px; min-height: 18px; padding: 0 5px; border-radius: 99px; color: @mk_text_dim; }
 .banner-progress { min-height: 8px; margin: 2px 0 4px 50px; }
-.banner-more { color: #fff; background: alpha(#1c2a3c,.78); border-radius: 99px; padding: 2px 12px; font-size: 10px; font-weight: bold; }
-.history-row { padding: 6px 4px; border-bottom: 1px solid alpha(#7d8c9f,.25); }
-
-/* Artemis Cloud: original companion surfaces. */
-headerbar,.metal-toolbar{background:alpha(#f8faff,.96);border-bottom:1px solid #d5dce8;box-shadow:none;padding:10px 16px;min-height:36px;color:#1d1d1f}.title-label{text-shadow:none}.menu-bar{background:alpha(#f8faff,.90);border-bottom:1px solid #d5dce8;color:#1d1d1f}.menu-bar button:hover,.menu-bar button:checked{background:#0071e3;color:white}.source-list{background:#f4f7fc;border-right:1px solid #d5dce8;padding:16px 8px}.source-list button{min-height:30px;border-radius:10px;padding:6px 12px}.source-list button:hover{background:#eaf2ff;color:#0055aa}.source-heading{color:#62646b}.launcher-shelf{background:alpha(#f8faff,.82);border:1px solid alpha(#fff,.65);border-radius:22px;box-shadow:0 8px 24px alpha(#102953,.18);padding:10px 16px}.running-dot{color:#0066cc}
+.banner-more { color: #f7eef2; background: alpha(#120a14,.92); border-radius: 99px; padding: 2px 12px; font-size: 10px; font-weight: bold; }
+.history-row { padding: 6px 4px; border-bottom: 1px solid @mk_border_soft; }

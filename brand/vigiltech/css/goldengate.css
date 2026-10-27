@@ -1,0 +1,110 @@
+/* SPDX-License-Identifier: GPL-3.0-or-later
+  VigilTech design system: "Golden Gate", after dark.
+  Calm, layered, translucent software that feels at home on a Mac and travels well to Windows and Linux, with a quiet gothic
+  streak: plum-black nights, one rose-pink tint, pointed arches and a single star. Original code and artwork: no third-party
+  artwork, fonts or marks. Optional typeface: css/vigilsans.vts.
+
+  Principles
+   1. Material over decoration: bars and sheets are frosted glass over the wallpaper; content sits on quiet surfaces.
+   2. One pink. VigilTech Pink #ff0058 tints selection, focus and the primary action. Everything else is a warm, plum-tinted neutral.
+   3. Soft geometry: 8 px controls, 12 px groups, 22 px sheets. The one gothic shape is the pointed (lancet) arch.
+   4. Depth from light: a lit top edge, a darker lower edge, long soft shadows. Never hard black outlines.
+   5. Goth, softly: night is the natural home, candle-warm highlights, thin rims, one star. No skulls, bats or clichés; stay friendly and readable.
+   6. Accessible by default: 4.5:1 text, a visible 3 px focus ring, reduced motion and reduced transparency respected.
+*/
+:root {
+  color-scheme: light dark;
+  /* VigilTech Pink */
+  --vt-pink-50: #fff0f5; --vt-pink-100: #ffd6e4; --vt-pink-200: #ffadc9; --vt-pink-300: #ff7aa6; --vt-pink-400: #ff4d86;
+  --vt-pink-500: #ff0058; --vt-pink-600: #d6004a; --vt-pink-700: #a8003a; --vt-pink-800: #7a002b; --vt-pink-900: #3d0016;
+  --vt-tint: var(--vt-pink-500); --vt-tint-strong: var(--vt-pink-700); --vt-tint-soft: rgba(255, 0, 88, .11); --vt-on-tint: #ffffff;
+  /* neutrals, light: warm bone and plum ink */
+  --vt-bg: #f6f1f4; --vt-surface: #fffbfd; --vt-surface-2: #faf4f7; --vt-label: #17101a; --vt-label-2: #6b5d68; --vt-label-3: #6b5d68;
+  --vt-separator: rgba(58, 30, 52, .15); --vt-fill: rgba(110, 70, 100, .1); --vt-fill-2: rgba(110, 70, 100, .18);
+  --vt-glass: rgba(255, 250, 252, .62); --vt-glass-edge: rgba(255, 255, 255, .72); --vt-glass-blur: 18px;
+  --vt-danger: #b3001b; --vt-warning: #9a4a00; --vt-info: #1a5cc2;
+  /* geometry and depth */
+  --vt-r-control: 8px; --vt-r-group: 12px; --vt-r-sheet: 22px; --vt-focus: 0 0 0 3px rgba(255, 0, 88, .5);
+  --vt-shadow-1: 0 1px 2px rgba(30, 6, 22, .07), 0 2px 8px rgba(30, 6, 22, .07);
+  --vt-shadow-2: 0 11px 34px rgba(30, 6, 22, .2); --vt-shadow-3: 17px 20px 40px rgba(30, 6, 22, .22);
+  --vt-s1: 4px; --vt-s2: 8px; --vt-s3: 12px; --vt-s4: 16px; --vt-s5: 24px; --vt-s6: 32px; --vt-s7: 48px;
+  --vt-wallpaper: linear-gradient(165deg, #fff4f8 0%, #ffc0d4 50%, #ff5c8f 100%);
+  --vt-wall-arc-a: rgba(255, 255, 255, .4); --vt-wall-arc-b: rgba(168, 0, 58, .22);
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --vt-tint: var(--vt-pink-400); --vt-tint-strong: var(--vt-pink-300); --vt-tint-soft: rgba(255, 77, 134, .18); --vt-on-tint: #ffffff;
+  --vt-bg: #120a14; --vt-surface: #1e1422; --vt-surface-2: #181019; --vt-label: #f7eef2; --vt-label-2: #b7a5b1; --vt-label-3: #b7a5b1; --vt-separator: rgba(255, 190, 220, .14); --vt-fill: rgba(255, 190, 220, .09); --vt-fill-2: rgba(255, 190, 220, .17);
+  --vt-glass: rgba(34, 18, 38, .62); --vt-glass-edge: rgba(255, 170, 205, .16); --vt-danger: #ff7a8e; --vt-warning: #ffb066; --vt-info: #8ab8ff; --vt-shadow-1: 0 1px 2px rgba(30, 6, 22, .45), 0 2px 8px rgba(30, 6, 22, .35); --vt-shadow-2: 0 11px 34px rgba(30, 6, 22, .7);
+  --vt-wallpaper: linear-gradient(165deg, #140812 0%, #2b0a1e 50%, #5a0a2c 100%); --vt-wall-arc-a: rgba(255, 143, 179, .13); --vt-wall-arc-b: rgba(31, 0, 9, .5); } }
+:root[data-theme="dark"] { --vt-tint: var(--vt-pink-400); --vt-tint-strong: var(--vt-pink-300); --vt-tint-soft: rgba(255, 77, 134, .18); --vt-on-tint: #ffffff;
+  --vt-bg: #120a14; --vt-surface: #1e1422; --vt-surface-2: #181019; --vt-label: #f7eef2; --vt-label-2: #b7a5b1; --vt-label-3: #b7a5b1; --vt-separator: rgba(255, 190, 220, .14); --vt-fill: rgba(255, 190, 220, .09); --vt-fill-2: rgba(255, 190, 220, .17);
+  --vt-glass: rgba(34, 18, 38, .62); --vt-glass-edge: rgba(255, 170, 205, .16); --vt-danger: #ff7a8e; --vt-warning: #ffb066; --vt-info: #8ab8ff; --vt-shadow-1: 0 1px 2px rgba(30, 6, 22, .45), 0 2px 8px rgba(30, 6, 22, .35); --vt-shadow-2: 0 11px 34px rgba(30, 6, 22, .7);
+  --vt-wallpaper: linear-gradient(165deg, #140812 0%, #2b0a1e 50%, #5a0a2c 100%); --vt-wall-arc-a: rgba(255, 143, 179, .13); --vt-wall-arc-b: rgba(31, 0, 9, .5); }
+
+.vt, .vt * { box-sizing: border-box; }
+.vt { font-family: var(--vt-font, -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, "Segoe UI", sans-serif); font-size: 15px; line-height: 1.5; color: var(--vt-label); background: var(--vt-bg); -webkit-font-smoothing: antialiased; font-synthesis: none; }
+.vt[data-font="system"] { font-family: var(--vt-font-system); }
+.vt h1, .vt h2, .vt h3 { margin: 0; font-weight: 700;  line-height: 1.15; }
+.vt h1 { font-size: clamp(30px, 5vw, 52px); } .vt h2 { font-size: 24px; } .vt h3 { font-size: 17px; }
+.vt a { color: var(--vt-tint-strong); text-underline-offset: 3px; }
+.vt :focus-visible { outline: 3px solid var(--vt-tint-strong); outline-offset: 3px; box-shadow: none; border-radius: var(--vt-r-control); }
+.vt ::selection { background: var(--vt-tint-soft); }
+
+/* the wallpaper: sweeping curves made of gradients, so it costs no image. Night by default, dawn in light mode. */
+.vt-wallpaper { background: radial-gradient(120% 90% at 0% 110%, var(--vt-wall-arc-a) 0 38%, transparent 38.3%), radial-gradient(110% 100% at 90% 125%, var(--vt-wall-arc-b) 0 52%, transparent 52.3%), radial-gradient(90% 80% at 40% 140%, var(--vt-wall-arc-a) 0 60%, transparent 60.3%), var(--vt-wallpaper); }
+:root[data-theme="dark"] .vt-wallpaper, .vt-wallpaper.night { background-image: radial-gradient(70% 55% at 62% 118%, rgba(255, 0, 88, .42), transparent 70%), radial-gradient(120% 90% at 0% 110%, var(--vt-wall-arc-a) 0 38%, transparent 38.3%), radial-gradient(110% 100% at 90% 125%, var(--vt-wall-arc-b) 0 52%, transparent 52.3%), var(--vt-wallpaper); }
+
+/* the pointed arch: the one gothic shape. Use it for avatars, hero images, selected tabs, empty states. */
+.vt-lancet { border-radius: 999px 999px 0 0 / 80% 80% 0 0; clip-path: polygon(0 100%, 0 46%, 6% 30%, 18% 16%, 34% 6%, 50% 0, 66% 6%, 82% 16%, 94% 30%, 100% 46%, 100% 100%); }
+.vt-star::before { content: ""; display: inline-block; width: .8em; height: .8em; margin-right: .35em; vertical-align: -.05em; background: currentColor; clip-path: polygon(50% 0, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0 50%, 40% 40%); }
+
+/* frosted bars and sheets */
+.vt-glass { background: var(--vt-glass); -webkit-backdrop-filter: blur(var(--vt-glass-blur)) saturate(1.6); backdrop-filter: blur(var(--vt-glass-blur)) saturate(1.6); border: 1px solid var(--vt-glass-edge); box-shadow: inset 0 1px 0 var(--vt-glass-edge), var(--vt-shadow-1); }
+.vt-toolbar { display: flex; align-items: center; gap: var(--vt-s3); padding: 10px var(--vt-s4); min-height: 52px; border-width: 0 0 1px; border-bottom: 1px solid var(--vt-separator); }
+.vt-sidebar { padding: var(--vt-s3); min-width: 240px; border-width: 0 1px 0 0; border-right: 1px solid var(--vt-separator); }
+.vt-sheet { border-radius: var(--vt-r-sheet); box-shadow: var(--vt-shadow-2), inset 0 1px 0 var(--vt-glass-edge); padding: var(--vt-s5); }
+@media (prefers-reduced-transparency: reduce) { .vt-glass { background: var(--vt-surface); -webkit-backdrop-filter: none; backdrop-filter: none; } }
+
+/* surfaces */
+.vt-card { background: var(--vt-surface); border-radius: var(--vt-r-group); box-shadow: var(--vt-shadow-1), 0 0 0 1px var(--vt-separator); padding: var(--vt-s4); }
+.vt-group { background: var(--vt-surface); border-radius: var(--vt-r-group); overflow: hidden; box-shadow: 0 0 0 1px var(--vt-separator); }
+.vt-group > * + * { border-top: 1px solid var(--vt-separator); }
+.vt-row { display: flex; align-items: center; gap: var(--vt-s3); padding: 11px var(--vt-s4); min-height: 44px; }
+
+/* controls */
+.vt-btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 32px; padding: 5px 14px; font: inherit; font-weight: 600; font-size: 14px; color: var(--vt-label); background: linear-gradient(var(--vt-surface), var(--vt-surface-2)); border: 0; border-radius: var(--vt-r-control); box-shadow: 0 0 0 1px var(--vt-separator), 0 1px 2px rgba(30, 6, 22, .1); cursor: pointer; transition: transform .08s ease, box-shadow .15s ease, filter .15s ease; }
+.vt-btn:hover { filter: brightness(.98); } .vt-btn:active { transform: translateY(1px); filter: brightness(.95); }
+.vt-btn[disabled] { opacity: .45; cursor: not-allowed; }
+.vt-btn.primary { color: var(--vt-on-tint); background: var(--vt-pink-600); box-shadow: inset 0 1px 0 rgba(255, 190, 215, .5), 0 0 0 1px rgba(61, 0, 22, .55), 0 1px 3px rgba(61, 0, 22, .4); text-shadow: 0 1px 0 rgba(61, 0, 22, .35); }
+.vt-btn.primary:hover { background: var(--vt-pink-700); filter: none; }
+.vt-btn.plain { background: none; box-shadow: none; color: var(--vt-tint-strong); }
+.vt-btn.large { min-height: 40px; padding: 8px 20px; font-size: 16px; border-radius: 10px; }
+.vt-field { width: 100%; min-height: 34px; padding: 6px 10px; font: inherit; color: var(--vt-label); background: var(--vt-surface); border: 0; border-radius: var(--vt-r-control); box-shadow: inset 0 1px 2px rgba(30, 6, 22, .14), 0 0 0 1px var(--vt-separator); }
+.vt-field:focus { outline: none; box-shadow: inset 0 1px 2px rgba(30, 6, 22, .14), var(--vt-focus), 0 0 0 1px var(--vt-tint); }
+.vt-segmented { display: inline-flex; padding: 2px; gap: 2px; background: var(--vt-fill); border-radius: 9px; }
+.vt-segmented > button { font: inherit; font-weight: 600; font-size: 13px; padding: 4px 14px; border: 0; background: none; color: var(--vt-label-2); border-radius: 7px; cursor: pointer; }
+.vt-segmented > button[aria-pressed="true"] { background: var(--vt-surface); color: var(--vt-label); box-shadow: 0 1px 3px rgba(30, 6, 22, .25), 0 0 0 .5px var(--vt-separator); }
+.vt-switch { appearance: none; -webkit-appearance: none; width: 42px; height: 26px; border-radius: 13px; background: var(--vt-fill-2); position: relative; cursor: pointer; transition: background .2s; vertical-align: middle; }
+.vt-switch::after { content: ""; position: absolute; top: 2px; left: 2px; width: 22px; height: 22px; border-radius: 50%; background: #fff; box-shadow: 0 2px 4px rgba(30, 6, 22, .35); transition: transform .2s ease; }
+.vt-switch:checked { background: var(--vt-tint); } .vt-switch:checked::after { transform: translateX(16px); }
+.vt-badge { display: inline-flex; align-items: center; padding: 2px 9px; border-radius: 99px; font-size: 12px; font-weight: 700; color: var(--vt-tint-strong); background: var(--vt-tint-soft); }
+.vt-kbd { font-family: var(--vt-mono); font-size: 12px; padding: 1px 6px; border-radius: 5px; background: var(--vt-fill); box-shadow: inset 0 -1px 0 var(--vt-separator); }
+.vt-icon { border-radius: 22.37%; box-shadow: var(--vt-shadow-1); }
+
+@media (prefers-reduced-motion: reduce) { .vt *, .vt-btn, .vt-switch, .vt-switch::after { transition: none !important; animation: none !important; } }
+@media (forced-colors: active) { .vt-btn, .vt-field, .vt-card { border: 1px solid CanvasText; } .vt-btn.primary { background: Highlight; color: HighlightText; } }
+
+/* Touch hit areas include the switch label rather than enlarging its visual track. */
+.vt button, .vt input, .vt select, .vt textarea { font: inherit; }
+.vt [data-font="system"], .vt[data-font="system"] { font-family: var(--vt-font-system); }
+.vt-row:has(.vt-switch) { cursor: pointer; }
+@media (pointer: coarse) {
+  .vt-btn, .vt-field, .vt-segmented > button, .vt summary, .vt select { min-height: 44px; }
+  .vt-row:has(.vt-switch) { min-height: 44px; }
+}
+@media (prefers-reduced-motion: reduce) { .vt *, .vt *::before, .vt *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
+@media (forced-colors: active) {
+  .vt :focus-visible { outline: 3px solid Highlight; box-shadow: none; }
+  .vt-switch { appearance: auto; }
+  .vt-switch::after { display: none; }
+  .vt-glass { background: Canvas; color: CanvasText; backdrop-filter: none; -webkit-backdrop-filter: none; }
+}

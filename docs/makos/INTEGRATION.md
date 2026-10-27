@@ -28,7 +28,7 @@ ARCHITECTURE.md, ASSETS.md, README.md and SOURCES.md existed under docs/makos.
   deterministic calculator expression, playback state and test-process cleanup.
 * Recovered GTK/KWin/Python version dependencies; package both Settings and Software
   Center helpers/polkit policies; include cursor and sound payloads, omit bytecode.
-* Paper, Digits and Slides use Mak Office's Euro-Office wrapper and upstream
+* Paper, Digits and Slides use Vigil Office's Euro-Office wrapper and upstream
   StartupWMClass. The shell preload is removed before spawning it; the wrapper owns
   its separate CEF preload. makos-apps recommends mak-office.
 
@@ -72,7 +72,7 @@ until the owner confirms it. No package release is published by this repair audi
   and labels enabled. Spread/Desks/gestures have not received equivalent coverage.
 * Extracted six-package payload: shell ready; Files and Settings have independent
   PIDs; inspected compositor capture includes the wallpaper and all Settings rows.
-* Mak Office: installed ARM64 wrapper renders word/cell/slide editor windows and
+* Vigil Office: installed ARM64 wrapper renders word/cell/slide editor windows and
   nonblank compositor captures in private KWin/XWayland. Save/reopen not tested.
 * Theme galleries produced GTK3/GTK4/Qt/notification/decoration captures at 1x and
   a decoration capture at 2x. This diagnostic script currently masks some command

@@ -1,1 +1,1 @@
-{"KPackageStructure":"KWin/Decoration","KPlugin":{"Id":"org.makos.glass","Name":"MakkOS Glass & Metal","Description":"Original silver window frames with glass controls","Version":"0.1.0","License":"GPL-3.0-only","Authors":[{"Name":"MakkOS contributors"}]}}
+{"KPackageStructure":"KWin/Decoration","KPlugin":{"Id":"org.makos.glass","Name":"VigilOS Glass","Description":"VigilTech window frames","Version":"0.1.0","License":"GPL-3.0-only","Authors":[{"Name":"VigilTech"}]}}

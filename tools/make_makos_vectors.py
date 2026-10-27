@@ -1,7 +1,28 @@
 #!/usr/bin/env python3
-"""Original compact vector assets for the development preview (not AI icon substitutes)."""
+"""Original compact vector assets for the development preview (not AI icon substitutes).
+
+Colours are drawn in the original blue-grey and remapped to the VigilTech rose/plum palette by vigil() below."""
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
+import colorsys
+import re
+
+
+def vigil(text):
+    """Remap blue and blue-grey hex colours to VigilTech rose (saturated) and plum-grey (neutral)."""
+    def one(m):
+        h=m.group(1)
+        if len(h)==3:h=''.join(c*2 for c in h)
+        r,g,b=(int(h[i:i+2],16)/255 for i in (0,2,4))
+        hue,light,sat=colorsys.rgb_to_hls(r,g,b)
+        deg=hue*360
+        if 150<=deg<=265 and sat>0.04:
+            if sat>0.35:hue,sat=340/360,min(1,sat+.15)
+            else:hue,sat=318/360,sat*.7
+            r,g,b=colorsys.hls_to_rgb(hue,light,sat)
+            return '#%02x%02x%02x'%(round(r*255),round(g*255),round(b*255))
+        return m.group(0)
+    return re.sub(r'#([0-9a-fA-F]{6}|[0-9a-fA-F]{3})\b',one,text)
 OUT=ROOT/'src/makos/icons/MakkOS/scalable/apps'
 DEFS='''<defs><linearGradient id="blue" x2=".2" y2="1"><stop stop-color="#c6edff"/><stop offset=".48" stop-color="#62b4ed"/><stop offset=".5" stop-color="#3182c3"/><stop offset="1" stop-color="#80c2ef"/></linearGradient><linearGradient id="silver" x2="0" y2="1"><stop stop-color="#fff"/><stop offset=".5" stop-color="#e2e8ed"/><stop offset="1" stop-color="#9dabb9"/></linearGradient><linearGradient id="paper" x2="0" y2="1"><stop stop-color="#fffef5"/><stop offset="1" stop-color="#e0e5e5"/></linearGradient></defs>'''
 FOLDER='<path d="M8 22 Q8 17 13 17 H26 L32 23 H55 Q59 23 59 28 L55 53 H9Z" fill="url(#blue)" stroke="#3675a4"/><path d="M10 31 H57 L53 53 H10Z" fill="#72b7e4" opacity=".7"/><path d="M10 30 H57" stroke="white" opacity=".8"/>'
@@ -23,7 +44,7 @@ MOTIFS={
 'rewind':'<path d="M14 22 A23 23 0 1 1 12 42" fill="none" stroke="#6d98bc" stroke-width="8"/><path d="M7 11 L7 29 L26 29" fill="none" stroke="#6d98bc" stroke-width="7" stroke-linejoin="round"/><path d="M33 18 V33 L44 40" fill="none" stroke="#4d738f" stroke-width="3"/>',
 'chatgpt':'<path d="M10 13 Q10 7 16 7 H48 Q55 7 55 14 V44 Q55 50 48 50 H29 L16 59 V50 Q10 50 10 44Z" fill="url(#blue)" stroke="#517b9d"/><path d="M21 24 H45 M21 32 H41" stroke="#f2fbff" stroke-width="3"/>',
 'claude':'<path d="M10 14 Q10 8 16 8 H48 Q54 8 54 14 V43 Q54 49 48 49 H35 L47 59 H21 Q10 59 10 49Z" fill="url(#silver)" stroke="#8095a9"/><path d="M21 24 H44 M21 32 H38" stroke="#5486ad" stroke-width="3"/>',
-'makos-logo': (ROOT/'src/makos/branding/cherry-blossom.svg').read_text().split('</title>',1)[1].rsplit('</svg>',1)[0],
+'makos-logo': (ROOT/'src/makos/branding/vigilos.svg').read_text().split('</title>',1)[1].rsplit('</svg>',1)[0].replace('width="256" height="256"','width="64" height="64"'),
 }
 
 # ---- Settings pane icons (settings-and-Seek engineer). One distinct original geometric drawing per pane.
@@ -67,7 +88,7 @@ APP_MOTIFS={
 APP_ICON_NAMES=list(APP_MOTIFS)
 
 def svg(body):
-    return '<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">'+DEFS+body+'</svg>'
+    return vigil('<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">'+DEFS+body+'</svg>')
 
 def main():
     OUT.mkdir(parents=True,exist_ok=True)

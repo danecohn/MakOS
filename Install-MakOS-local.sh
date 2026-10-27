@@ -30,4 +30,4 @@ Signed-By: /usr/share/keyrings/makos-archive-keyring.gpg
 EOF
 apt-get update -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/makos-local.sources -o Dir::Etc::sourceparts=-
 apt-get install --no-remove --no-install-recommends makos-desktop=0.1.0~dev7
-printf '\nMakk OS is available in the login session selector. Log out normally and select Makk OS.\nTo return, choose Plasma or Amerika OS. Login and boot defaults were not changed.\n'
+printf '\nVigilOS is available in the login session selector. Log out normally and select VigilOS.\nTo return, choose Plasma or Amerika OS. Login and boot defaults were not changed.\n'

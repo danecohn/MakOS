@@ -26,6 +26,10 @@ def set_accent(name):
     return put(accent=name, graphite=name == 'graphite')
 
 
+def set_dark(on):
+    return put(dark=bool(on))
+
+
 def set_font_size(px):
     px = int(px)
     if not 10 <= px <= 18:

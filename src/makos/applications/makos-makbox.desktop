@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Application
-Name=MakBox
+Name=Vigil Box
 Exec=makos-app makbox %U
 Icon=makos-makbox
 Terminal=false

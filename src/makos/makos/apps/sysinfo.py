@@ -121,7 +121,7 @@ def gather():
     cpu, cores = cpu_info()
     seconds = uptime()
     sections = [
-        ('Software', [('Operating system', f'Makk OS {VERSION} (development preview)'), ('Base', release.get('PRETTY_NAME', 'unknown')), ('Kernel', platform.release()),
+        ('Software', [('Operating system', f'VigilOS {VERSION} (development preview)'), ('Base', release.get('PRETTY_NAME', 'unknown')), ('Kernel', platform.release()),
                       ('Architecture', platform.machine()), ('Compositor', tool_version(['kwin_wayland', '--version']) or 'KWin (version unavailable)'),
                       ('Toolkit', 'GTK %s.%s.%s' % (Gtk.get_major_version(), Gtk.get_minor_version(), Gtk.get_micro_version())), ('Python', platform.python_version()),
                       ('Session', os.environ.get('XDG_CURRENT_DESKTOP', 'unknown') + ' / ' + os.environ.get('XDG_SESSION_TYPE', 'unknown'))]),
@@ -135,7 +135,7 @@ def gather():
 
 def report(sections=None, redact_secrets=True):
     sections = sections or gather()
-    lines = ['Makk OS system report']
+    lines = ['VigilOS system report']
     for title, rows in sections:
         lines += ['', title]
         lines += [f'  {k}: {v}' for k, v in rows]
@@ -156,8 +156,8 @@ class SystemInfo:
         head = ui.box(spacing=16)
         head.append(ui.icon('makos-logo', 72))
         titles = ui.box(True, 2)
-        titles.append(Gtk.Label(label='Makk OS', xalign=0, css_classes=['hero']))
-        titles.append(Gtk.Label(label='Developed by Artemis Softworks LLC', xalign=0))
+        titles.append(Gtk.Label(label='VigilOS', xalign=0, css_classes=['hero']))
+        titles.append(Gtk.Label(label='A product of VigilTech, vigiltech.org', xalign=0))
         titles.append(Gtk.Label(label=f'Development preview {VERSION}', xalign=0, css_classes=['subtitle']))
         head.append(titles)
         col.append(head)

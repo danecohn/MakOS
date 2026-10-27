@@ -72,7 +72,7 @@ def lookup(app=None):
 
 
 def lookup_agent():
-    return None  # Agent key reuse is retired in Makk OS.
+    return None  # Agent key reuse is retired in VigilOS.
 
 
 def _present(fn):

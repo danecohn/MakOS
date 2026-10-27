@@ -1,11 +1,11 @@
 [Plymouth Theme]
-Name=Makk OS
-Description=Artemis Softworks LLC startup screen
+Name=VigilOS
+Description=VigilTech startup screen
 ModuleName=two-step
 
 [two-step]
-Font=DejaVu Sans 12
-TitleFont=DejaVu Sans 30
+Font=Vigil Sans 12
+TitleFont=Vigil Sans 30
 ImageDir=/usr/share/plymouth/themes/makk
 DialogHorizontalAlignment=.5
 DialogVerticalAlignment=.62
@@ -17,9 +17,9 @@ WatermarkHorizontalAlignment=.5
 WatermarkVerticalAlignment=.42
 Transition=none
 TransitionDuration=0.0
-BackgroundStartColor=0xd9e2e9
-BackgroundEndColor=0xb5c5d2
-ProgressBarBackgroundColor=0xa1b3c2
+BackgroundStartColor=0x120a14
+BackgroundEndColor=0x2b0a1e
+ProgressBarBackgroundColor=0x3b2a3f
 ProgressBarForegroundColor=0xff0058
 DialogClearsFirmwareBackground=true
 MessageBelowAnimation=true
@@ -40,5 +40,5 @@ UseFirmwareBackground=false
 SuppressMessages=true
 ProgressBarShowPercentComplete=true
 UseProgressBar=true
-Title=Updating Makk OS
+Title=Updating VigilOS
 SubTitle=Keep your computer powered on

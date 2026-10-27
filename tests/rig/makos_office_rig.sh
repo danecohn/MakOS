@@ -1,5 +1,5 @@
 #!/bin/sh
-# Installed Mak Office, isolated HOME/config/bus and compositor; no owner document is opened.
+# Installed Vigil Office, isolated HOME/config/bus and compositor; no owner document is opened.
 set -eu
 ROOT=$(cd "$(dirname "$0")/../.." && pwd)
 T=$(mktemp -d)

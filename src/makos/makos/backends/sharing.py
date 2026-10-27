@@ -1,4 +1,4 @@
-# Adapted for MakkOS from Amerika OS (src/os/amerika/sharing.py), GPL-3.0-only, Artemis Softworks LLC; MakkOS adaptations.
+# Adapted for MakkOS from Amerika OS (src/os/amerika/sharing.py), GPL-3.0-only, VigilTech; MakkOS adaptations.
 """Sharing & remote desktop backend: read-only status of the services that expose this computer, plus user-level toggles
 for the remote-desktop service where one exists. System services (SSH, Samba) are shown with the exact command to
 enable them; nothing here changes them."""

@@ -1,8 +1,8 @@
 [SddmGreeterTheme]
-Name=Makk OS
-Description=Makk OS login by Artemis Softworks LLC
-Author=Artemis Softworks LLC
-Copyright=2026 Artemis Softworks LLC
+Name=VigilOS
+Description=VigilOS login by VigilTech
+Author=VigilTech
+Copyright=2026 VigilTech
 License=GPL-3.0-only
 Type=sddm-theme
 Version=0.1.0

@@ -59,11 +59,11 @@
       }
     ],
     "Category": "",
-    "Description": "Makk OS lock screen by Artemis Softworks LLC",
+    "Description": "VigilOS lock screen by VigilTech",
     "Icon": "user-desktop",
     "Id": "org.makk.desktop",
     "License": "GPL-2.0+",
-    "Name": "Makk OS",
+    "Name": "VigilOS",
     "Version": "",
     "Website": "https://www.kde.org/plasma-desktop"
   },

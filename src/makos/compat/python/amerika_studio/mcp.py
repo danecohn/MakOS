@@ -15,7 +15,7 @@ from .common import APPS, StudioError
 
 INSTRUCTIONS = (
     'These tools drive Studio, the user\'s game-making apps: Render (3D, Blender), Engine (Godot), '
-    'Sprite (pixel art) and MakBox (chiptune music). Tool names are <app>_<area>_<action>. Start with a read '
+    'Sprite (pixel art) and Vigil Box (chiptune music). Tool names are <app>_<area>_<action>. Start with a read '
     'tool (scene_info, project_info, canvas_info, song_get), make small changes, then verify (screenshot, describe). '
     '<app>_app_prompt hands a plain-language instruction to the app\'s own Claude assistant. Files are confined to the '
     'project folder (~/Studio/<App>). Tools that run code ask the user for approval every time; if declined, do not retry.')

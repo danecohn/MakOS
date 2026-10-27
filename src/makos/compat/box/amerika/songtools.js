@@ -1,4 +1,4 @@
-/* MakBox: the AI composer's song tools.
+/* Vigil Box: the AI composer's song tools.
  *
  * `create(B, host)` returns {definitions, run, ...}. B is the BeepBox namespace (Song, Synth, Config...), host is
  *   { getSong(): Song, commit(song: Song, label: string): void, play(opts), stop(), undo(steps) }.
@@ -7,7 +7,7 @@
  *
  * API conventions shown to the model: channels, patterns, instruments and bars are numbered from 1 (like the editor UI);
  * pitches are note names (C4 = middle C) or MIDI numbers; times are in beats (a quarter note = 1 beat).
- * MakBox is not affiliated with BeepBox or John Nesky. See NOTICE.
+ * Vigil Box is not affiliated with BeepBox or John Nesky. See NOTICE.
  */
 (function (root, factory) {
 	if (typeof module === "object" && module.exports) module.exports = factory(require("./theory.js"), require("./audio.js"));

@@ -79,7 +79,7 @@ def build(col, ctx):
     s.append(row)
 
     s = W.section(col, 'Screen saver and lock')
-    W.note(s, 'Makk OS has no animated screen savers. After the idle time the screen is locked, and your display power settings decide when it turns off.')
+    W.note(s, 'VigilOS has no animated screen savers. After the idle time the screen is locked, and your display power settings decide when it turns off.')
     lock = security.lock_settings()
     state = {'timeout': lock['timeout_min']}
     W.switch_row(s, 'Lock the screen after being idle', lock['auto_lock'], lambda v: ctx.do(security.set_lock, auto_lock=v, ok='Saved.'))

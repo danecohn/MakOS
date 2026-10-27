@@ -1,4 +1,4 @@
-# Adapted for MakkOS from Amerika OS (src/os/amerika/datetime_.py), GPL-3.0-only, Artemis Softworks LLC; MakkOS adaptations.
+# Adapted for MakkOS from Amerika OS (src/os/amerika/datetime_.py), GPL-3.0-only, VigilTech; MakkOS adaptations.
 """Date & time backend: systemd-timedated through `timedatectl` (its own polkit actions authorise changes)."""
 import re
 

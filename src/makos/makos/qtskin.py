@@ -21,9 +21,9 @@ QT_DIR = SHARE / 'theme' / 'qt'
 # QPalette role order used by qt6ct colour schemes (Qt 6.x, 21 roles + accent).
 ROLES = ['WindowText', 'Button', 'Light', 'Midlight', 'Dark', 'Mid', 'Text', 'BrightText', 'ButtonText', 'Base', 'Window', 'Shadow',
          'Highlight', 'HighlightedText', 'Link', 'LinkVisited', 'AlternateBase', 'NoRole', 'ToolTipBase', 'ToolTipText', 'PlaceholderText', 'Accent']
-ACTIVE = ['#242b34', '#ededee', '#ffffff', '#f6f6f7', '#a2a8af', '#c7cbd0', '#242b34', '#ffffff', '#242b34', '#ffffff', '#ececec', '#000000',
-          '#2d70c8', '#ffffff', '#1f5fbf', '#6f4aa8', '#f0f4fa', '#000000', '#fffdf0', '#3a3517', '#8a929c', '#418ee6']
-DISABLED_FADE = {'WindowText', 'Text', 'ButtonText'}
+ACTIVE = ['#17101a', '#fffbfd', '#ffffff', '#faf5f8', '#857380', '#d9ccd4', '#17101a', '#ffffff', '#17101a', '#fffbfd', '#f6f1f4', '#1e0616',
+          '#d6004a', '#ffffff', '#a8003a', '#6d3bc0', '#faf4f7', '#000000', '#1e1422', '#f7eef2', '#5d4e5a', '#d6004a']
+DISABLED_FADE = {'WindowText', 'Text', 'ButtonText'}  # disabled text uses the dim colour (4.5:1), not a faded one
 
 
 def _argb(color, alpha=0xff):
@@ -33,7 +33,7 @@ def _argb(color, alpha=0xff):
 def palette_text():
     active = [_argb(c) for c in ACTIVE]
     inactive = list(active)
-    disabled = [_argb(c, 0x73) if r in DISABLED_FADE else _argb(c) for r, c in zip(ROLES, ACTIVE)]
+    disabled = [_argb('#5d4e5a') if r in DISABLED_FADE else _argb(c) for r, c in zip(ROLES, ACTIVE)]
     return '[ColorScheme]\nactive_colors=%s\ninactive_colors=%s\ndisabled_colors=%s\n' % (', '.join(active), ', '.join(inactive), ', '.join(disabled))
 
 

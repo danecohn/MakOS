@@ -1,0 +1,4 @@
+/* Vigil Sans: VigilTech's own typeface (fonts/). Load it, with a system fallback so text never waits on the network. */
+@font-face { font-family: "Vigil Sans"; font-style: normal; font-weight: 400; font-display: swap; src: url("../fonts/VigilSans-Regular.woff2") format("woff2"), url("../fonts/VigilSans-Regular.ttf") format("truetype"); }
+@font-face { font-family: "Vigil Sans"; font-style: normal; font-weight: 700; font-display: swap; src: url("../fonts/VigilSans-Bold.woff2") format("woff2"), url("../fonts/VigilSans-Bold.ttf") format("truetype"); }
+:root { --vt-font: "Vigil Sans", -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; --vt-font-system: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; --vt-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace; }

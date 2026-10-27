@@ -97,7 +97,7 @@ def build(col, ctx):
                 if f and f.get_path():
                     ctx.do(netman.vpn_import, f.get_path(), ok='VPN profile imported.', done=reload)
             dialog.open(ctx.window, None, picked)
-        W.button_row(s, '', 'Import VPN Profile…', pick, hint='Credentials in the profile are stored by NetworkManager, not by Makk OS.')
+        W.button_row(s, '', 'Import VPN Profile…', pick, hint='Credentials in the profile are stored by NetworkManager, not by VigilOS.')
 
         s = W.section(box, 'Proxy')
         px = info['proxy']

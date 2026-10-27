@@ -8,7 +8,7 @@ from gi.repository import Gtk  # noqa: E402
 
 from .. import common
 
-DEFAULT_NAME = 'wallpaper-aurora-blue.jpg'
+DEFAULT_NAME = 'wallpaper-nave-night.jpg'
 IMAGE_EXT = ('.png', '.jpg', '.jpeg', '.webp')
 
 
@@ -21,7 +21,7 @@ def wallpaper_path(prefs=None):
         if p.is_file() and p.suffix.lower() in IMAGE_EXT:
             return p
     for base in (common.SHARE / 'wallpapers', common.SOURCE.parents[1] / 'assets' / 'makos'):
-        for name in (DEFAULT_NAME, 'wallpaper-aurora-blue.png'):
+        for name in (DEFAULT_NAME, 'wallpaper-nave-night.png'):
             p = base / name
             if p.is_file():
                 return p

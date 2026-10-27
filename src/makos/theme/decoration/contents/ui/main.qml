@@ -17,9 +17,9 @@ Decoration {
     readonly property bool sheet: win.modal
     readonly property int titleHeight: tool ? 22 : 30
     readonly property int pad: flat ? 0 : (active ? 14 : 10)
-    readonly property color edgeColor: sheet ? "#6f7a89" : (active ? "#7d8691" : "#a8adb4")
+    readonly property color edgeColor: sheet ? "#857380" : (active ? "#a99aa5" : "#d9ccd4")
     property bool groupHover: orbs.hovered
-    function corner(a, b) { return (flat || (edges & a) || (edges & b)) ? 0 : 7 }
+    function corner(a, b) { return (flat || (edges & a) || (edges & b)) ? 0 : 12 }
 
     Component.onCompleted: {
         borders.setBorders(1);
@@ -57,7 +57,7 @@ Decoration {
             topRightRadius: corner(Qt.TopEdge, Qt.RightEdge)
             bottomLeftRadius: corner(Qt.BottomEdge, Qt.LeftEdge)
             bottomRightRadius: corner(Qt.BottomEdge, Qt.RightEdge)
-            color: "#e8eaec"
+            color: "#f6f1f4"
             border.width: flat ? 0 : 1
             border.color: root.edgeColor
         }
@@ -69,16 +69,16 @@ Decoration {
             topRightRadius: Math.max(0, corner(Qt.TopEdge, Qt.RightEdge) - 1)
             clip: true
             gradient: Gradient {
-                GradientStop { position: 0.0; color: root.active ? "#fbfbfb" : "#f6f6f6" }
-                GradientStop { position: 0.5; color: root.active ? "#e3e5e8" : "#ebecee" }
-                GradientStop { position: 0.52; color: root.active ? "#d3d6da" : "#e4e5e7" }
-                GradientStop { position: 1.0; color: root.active ? "#c6c9ce" : "#dedfe1" }
+                GradientStop { position: 0.0; color: root.active ? "#fbf7f9" : "#f6f1f4" }
+                GradientStop { position: 0.5; color: root.active ? "#f8f2f5" : "#f4eef1" }
+                GradientStop { position: 0.52; color: root.active ? "#f3ecf0" : "#f2ecef" }
+                GradientStop { position: 1.0; color: root.active ? "#efe7ec" : "#f0eaee" }
             }
             Image {  // brushed metal grain (original, generated; contents/images/metal*.png)
                 anchors.fill: parent
                 source: "../images/metal.png"
                 fillMode: Image.Tile
-                opacity: root.active ? 0.28 : 0.14
+                opacity: 0; visible: false
             }
             Rectangle { x: 0; y: 0; width: parent.width; height: 1; color: "#ffffff"; opacity: 0.9 }
             Rectangle { x: 0; y: parent.height - 1; width: parent.width; height: 1; color: root.edgeColor; opacity: 0.9 }
@@ -89,10 +89,9 @@ Decoration {
                 text: win.caption
                 horizontalAlignment: Text.AlignHCenter
                 elide: Text.ElideMiddle
-                color: root.active ? "#232932" : "#8e949c"
-                style: Text.Raised
-                styleColor: root.active ? "#ffffff" : "#f5f5f5"
-                font.family: "DejaVu Sans"
+                color: root.active ? "#17101a" : "#5d4e5a"
+                style: Text.Normal
+                font.family: "Vigil Sans"
                 font.pixelSize: root.tool ? 11 : 12
                 font.bold: root.active
             }

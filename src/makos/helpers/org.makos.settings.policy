@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE policyconfig PUBLIC "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
  "http://www.freedesktop.org/standards/PolicyKit/1.0/policyconfig.dtd">
-<!-- Adapted for MakkOS from Amerika OS org.amerika.settings.policy (GPL-3.0-only, Artemis Softworks LLC). -->
+<!-- Adapted for MakkOS from Amerika OS org.amerika.settings.policy (GPL-3.0-only, VigilTech). -->
 <policyconfig>
   <vendor>MakkOS</vendor>
   <action id="org.makos.settings.manage">

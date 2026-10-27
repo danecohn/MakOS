@@ -161,7 +161,7 @@
       "pattern": "^res://[^\\\\]*$",
       "description": "res:// path inside the project"
      },
-     "description": "Track key -> res:// path (MakBox export, .ogg/.wav/.mp3)"
+     "description": "Track key -> res:// path (Vigil Box export, .ogg/.wav/.mp3)"
     },
     "sfx": {
      "type": "object",

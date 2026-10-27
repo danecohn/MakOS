@@ -35,7 +35,7 @@ def make_splash(path, title='Engine', w=640, h=360):
         logo = logo.resize((side, side), Image.Resampling.LANCZOS)
         img.paste(logo, ((w-side)//2, (h-side)//2-8), logo)
     d.text((w // 2 - len(title) * 3, int(h * 0.10)), title.upper(), fill=(237, 239, 223))
-    d.text((20, h-33), 'A product of Artemis Softworks LLC', fill=(188, 204, 195))
+    d.text((20, h-33), 'A product of VigilTech', fill=(188, 204, 195))
     d.text((20, h-18), 'Powered by the Godot Engine (MIT)', fill=(148, 169, 169))
     img.save(path)
     return path

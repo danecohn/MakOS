@@ -1,69 +1,65 @@
-/* MakkOS Venture — original Glass & Metal browser chrome, GPL-3.0-only.
+/* VigilOS Venture: browser chrome in the VigilTech design (light bone, one pink), GPL-3.0-only.
    Browser UI only: web content and the browser's identity/security indicators stay native. */
 :root {
   color-scheme: light !important;
-  --toolbar-bgcolor: #d6d6d6 !important;
-  --toolbar-color: #25282b !important;
-  --toolbar-field-background-color: #fff !important;
-  --toolbar-field-color: #20252b !important;
-  --toolbar-field-border-color: #92989e !important;
-  --toolbar-field-focus-border-color: #6fa8db !important;
-  --chrome-content-separator-color: #8f949b !important;
-  --toolbarbutton-border-radius: 4px !important;
-  --tab-border-radius: 5px !important;
-  --tab-min-height: 29px !important;
-  --tab-selected-bgcolor: #eff0f2 !important;
-  --tab-selected-textcolor: #20252b !important;
-  --lwt-text-color: #25282b !important;
-  --lwt-tab-text: #25282b !important;
-  --lwt-accent-color: #c8cace !important;
-  font-family: "DejaVu Sans", sans-serif !important;
+  --toolbar-bgcolor: #faf5f8 !important;
+  --toolbar-color: #17101a !important;
+  --toolbar-field-background-color: #fffbfd !important;
+  --toolbar-field-color: #17101a !important;
+  --toolbar-field-border-color: #857380 !important;
+  --toolbar-field-focus-border-color: #d6004a !important;
+  --chrome-content-separator-color: #d9ccd4 !important;
+  --toolbarbutton-border-radius: 8px !important;
+  --tab-border-radius: 8px !important;
+  --tab-min-height: 30px !important;
+  --tab-selected-bgcolor: #fffbfd !important;
+  --tab-selected-textcolor: #17101a !important;
+  --lwt-text-color: #17101a !important;
+  --lwt-tab-text: #17101a !important;
+  --lwt-accent-color: #efe6ec !important;
+  font-family: "Vigil Sans", "DejaVu Sans", sans-serif !important;
 }
-#navigator-toolbox { display: flex !important; flex-direction: column !important; background: #d0d2d5 !important; border-bottom: 1px solid #84898e !important; }
-#toolbar-menubar { order: 0 !important; background: linear-gradient(#f8f8f8,#ddd) !important; }
-#nav-bar { order: 1 !important; min-height: 42px !important; padding: 3px 8px !important; border: 0 !important; background: linear-gradient(#efefef 0%,#d9d9db 48%,#c9cbce 100%) !important; box-shadow: inset 0 1px #fff !important; }
-#PersonalToolbar { order: 2 !important; min-height: 25px !important; padding: 0 10px !important; background: linear-gradient(#d4d5d7,#c4c6c9) !important; border-top: 1px solid #ffffff70 !important; border-bottom: 1px solid #92979c !important; }
-#TabsToolbar { order: 3 !important; padding: 0 8px !important; background: linear-gradient(#b5b8bd,#c8cace) !important; color: #25282b !important; }
+#navigator-toolbox { display: flex !important; flex-direction: column !important; background: #efe6ec !important; border-bottom: 1px solid #d9ccd4 !important; }
+#toolbar-menubar { order: 0 !important; background: #faf5f8 !important; color: #17101a !important; }
+#nav-bar { order: 1 !important; min-height: 44px !important; padding: 4px 8px !important; border: 0 !important; background: #faf5f8 !important; box-shadow: inset 0 1px #ffffff !important; }
+#PersonalToolbar { order: 2 !important; min-height: 27px !important; padding: 0 10px !important; background: #faf5f8 !important; border-top: 1px solid #d9ccd4 !important; border-bottom: 1px solid #d9ccd4 !important; }
+#TabsToolbar { order: 3 !important; padding: 0 8px !important; background: #efe6ec !important; color: #17101a !important; }
 #nav-bar .toolbarbutton-1:not(#urlbar-searchmode-switcher) > .toolbarbutton-icon,
 #nav-bar .toolbarbutton-1 > .toolbarbutton-badge-stack {
-  background: linear-gradient(#fefefe,#e5e6e7 48%,#cdd0d3 51%,#f1f2f3) !important;
-  border: 1px solid #92989e !important; border-radius: 4px !important;
-  box-shadow: inset 0 1px #fff,0 1px #ffffff70 !important;
-  padding: 4px 7px !important; width: 30px !important; height: 26px !important;
+  background: transparent !important; border: 1px solid transparent !important; border-radius: 8px !important;
+  padding: 4px 7px !important; width: 30px !important; height: 28px !important;
 }
-#nav-bar .toolbarbutton-1:hover > .toolbarbutton-icon { background: linear-gradient(#fff,#d2dfeb) !important; }
-#nav-bar .toolbarbutton-1:active > .toolbarbutton-icon { background: linear-gradient(#acb4bc,#e4e7eb) !important; box-shadow: inset 0 1px 3px #59667366 !important; }
-#back-button { padding-inline-end: 0 !important; }
-#forward-button { padding-inline-start: 0 !important; }
-#back-button > .toolbarbutton-icon { border-radius: 5px 0 0 5px !important; }
-#forward-button > .toolbarbutton-icon { border-radius: 0 5px 5px 0 !important; border-left: 0 !important; }
+#nav-bar .toolbarbutton-1:hover > .toolbarbutton-icon { background: #ebe2e8 !important; }
+#nav-bar .toolbarbutton-1:active > .toolbarbutton-icon { background: #ddd1d9 !important; }
+#nav-bar .toolbarbutton-1:focus-visible > .toolbarbutton-icon { outline: 2px solid #d6004a !important; }
 #urlbar-container { margin-inline: 7px !important; }
 #urlbar-background, #searchbar {
-  border: 1px solid #92989e !important; border-radius: 13px !important;
-  background: #fff !important; box-shadow: inset 0 1px 3px #34404d30,0 1px #ffffffa0 !important;
+  border: 1px solid #857380 !important; border-radius: 14px !important;
+  background: #fffbfd !important; box-shadow: inset 0 1px 2px #1e061620 !important;
 }
-#urlbar[focused] > #urlbar-background, #searchbar:focus-within { border-color: #5799d4 !important; box-shadow: inset 0 1px 2px #34404d20,0 0 0 2px #5ba6e64d !important; }
+#urlbar[focused] > #urlbar-background, #searchbar:focus-within { border-color: #d6004a !important; box-shadow: 0 0 0 3px #d6004a55 !important; }
 #search-container { min-width: 160px !important; max-width: 230px !important; }
-#searchbar { min-height: 27px !important; margin-block: 0 !important; }
-#urlbar-input, .searchbar-textbox { font-size: 12px !important; }
-.bookmark-item { border-radius: 3px !important; padding: 2px 7px !important; font-size: 11px !important; text-shadow: 0 1px #ffffff90 !important; }
-.bookmark-item:hover { background: #ffffff55 !important; }
+#searchbar { min-height: 28px !important; margin-block: 0 !important; }
+#urlbar-input, .searchbar-textbox { font-size: 12px !important; color: #17101a !important; }
+.bookmark-item { border-radius: 6px !important; padding: 2px 7px !important; font-size: 11px !important; color: #17101a !important; }
+.bookmark-item:hover { background: #ebe2e8 !important; }
 .tabbrowser-tab { padding-inline: 0 !important; }
-.tab-background { margin: 2px 0 0 !important; border-radius: 5px 5px 0 0 !important; border: 1px solid #92979e !important; border-bottom: 0 !important; background: linear-gradient(#d3d5d8,#b5b9be) !important; box-shadow: inset 0 1px #ffffff80 !important; }
-.tab-background[selected] { background: linear-gradient(#f9fafb,#e1e3e6) !important; box-shadow: inset 0 1px white !important; }
+.tab-background { margin: 3px 0 0 !important; border-radius: 8px 8px 0 0 !important; border: 1px solid transparent !important; border-bottom: 0 !important; background: transparent !important; }
+.tab-background[selected] { background: #fffbfd !important; border-color: #d9ccd4 !important; box-shadow: none !important; }
+.tabbrowser-tab:hover:not([selected]) .tab-background { background: #ebe2e8 !important; }
 .tab-content { padding-inline: 10px !important; }
-.tab-label { font-size: 11px !important; }
+.tab-label { font-size: 11px !important; color: #17101a !important; }
 .tab-close-button { border-radius: 50% !important; width: 17px !important; height: 17px !important; padding: 3px !important; }
 #TabsToolbar .titlebar-spacer, #firefox-view-button { display: none !important; }
 /* Keep menus visible inside the browser until a compatible global menu is available. */
 #toolbar-menubar:not([inactive]) { visibility: visible !important; }
 
 /* Explicit foregrounds also work when the host's GTK appearance is dark. */
-#nav-bar toolbarbutton, #TabsToolbar toolbarbutton, #TabsToolbar .tab-label { color: #303a45 !important; }
-#nav-bar .toolbarbutton-icon, #TabsToolbar .toolbarbutton-icon { fill: #3b4652 !important; fill-opacity: 1 !important; }
+#nav-bar toolbarbutton, #TabsToolbar toolbarbutton, #TabsToolbar .tab-label { color: #17101a !important; }
+#nav-bar .toolbarbutton-icon, #TabsToolbar .toolbarbutton-icon { fill: #5d4e5a !important; fill-opacity: 1 !important; }
 #PersonalToolbar { width: 100% !important; min-height: 27px !important; }
-#searchbar-new { min-width: 160px !important; max-width: 230px !important; background: white !important; border-radius: 13px !important; color: #20252b !important; }
-/* Venture's inherited distribution policy collapses bookmarks. MakkOS supplies
+#searchbar-new { min-width: 160px !important; max-width: 230px !important; background: #fffbfd !important; border-radius: 14px !important; color: #17101a !important; }
+/* Venture's inherited distribution policy collapses bookmarks. VigilOS supplies
    its fixed classic bookmarks row within this profile's chrome only. */
 #PersonalToolbar { display: flex !important; visibility: visible !important; flex: 0 0 27px !important; height: 27px !important; max-height: none !important; align-self: stretch !important; }
 #PersonalToolbar > #PlacesToolbar { flex: 1 !important; }

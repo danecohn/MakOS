@@ -165,7 +165,7 @@ def safe_filename(name, fallback='untitled'):
     return name or fallback
 
 
-def notify(summary, body, icon='makos-calendar', app_name='Makk OS'):
+def notify(summary, body, icon='makos-calendar', app_name='VigilOS'):
     """Post a desktop notification (the shell's banner service). Failure is silent."""
     try:
         bus = Gio.bus_get_sync(Gio.BusType.SESSION)

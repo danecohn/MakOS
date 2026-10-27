@@ -1,9 +1,9 @@
-/* MakBox: music theory helpers, instrument presets, part generators and genre presets.
+/* Vigil Box: music theory helpers, instrument presets, part generators and genre presets.
  *
  * Pure JavaScript with no DOM access, so it runs in the editor window and in Node tests.
  * Everything here talks in MIDI note numbers (C4 = 60) and beats (a quarter note = 1 beat);
  * songtools.js converts to BeepBox pitches (midi - keyBase) and ticks.
- * MakBox is not affiliated with BeepBox or John Nesky. See NOTICE.
+ * Vigil Box is not affiliated with BeepBox or John Nesky. See NOTICE.
  */
 (function (root, factory) {
 	if (typeof module === "object" && module.exports) module.exports = factory();
@@ -135,7 +135,7 @@
 	};
 
 	// ---------------------------------------------------------------- rhythm / drum templates (beats within a 4-beat bar)
-	// Drum rows of the MakBox "drum kit" preset: 0 kick, 1-3 toms (low to high), 4 clap, 5 snare, 6 rim, 7 shaker, 8 hat, 9 open hat, 10 crash, 11 bell.
+	// Drum rows of the Vigil Box "drum kit" preset: 0 kick, 1-3 toms (low to high), 4 clap, 5 snare, 6 rim, 7 shaker, 8 hat, 9 open hat, 10 crash, 11 bell.
 	const DRUM_ROWS = { kick: 0, tomlow: 1, tommid: 2, tomhigh: 3, clap: 4, snare: 5, rim: 6, shaker: 7, hat: 8, openhat: 9, crash: 10, bell: 11 };
 	const DRUM_NAMES = Object.keys(DRUM_ROWS);
 	const range = function (a, b, s) { const r = []; for (let x = a; x < b - 1e-9; x += s) r.push(+x.toFixed(4)); return r; };

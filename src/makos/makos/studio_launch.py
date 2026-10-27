@@ -21,7 +21,7 @@ def main(argv=None):
     if app in ('sprite','makbox'):
         from amerika_studio.webview import main as start
         ident='box' if app=='makbox' else 'sprite'
-        title='MakBox' if app=='makbox' else 'Sprite'
+        title='Vigil Box' if app=='makbox' else 'Sprite'
         return start(['--app',ident,'--dir',str(base/ident),'--title',title,*argv])
     if app=='engine':
         os.environ['AMERIKA_ENGINE_SHARE']=str(base/'engine')

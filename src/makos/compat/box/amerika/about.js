@@ -1,4 +1,4 @@
-/* MakBox: About text. The BeepBox licence below is reproduced verbatim from LICENSE.md of the BeepBox source. */
+/* Vigil Box: About text. The BeepBox licence below is reproduced verbatim from LICENSE.md of the BeepBox source. */
 (function (root) {
 	"use strict";
 	const NS = (root.Amerika = root.Amerika || {});

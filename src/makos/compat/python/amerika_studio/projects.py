@@ -14,7 +14,7 @@ Created with Studio on {date}.
 * Render/   3D models and scenes (Render). Export .glb files here.
 * Engine/   the Godot project (Engine).
 * Sprite/   pixel art and animations (Sprite).
-* Box/      music (MakBox).
+* Box/      music (Vigil Box).
 
 Ask Engine to "import model" to bring Render exports into the game.
 """

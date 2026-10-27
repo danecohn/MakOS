@@ -9,7 +9,7 @@ CONFIG = Path(os.environ.get('XDG_CONFIG_HOME', Path.home() / '.config')) / 'mak
 STATE = Path(os.environ.get('XDG_STATE_HOME', Path.home() / '.local/state')) / 'makos'
 RUNTIME = Path(os.environ.get('XDG_RUNTIME_DIR', '/tmp')) / 'makos'
 DEFAULTS = {'launcher_size': 56, 'launcher_position': 'bottom', 'launcher_autohide': False,
-            'reduce_motion': False, 'graphite': False, 'pinstripes': False,
+            'reduce_motion': False, 'graphite': False, 'dark': False, 'pinstripes': False,
             'pins': ['files', 'venture', 'paper', 'digits', 'notes', 'terminal', 'settings', 'trash-empty'],
             # --- settings-and-Seek engineer: keys written by makos.settings panes (validated in settings.model.clean) ---
             'accent': 'blossom', 'font_size': 12, 'scrollbars': 'auto', 'reduce_transparency': False,

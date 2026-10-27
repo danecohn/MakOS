@@ -196,14 +196,14 @@ Item {
 
         Component.onCompleted: launchAnimation.start();
 
-        Rectangle { anchors.fill: parent; color: "#c4d1dc" }
+        Rectangle { anchors.fill: parent; color: "#120a14" }
         Row {
             x: 38; y: 32; spacing: 14
-            Image { source: "blossom.svg"; width: 64; height: 64 }
+            Image { source: "vigilos.svg"; width: 64; height: 64 }
             Column {
                 anchors.verticalCenter: parent.verticalCenter; spacing: 3
-                Text { text: "Makk OS"; font.pixelSize: 28; color: "#253c50" }
-                Text { text: "Artemis Softworks LLC"; font.pixelSize: 14; color: "#4c6375" }
+                Text { text: "VigilOS"; font.pixelSize: 28; color: "#f7eef2" }
+                Text { text: "A product of VigilTech"; font.pixelSize: 14; color: "#d9c8d3" }
             }
         }
 

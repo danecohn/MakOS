@@ -10,16 +10,16 @@ def install_theme():
     # theme-and-system-skin: the complete widget theme (tokens, accent, Graphite) loads below glass.css.
     from . import appearance
     prefs = common.load_settings()
-    appearance.install(Gdk.Display.get_default(), prefs.get('accent', 'blue'), bool(prefs.get('graphite')))
+    appearance.install(Gdk.Display.get_default(), prefs.get('accent', 'blossom'), bool(prefs.get('graphite')), bool(prefs.get('dark')))
     provider = Gtk.CssProvider()
     provider.load_from_path(str(common.SHARE / 'theme/glass.css'))
     Gtk.StyleContext.add_provider_for_display(Gdk.Display.get_default(), provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
     settings = Gtk.Settings.get_default()
-    settings.set_property('gtk-font-name', 'DejaVu Sans 10')
+    settings.set_property('gtk-font-name', 'Vigil Sans 10')
     if settings.find_property('gtk-interface-color-scheme'):
-        settings.set_property('gtk-interface-color-scheme', 1)
+        settings.set_property('gtk-interface-color-scheme', 2 if prefs.get('dark') else 1)
     else:
-        settings.set_property('gtk-application-prefer-dark-theme', False)
+        settings.set_property('gtk-application-prefer-dark-theme', bool(prefs.get('dark')))
     settings.set_property('gtk-enable-animations', not common.load_settings()['reduce_motion'])
     icons = Gtk.IconTheme.get_for_display(Gdk.Display.get_default())
     icons.add_search_path(str(common.SHARE / 'icons'))
@@ -45,7 +45,7 @@ def refresh_appearance():
     if settings.find_property('gtk-overlay-scrolling'):
         settings.set_property('gtk-overlay-scrolling', data['scrollbars'] == 'auto')
     from . import appearance
-    appearance.set_variant(display, data['accent'], bool(data['graphite']))
+    appearance.set_variant(display, data['accent'], bool(data['graphite']), bool(data.get('dark')))
 
 
 def box(vertical=False, spacing=0, css=None):

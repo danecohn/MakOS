@@ -301,7 +301,7 @@ class SysInfoTests(unittest.TestCase):
 
     def test_gathered_report_has_no_secrets(self):
         r = sysinfo.report()
-        self.assertIn('Makk OS', r)
+        self.assertIn('VigilOS', r)
         self.assertNotIn(str(Path.home()), r)
         self.assertEqual(sysinfo.os_release('/nonexistent'), {})
 
@@ -638,7 +638,7 @@ class CatalogAndPackagingTests(unittest.TestCase):
     def test_names_ids_and_required_apps(self):
         names = [a.name for a in catalog.APPS]
         for required in ('Files', 'Terminal', 'Text Editor', 'Notes', 'Calculator', 'Calendar', 'Activity', 'Disk Utility', 'System Information', 'Screenshot', 'Preview', 'Pictures', 'Tunes', 'Movies',
-                         'Software Center', 'Widgets', 'Venture', 'Paper', 'Digits', 'Slides', 'MakBox', 'Studio', 'Render', 'Engine', 'Sprite', 'ChatGPT', 'Claude'):
+                         'Software Center', 'Widgets', 'Venture', 'Paper', 'Digits', 'Slides', 'Vigil Box', 'Studio', 'Render', 'Engine', 'Sprite', 'ChatGPT', 'Claude'):
             self.assertIn(required, names)
         for name in names:
             self.assertNotIn(name, self.FORBIDDEN)

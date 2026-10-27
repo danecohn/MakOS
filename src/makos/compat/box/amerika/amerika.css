@@ -1,4 +1,4 @@
-/* MakBox shell styling: retro-futurist neon on chrome. Only touches our own elements plus the editor container sizing;
+/* Vigil Box shell styling: retro-futurist neon on chrome. Only touches our own elements plus the editor container sizing;
    BeepBox's own look comes from its theme system (see theme.js). */
 :root {
 	--am-bg: #06050c; --am-panel: #0f0c20; --am-panel2: #171433; --am-line: #2c2656; --am-text: #f4eeff; --am-dim: #9b92c4;

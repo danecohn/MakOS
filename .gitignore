@@ -68,11 +68,5 @@ assets/makos/*.png
 !assets/makos/file-spreadsheet.png
 !assets/makos/file-presentation.png
 !assets/makos/file-document.png
-!assets/makos/wallpaper-aurora-blue.png
 
-!assets/makos/wallpaper-water-drop.png
-!assets/makos/wallpaper-nebula.png
-!assets/makos/wallpaper-hills.png
-!assets/makos/wallpaper-graphite.png
-!assets/makos/wallpaper-linen-grey.png
 src/makos/theme/plymouth/*.png

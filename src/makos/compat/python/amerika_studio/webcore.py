@@ -17,7 +17,7 @@ SPECS = {
     'sprite': {'title': 'Sprite', 'icon': 'amerika-sprite', 'app_id': 'org.amerika.Sprite',
                'filters': [('Sprites and images', ['*.png', '*.gif', '*.aseprite', '*.ase', '*.json', '*.webp']), ('All files', ['*'])],
                'binary': ('.png', '.gif', '.aseprite', '.ase', '.webp', '.jpg', '.jpeg', '.bmp')},
-    'box': {'title': 'MakBox', 'icon': 'amerika-box', 'app_id': 'org.amerika.Box',
+    'box': {'title': 'Vigil Box', 'icon': 'amerika-box', 'app_id': 'org.amerika.Box',
             'filters': [('Songs', ['*.json', '*.beepbox', '*.wav', '*.mid', '*.midi']), ('All files', ['*'])],
             'binary': ('.wav', '.mid', '.midi', '.ogg', '.mp3', '.flac')},
 }

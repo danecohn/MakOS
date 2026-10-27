@@ -1,31 +1,34 @@
-/* Shared MakkOS app widgets. Original, GPL-3.0-only. */
-.app-menubar { background: linear-gradient(#fbfbfc,#e2e5e9); border-bottom: 1px solid #a4abb3; padding: 0 4px; min-height: 24px; }
-.app-menubar > item { padding: 3px 10px; border-radius: 0; }
-.app-menubar > item:hover, .app-menubar > item:checked { background: linear-gradient(#65a6e9,#266bc1); color: #fff; }
-.app-sidebar { background: linear-gradient(to right,#dfe8f2,#d6e0ea); border-right: 1px solid #a8b4c1; }
+/* Shared VigilOS app widgets (VigilTech design system), GPL-3.0-only. Colours come from the @mk_* tokens. */
+.app-menubar { background: @mk_bar; border-bottom: 1px solid @mk_border_soft; padding: 0 4px; min-height: 24px; color: @mk_text; }
+.app-menubar > item { padding: 3px 10px; border-radius: 6px; color: @mk_text; }
+.app-menubar > item:hover, .app-menubar > item:checked { background: @mk_acc_dark; color: @mk_acc_text; }
+.app-sidebar { background: linear-gradient(to right,@mk_sidebar_a,@mk_sidebar_b); border-right: 1px solid @mk_border_soft; }
 .app-sidebar row { padding: 6px 10px; }
-.app-sidebar row:selected { color: #fff; background: linear-gradient(#7ca5cf,#507caa); }
-.calc-display { font-size: 30px; font-weight: bold; padding: 6px 10px; background: linear-gradient(#e9f0e4,#cfdac8); border: 1px solid #8b9885; border-radius: 6px; color: #25331f; }
-.calc-expression { font-size: 13px; color: #55644f; }
+.app-sidebar row:selected { color: @mk_acc_text; background: @mk_acc_dark; }
+.calc-display { font-size: 30px; font-weight: bold; padding: 6px 12px; background: @mk_base; border: 1px solid @mk_border; border-radius: 12px; color: @mk_text; }
+.calc-expression { font-size: 13px; color: @mk_text_dim; }
 .calc-key { min-width: 54px; min-height: 36px; font-size: 15px; }
-.calc-key.op { background: linear-gradient(#e7eef7,#b8c8dc); }
-.calc-key.eq { color: #10263d; background: linear-gradient(to bottom,#d7efff 0%,#8cc7ff 44%,#418ee6 50%,#83c4ff 100%); }
-.tile { border-radius: 6px; padding: 4px; background: transparent; border: 1px solid transparent; box-shadow: none; }
-.tile:hover { background: alpha(#9cbce0,.25); }
-.tile.selected { background: alpha(#3d7fd0,.30); border-color: #3d7fd0; }
-.dark-stage { background: #1b1f24; }
-.dark-stage label { color: #e6edf4; }
-.player-bar { background: linear-gradient(#f5f5f5,#d6d7d9); border-top: 1px solid #969ba0; padding: 8px 12px; }
+.calc-key.op { background: @mk_acc_light; color: #3d0016; border-color: @mk_acc_border; }
+.calc-key.op label { color: #3d0016; }
+.calc-key.eq { color: @mk_acc_text; background: @mk_acc_dark; border-color: @mk_acc_border; }
+.calc-key.eq label { color: @mk_acc_text; }
+.tile { border-radius: 12px; padding: 4px; background: transparent; border: 1px solid transparent; box-shadow: none; color: @mk_text; }
+.tile:hover { background: @mk_hover; }
+.tile.selected { background: @mk_acc_light; border-color: @mk_acc_dark; color: #3d0016; }
+.tile.selected label { color: #3d0016; }
+.dark-stage { background: #120a14; }
+.dark-stage label { color: #f7eef2; }
+.player-bar { background: @mk_bar; border-top: 1px solid @mk_border_soft; padding: 8px 12px; color: @mk_text; }
 .video-stage { background: #000; }
 .meter { min-height: 8px; }
-.meter trough { min-height: 8px; border-radius: 4px; background: #cdd5dd; }
-.meter block.filled { background: linear-gradient(#8ec9ff,#3a82d6); border-radius: 4px; }
-.hot meter block.filled { background: #d95f4e; }
-.widget-layer { background: alpha(#0d1620,.62); }
-.widget-card { background: linear-gradient(alpha(#ffffff,.88),alpha(#dfe7f0,.84)); border: 1px solid alpha(#ffffff,.85); border-radius: 14px; padding: 12px; box-shadow: 0 8px 24px alpha(#000,.45); }
-.widget-card label { color: #1d2733; }
-.widget-title { font-size: 11px; font-weight: bold; color: #5a6c80; }
+.meter trough { min-height: 8px; border-radius: 4px; background: @mk_pressed; }
+.meter block.filled { background: @mk_acc_dark; border-radius: 4px; }
+.hot meter block.filled { background: @mk_error; }
+.widget-layer { background: alpha(#120a14,.72); }
+.widget-card { background: alpha(@mk_base,.97); border: 1px solid @mk_border_soft; border-radius: 18px; padding: 12px; box-shadow: 0 10px 28px alpha(#1e0616,.45); }
+.widget-card label { color: @mk_text; }
+.widget-title { font-size: 11px; font-weight: bold; color: @mk_text_dim; }
 .widget-big { font-size: 38px; font-weight: bold; }
-.widget-bar { background: linear-gradient(alpha(#fff,.85),alpha(#aebccd,.8)); border-radius: 12px; padding: 8px 14px; }
-.hint { color: #6b7d91; font-size: 11px; }
-.error-text { color: #a8321f; }
+.widget-bar { background: alpha(@mk_base,.97); border-radius: 18px; padding: 8px 14px; }
+.hint { color: @mk_text_dim; font-size: 11px; }
+.error-text { color: @mk_error; }

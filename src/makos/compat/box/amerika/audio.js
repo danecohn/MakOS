@@ -1,4 +1,4 @@
-/* MakBox: offline rendering with BeepBox's own synth, WAV encoding (with loop points), and audio analysis.
+/* Vigil Box: offline rendering with BeepBox's own synth, WAV encoding (with loop points), and audio analysis.
  * Pure JavaScript; works in the editor window and in Node (tests). Not affiliated with BeepBox; see NOTICE. */
 (function (root, factory) {
 	if (typeof module === "object" && module.exports) module.exports = factory();

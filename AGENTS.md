@@ -1,4 +1,4 @@
-# Makk OS development rules
+# VigilOS development rules
 
 MakkOS is an original Linux desktop on KWin Wayland, ARM64 first. Work in `src/makos`.
 Keep the existing Plasma and Amerika sessions until MakkOS passes owner acceptance.
@@ -7,7 +7,7 @@ Do not claim completion, physical 60 fps, a working login, or hardware acceptanc
 
 Never copy proprietary operating-system artwork, fonts, sounds, cursors or logos. Keep
 asset provenance in `docs/makos/ASSETS.md`. Preserve upstream credits and licences.
-Visible app names: Venture, Paper, Digits, MakBox, Studio, Render, Engine, Sprite.
+Visible app names: Venture, Paper, Digits, Vigil Box, Studio, Render, Engine, Sprite.
 Keep ChatGPT and Claude available. Amerika Agent/OpenClaw was explicitly removed.
 
 Never read, print or modify the real `.claude`, `.codex`, or `.openclaw` configuration.
@@ -25,7 +25,7 @@ cursors and sounds are derivatives; the build regenerates them. To compile curso
 No login/boot/PAM/default-session mutations in package installation. Risky optional theme
 switches require their own tested snapshot/revert/recovery implementation before exposure.
 
-Current identity: Makk OS, developed by Artemis Softworks LLC, founded by Demetria Althea Cohn; original crescent-moon and archer-bow emblem.
+Current identity: VigilOS, developed by VigilTech, founded by Demetria Althea Cohn; original crescent-moon and archer-bow emblem.
 Makk Office must use Euro-Office as its direct upstream. Preserve licence notices.
 Login/boot changes are explicitly authorized by the owner on 2026-10-22, but require tested recovery.
 

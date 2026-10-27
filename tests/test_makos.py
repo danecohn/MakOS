@@ -25,7 +25,7 @@ class MakkOSTests(unittest.TestCase):
         self.assertEqual(len(ids),len(set(ids)))
         self.assertIn('chatgpt',ids);self.assertIn('claude',ids)
         self.assertNotIn('agent',ids)
-        self.assertEqual(catalog.BY_ID['makbox'].name,'MakBox')
+        self.assertEqual(catalog.BY_ID['makbox'].name,'Vigil Box')
         for key in ('studio','render','engine','sprite'):
             self.assertEqual(catalog.BY_ID[key].name,key.title())
         for term in ('Konsole','Ptyxis','Amerika'):
@@ -75,7 +75,7 @@ class PackagedWallpaperTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as folder:
             share=Path(folder)
             (share/'wallpapers').mkdir()
-            jpeg=share/'wallpapers/wallpaper-aurora-blue.jpg'
+            jpeg=share/'wallpapers/wallpaper-nave-night.jpg'
             jpeg.write_bytes(b'fixture')
             with patch('makos.shell.desktop.common.SHARE', share):
                 self.assertEqual(wallpaper_path({}),jpeg)

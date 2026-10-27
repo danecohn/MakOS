@@ -12,7 +12,7 @@ from pathlib import Path
 from . import __version__
 
 APPS = ('render', 'engine', 'sprite', 'box')
-APP_TITLES = {'render': 'Render', 'engine': 'Engine', 'sprite': 'Sprite', 'box': 'MakBox'}
+APP_TITLES = {'render': 'Render', 'engine': 'Engine', 'sprite': 'Sprite', 'box': 'Vigil Box'}
 APP_LAUNCHERS = {'render': 'amerika-render', 'engine': 'amerika-engine', 'sprite': 'amerika-sprite', 'box': 'amerika-box'}
 APP_FOLDERS = {'render': 'Render', 'engine': 'Engine', 'sprite': 'Sprite', 'box': 'Box'}
 # callers the bridge accepts in X-Amerika-App (the four apps, Amerika Agent, and the hub itself)

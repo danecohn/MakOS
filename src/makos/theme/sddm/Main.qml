@@ -14,25 +14,25 @@ Item {
     Rectangle {
         anchors.fill: parent
         gradient: Gradient {
-            GradientStop { position: 0; color: "#eaf0f5" }
-            GradientStop { position: .5; color: "#c9d6e2" }
-            GradientStop { position: 1; color: "#9baebb" }
+            GradientStop { position: 0; color: "#140812" }
+            GradientStop { position: .5; color: "#2b0a1e" }
+            GradientStop { position: 1; color: "#5a0a2c" }
         }
     }
     Column {
         anchors.centerIn: parent; width: 360; spacing: 18
         Image {
             anchors.horizontalCenter: parent.horizontalCenter
-            source: "blossom.svg"; width: 110; height: 110
+            source: "vigilos.svg"; width: 110; height: 110
             sourceSize.width: 220; sourceSize.height: 220
         }
         Label {
             anchors.horizontalCenter: parent.horizontalCenter
-            text: "Makk OS"; color: "#253c50"; font.pixelSize: 40; font.weight: Font.Light
+            text: "VigilOS"; color: "#f7eef2"; font.pixelSize: 40; font.weight: Font.Light
         }
         Label {
             anchors.horizontalCenter: parent.horizontalCenter
-            text: "Artemis Softworks LLC"; color: "#4c6375"; font.pixelSize: 15
+            text: "A product of VigilTech"; color: "#d9c8d3"; font.pixelSize: 15
         }
         TextField {
             id: username; width: parent.width
@@ -62,7 +62,7 @@ Item {
         Label {
             width: parent.width; text: root.errorMessage
             horizontalAlignment: Text.AlignHCenter; wrapMode: Text.Wrap
-            color: "#8c244b"; font.pixelSize: 16
+            color: "#ff9fb2"; font.pixelSize: 16
             Accessible.role: Accessible.AlertMessage
         }
         Row {

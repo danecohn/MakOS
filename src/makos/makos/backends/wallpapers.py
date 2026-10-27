@@ -6,7 +6,7 @@ from .. import common
 from . import look
 
 IMAGE_EXT = ('.png', '.jpg', '.jpeg', '.webp')
-DEFAULT_NAME = 'wallpaper-aurora-blue.jpg'
+DEFAULT_NAME = 'wallpaper-nave-night.jpg'
 MAX_BYTES = 80_000_000
 
 

@@ -1,4 +1,4 @@
-/* MakBox: "Export for game" bundles and plain WAV export into ~/Studio/Box.
+/* Vigil Box: "Export for game" bundles and plain WAV export into ~/Studio/Box.
  *
  * A game bundle is a folder  exports/<name>/  containing
  *   <name>.wav            16-bit stereo, intro + one loop, with a 'smpl' loop chunk (Godot and most engines honour it)
@@ -15,7 +15,7 @@
 })(typeof self !== "undefined" ? self : this, function (A) {
 	"use strict";
 
-	const GENERATOR = "MakBox (BeepBox 4.2.2 synth)";
+	const GENERATOR = "Vigil Box (BeepBox 4.2.2 synth)";
 
 	function safeName(name) {
 		const n = String(name || "song").trim().replace(/[^A-Za-z0-9._ -]+/g, "").replace(/\s+/g, "_").replace(/^[.-]+/, "").slice(0, 60);
@@ -53,13 +53,13 @@
 
 	function readme(name, meta, hasOgg) {
 		return [
-			name + " - exported from MakBox",
+			name + " - exported from Vigil Box",
 			"",
 			"Files",
 			"  " + name + ".wav        intro + one seamless loop (" + meta.length_seconds + " s), loop points embedded",
 			hasOgg ? "  " + name + ".ogg        same audio as Ogg Vorbis (smaller; use this one in games)" : "  (no .ogg: ffmpeg or the amerika-box-ogg helper was not available; run `amerika-box-ogg " + name + ".wav` later)",
 			"  " + name + ".json       loop and tempo metadata",
-			"  " + name + ".song.json  the BeepBox song, open it in MakBox to edit",
+			"  " + name + ".song.json  the BeepBox song, open it in Vigil Box to edit",
 			"",
 			"Loop: starts at " + meta.loop_start_seconds + " s (" + meta.loop_start_samples + " samples), ends at " + meta.loop_end_seconds + " s (" + meta.loop_end_samples + " samples).",
 			"",
@@ -70,7 +70,7 @@
 			"  3. Load it with: var stream: AudioStream = load(\"res://audio/music/" + name + "/" + name + (hasOgg ? ".ogg" : ".wav") + "\")",
 			"     $AudioStreamPlayer.stream = stream ; $AudioStreamPlayer.play()",
 			"",
-			"BeepBox is by John Nesky (MIT licence). MakBox is not affiliated with BeepBox.",
+			"BeepBox is by John Nesky (MIT licence). Vigil Box is not affiliated with BeepBox.",
 			"",
 		].join("\n");
 	}

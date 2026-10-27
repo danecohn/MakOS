@@ -145,22 +145,12 @@ def decoration_images():
 
 
 def sounds():
+    """VigilTech's own UI sounds (brand/vigiltech/sounds), installed under the event names the shell uses."""
+    import shutil
     dest=ROOT/'src/makos/sounds'
     dest.mkdir(parents=True,exist_ok=True)
-    for name,tones in [('notification',[(784,.0),(1176,.055)]),('login',[(392,.0),(588,.08),(784,.16)]),('trash',[(220,.0),(165,.04)]),('error',[(294,.0),(277,.13)])]:
-        rate=44100;duration=.7
-        with wave.open(str(dest/(name+'.wav')),'wb') as f:
-            f.setparams((1,2,rate,0,'NONE','not compressed'))
-            data=[]
-            for i in range(round(rate*duration)):
-                t=i/rate;value=0
-                for freq,start in tones:
-                    s=t-start
-                    if s>=0:
-                        env=min(1,s/.008)*math.exp(-s*11)
-                        value+=(math.sin(2*math.pi*freq*s)+.14*math.sin(2*math.pi*freq*2*s))*env*.12
-                data.append(struct.pack('<h',round(max(-1,min(1,value))*32767)))
-            f.writeframes(b''.join(data))
+    for name,source in [('notification','vigil-chime'),('login','ui-success'),('trash','ui-tap'),('error','ui-soft-error')]:
+        shutil.copyfile(ROOT/'brand/vigiltech/sounds'/(source+'.wav'),dest/(name+'.wav'))
 
 
 def cursor(name,drawfn,hot=(3,2),frames=1):
@@ -197,11 +187,11 @@ def main():
                 d.ellipse((48-radius,48-radius,48+radius,48+radius),fill=shade)
             d.ellipse((21,14,62,38),fill=(255,255,255,155))
             if state=='hover':
-                d.line((35,48,61,48),fill='#364957',width=3)
-                if name=='zoom':d.line((48,35,48,61),fill='#364957',width=3)
+                d.line((35,48,61,48),fill='#17101a',width=3)
+                if name=='zoom':d.line((48,35,48,61),fill='#17101a',width=3)
                 if name=='close':
                     d.ellipse((31,31,65,65),fill=c+(255,))
-                    d.line((36,36,60,60),fill='#364957',width=3);d.line((36,60,60,36),fill='#364957',width=3)
+                    d.line((36,36,60,60),fill='#17101a',width=3);d.line((36,60,60,36),fill='#17101a',width=3)
             im.save(OUT/f'traffic-light-{name}-{state}.png')
     rounded_material('scrollbar-thumb',(24,80),(226,238,248),(141,165,188),11)
     rounded_material('badge-red',(64,40),(255,171,160),(201,54,55),20)
@@ -215,7 +205,7 @@ def main():
     logo=ROOT/'src/makos/icons/MakkOS/scalable/apps/makos-makos-logo.svg'
     pix=GdkPixbuf.Pixbuf.new_from_file_at_scale(str(logo),1024,1024,True)
     pix.savev(str(OUT/'makos-logo.png'),'png',[],[])
-    mono=Image.open(OUT/'makos-logo.png').convert('RGBA');gray=Image.new('RGBA',mono.size,'#4c6276');gray.putalpha(mono.getchannel('A'));gray.save(OUT/'makos-logo-mono.png')
+    mono=Image.open(OUT/'makos-logo.png').convert('RGBA');gray=Image.new('RGBA',mono.size,'#5d4e5a');gray.putalpha(mono.getchannel('A'));gray.save(OUT/'makos-logo-mono.png')
     THEME.mkdir(parents=True,exist_ok=True)
     for path in OUT.glob('*.png'):
         if path.name.startswith(('texture-','menubar-','title-gradient','toolbar-','button-','traffic-','scrollbar-','badge-','login-','dock-','makos-logo')):
@@ -223,10 +213,10 @@ def main():
             shutil.copy2(path,THEME/path.name)
     decoration_images()
     sounds()
-    cursor('arrow',lambda d,f:d.polygon([(12,8),(12,100),(35,78),(52,112),(68,104),(52,70),(84,70)],fill='#e5f2fb',outline='#28475d',width=5))
-    cursor('ibeam',lambda d,f:(d.line((64,12,64,112),fill='#28475d',width=6),d.line((44,12,84,12),fill='#28475d',width=6),d.line((44,112,84,112),fill='#28475d',width=6)),(16,16))
-    cursor('crosshair',lambda d,f:(d.line((64,12,64,116),fill='#3d5e77',width=5),d.line((12,64,116,64),fill='#3d5e77',width=5)),(16,16))
-    cursor('pointer-hand',lambda d,f:(d.rounded_rectangle((44,18,60,88),8,fill='#edf7fd',outline='#28475d',width=4),d.rounded_rectangle((38,52,96,111),12,fill='#edf7fd',outline='#28475d',width=4)),(13,5))
+    cursor('arrow',lambda d,f:d.polygon([(12,8),(12,100),(35,78),(52,112),(68,104),(52,70),(84,70)],fill='#ffffff',outline='#17101a',width=5))
+    cursor('ibeam',lambda d,f:(d.line((64,12,64,112),fill='#17101a',width=6),d.line((44,12,84,12),fill='#17101a',width=6),d.line((44,112,84,112),fill='#17101a',width=6)),(16,16))
+    cursor('crosshair',lambda d,f:(d.line((64,12,64,116),fill='#17101a',width=5),d.line((12,64,116,64),fill='#17101a',width=5)),(16,16))
+    cursor('pointer-hand',lambda d,f:(d.rounded_rectangle((44,18,60,88),8,fill='#ffffff',outline='#17101a',width=4),d.rounded_rectangle((38,52,96,111),12,fill='#ffffff',outline='#17101a',width=4)),(13,5))
     for name in ('resize-horizontal','resize-vertical','resize-diagonal-1','resize-diagonal-2'):
         def render(d,f,name=name):
             points=[(12,64),(37,40),(37,54),(91,54),(91,40),(116,64),(91,88),(91,74),(37,74),(37,88)]
@@ -234,14 +224,14 @@ def main():
             elif name.startswith('resize-diagonal'):
                 angle=math.pi/4*(1 if name.endswith('1') else -1)
                 points=[(64+(x-64)*math.cos(angle)-(y-64)*math.sin(angle),64+(x-64)*math.sin(angle)+(y-64)*math.cos(angle)) for x,y in points]
-            d.polygon(points,fill='#e5f2fb',outline='#28475d',width=4)
+            d.polygon(points,fill='#ffffff',outline='#17101a',width=4)
         cursor(name,render,(16,16))
     def spinner(d,f):
         for n in range(12):
             angle=n*math.pi/6
             x,y=64+33*math.cos(angle),64+33*math.sin(angle)
             a=round(50+205*((n-f)%12)/11)
-            d.ellipse((x-6,y-6,x+6,y+6),fill=(65,107,142,a))
+            d.ellipse((x-6,y-6,x+6,y+6),fill=(214,0,74,a))
     cursor('busy-spinner',spinner,(16,16),12)
-    print('Created original UI materials, 4 sounds and cursor source artwork')
+    print('Created UI materials, 4 sounds and cursor source artwork')
 if __name__=='__main__':main()

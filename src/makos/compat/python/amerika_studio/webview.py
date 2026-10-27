@@ -1,4 +1,4 @@
-"""amerika-studio-webview: the shared WebKitGTK shell for Sprite and MakBox. See docs/studio/webview.md."""
+"""amerika-studio-webview: the shared WebKitGTK shell for Sprite and Vigil Box. See docs/studio/webview.md."""
 import argparse
 import atexit
 import base64
@@ -495,7 +495,7 @@ class WebApp(Gtk.Application):
 
 
 def parse_args(argv):
-    p = argparse.ArgumentParser(prog='amerika-studio-webview', description='Shared WebKitGTK shell for Sprite and MakBox')
+    p = argparse.ArgumentParser(prog='amerika-studio-webview', description='Shared WebKitGTK shell for Sprite and Vigil Box')
     p.add_argument('--app', required=True, choices=sorted(webcore.SPECS))
     p.add_argument('--dir', required=True, help='directory of the web app')
     p.add_argument('--entry', default='index.html')

@@ -4,15 +4,14 @@ import json
 from pathlib import Path
 from PIL import Image,ImageOps
 ROOT=Path(__file__).resolve().parents[1]
-NAMES=('aurora-blue','water-drop','nebula','hills','graphite','linen-grey')
+NAMES=('nave-night','nave-dawn','ridge-night','ridge-dawn','starfall-night','starfall-dawn','rose-window-night','rose-window-dawn')
 
 def main():
     target=ROOT/'src/makos/wallpapers'
     (target/'previews').mkdir(parents=True,exist_ok=True)
-    (target/'wallpaper-aurora-blue.png').unlink(missing_ok=True)
     report=[]
     for name in NAMES:
-        src=ROOT/'assets/makos'/f'wallpaper-{name}.png'
+        src=ROOT/'assets/makos'/f'wallpaper-{name}.jpg'
         if not src.exists():continue
         with Image.open(src) as image:
             original=image.size

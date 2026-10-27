@@ -62,7 +62,7 @@ class Branding:
         (self.state/'pending').unlink(missing_ok=True)
     def apply(self):
         for rel in ('usr/share/sddm/themes/makk/Main.qml',THEME.lstrip('/'),'usr/share/plymouth/themes/makk/watermark.png'):
-            if not (self.root/rel).is_file():raise RuntimeError('Install the Makk OS theme package first: '+rel)
+            if not (self.root/rel).is_file():raise RuntimeError('Install the VigilOS theme package first: '+rel)
         if (self.state/'active').exists() or (self.state/'pending').exists():raise RuntimeError('Branding is already active. Revert before applying again.')
         if shutil.disk_usage(self.root/'boot').free < 600*1024*1024:raise RuntimeError('At least 600 MiB free on /boot is required for safe initramfs regeneration.')
         self.run('/usr/sbin/makk-boot-check')
@@ -77,7 +77,7 @@ class Branding:
             cfg['Daemon']['Theme']='makk'
             with (self.root/FILES[1]).open('w') as stream:cfg.write(stream)
             grub=self.root/FILES[2];grub.parent.mkdir(parents=True,exist_ok=True)
-            grub.write_text("# Makk OS presentation only; no default or kernel parameters change.\nGRUB_DISTRIBUTOR='Makk OS'\n")
+            grub.write_text("# VigilOS presentation only; no default or kernel parameters change.\nGRUB_DISTRIBUTOR='VigilOS'\n")
             self.run('update-alternatives','--install','/usr/share/plymouth/themes/default.plymouth','default.plymouth',THEME,'80')
             self.run('update-alternatives','--set','default.plymouth',THEME)
             self.run('update-initramfs','-u','-k','all')
@@ -100,7 +100,7 @@ def main():
     if os.geteuid()!=0:raise SystemExit('Run through pkexec: pkexec /usr/sbin/makk-branding '+args.action)
     service=Branding()
     if args.action=='status':print('active' if (service.state/'active').exists() else 'inactive')
-    elif args.action=='apply':print('Applied Makk OS login/boot branding. Recovery snapshot: '+str(service.apply()))
+    elif args.action=='apply':print('Applied VigilOS login/boot branding. Recovery snapshot: '+str(service.apply()))
     else:print('Restored login/boot from '+str(service.revert()))
 
 if __name__=='__main__':main()

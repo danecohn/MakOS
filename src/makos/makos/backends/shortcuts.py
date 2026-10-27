@@ -1,4 +1,4 @@
-# Adapted for MakkOS from Amerika OS (src/os/amerika/shortcuts.py), GPL-3.0-only, Artemis Softworks LLC; MakkOS adaptations.
+# Adapted for MakkOS from Amerika OS (src/os/amerika/shortcuts.py), GPL-3.0-only, VigilTech; MakkOS adaptations.
 """Global shortcut editor backend.
 
 The shortcut *definitions* come from bridge/bridge.js (`registerShortcut(title, description, default, ...)`); the

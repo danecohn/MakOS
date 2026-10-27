@@ -1,6 +1,6 @@
 [Desktop Entry]
-Name=Makk OS
-Comment=Makk OS desktop on KWin Wayland
+Name=VigilOS
+Comment=VigilOS desktop on KWin Wayland
 Exec=/usr/bin/makos-session
 TryExec=/usr/bin/makos-session
 Type=Application

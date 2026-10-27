@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Application
-Name=Makk Social
+Name=Vigil Social
 Exec=makos-app social %U
 Icon=makos-makos-logo
 Terminal=false
